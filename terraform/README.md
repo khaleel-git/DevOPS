@@ -1,6 +1,6 @@
-Commands:
+# Commands:
 
-Basic Commands:
+## Basic Commands:
 -> terraform init
 -> terraform plan
 -> terraform apply
@@ -8,8 +8,7 @@ Basic Commands:
 -> terraform output
 -> terraform console
 
-Terraform State Commands:
+## Terraform State Commands:
 
-
-Important Points:
+# Important Points:
 for_each (loop) does not accept a list. Just convert list to set. Then it will accept.
