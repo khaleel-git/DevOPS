@@ -1,0 +1,18 @@
+# Ignore hidden directories
+.*/
+
+# Ignore CSV files
+*.csv
+
+# Ignore Excel files (both .xls and .xlsx)
+*.xls
+*.xlsx
+
+# Ignore .terraform directory
+.terraform/
+
+# Ignore specific files within .terraform directory
+.terraform/*.tfstate
+.terraform/*.tfstate.backup
+
+
