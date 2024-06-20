@@ -1,4 +1,5 @@
 variable "filename" {
+  type = set(string)
   default = [
     "/home/khaleel-unix/DevOPS/terraform/count_for_each/pets.txt",
     "/home/khaleel-unix/DevOPS/terraform/count_for_each/dogs.txt",
