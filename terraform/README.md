@@ -1,12 +1,12 @@
 # Commands:
 
 ## Basic Commands:
--> terraform init
--> terraform plan
--> terraform apply
--> terraform show
--> terraform output
--> terraform console
+1. terraform init
+2. terraform plan
+3. terraform apply
+4. terraform show
+5. terraform output
+6. terraform console
 
 ## Terraform State Commands:
 
