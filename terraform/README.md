@@ -7,6 +7,7 @@
 4. terraform show
 5. terraform output
 6. terraform console
+7. terraform validate
 
 ## Terraform State Commands:
 
