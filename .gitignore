@@ -4,6 +4,11 @@
 # Ignore CSV files
 *.csv
 
+# ignore keys
+*.ppk
+*.pub
+*.pem
+
 # Ignore Excel files (both .xls and .xlsx)
 *.xls
 *.xlsx
