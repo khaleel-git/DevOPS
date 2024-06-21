@@ -17,10 +17,10 @@ resource "aws_instance" "cerberus" {
 
   user_data              = file("./install-nginx.sh") # it will run at the start of boot (one time only)
   vpc_security_group_ids = [aws_security_group.ssh-access.id]
-  key_name               = "ubuntu-universal"
+  key_name               = "lasttry"
 
   tags = {
-    Name = "ubuntu-new-instance" # Replace with your desired name
+    Name = "lasttry" # Replace with your desired name
   }
 }
 
