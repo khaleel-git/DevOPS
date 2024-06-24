@@ -1,0 +1,17 @@
+warning: fetch updated the current branch head.
+fast-forwarding your working tree from
+commit 60f9e7bc10e3b39631fa5ae986d4c51f4e262fda.
+error: Your local changes to the following files would be overwritten by merge:
+	ShellScript/1.first.sh
+	git_push.sh
+Please commit your changes or stash them before you merge.
+error: The following untracked working tree files would be overwritten by merge:
+	git_operations.log
+Please move or remove them before you merge.
+Aborting
+fatal: Cannot fast-forward your working tree.
+After making sure that you saved anything precious from
+$ git diff 60f9e7bc10e3b39631fa5ae986d4c51f4e262fda
+output, run
+$ git reset --hard
+to recover.
