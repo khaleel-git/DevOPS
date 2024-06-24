@@ -54,3 +54,10 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    2879927..e1680da  master -> master
 branch 'master' set up to track 'origin/master'.
+[master 82b5e2d] 2024-06-24 15:13:01
+ 3 files changed, 1 insertion(+)
+ rename git_init.sh => Git/git_init.sh (100%)
+ rename git_push.sh => Git/git_push.sh (100%)
+To github.com:khaleel-git/DevOPS.git
+   b08581d..82b5e2d  master -> master
+branch 'master' set up to track 'origin/master'.
