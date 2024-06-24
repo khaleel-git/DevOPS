@@ -7,10 +7,10 @@ echo "${str^}"    # only uppercase first letter
 echo "${str^^}"   # convert whole str into uppercase
 
 echo "Converting str into lowercase"
-str = "KHALEEL AHMAD"
+str="KHALEEL AHMAD"
 echo "${str,}"  # only first letter
 echo "${str,,}" # convert completley
 
 
-echo "Gettin a lenght of a str"
+echo "Getting a lenght of a str"
 echo "$str lengths is: ${#str}"
