@@ -269,3 +269,9 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    6fe2752..206e600  master -> master
 branch 'master' set up to track 'origin/master'.
+[master 2050059] 2024-06-24 15:55:01
+ 2 files changed, 24 insertions(+)
+ create mode 100755 ShellScript/10.cmd_args.sh
+To github.com:khaleel-git/DevOPS.git
+   206e600..2050059  master -> master
+branch 'master' set up to track 'origin/master'.
