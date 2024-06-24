@@ -1,4 +1,5 @@
 #!/bin/zsh
+cd /home/khaleel/DevOPS
 git fetch 
 git pull
 git add .
