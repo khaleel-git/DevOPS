@@ -767,3 +767,10 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    51d7e07..a2406e4  master -> master
 branch 'master' set up to track 'origin/master'.
+[master 9940797] 2024-06-24 17:33:01
+ 1 file changed, 5 insertions(+)
+Connection to github.com closed by remote host.
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
