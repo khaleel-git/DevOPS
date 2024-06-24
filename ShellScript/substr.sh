@@ -7,7 +7,7 @@ echo "${str:1}"
 echo "${str:4}"
 echo "${str:0:3}"
 echo "${str:3:3}"
-echo "${str: -5}" # with space
+echo "${str: -5}" # with space    -> print 5 characters starting from last character
 echo "${str:-5}"  # without space -> don't perform substr operation
 
 echo "${str#a*c}"  #  starting, shortest match
