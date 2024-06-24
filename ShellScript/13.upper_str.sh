@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 
 echo "Converting str into Uppercase"
 str="my name is khaleel"
