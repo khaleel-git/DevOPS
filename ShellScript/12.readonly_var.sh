@@ -4,6 +4,7 @@ name="khaleel"
 echo "${name}
 
 name="Ahmad"
+unset name
 echo "${name}
 
 # now use readonly
