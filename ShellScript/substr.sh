@@ -1,24 +1,24 @@
 #!/bin/bash
 
-string="abcgauravabcxyz"
+str="abcgauravabcxyz"
 
-echo "${string:0}"
-echo "${string:1}"
-echo "${string:4}"
-echo "${string:0:3}"
-echo "${string:3:3}"
-echo "${string: -5}"
+echo "${str:0}"
+echo "${str:1}"
+echo "${str:4}"
+echo "${str:0:3}"
+echo "${str:3:3}"
+echo "${str: -5}"
 
-echo "${string#a*c}"  # from starting, shortest match
-echo "${string##a*c}" # from starting, longest match
+echo "${str#a*c}"  #  starting, shortest match
+echo "${str##a*c}" #  starting, longest match
 
-echo ${string%b*z}  # from ending, shortest match
-echo "${string%%b*z}" # from ending, longest match
+echo ${str%b*z}    #  ending, shortest match
+echo "${str%%b*z}" #  ending, longest match
 
-string="abcgauravabcxyz"
+str="abcgauravabcxyz"
 
-echo "${string/abc/xyz}"
-echo "${string//abc/xyz}"
+echo "${str/abc/xyz}"
+echo "${str//abc/xyz}"
 
-echo "${string/abc}"
-echo "${string//abc}"
+echo "${str/abc}"
+echo "${str//abc}"
