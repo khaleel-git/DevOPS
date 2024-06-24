@@ -5,7 +5,9 @@ echo "${name}"
 
 name="Ahmad"
 unset name
-echo "${name}
+
+echo "var name has been unset"
+echo "${name}"
 
 # now use readonly
 readonly name="khaleel"
