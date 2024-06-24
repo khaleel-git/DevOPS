@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 name="khaleel"
-echo "${name}
+echo "${name}"
 
 name="Ahmad"
 unset name
@@ -11,4 +11,4 @@ echo "${name}
 readonly name="khaleel"
 
 name="can't update"
-echo "${name}
+echo "${name}"
