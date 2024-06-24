@@ -1,6 +1,6 @@
 #!/bin/bash
 
-str="abcgauravabcxyz"
+str="khaleelahmadisadevopsengineer"
 
 echo "${str:0}"
 echo "${str:1}"
