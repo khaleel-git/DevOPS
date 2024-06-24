@@ -8,7 +8,7 @@ echo "${str:4}"
 echo "${str:0:3}"
 echo "${str:3:3}"
 echo "${str: -5}" # with space
-echo "${str:-5}"  # without space
+echo "${str:-5}"  # without space -> don't perform substr operation
 
 echo "${str#a*c}"  #  starting, shortest match
 echo "${str##a*c}" #  starting, longest match
