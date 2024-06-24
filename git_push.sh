@@ -1,5 +1,5 @@
-git fetch -u origin master
+git fetch 
 git pull
 git add .
-git commit -m date
+git commit -m "$(date +'%Y-%m-%d %H:%M:%S')"  
 git push -u origin master
