@@ -1,5 +1,9 @@
 #!/bin/zsh
 
-read -p "Please Enter your name" name
-read -p "Please Enter your age" age
+echo "Please Enter your name: " 
+read name
+
+echo "Please Enter your age: "
+read age
+
 echo "My name is ${name} and my age is ${age}"
