@@ -1,6 +1,6 @@
 #!/bin/zsh
 #cd /home/khaleel/DevOPS
-cd /home/khaleel/DevOPS/Git
+cd /home/khaleel/DevOPS
 #git fetch 
 #git pull
 git add .
