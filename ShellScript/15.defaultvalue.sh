@@ -1,5 +1,5 @@
 #!/bin/bash
-
+#!/bin/zsh # it will be skipped. only first line shebang is functional
 read -p " please enter your name " name
 
 name=${name:-World}
