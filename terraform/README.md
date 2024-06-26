@@ -1,41 +1,49 @@
-# Commands:
+# Terraform Commands Cheat Sheet
 
 ## Basic Commands:
-1. terraform init
-2. terraform plan
-3. terraform apply & terraform apply -auto-approve
-4. terraform show
-5. terraform output
-6. terraform console
-7. terraform validate
+1. `terraform init`: Initialize a Terraform working directory containing Terraform configuration files.
+2. `terraform plan`: Create an execution plan for changes to infrastructure.
+3. `terraform apply` & `terraform apply -auto-approve`: Apply the changes required to reach the desired state of the configuration.
+4. `terraform show`: Inspect Terraform state or plan.
+5. `terraform output`: Read an output from a state file.
+6. `terraform console`: Try Terraform expressions interactively.
+7. `terraform validate`: Check whether the configuration files are valid.
 
 ## Terraform Taint
 ### Definition:
-In Terraform, the taint command marks a resource as degraded or damaged, and indicates that it will be destroyed and recreated during the next apply operation. This can be useful when a resource is in an undesirable state, but its configuration hasn't changed. For example, you might taint a VM if its setup script failed, or a storage bucket if you need to empty it out and recreate it.
+In Terraform, the `taint` command marks a resource as degraded or damaged, indicating it will be destroyed and recreated during the next apply operation.
 
--> When you run terraform apply Next time, that resource will be destroyed and re-created.
--> The configuration for the resource will not change, but the actual resource will be replaced.
--> Cause problems in a collaborative environment
+- When you run `terraform apply` next time, that resource will be destroyed and re-created.
+- The configuration for the resource will not change, but the actual resource will be replaced.
+- Can cause problems in a collaborative environment.
 
-### Taint Commands
-1. terraform taint {resource}
-2. terraform untaint {resource}
+### Taint Commands:
+1. `terraform taint {resource}`: Mark a resource for recreation.
+2. `terraform untaint {resource}`: Remove the taint from a resource.
 
-### new feature
--> terraform plan, terraform taint -> terraform plan -replaced
--> terraform plan -replace="resource_name.main" (imperative)
+### New Feature:
+- `terraform plan`, `terraform taint` -> `terraform plan -replaced`
+- `terraform plan -replace="resource_name.main"` (imperative)
 
+## Terraform Logs:
+Levels: Info, Warning, Error, Debug, Trace
 
-## Terraform Logs
-Info, Warning, Error, Debug, Trace
-command: export TF_LOG=<log_level> 
-example: export TF_LOG=TRACE
-save logs: export TF_LOG_Path=/tmp/terraform.log
-
-Disable logs:
-unset 
+- Enable logs: `export TF_LOG=<log_level>`
+  Example: `export TF_LOG=TRACE`
+- Save logs to a file: `export TF_LOG_PATH=/tmp/terraform.log`
+- Disable logs: `unset TF_LOG`
 
 ## Terraform State Commands:
 
-# Important Points:
-for_each (loop) does not accept a list. Just convert list to set. Then it will accept.
+### Important Points:
+- `for_each` (loop) does not accept a list. Convert the list to a set first.
+
+## Terraform Import:
+- `terraform import aws_instance.webserver-2 i-023324324df7`
+- It does not update configuration, only the state file.
+- Initialize the configuration block as follows:
+```
+resource "aws_instance" "webserver-2" {
+    # empty
+}
+```
