@@ -37,6 +37,8 @@ fi
 
 # Define function to calculate sum
 sum() {
+    echo "Script name is ${0}"
+    echo "Entering ${FUNCNAME} function ..."
     local a="$1"
     local b="$2"
     echo "Sum is $((a + b))"
