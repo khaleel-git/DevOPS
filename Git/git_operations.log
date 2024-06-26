@@ -1035,3 +1035,6 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    e2dba22..f9aea35  master -> master
 branch 'master' set up to track 'origin/master'.
+/bin/sh: 1: /home/khaleel/DevOPS/Git/./git_push.sh: not found
+/bin/sh: 1: /home/khaleel/DevOPS/Git/./git_push.sh: not found
+/bin/sh: 1: /home/khaleel/DevOPS/Git/./git_push.sh: not found
