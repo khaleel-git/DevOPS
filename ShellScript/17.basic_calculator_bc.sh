@@ -1,0 +1,1 @@
+echo "scale=2; 5 / 6" | bc
