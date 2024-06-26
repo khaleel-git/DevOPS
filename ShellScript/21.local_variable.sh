@@ -1,7 +1,7 @@
 #!/bin/bash
 packageName="nginx"
 function install(){
-    local myname="gaurav"
+    local myname="Khaleel"
     echo "installing ${1}"
 }
 
