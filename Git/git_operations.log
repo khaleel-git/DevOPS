@@ -1077,3 +1077,11 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    b5c0cdc..7ffecd5  master -> master
 branch 'master' set up to track 'origin/master'.
+[master f6b7989] 2024-06-26 14:45:04
+ 4 files changed, 13 insertions(+)
+ create mode 100644 Linux/How linux boot.png:Zone.Identifier
+ create mode 100644 Linux/How-linu-boot.png
+ create mode 100644 Linux/README.md
+To github.com:khaleel-git/DevOPS.git
+   7ffecd5..f6b7989  master -> master
+branch 'master' set up to track 'origin/master'.
