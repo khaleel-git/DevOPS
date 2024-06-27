@@ -8,6 +8,7 @@
 5. `terraform output`: Read an output from a state file.
 6. `terraform console`: Try Terraform expressions interactively.
 7. `terraform validate`: Check whether the configuration files are valid.
+8. `terraform destroy -target RESOURCE_TYPE.NAME`: destroy one specific resource
 
 ## Terraform vars input methods
 
