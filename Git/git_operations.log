@@ -1265,3 +1265,9 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    fd78295..a8685d0  master -> master
 branch 'master' set up to track 'origin/master'.
+[master 379ad64] terraform commit @ 2024-06-27 15:30:04
+ 1 file changed, 3 deletions(-)
+ delete mode 100644 devops-road-map.png:Zone.Identifier
+To github.com:khaleel-git/DevOPS.git
+   45ecb06..379ad64  master -> master
+branch 'master' set up to track 'origin/master'.
