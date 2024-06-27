@@ -9,6 +9,20 @@
 6. `terraform console`: Try Terraform expressions interactively.
 7. `terraform validate`: Check whether the configuration files are valid.
 
+## Terraform vars input methods
+
+### passing a single var
+```terraform plan -var 'user=user_01'
+```
+### passing a list
+```terraform plan -var 'usersage=["apple","banana","mangos"]'
+```
+### passing a map
+```terraform plan -var 'usersage={ "gaurav":"23","saurav":"22","men":"25" }'
+```
+### passing var file
+```terraform plan -var-file=custom.tfvars```
+
 ## Terraform Taint
 ### Definition:
 In Terraform, the `taint` command marks a resource as degraded or damaged, indicating it will be destroyed and recreated during the next apply operation.
