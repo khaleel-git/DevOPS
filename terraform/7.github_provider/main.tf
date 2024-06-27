@@ -11,3 +11,7 @@ resource "github_repository" "repo2" {
   visibility  = "public"
   auto_init   = true
 } 
+
+output "repo1-html_url" {
+  value = github_repository.repo1.html_url
+}
