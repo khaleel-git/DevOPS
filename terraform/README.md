@@ -17,7 +17,7 @@
 `terraform plan -var 'usersage=["apple","banana","mangos"]'
 `
 ### passing a map
-`terraform plan -var 'usersage={ "gaurav":"23","saurav":"22","men":"25" }'
+`terraform plan -var 'usersage={ "khaleel":"23","zafar":"22","shivmeena":"25" }'
 `
 ### passing var file
 `terraform plan -var-file=custom.tfvars`
