@@ -1,3 +1,3 @@
 output "main2" {
-  value = "main2.tf Block"
+  value = "Your username is ${var.username} and your age is ${var.age}"
 }

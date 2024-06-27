@@ -4,7 +4,7 @@ variable username {
 	default = "defaultuser"
 }
 
-output printuser {
-	value = "Hello ${var.username}"
+variable age {
+	type = number
+	default = 23
 }
-
