@@ -13,9 +13,11 @@
 
 ### passing a single var
 `terraform plan -var 'user=user_01'`
+
+### using env variable
+`export TF_VAR_username=khaleel`
 ### passing a list
-`terraform plan -var 'usersage=["apple","banana","mangos"]'
-`
+`terraform plan -var 'usersage=["apple","banana","mangos"]'`
 ### passing a map
 `terraform plan -var 'usersage={ "khaleel":"23","zafar":"22","shivmeena":"25" }'
 `
