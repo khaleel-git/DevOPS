@@ -1,3 +1,7 @@
 [submodule "Linux/Linux-Shell-Commands"]
 	path = Linux/Linux-Shell-Commands
 	url = git@github.com:khaleel-git/Linux-Shell-Commands.git
+
+[submodule "Python"]
+	path = Python
+	url = git@github.com:khaleel-git/Python-Practical-Crash-Notes-By-Khaleel.git

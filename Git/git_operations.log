@@ -1229,3 +1229,23 @@ Your branch is up to date with 'origin/master'.
 nothing to commit, working tree clean
 Everything up-to-date
 branch 'master' set up to track 'origin/master'.
+warning: adding embedded git repository: Python-Practical-Crash-Notes-By-Khaleel
+hint: You've added another git repository inside your current repository.
+hint: Clones of the outer repository will not contain the contents of
+hint: the embedded repository and will not know how to obtain it.
+hint: If you meant to add a submodule, use:
+hint: 
+hint: 	git submodule add <url> Python-Practical-Crash-Notes-By-Khaleel
+hint: 
+hint: If you added this path by mistake, you can remove it from the
+hint: index with:
+hint: 
+hint: 	git rm --cached Python-Practical-Crash-Notes-By-Khaleel
+hint: 
+hint: See "git help submodule" for more information.
+[master 61adbbe] 2024-06-27 14:15:05
+ 2 files changed, 7 insertions(+)
+ create mode 160000 Python-Practical-Crash-Notes-By-Khaleel
+To github.com:khaleel-git/DevOPS.git
+   208934f..61adbbe  master -> master
+branch 'master' set up to track 'origin/master'.
