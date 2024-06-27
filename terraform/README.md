@@ -10,6 +10,15 @@
 7. `terraform validate`: Check whether the configuration files are valid.
 8. `terraform destroy -target RESOURCE_TYPE.NAME`: destroy one specific resource
 9. `terraform refresh': Sync/refresh remote changes to state file 
+### 10. `terraform console`: 
+```
+❯ terraform console
+> var.username
+"khaleel"
+> var.token
+> var.github_repository.repo1.html_url
+"https://github.com/khaleel-git/git1"
+```
 
 ## Terraform vars input methods
 
