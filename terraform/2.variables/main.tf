@@ -1,3 +1,3 @@
 output "printvar" {
-  value = "first item of list is ${var.mylist}"
+  value = "first item of list is ${var.mylist[0]}"
 }
