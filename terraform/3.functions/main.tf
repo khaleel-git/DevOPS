@@ -1,7 +1,15 @@
-output printit {
+output buildinfunction {
 	value="${join("-->",var.users)}"
 }
 
-output helloworld {
-	value = "${upper(var.users[0])"}
+output upperoutput {
+	value = "${upper(var.users[0])}"
+}
+
+output loweroutput {
+	value = "${lower(var.users[1])}"
+}
+
+output titleoutput {
+	value = "${title(var.users[2])}"
 }
