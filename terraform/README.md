@@ -9,6 +9,7 @@
 6. `terraform console`: Try Terraform expressions interactively.
 7. `terraform validate`: Check whether the configuration files are valid.
 8. `terraform destroy -target RESOURCE_TYPE.NAME`: destroy one specific resource
+9. `terraform refresh': Sync/refresh remote changes to state file 
 
 ## Terraform vars input methods
 
