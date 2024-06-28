@@ -1601,3 +1601,9 @@ and the repository exists.
 To github.com:khaleel-git/DevOPS.git
    b9040f4..8361358  master -> master
 branch 'master' set up to track 'origin/master'.
+[master cd4089d] terraform commit @ 2024-06-28 12:18:01
+ 2 files changed, 5 insertions(+)
+ create mode 100644 terraform/9.terraform-aws/aws-linux.pem:Zone.Identifier
+To github.com:khaleel-git/DevOPS.git
+   8361358..cd4089d  master -> master
+branch 'master' set up to track 'origin/master'.
