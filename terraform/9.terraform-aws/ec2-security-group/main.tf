@@ -30,3 +30,7 @@ resource "aws_instance" "newvm" {
     Name = "myvmtf"
   }
 }
+
+output "securitygroupdetails" {
+  vale = aws_security_group.terraformsecuritygroup.
+}
