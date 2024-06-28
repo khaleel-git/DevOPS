@@ -82,4 +82,4 @@ resource "aws_instance" "webserver-2" {
 2. Why Terraform?
 3. Features of Terraform/HCL
 4. Destory only specific resources: terraform destroy target ....
-5. Reserve 
+5. Reserve key
