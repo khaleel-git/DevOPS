@@ -1,2 +1,2 @@
 ports = [22,80,443,3306,27017]
-image_id = = ""
+image_id = "ami-04b70fa74e45c3917"
