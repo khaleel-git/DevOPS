@@ -2714,3 +2714,9 @@ remote:
 To github.com:khaleel-git/DevOPS.git
  ! [remote rejected] master -> master (push declined due to repository rule violations)
 error: failed to push some refs to 'github.com:khaleel-git/DevOPS.git'
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
+Everything up-to-date
+branch 'master' set up to track 'origin/master'.
