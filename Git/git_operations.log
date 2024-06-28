@@ -2975,3 +2975,11 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    f91a3c1..e6c39a7  master -> master
 branch 'master' set up to track 'origin/master'.
+[master bb1e820] terraform commit @ 2024-06-28 14:37:01
+ 3 files changed, 6 insertions(+), 4 deletions(-)
+ delete mode 100644 terraform/9.terraform-aws/ec2-security-group/.terraform.tfstate.lock.info
+ssh: Could not resolve hostname github.com: Temporary failure in name resolution
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
