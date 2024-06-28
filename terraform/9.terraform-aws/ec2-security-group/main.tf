@@ -1,8 +1,3 @@
-// import modules
-module "import_modules" {
-  source = "./modules"
-}
-
 resource "aws_instance" "newvm" {
   ami             = "ami-04b70fa74e45c3917"
   instance_type   = "t2.micro"
