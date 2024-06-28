@@ -25991,3 +25991,9 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    31c584c..1903bb8  master -> master
 branch 'master' set up to track 'origin/master'.
+[master f458f80] terraform commit @ 2024-06-28 16:48:01
+ 4 files changed, 12 insertions(+), 11 deletions(-)
+ create mode 100644 terraform/9.terraform-aws/ec2-security-group/.terraform.tfstate.lock.info
+To github.com:khaleel-git/DevOPS.git
+   1903bb8..f458f80  master -> master
+branch 'master' set up to track 'origin/master'.
