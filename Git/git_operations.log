@@ -25491,3 +25491,9 @@ error: failed to push some refs to 'github.com:khaleel-git/DevOPS.git'
 To github.com:khaleel-git/DevOPS.git
    4da5b67..024ebe2  master -> master
 branch 'master' set up to track 'origin/master'.
+[master 7b8e869] terraform commit @ 2024-06-28 15:18:01
+ 4 files changed, 7429 insertions(+), 175 deletions(-)
+ delete mode 100644 terraform/9.terraform-aws/ec2-advanced/.terraform.tfstate.lock.info
+To github.com:khaleel-git/DevOPS.git
+   024ebe2..7b8e869  master -> master
+branch 'master' set up to track 'origin/master'.
