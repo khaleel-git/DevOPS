@@ -18035,3 +18035,6 @@ remote:
 To github.com:khaleel-git/DevOPS.git
  ! [remote rejected] master -> master (push declined due to repository rule violations)
 error: failed to push some refs to 'github.com:khaleel-git/DevOPS.git'
+[master c54b477] terraform commit @ 2024-06-28 15:10:01
+ 4 files changed, 195 insertions(+), 150 deletions(-)
+ delete mode 100644 terraform/9.terraform-aws/ec2-advanced/.terraform.tfstate.lock.info
