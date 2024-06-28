@@ -8,13 +8,12 @@ resource "aws_security_group" "terraformsecuritygroup" {
   description = "Allow TLS inbound traffic"
 
   dynamic "ingress" {
-    for_each = [22,80,443,3306,27017]
-    iterator = port
+    for_each = [22, 80, 443, 3306, 27017]
     content {
       description = "Dynamically generated security group"
-      from_port = port.value
-      to_port =  port.value
-      protocol = "tcp"
+      from_port   = iterator.value
+      to_port     = iterator.value
+      protocol    = "tcp"
       cidr_blocks = ["0.0.0.0/0"]
     }
   }
