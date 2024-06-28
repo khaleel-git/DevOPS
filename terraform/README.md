@@ -83,4 +83,4 @@ resource "aws_instance" "webserver-2" {
 3. Features of Terraform/HCL
 4. Destory only specific resources: terraform destroy target ....
 5. Reserve key
-6. Modules (3 modules -> root, child, public module)
+6. Modules (types of modules)
