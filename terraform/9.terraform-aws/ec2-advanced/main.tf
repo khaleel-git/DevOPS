@@ -12,7 +12,6 @@ resource "aws_instance" "newvm" {
   }
 }
 
-
 output "keypair" {
   value = aws_key_pair.terraform_key.key_name
 }
