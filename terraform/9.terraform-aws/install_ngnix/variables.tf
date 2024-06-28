@@ -3,8 +3,7 @@ variable "ports" {
 }
 
 variable "image_id" {
-  
 }
+
 variable "instance_type" {
-  
 }
