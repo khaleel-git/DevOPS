@@ -3,6 +3,6 @@ resource "aws_instance" "web" {
   instance_type = "t2.micro"
   key_name      = "aws-linux"
   tags = {
-    name = "web2-tfinstance"
+    Name = "web2-tfinstance"
   }
 }
