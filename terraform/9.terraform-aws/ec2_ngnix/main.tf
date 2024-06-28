@@ -8,3 +8,7 @@ resource "aws_instance" "newvm" {
     Name = "myvmtf"
   }
 }
+
+output "publicip" {
+  value = aws_instance.newvm.publicip
+}
