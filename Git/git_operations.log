@@ -26351,3 +26351,9 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    2fd7b51..d593ba5  master -> master
 branch 'master' set up to track 'origin/master'.
+[master f642cee] terraform commit @ 2024-06-28 18:55:01
+ 4 files changed, 9 insertions(+), 2 deletions(-)
+ create mode 100644 terraform/9.terraform-aws/install_ngnix/terraform.tfvars
+To github.com:khaleel-git/DevOPS.git
+   d593ba5..f642cee  master -> master
+branch 'master' set up to track 'origin/master'.
