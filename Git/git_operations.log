@@ -18085,3 +18085,50 @@ remote:
 To github.com:khaleel-git/DevOPS.git
  ! [remote rejected] master -> master (push declined due to repository rule violations)
 error: failed to push some refs to 'github.com:khaleel-git/DevOPS.git'
+[master caa8228] terraform commit @ 2024-06-28 15:12:01
+ 3 files changed, 179 insertions(+), 3 deletions(-)
+ delete mode 100644 terraform/9.terraform-aws/ec2-advanced/.terraform.tfstate.lock.info
+remote: warning: See https://gh.io/lfs for more information.        
+remote: warning: File terraform/9.terraform-aws/ec2-security-group/awscliv2.zip is 57.91 MB; this is larger than GitHub's recommended maximum file size of 50.00 MB        
+remote: warning: GH001: Large files detected. You may want to try Git Large File Storage - https://git-lfs.github.com.        
+remote: error: GH013: Repository rule violations found for refs/heads/master.        
+remote: 
+remote: - GITHUB PUSH PROTECTION        
+remote:   —————————————————————————————————————————        
+remote:     Resolve the following violations before pushing again        
+remote: 
+remote:     - Push cannot contain secrets        
+remote: 
+remote:             
+remote:      (?) Learn how to resolve a blocked push        
+remote:      https://docs.github.com/code-security/secret-scanning/pushing-a-branch-blocked-by-push-protection        
+remote:             
+remote:             
+remote:       —— Amazon AWS Access Key ID ——————————————————————————        
+remote:        locations:        
+remote:          - blob id: 352b137f280576cafee4cfdd763f4383ce56c0e8        
+remote:             
+remote:        (?) To push, remove secret from commit(s) or follow this URL to allow the secret.        
+remote:        https://github.com/khaleel-git/DevOPS/security/secret-scanning/unblock-secret/2iVGgvFfOmw75WvuJ4SISWnfSLN        
+remote:             
+remote:             
+remote:       —— Amazon AWS Secret Access Key ——————————————————————        
+remote:        locations:        
+remote:          - blob id: 352b137f280576cafee4cfdd763f4383ce56c0e8        
+remote:             
+remote:        (?) To push, remove secret from commit(s) or follow this URL to allow the secret.        
+remote:        https://github.com/khaleel-git/DevOPS/security/secret-scanning/unblock-secret/2iVGgvjO8qVo0cUvwfEXmt7OMXx        
+remote:             
+remote:             
+remote:     ——[ WARNING ]—————————————————————————————————————————        
+remote:      Scan incomplete: This push was large and we didn't finish on time.        
+remote:      It can still contain undetected secrets.        
+remote:             
+remote:      (?) Use the following command to find the path of the detected secret(s):        
+remote:          git rev-list --objects --all | grep blobid        
+remote:     ——————————————————————————————————————————————————————        
+remote: 
+remote: 
+To github.com:khaleel-git/DevOPS.git
+ ! [remote rejected] master -> master (push declined due to repository rule violations)
+error: failed to push some refs to 'github.com:khaleel-git/DevOPS.git'
