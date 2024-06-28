@@ -9,9 +9,13 @@ resource "aws_security_group" "terraformsecuritygroup" {
 
   dynamic "ingress" {
     for_each = [22,80,443,3306,27017]
+    iterator = port
     content {
       description = "Dynamically generated security group"
-      from_port = 
+      from_port = port.value
+      to_port =  port.value
+      protocol = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
     }
   }
 }
