@@ -12,3 +12,13 @@ resource "aws_instance" "newvm" {
     Name = "terraform_key_Attached"
   }
 }
+
+// Include the security group configuration from security_group.tf
+module "my_security_group" {
+  source = "./security_group.tf"
+}
+
+// Optionally, you can reference outputs from the security group module
+output "security_group_id" {
+  value = module.my_security_group.aws_security_group.terraformsecuritygroup.id
+}
