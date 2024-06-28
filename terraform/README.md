@@ -79,3 +79,5 @@ resource "aws_instance" "webserver-2" {
 
 # Learn More
 1. Lifecycle of Terraform
+2. Why Terraform?
+3. 
