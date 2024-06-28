@@ -18196,3 +18196,26 @@ remote: warning: GH001: Large files detected. You may want to try Git Large File
 To github.com:khaleel-git/DevOPS.git
  ! [remote rejected] master -> master (cannot lock ref 'refs/heads/master': is at 2bbc7104bd5fdf0502156a2acf0621f515b92d27 but expected 592c14cb0c22f09740d4c6747d4b3178e34b8693)
 error: failed to push some refs to 'github.com:khaleel-git/DevOPS.git'
+[master 8f8f46a] terraform commit @ 2024-06-28 15:15:01
+ 1 file changed, 12 insertions(+)
+To github.com:khaleel-git/DevOPS.git
+   2bbc710..8f8f46a  master -> master
+branch 'master' set up to track 'origin/master'.
+remote: warning: See https://gh.io/lfs for more information.        
+remote: warning: File 6092476559d8bdaf670e304df1605fd0c1193684 is 57.91 MB; this is larger than GitHub's recommended maximum file size of 50.00 MB        
+remote: warning: GH001: Large files detected. You may want to try Git Large File Storage - https://git-lfs.github.com.        
+To github.com:khaleel-git/DevOPS.git
+ ! [remote rejected] master -> master (cannot lock ref 'refs/heads/master': is at 8f8f46abdaea048af226a9b2ff11a3295b4db4db but expected 592c14cb0c22f09740d4c6747d4b3178e34b8693)
+error: failed to push some refs to 'github.com:khaleel-git/DevOPS.git'
+remote: warning: See https://gh.io/lfs for more information.        
+remote: warning: File 6092476559d8bdaf670e304df1605fd0c1193684 is 57.91 MB; this is larger than GitHub's recommended maximum file size of 50.00 MB        
+remote: warning: GH001: Large files detected. You may want to try Git Large File Storage - https://git-lfs.github.com.        
+To github.com:khaleel-git/DevOPS.git
+ ! [remote rejected] master -> master (cannot lock ref 'refs/heads/master': is at 8f8f46abdaea048af226a9b2ff11a3295b4db4db but expected 592c14cb0c22f09740d4c6747d4b3178e34b8693)
+error: failed to push some refs to 'github.com:khaleel-git/DevOPS.git'
+remote: warning: See https://gh.io/lfs for more information.        
+remote: warning: File 6092476559d8bdaf670e304df1605fd0c1193684 is 57.91 MB; this is larger than GitHub's recommended maximum file size of 50.00 MB        
+remote: warning: GH001: Large files detected. You may want to try Git Large File Storage - https://git-lfs.github.com.        
+To github.com:khaleel-git/DevOPS.git
+ ! [remote rejected] master -> master (cannot lock ref 'refs/heads/master': is at 8f8f46abdaea048af226a9b2ff11a3295b4db4db but expected 592c14cb0c22f09740d4c6747d4b3178e34b8693)
+error: failed to push some refs to 'github.com:khaleel-git/DevOPS.git'
