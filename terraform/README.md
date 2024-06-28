@@ -1,5 +1,7 @@
 # Terraform Commands Cheat Sheet
 
+
+
 ## Basic Commands:
 1. `terraform init`: Initialize a Terraform working directory containing Terraform configuration files.
 2. `terraform plan`: Create an execution plan for changes to infrastructure.
