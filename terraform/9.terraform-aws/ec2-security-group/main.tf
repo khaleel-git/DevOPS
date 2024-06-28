@@ -13,7 +13,15 @@ resource "aws_instance" "newvm" {
 }
 
 resource "aws_security_group" "terraformsecuritygroup" {
-  name = 
+  name = " allow_tls"
+  description = "Allow TLS inbound traffic"
+
+  ingress = {
+    description = "TLS from VPC"
+    from_port = 22
+    to_port   = 22
+    prot
+  }
 }
 
 output "keypair" {
