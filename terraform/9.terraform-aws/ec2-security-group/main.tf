@@ -4,7 +4,7 @@ provider "aws" {
 
 // Include the security group module
 module "modules" {
-  source = "./security_group"
+  source = "./modules"
 }
 
 resource "aws_key_pair" "terraform_key" {
