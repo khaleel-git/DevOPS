@@ -1,5 +1,10 @@
-module "my_security_group" {
-  source = "./security_group.tf"
+provider "aws" {
+  region = "us-east-1"
+}
+
+// Include the security group module
+module "modules" {
+  source = "./security_group"
 }
 
 resource "aws_key_pair" "terraform_key" {
