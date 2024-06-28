@@ -1,6 +1,6 @@
 // Include the security group module
 module "modules" {
-  source = "./modules"
+  source = "security_group.tf"
 }
 
 resource "aws_key_pair" "terraform_key" {
