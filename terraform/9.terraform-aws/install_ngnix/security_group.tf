@@ -3,7 +3,7 @@ resource "aws_security_group" "terraformsecuritygroup" {
   description = "Allow TLS inbound traffic"
 
   dynamic "ingress" {
-    for_each = [22, 80, 443, 3306, 27017]
+    for_each = var.ports
     iterator = port
     content {
       description = "Dynamically generated security group"
