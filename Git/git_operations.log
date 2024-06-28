@@ -25638,3 +25638,10 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    4447381..3addb12  master -> master
 branch 'master' set up to track 'origin/master'.
+[master ffd915a] terraform commit @ 2024-06-28 15:45:01
+ 4 files changed, 10 insertions(+), 134 deletions(-)
+ delete mode 100644 terraform/9.terraform-aws/ec2-security-group/terraform.tfstate
+ delete mode 100644 terraform/9.terraform-aws/ec2-security-group/terraform.tfstate.backup
+To github.com:khaleel-git/DevOPS.git
+   3addb12..ffd915a  master -> master
+branch 'master' set up to track 'origin/master'.
