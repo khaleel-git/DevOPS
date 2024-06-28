@@ -8,11 +8,10 @@ resource "aws_security_group" "terraformsecuritygroup" {
   description = "Allow TLS inbound traffic"
 
   dynamic "ingress" {
-    for_each = [22,]
+    for_each = [22,80,443,3306,27017]
     content {
-      namespace = setting.value["namespace"]
-      name = setting.value["name"]
-      value = setting.value["value"]
+      description = "Dynamically generated security group"
+      from_port = 
     }
   }
 }
