@@ -1,5 +1,6 @@
 # Terraform Commands Cheat Sheet
 ### Docs: https://registry.terraform.io
+#### HCL: Hashicorp Configuration Language
 
 ## Basic Commands:
 1. `terraform init`: Initialize a Terraform working directory containing Terraform configuration files.
