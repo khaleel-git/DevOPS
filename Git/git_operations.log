@@ -25631,3 +25631,10 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    fb6144c..4447381  master -> master
 branch 'master' set up to track 'origin/master'.
+[master 3addb12] terraform commit @ 2024-06-28 15:44:01
+ 4 files changed, 6 insertions(+), 26 deletions(-)
+ delete mode 100644 terraform/9.terraform-aws/ec2-security-group/.terraform.lock.hcl
+ rename terraform/9.terraform-aws/ec2-security-group/{modules => }/security_group.tf (100%)
+To github.com:khaleel-git/DevOPS.git
+   4447381..3addb12  master -> master
+branch 'master' set up to track 'origin/master'.
