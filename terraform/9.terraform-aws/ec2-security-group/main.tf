@@ -6,3 +6,7 @@ resource "aws_instance" "newvm" {
     Name = "terraform_key_Attached"
   }
 }
+
+output "ip" {
+  value = aws_instance.newvm.public_ip
+}
