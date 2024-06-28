@@ -1748,3 +1748,40 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    c79da52..caa782f  master -> master
 branch 'master' set up to track 'origin/master'.
+[master a1e1bbb] terraform commit @ 2024-06-28 12:47:01
+ 2 files changed, 7 insertions(+), 2 deletions(-)
+remote: error: GH013: Repository rule violations found for refs/heads/master.        
+remote: 
+remote: - GITHUB PUSH PROTECTION        
+remote:   —————————————————————————————————————————        
+remote:     Resolve the following violations before pushing again        
+remote: 
+remote:     - Push cannot contain secrets        
+remote: 
+remote:             
+remote:      (?) Learn how to resolve a blocked push        
+remote:      https://docs.github.com/code-security/secret-scanning/pushing-a-branch-blocked-by-push-protection        
+remote:             
+remote:             
+remote:       —— Amazon AWS Access Key ID ——————————————————————————        
+remote:        locations:        
+remote:          - commit: a1e1bbbbc7d3d9b29678def23170fcd24384c081        
+remote:            path: terraform/9.terraform-aws/provider.tf:13        
+remote:             
+remote:        (?) To push, remove secret from commit(s) or follow this URL to allow the secret.        
+remote:        https://github.com/khaleel-git/DevOPS/security/secret-scanning/unblock-secret/2iV1FD2Je1Tcu9GRiqCvsd1OZFp        
+remote:             
+remote:             
+remote:       —— Amazon AWS Secret Access Key ——————————————————————        
+remote:        locations:        
+remote:          - commit: a1e1bbbbc7d3d9b29678def23170fcd24384c081        
+remote:            path: terraform/9.terraform-aws/provider.tf:14        
+remote:             
+remote:        (?) To push, remove secret from commit(s) or follow this URL to allow the secret.        
+remote:        https://github.com/khaleel-git/DevOPS/security/secret-scanning/unblock-secret/2iV1FC9mWOH8GGZhXn7uvzwqZwJ        
+remote:             
+remote: 
+remote: 
+To github.com:khaleel-git/DevOPS.git
+ ! [remote rejected] master -> master (push declined due to repository rule violations)
+error: failed to push some refs to 'github.com:khaleel-git/DevOPS.git'
