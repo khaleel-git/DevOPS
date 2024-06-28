@@ -1,5 +1,5 @@
 # Terraform Commands Cheat Sheet
-### Docs: https://registry.terraform.io/
+### Docs: https://registry.terraform.io
 
 ## Basic Commands:
 1. `terraform init`: Initialize a Terraform working directory containing Terraform configuration files.
