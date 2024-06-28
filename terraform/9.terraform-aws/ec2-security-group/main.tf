@@ -1,8 +1,3 @@
-resource "aws_key_pair" "terraform_key" {
-  key_name   = "mykeytf"
-  public_key = file("/home/khaleel/.ssh/aws_rsa.pub")
-}
-
 resource "aws_instance" "newvm" {
   ami             = "ami-04b70fa74e45c3917"
   instance_type   = "t2.micro"
