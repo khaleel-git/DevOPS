@@ -1,3 +1,7 @@
+// Include the security group module
+module "modules" {
+  source = "security_group.tf"
+} 
 
 resource "aws_key_pair" "terraform_key" {
   key_name   = "mykeytf"
@@ -7,14 +11,10 @@ resource "aws_key_pair" "terraform_key" {
 resource "aws_instance" "newvm" {
   ami           = "ami-04b70fa74e45c3917"
   instance_type = "t2.micro"
-  key_name      = "mykeytf"
-  # security_group = aws_security_group.terraformsecuritygroup.id
+  key_name      = aws_key_pair.terraform_key.key_name
+  security_groups = [aws_security_group.terraformsecuritygroup.id]  // Use security group ID from the module
+
   tags = {
     Name = "myvmtf"
   }
-}
-
-// Include the security group module
-module "modules" {
-  source = "security_group.tf"
 }
