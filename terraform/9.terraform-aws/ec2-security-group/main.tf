@@ -3,6 +3,15 @@ resource "aws_key_pair" "terraform_key" {
   public_key = file("/home/khaleel/.ssh/aws_rsa.pub")
 }
 
+ dynamic "setting" {
+    for_each = var.settings
+    content {
+      namespace = setting.value["namespace"]
+      name = setting.value["name"]
+      value = setting.value["value"]
+    }
+  }
+
 resource "aws_security_group" "terraformsecuritygroup" {
   name        = "mysecuritygrouptf"
   description = "Allow TLS inbound traffic"
