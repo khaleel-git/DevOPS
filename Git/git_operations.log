@@ -26455,3 +26455,9 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    0ec3fbd..5598089  master -> master
 branch 'master' set up to track 'origin/master'.
+[master 904889b] terraform commit @ 2024-06-28 19:15:00
+ 1 file changed, 5 insertions(+)
+remote: Internal Server Error
+To github.com:khaleel-git/DevOPS.git
+ ! [remote rejected] master -> master (Internal Server Error)
+error: failed to push some refs to 'github.com:khaleel-git/DevOPS.git'
