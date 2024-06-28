@@ -76,3 +76,6 @@ resource "aws_instance" "webserver-2" {
     # empty
 }
 ```
+
+# Learn More
+1. Lifecycle of Terraform
