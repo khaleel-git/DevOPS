@@ -1,5 +1,5 @@
 resource "aws_security_group" "terraformsecuritygroup" {
-  name        = "allow_tls"
+  name        = "terraformsecuritygroup"
   description = "Allow TLS inbound traffic"
 
   // Ingress rule for SSH (port 22)
