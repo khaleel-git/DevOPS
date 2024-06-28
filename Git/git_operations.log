@@ -10583,3 +10583,6 @@ error: failed to push some refs to 'github.com:khaleel-git/DevOPS.git'
  1 file changed, 48 insertions(+)
 [master a62d29d] terraform commit @ 2024-06-28 15:04:02
  1 file changed, 2 insertions(+)
+[master af130fe] terraform commit @ 2024-06-28 15:05:02
+ 2 files changed, 3 insertions(+)
+ create mode 100644 terraform/9.terraform-aws/ec2-security-group/.terraform.tfstate.lock.info
