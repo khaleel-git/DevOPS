@@ -77,8 +77,9 @@ resource "aws_instance" "webserver-2" {
 }
 ```
 
-# Learn More
+# Interview Highlights
 1. Lifecycle of Terraform
 2. Why Terraform?
 3. Features of Terraform/HCL
-4. Bycep / ARM Templates
+4. Destory only specific resources: terraform destroy target ....
+5. Reserve 
