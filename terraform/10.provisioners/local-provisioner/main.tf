@@ -15,8 +15,8 @@ resource "aws_instance" "newvm" {
 
   # copy a folder
   provisioner "local-exec" {
-
-    command = "echo ${self.public_ip} > ${path.module}/public_ip.txt"
+    working_dir = "/tmp/"
+    command = "echo ${self.public_ip} > public_ip.txt"
   }
 
   tags = {
