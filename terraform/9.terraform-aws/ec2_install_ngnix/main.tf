@@ -12,8 +12,9 @@ resource "aws_instance" "newvm" {
     source      = "${path.module}/nginx.sh"
     destination = "/tmp/nginx.sh"
     connection {
-      type = "ssh"
-      host = aws_instance.newvm.publicip
+      type        = "ssh"
+      host        = aws_instance.newvm.public_ip
+      user        = "ubuntu"
       private_key = file("/home/khaleel/.ssh/aws_rsa")
     }
   }
