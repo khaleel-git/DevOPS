@@ -13,9 +13,22 @@ resource "aws_instance" "newvm" {
       private_key = file("/home/khaleel/.ssh/aws_rsa")
     }
 
+  # copy a file
+  provisioner "file" {
+    source      = "${path.module}/nginx.sh"
+    destination = "/tmp/nginx.sh"
+  }
+
+  # create a file
+  provisioner "file" {
+    content = "This is a test content"
+    destination = "/tmp/content-file.txt"
+  }
+
   # copy a folder
-  provisioner "local-exec" {
-    command = "${self.public_ip} > public_ip.txt"
+  provisioner "file" {
+    source = "${path.module}/scpdirectory" # copy current folder
+    destination = "/tmp/newdirectory"
   }
 
   tags = {
