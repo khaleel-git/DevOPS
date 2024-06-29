@@ -14,3 +14,6 @@ user_data = file("${path.module}/nginx.sh")
 output "publicip" {
   value = aws_instance.newvm.public_ip
 }
+output "path.module" {
+  value = ${path.module}
+}
