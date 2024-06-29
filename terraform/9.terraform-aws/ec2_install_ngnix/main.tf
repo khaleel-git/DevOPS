@@ -4,11 +4,13 @@ resource "aws_instance" "newvm" {
   key_name               = aws_key_pair.terraform_key.key_name
   vpc_security_group_ids = [aws_security_group.terraformsecuritygroup.id]
 
-user_data = file("${path.module}/nginx.sh")
+  # run at boot time
+  user_data = file("${path.module}/nginx.sh")
 
-provisioner "file" {
-  source = ""
-}
+  provisioner "file" {
+    source      = "${path.module}/nginx.sh"
+    destination = "/tmp/nginx.sh"
+  }
 
   tags = {
     Name = "newnametf"
