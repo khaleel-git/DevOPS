@@ -79,6 +79,8 @@ resource "aws_instance" "webserver-2" {
 }
 ```
 
+
+
 # Interview Highlights
 1. Lifecycle of Terraform
 2. Why Terraform?
