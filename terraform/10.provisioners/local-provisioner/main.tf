@@ -13,11 +13,15 @@ resource "aws_instance" "newvm" {
       private_key = file("/home/khaleel/.ssh/aws_rsa")
     }
 
-  # copy a folder
+  # write public ip to local file
   provisioner "local-exec" {
     working_dir = "/tmp/"
-    interpreter = [  ]
     command = "echo ${self.public_ip} > public_ip.txt"
+  }
+
+  provisioner "local-exec" {
+    working_dir = "/tmp/"
+    interpreter = [ python3  ]
   }
 
   tags = {
