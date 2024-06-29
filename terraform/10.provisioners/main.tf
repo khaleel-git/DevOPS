@@ -13,15 +13,21 @@ resource "aws_instance" "newvm" {
       private_key = file("/home/khaleel/.ssh/aws_rsa")
     }
 
-  # run after boot
+  # copy a file
   provisioner "file" {
     source      = "${path.module}/nginx.sh"
     destination = "/tmp/nginx.sh"
   }
 
+  # create a file
   provisioner "file" {
     content = "This is a test content"
     destination = "/tmp/content-file.txt"
+  }
+
+  # copy a folder
+  provisioner "file" {
+    source = "${path.module}"
   }
 
   tags = {
