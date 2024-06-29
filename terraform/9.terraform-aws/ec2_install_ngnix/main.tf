@@ -16,5 +16,5 @@ resource "aws_instance" "newvm" {
 }
 
 output "publicip" {
-  value = aws_instance.newvm.publicip
+  value = aws_instance.newvm.public_ip
 }
