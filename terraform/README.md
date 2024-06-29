@@ -79,7 +79,8 @@ resource "aws_instance" "webserver-2" {
 }
 ```
 
-
+## Terraform Provisioners
+### (1) file, (2) local-exec, (3) remote-exec
 
 # Interview Highlights
 1. Lifecycle of Terraform
