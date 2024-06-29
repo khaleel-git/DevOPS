@@ -123,4 +123,16 @@ sudo apt-get install nginx -y
 sudo echo "Hello Nginx" > /var/www/html/index.nginx-debian.html
 EOF
 ```
-
+## 9. Deadlock condition in terraform:
+```
+  # 
+  provisioner "file" {
+    source      = "${path.module}/nginx.sh"
+    destination = "/tmp/nginx.sh"
+    connection {
+      type        = "ssh"
+      host        = self.public_ip
+      user        = "ubuntu"
+      private_key = file("/home/khaleel/.ssh/aws_rsa")
+    }
+  }
