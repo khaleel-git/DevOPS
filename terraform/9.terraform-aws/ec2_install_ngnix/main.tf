@@ -5,8 +5,10 @@ resource "aws_instance" "newvm" {
   vpc_security_group_ids = [aws_security_group.terraformsecuritygroup.id]
 
   user_data = <<-EOF
-#!/usr/bin/bash
+#!/bin/bash
 ls > ls.txt
+sudo apt-get update -y
+sudo apt-get install nginxh -y
 EOF
 
   tags = {
