@@ -1,5 +1,5 @@
 variable "ports" {
-    type = list(number)
+  type = list(number)
 }
 
 variable "image_id" {
