@@ -7,6 +7,18 @@ resource "aws_instance" "newvm" {
   # run at boot time (one-time only)
   user_data = file("${path.module}/nginx.sh")
 
+  # run after boot
+  provisioner "file" {
+    source      = "${path.module}/nginx.sh"
+    destination = "/tmp/nginx.sh"
+    connection {
+      type        = "ssh"
+      host        = aws_instance.newvm.public_ip
+      user        = "ubuntu"
+      private_key = file("/home/khaleel/.ssh/aws_rsa")
+    }
+  }
+
   tags = {
     Name = "newnametf"
   }
