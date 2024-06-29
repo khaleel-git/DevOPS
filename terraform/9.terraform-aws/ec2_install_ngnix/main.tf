@@ -9,8 +9,8 @@ resource "aws_instance" "newvm" {
   }
   user_data = <<EOF
   #!/bin/bash
-  apt update
-  apt install nginx
+  sudo apt update
+  sudo apt install nginx -y
   echo "Hello World" > /var/www/html/index.nginx-debian.html
   EOF
 }
