@@ -10,13 +10,7 @@ resource "aws_instance" "newvm" {
   # run after boot
   provisioner "file" {
     # source      = "${path.module}/nginx.sh"
-    content = >> -EOF
-    #!/bin/bash
-ls > ls.txt
-sudo apt-get update -y
-sudo apt-get install nginx -y
-sudo echo "Hello Nginx" > /var/www/html/index.nginx-debian.html
-EOF
+    content   = "This is a test content"
     destination = "/tmp/nginx.sh"
     connection {
       type        = "ssh"
