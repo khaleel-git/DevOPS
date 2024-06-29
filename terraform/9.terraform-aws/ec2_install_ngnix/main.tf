@@ -6,6 +6,10 @@ resource "aws_instance" "newvm" {
 
 user_data = file("${path.module}/nginx.sh")
 
+provisioner "file" {
+  source = ""
+}
+
   tags = {
     Name = "newnametf"
   }
