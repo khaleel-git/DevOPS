@@ -47,7 +47,7 @@ In Terraform, the `taint` command marks a resource as degraded or damaged, indic
 - Can cause problems in a collaborative environment.
 
 ### Taint Commands:
-1. `terraform taint {resource}`: Mark a resource for recreation. 
+1. `terraform taint {resource}`: Mark a resource for recreation. (manual)
 2. `terraform untaint {resource}`: Remove the taint from a resource.
 
 ### New Feature:
