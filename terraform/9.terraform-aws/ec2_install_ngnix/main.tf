@@ -7,6 +7,7 @@ resource "aws_instance" "newvm" {
   tags = {
     Name = "myvmtf"
   }
+  user_data = 
   #!/bin/bash
   apt update
   apt install nginx
