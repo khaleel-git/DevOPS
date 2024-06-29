@@ -7,21 +7,21 @@ resource "aws_instance" "newvm" {
   # run at boot time (one-time only)
   user_data = file("${path.module}/nginx.sh")
   connection {
-      type        = "ssh"
-      host        = self.public_ip
-      user        = "ubuntu"
-      private_key = file("/home/khaleel/.ssh/aws_rsa")
-    }
+    type        = "ssh"
+    host        = self.public_ip
+    user        = "ubuntu"
+    private_key = file("/home/khaleel/.ssh/aws_rsa")
+  }
 
   # write public ip to local file
   provisioner "local-exec" {
     working_dir = "/tmp/"
-    command = "echo ${self.public_ip} > public_ip.txt"
+    command     = "echo ${self.public_ip} > public_ip.txt"
   }
 
   provisioner "local-exec" {
-    working_dir = "/tmp/"
-    interpreter = ["/usr/bin/python3","-c" ]
+    interpreter = ["/usr/bin/python3", "-c"]
+    command     = "print('hello world')"
   }
 
   tags = {
