@@ -81,7 +81,7 @@ resource "aws_instance" "webserver-2" {
 
 ## Terraform Provisioners
 ### (1) file, (2) local-exec, (3) remote-exec
-#### If provisioner failed to run, terraform will mark is at tainted, so next time it will replace the resources
+#### If provisioner failed to run, terraform will mark it as tainted, so next time it will replace the resources
 
 # Interview Highlights
 1. Lifecycle of Terraform
