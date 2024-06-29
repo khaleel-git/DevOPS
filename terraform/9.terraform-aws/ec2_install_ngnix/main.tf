@@ -4,14 +4,15 @@ resource "aws_instance" "newvm" {
   key_name               = aws_key_pair.terraform_key.key_name
   vpc_security_group_ids = [aws_security_group.terraformsecuritygroup.id]
 
-  tags = {
-    Name = "myvmtf"
-  }
   user_data = <<EOF
   #!/usr/bin/bash
   sudo apt update -y
   sudo apt install nginx -y
   EOF
+
+  tags = {
+    Name = "myvmtf"
+  }
 }
 
 output "publicip" {
