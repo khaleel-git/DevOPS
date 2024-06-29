@@ -5,11 +5,11 @@ resource "aws_instance" "newvm" {
   vpc_security_group_ids = [aws_security_group.terraformsecuritygroup.id]
 
 user_data = <<-EOF
-#!/bin/bash
-ls > ls.txt
-sudo apt-get update -y
-sudo apt-get install nginx -y
-sudo echo "Hello Nginx" > /var/www/html/index.nginx-debian.html
+  #!/bin/bash
+  ls > ls.txt
+  sudo apt-get update -y
+  sudo apt-get install nginx -y
+  sudo echo "Hello Nginx" > /var/www/html/index.nginx-debian.html
 EOF
 
   tags = {

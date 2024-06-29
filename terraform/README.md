@@ -107,3 +107,14 @@ user_data = <<-EOF
   sudo echo "Hello Nginx" > /var/www/html/index.nginx-debian.html
 EOF
 ```
+```
+#### Below code run successfully because of no indentation in shebang
+```
+user_data = <<-EOF
+#!/bin/bash
+ls > ls.txt
+sudo apt-get update -y
+sudo apt-get install nginx -y
+sudo echo "Hello Nginx" > /var/www/html/index.nginx-debian.html
+EOF
+```
