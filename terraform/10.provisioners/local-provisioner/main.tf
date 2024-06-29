@@ -19,7 +19,7 @@ resource "aws_instance" "newvm" {
   }
 
   tags = {
-    Name = "newnametf"
+    Name = "newnametflocalprovisioner"
   }
 }
 
