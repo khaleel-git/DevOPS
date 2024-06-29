@@ -84,3 +84,4 @@ resource "aws_instance" "webserver-2" {
 4. Destory only specific resources: terraform destroy target ....
 5. Reserve key
 6. Modules (types of modules)
+7. Why Terraform don't recommend tint command
