@@ -9,7 +9,8 @@ resource "aws_instance" "newvm" {
 
   # run after boot
   provisioner "file" {
-    source      = "${path.module}/nginx.sh"
+    # source      = "${path.module}/nginx.sh"
+    content = 
     destination = "/tmp/nginx.sh"
     connection {
       type        = "ssh"
