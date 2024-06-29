@@ -7,11 +7,12 @@ resource "aws_instance" "newvm" {
   tags = {
     Name = "myvmtf"
   }
-  user_data = 
+  user_data = <<EOF
   #!/bin/bash
   apt update
   apt install nginx
-  echo "Hello World" > /var/ 
+  echo "Hello World" > /var/www/html/index.nginx-debian.html
+  EOF
 }
 
 output "publicip" {
