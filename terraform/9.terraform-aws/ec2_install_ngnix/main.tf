@@ -10,7 +10,7 @@ resource "aws_instance" "newvm" {
   #!/bin/bash
   apt update
   apt install nginx
-  echo "Hello World"
+  echo "Hello World" > /var/ 
 }
 
 output "publicip" {
