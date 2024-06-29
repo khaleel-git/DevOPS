@@ -15,7 +15,7 @@ resource "aws_instance" "newvm" {
 
   # copy a folder
   provisioner "local-exec" {
-    command = "ifconfig"
+    command = "${self.public_ip} > public"
   }
 
   tags = {
