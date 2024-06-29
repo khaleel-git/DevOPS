@@ -123,7 +123,7 @@ sudo apt-get install nginx -y
 sudo echo "Hello Nginx" > /var/www/html/index.nginx-debian.html
 EOF
 ```
-## 9. Deadlock condition in terraform (use self)
+## 9. Deadlock condition in terraform (use self keyword)
 ```
   # replace self.public_ip with aws_instance.name.public_ip (this provisioner is called within the aws instance creation block)
   provisioner "file" {
