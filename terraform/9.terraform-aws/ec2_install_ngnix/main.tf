@@ -4,7 +4,7 @@ resource "aws_instance" "newvm" {
   key_name               = aws_key_pair.terraform_key.key_name
   vpc_security_group_ids = [aws_security_group.terraformsecuritygroup.id]
 
-user_data = 
+user_data = file("${path.module}/nginx.sh")
 
   tags = {
     Name = "newnametf"
