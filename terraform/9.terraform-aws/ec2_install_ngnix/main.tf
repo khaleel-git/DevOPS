@@ -12,7 +12,7 @@ sudo apt-get install nginx -y
 EOF
 
   tags = {
-    Name = "myvmtf"
+    Name = "newnametf"
   }
 }
 
