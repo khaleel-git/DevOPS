@@ -7,6 +7,10 @@ resource "aws_instance" "newvm" {
   tags = {
     Name = "myvmtf"
   }
+  #!/bin/bash
+  apt update
+  apt install nginx
+  echo "Hello World"
 }
 
 output "publicip" {
