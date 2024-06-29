@@ -11,6 +11,10 @@ resource "aws_instance" "newvm" {
   provisioner "file" {
     source      = "${path.module}/nginx.sh"
     destination = "/tmp/nginx.sh"
+    connection {
+      type = "ssh"
+      private_key = file
+    }
   }
 
   tags = {
