@@ -8,7 +8,7 @@ resource "aws_instance" "newvm" {
 #!/bin/bash
 ls > ls.txt
 sudo apt-get update -y
-sudo apt-get install nginxh -y
+sudo apt-get install nginx -y
 EOF
 
   tags = {
