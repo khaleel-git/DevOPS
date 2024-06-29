@@ -11,7 +11,7 @@
 6. `terraform console`: Try Terraform expressions interactively.
 7. `terraform validate`: Check whether the configuration files are valid.
 8. `terraform destroy -target RESOURCE_TYPE.NAME`: destroy one specific resource
-9. `terraform refresh': Sync/refresh remote changes to state file 
+9. `terraform refresh`: Sync/refresh remote changes to state file 
 ### 10. `terraform console`: 
 ```
 ❯ terraform console
@@ -28,7 +28,8 @@
 `terraform plan -var 'user=user_01'`
 
 ### using env variable
-```export TF_VAR_username=khaleel
+```
+export TF_VAR_username=khaleel
 terraform plan
 ```
 ### passing a list
