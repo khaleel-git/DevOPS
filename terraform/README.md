@@ -88,7 +88,7 @@ resource "aws_instance" "webserver-2" {
 7. Why Terraform doesn't recommend tint command? and why replace command?
 
 ### 8. aws user_data: 
-#### Below code wont be run becuase us indentation in Shebang
+#### Below code wont be run becuase of indentation in Shebang
 ```
 user_data = <<EOF
   #!/bin/bash
@@ -107,7 +107,6 @@ user_data = <<-EOF
   sudo apt-get install nginx -y
   sudo echo "Hello Nginx" > /var/www/html/index.nginx-debian.html
 EOF
-```
 ```
 #### Below code run successfully because of no indentation in shebang
 ```
