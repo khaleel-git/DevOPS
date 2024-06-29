@@ -6,18 +6,22 @@ resource "aws_instance" "newvm" {
 
   # run at boot time (one-time only)
   user_data = file("${path.module}/nginx.sh")
-
-  # run after boot
-  provisioner "file" {
-    # source      = "${path.module}/nginx.sh"
-    content   = "This is a test content"
-    destination = "/tmp/nginx.sh"
-    connection {
+  connection {
       type        = "ssh"
       host        = self.public_ip
       user        = "ubuntu"
       private_key = file("/home/khaleel/.ssh/aws_rsa")
     }
+
+  # run after boot
+  provisioner "file" {
+    source      = "${path.module}/nginx.sh"
+    destination = "/tmp/nginx.sh"
+  }
+
+  provisioner "file" {
+    content = "This is a test content"
+    destination = "/tmp/content-file.txt"
   }
 
   tags = {
