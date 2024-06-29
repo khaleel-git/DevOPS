@@ -99,3 +99,8 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    269f6b8..6245ad3  master -> master
 branch 'master' set up to track 'origin/master'.
+[master 4670224] terraform commit @ 2024-06-29 12:18:03
+ 1 file changed, 5 insertions(+)
+To github.com:khaleel-git/DevOPS.git
+   6245ad3..4670224  master -> master
+branch 'master' set up to track 'origin/master'.
