@@ -21,7 +21,7 @@ resource "aws_instance" "newvm" {
 
   provisioner "local-exec" {
     working_dir = "/tmp/"
-    interpreter = [ python3  ]
+    interpreter = ["/usr/bin/python3","-c" ]
   }
 
   tags = {
