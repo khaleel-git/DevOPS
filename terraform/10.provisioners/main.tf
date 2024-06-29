@@ -27,7 +27,7 @@ resource "aws_instance" "newvm" {
 
   # copy a folder
   provisioner "file" {
-    source = "${path.module}" # copy current folder
+    source = "${path.module}/scpdirectory" # copy current folder
     destination = "/tmp/newdirectory"
   }
 
