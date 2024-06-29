@@ -88,7 +88,7 @@ resource "aws_instance" "webserver-2" {
 6. Modules (types of modules)
 7. Why Terraform doesn't recommend tint command? and why replace command?
 
-### 8. aws user_data & : 
+### 8. aws user_data and problems with Configuration Management
 #### Below code wont be run becuase of indentation in Shebang
 ```
 user_data = <<EOF
