@@ -5,9 +5,9 @@ resource "aws_instance" "newvm" {
   vpc_security_group_ids = [aws_security_group.terraformsecuritygroup.id]
 
   user_data = <<EOF
-  #!/usr/bin/bash
-  ls > ls.txt
-  EOF
+#!/usr/bin/bash
+ls > ls.txt
+EOF
 
   tags = {
     Name = "myvmtf"
