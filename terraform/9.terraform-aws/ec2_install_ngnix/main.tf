@@ -10,8 +10,8 @@ resource "aws_instance" "newvm" {
   user_data = <<EOF
   #!/usr/bin/bash
   sudo -i
-  sudo apt update
-  sudo apt install nginx -y
+  apt update
+  apt install nginx
   EOF
 }
 
