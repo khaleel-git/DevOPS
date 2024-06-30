@@ -599,3 +599,13 @@ branch 'master' set up to track 'origin/master'.
  1 file changed, 5 insertions(+)
 [master f3bd7b9] terraform commit @ 2024-06-30 23:12:01
  1 file changed, 2 insertions(+)
+[master 0a930ee] terraform commit @ 2024-06-30 23:13:01
+ 1 file changed, 2 insertions(+)
+To github.com:khaleel-git/DevOPS.git
+   c5ca3a7..0a930ee  master -> master
+branch 'master' set up to track 'origin/master'.
+ssh: connect to host github.com port 22: Connection timed out
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
