@@ -30,3 +30,4 @@ data "aws_ami" "ami" {
     values = ["hvm"]
   }
 }
+
