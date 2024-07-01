@@ -24,6 +24,8 @@ resource "aws_instance" "newvm" {
     command     = "print('hello world')"
   }
 
+  # 
+
   tags = {
     Name = "newnametflocalprovisioner"
   }
