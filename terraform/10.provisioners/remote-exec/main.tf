@@ -11,6 +11,7 @@ resource "aws_instance" "newvm" {
     private_key = file("/home/khaleel/.ssh/aws_rsa")
   }
 
+  # in-line remote-exec
   provisioner "remote-exec" {
     inline = [
       "ifconfig > /tmp/ifconfig.output",
@@ -18,6 +19,10 @@ resource "aws_instance" "newvm" {
     ]
   }
 
+  # .sh remote-exec
+  provisioner "remote-exec" {
+    script = file(./nginx.sh)
+  }
   tags = {
     Name = "newnametflocalprovisioner"
   }
