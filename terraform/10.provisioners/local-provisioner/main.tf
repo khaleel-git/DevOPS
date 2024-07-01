@@ -36,8 +36,10 @@ resource "aws_instance" "newvm" {
     command = "echo 'at Create'"
   }
 
+  # local-exec at deletion of the instance
   provisioner "local-exec" {
-    command = "echo '"
+    when = destroy
+    command = "echo 'at Delete'"
   }
   tags = {
     Name = "newnametflocalprovisioner"
