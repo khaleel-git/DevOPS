@@ -13,6 +13,21 @@ output "publicip" {
   value = aws_instance.newvm.public_ip
 }
 
-data "aws_ami" "name" {
+data "aws_ami_ids" "ami" {
   
+
+    filter {
+    name   = "name"
+    values = ["myami-*"]
+  }
+
+  filter {
+    name   = "root-device-type"
+    values = ["ebs"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
 }
