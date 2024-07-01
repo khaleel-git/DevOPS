@@ -13,6 +13,9 @@ resource "aws_instance" "newvm" {
 
   provisioner "remote-exec" {
     inline = [ 
+      "ifconfig > /tmp/ifconfig.output"
+      "echo 'hello world' > /tmp/hello.txt"
+    ]
   }
 
   tags = {
