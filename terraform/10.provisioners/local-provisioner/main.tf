@@ -38,7 +38,7 @@ resource "aws_instance" "newvm" {
 
   # local-exec at deletion of the instance
   provisioner "local-exec" {
-    when = destroy
+    when    = destroy
     command = "echo 'at Delete'"
   }
   tags = {
