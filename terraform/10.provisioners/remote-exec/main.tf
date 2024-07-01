@@ -21,7 +21,7 @@ resource "aws_instance" "newvm" {
 
   # .sh remote-exec
   provisioner "remote-exec" {
-    script = file(./nginx.sh)
+    script = "./nginx.sh"
   }
   tags = {
     Name = "newnametflocalprovisioner"
