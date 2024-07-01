@@ -160,6 +160,7 @@ terraform graph | dot -Tpng > graph.png
 ```
 terraform workspace list
 terraform workspace new dev
+terraform workspace show
 ```
 
 # Interview Highlights
