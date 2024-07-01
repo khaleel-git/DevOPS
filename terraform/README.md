@@ -83,7 +83,6 @@ resource "aws_instance" "webserver-2" {
 ### (1) file, (2) local-exec, (3) remote-exec
 #### If provisioner failed to run, terraform will mark it as tainted, so next time it will replace the resources
 
-
 ### By default provisioner runs at creation time
 ```
   # write public ip to local file
