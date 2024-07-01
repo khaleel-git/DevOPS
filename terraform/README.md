@@ -124,6 +124,8 @@ resource "aws_instance" "webserver-2" {
   }
 ```
 
+## Terraform won't detect remote changes
+
 
 
 # Interview Highlights
