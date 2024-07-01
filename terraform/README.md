@@ -83,6 +83,31 @@ resource "aws_instance" "webserver-2" {
 ### (1) file, (2) local-exec, (3) remote-exec
 #### If provisioner failed to run, terraform will mark it as tainted, so next time it will replace the resources
 
+
+
+```
+  # write public ip to local file
+  provisioner "local-exec" {
+    working_dir = "/tmp/"
+    command     = "echo ${self.public_ip} > public_ip.txt"
+  }
+
+  provisioner "local-exec" {
+    interpreter = ["/usr/bin/python3", "-c"]
+    command     = "print('hello world')"
+  }
+
+  provisioner "local-exec" {
+    command = "env>env.txt"
+    environment = {
+      envname = "envvalue"
+    }
+  }
+```
+
+
+
+
 # Interview Highlights
 1. Lifecycle of Terraform
 2. Why Terraform?
