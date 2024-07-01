@@ -9,6 +9,11 @@ resource "aws_instance" "newvm" {
   }
 }
 
-output "publicip" {
+output "aws_ami_id" {
+  value = data.aws_ami.ami.id
+}
+
+output "public_ip" {
   value = aws_instance.newvm.public_ip
 }
+
