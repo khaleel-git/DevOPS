@@ -150,6 +150,7 @@ resource "aws_instance" "webserver-2" {
 
 ## Terraform Graph Command:
 ```
+sudo apt-get install graphviz
 terraform graph | dot -Tpdf > graph.pdf 
 
 ```
