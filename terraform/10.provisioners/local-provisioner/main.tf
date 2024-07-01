@@ -24,7 +24,13 @@ resource "aws_instance" "newvm" {
     command     = "print('hello world')"
   }
 
-  # 
+  # local-exec at creation of the instance
+  provisioner "local-exec" {
+    command = "env>env.txt"
+    environment = {
+      envn
+    }
+  }
 
   tags = {
     Name = "newnametflocalprovisioner"
