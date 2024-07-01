@@ -24,14 +24,21 @@ resource "aws_instance" "newvm" {
     command     = "print('hello world')"
   }
 
-  # local-exec at creation of the instance
   provisioner "local-exec" {
     command = "env>env.txt"
     environment = {
-      envn
+      envname = "envvalue"
     }
   }
 
+  # local-exec at creation of the instance
+  provisioner "local-exec" {
+    command = "echo 'at Create'"
+  }
+
+  provisioner "local-exec" {
+    command = "echo '"
+  }
   tags = {
     Name = "newnametflocalprovisioner"
   }
