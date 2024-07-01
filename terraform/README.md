@@ -148,6 +148,12 @@ resource "aws_instance" "webserver-2" {
   }
 ```
 
+## Terraform Graph Command:
+```
+terraform graph | dot -Tpdf > graph.pdf 
+
+```
+
 # Interview Highlights
 1. Lifecycle of Terraform
 2. Why Terraform?
