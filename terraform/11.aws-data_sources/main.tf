@@ -13,8 +13,9 @@ output "publicip" {
   value = aws_instance.newvm.public_ip
 }
 
-data "aws_ami_ids" "ami" {
-  
+data "aws_ami" "ami" {
+  most_recent = true
+  owners = []
 
     filter {
     name   = "name"
