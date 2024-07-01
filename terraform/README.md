@@ -152,7 +152,8 @@ resource "aws_instance" "webserver-2" {
 ```
 sudo apt-get install graphviz
 terraform graph | dot -Tpdf > graph.pdf 
-terraform graph > graph.dot | dot -Tsvg graph.dot -o graph.svg
+terraform graph | dot -Tsvg > graph.svg
+terraform graph | dot -Tpng > graph.png
 ```
 
 ## Terraform Workspace 
