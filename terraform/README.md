@@ -5,7 +5,7 @@
 ## Basic Commands:
 1. `terraform init`: Initialize a Terraform working directory containing Terraform configuration files.
 2. `terraform plan`: Create an execution plan for changes to infrastructure.
-3. `terraform apply` & `terraform apply -auto-approve`: Apply the changes required to reach the desired state of the configuration.
+3. `terraform apply` & `terraform apply -auto-approve & terraform apply --auto-approve --var-file=dev-terraform.tfvars`: Apply the changes required to reach the desired state of the configuration.
 4. `terraform show`: Inspect Terraform state or plan.
 5. `terraform output`: Read an output from a state file.
 6. `terraform console`: Try Terraform expressions interactively.
