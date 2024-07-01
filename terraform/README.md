@@ -155,6 +155,12 @@ terraform graph | dot -Tpdf > graph.pdf
 
 ```
 
+## Terraform Workspace 
+```
+terraform workspace list
+terraform workspace new dev
+```
+
 # Interview Highlights
 1. Lifecycle of Terraform
 2. Why Terraform?
