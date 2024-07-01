@@ -113,6 +113,9 @@ resource "aws_instance" "webserver-2" {
   }
 ```
 
+### Continue to apply even if some local-exec filed
+
+
 
 
 # Interview Highlights

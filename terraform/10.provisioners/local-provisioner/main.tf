@@ -25,6 +25,7 @@ resource "aws_instance" "newvm" {
   }
 
   provisioner "local-exec" {
+    on_failure = continue
     command = "env>env.txt"
     environment = {
       envname = "envvalue"
