@@ -126,9 +126,28 @@ resource "aws_instance" "webserver-2" {
 
 ## Terraform won't detect remote changes, therefore, we don't recommend using provisioners, use ansible for alternatives
 ### Example below:
+#### First time run
 ```
-
-
+  # in-line remote-exec
+  provisioner "remote-exec" {
+    inline = [
+      "sudo apt install net-tools",
+      "ifconfig > /tmp/ifconfig.output",
+      "echo 'hello world' > /tmp/hello.txt"
+    ]
+  }
+```
+#### Second time run -> won't run, bcz wont' detect changes
+```
+  # in-line remote-exec
+  provisioner "remote-exec" {
+    inline = [
+      "sudo apt install net-tools",
+      "ifconfig > /tmp/ifconfig.output",
+      "echo 'hello world' > /tmp/hello.txt"
+    ]
+  }
+```
 
 # Interview Highlights
 1. Lifecycle of Terraform
