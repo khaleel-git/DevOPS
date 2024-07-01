@@ -114,7 +114,15 @@ resource "aws_instance" "webserver-2" {
 ```
 
 ### Continue to apply even if some local-exec filed
-
+```
+ provisioner "local-exec" {
+    on_failure = continue
+    command = "env>env.txt"
+    environment = {
+      envname = "envvalue"
+    }
+  }
+```
 
 
 
