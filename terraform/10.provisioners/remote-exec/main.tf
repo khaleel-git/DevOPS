@@ -13,34 +13,8 @@ resource "aws_instance" "newvm" {
     private_key = file("/home/khaleel/.ssh/aws_rsa")
   }
 
-  # write public ip to local file
-  provisioner "local-exec" {
-    working_dir = "/tmp/"
-    command     = "echo ${self.public_ip} > public_ip.txt"
-  }
-
-  provisioner "local-exec" {
-    interpreter = ["/usr/bin/python3", "-c"]
-    command     = "print('hello world')"
-  }
-
-  provisioner "local-exec" {
-    on_failure = continue
-    command = "env>env.txt"
-    environment = {
-      envname = "envvalue"
-    }
-  }
-
-  # local-exec at creation of the instance
-  provisioner "local-exec" {
-    command = "echo 'at Create'"
-  }
-
-  # local-exec at deletion of the instance
-  provisioner "local-exec" {
-    when    = destroy
-    command = "echo 'at Delete'"
+  provisioner "remote-exec" {
+    
   }
   tags = {
     Name = "newnametflocalprovisioner"
