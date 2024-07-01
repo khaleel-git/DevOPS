@@ -12,9 +12,9 @@ resource "aws_instance" "newvm" {
   }
 
   provisioner "remote-exec" {
-    
+    inline = [ 
   }
-  
+
   tags = {
     Name = "newnametflocalprovisioner"
   }
