@@ -142,9 +142,8 @@ resource "aws_instance" "webserver-2" {
   # in-line remote-exec
   provisioner "remote-exec" {
     inline = [
-      "sudo apt install net-tools",
       "ifconfig > /tmp/ifconfig.output",
-      "echo 'hello world' > /tmp/hello.txt"
+      "echo 'hello world 1' > /tmp/hello.txt"
     ]
   }
 ```
