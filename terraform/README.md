@@ -84,7 +84,7 @@ resource "aws_instance" "webserver-2" {
 #### If provisioner failed to run, terraform will mark it as tainted, so next time it will replace the resources
 
 
-
+### By default provisioner runs at creation time
 ```
   # write public ip to local file
   provisioner "local-exec" {
@@ -105,6 +105,14 @@ resource "aws_instance" "webserver-2" {
   }
 ```
 
+### Run Provisioner at Deletion time
+```
+# local-exec at deletion of the instance
+  provisioner "local-exec" {
+    when = destroy
+    command = "echo 'at Delete'"
+  }
+```
 
 
 
