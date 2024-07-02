@@ -3,6 +3,7 @@ terraform {
     bucket = "lenovo-tf-state"
     region = "us-east-1"
     key = "terraform-tfstate"
+    dynamodb_table = "khaleel-tf-table"
   }
 }
 # comment above and run below command of migration of backend
