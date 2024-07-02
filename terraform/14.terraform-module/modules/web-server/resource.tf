@@ -18,3 +18,23 @@ output "aws_ami_id" {
 output "public_ip" {
   value = aws_instance.newvm.public_ip
 }
+
+data "aws_ami" "ami" {
+  most_recent = true
+  owners      = ["099720109477"]
+
+  filter {
+    name   = "name"
+    values = ["ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"]
+  }
+
+  filter {
+    name   = "root-device-type"
+    values = ["ebs"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+}

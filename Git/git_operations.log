@@ -824,3 +824,13 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    1dece85..6dae4cf  master -> master
 branch 'master' set up to track 'origin/master'.
+[master d1cb4ec] terraform commit @ 2024-07-02 13:05:02
+ 6 files changed, 6 insertions(+), 57 deletions(-)
+ delete mode 100644 terraform/14.terraform-module/dev-terraform.tfvars
+ delete mode 100644 terraform/14.terraform-module/graph.svg
+ rename terraform/14.terraform-module/{ => modules/web-server}/aws-sg.tf (100%)
+ rename terraform/14.terraform-module/{ => modules/web-server}/keypair.tf (100%)
+ rename terraform/14.terraform-module/{ => modules/web-server}/terraform.tfvars (100%)
+To github.com:khaleel-git/DevOPS.git
+   6dae4cf..d1cb4ec  master -> master
+branch 'master' set up to track 'origin/master'.
