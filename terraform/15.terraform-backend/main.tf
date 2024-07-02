@@ -5,6 +5,8 @@ terraform {
     key = "terraform-tfstate"
   }
 }
+# comment above and run below command of migration of backend
+# terraform init -migrate-state
 
 resource "aws_instance" "newvm" {
   ami                    = data.aws_ami.ami.id
