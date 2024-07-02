@@ -6,10 +6,6 @@ terraform {
     }
   }
 }
-# Configure the AWS Provider
-provider "aws" {
-
-}
 
 data "aws_ami" "ami" {
   most_recent = true

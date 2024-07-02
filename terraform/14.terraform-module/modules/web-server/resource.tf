@@ -1,6 +1,4 @@
-module "muimport" {
-  source = "../../."
-}
+
 
 resource "aws_instance" "newvm" {
   ami                    = data.aws_ami.ami.id
