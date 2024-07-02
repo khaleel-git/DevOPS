@@ -5,3 +5,7 @@ module "web-server" {
   public_key = file("/home/khaleel/.ssh/aws_rsa.pub")
   key_name   = "mykeytf"
 }
+
+output "public_ip" {
+  value = module.web-server.
+}
