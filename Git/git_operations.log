@@ -848,3 +848,9 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    3f200e2..c8064a5  master -> master
 branch 'master' set up to track 'origin/master'.
+[master fd9354d] terraform commit @ 2024-07-02 13:08:04
+ 2 files changed, 7 insertions(+)
+ delete mode 100644 terraform/14.terraform-module/graph.png
+To github.com:khaleel-git/DevOPS.git
+   c8064a5..fd9354d  master -> master
+branch 'master' set up to track 'origin/master'.
