@@ -2,6 +2,24 @@
 ### Docs: https://registry.terraform.io
 #### HCL: Hashicorp Configuration Language
 
+# Table of Contents
+
+1. [Basic Commands](#basic-commands)
+2. [Terraform vars input methods](#terraform-vars-input-methods)
+3. [Terraform Taint](#terraform-taint)
+4. [Terraform Logs](#terraform-logs)
+5. [Terraform State Commands](#terraform-state-commands)
+6. [Terraform Import](#terraform-import)
+7. [Terraform Provisioners](#terraform-provisioners)
+8. [Terraform won't detect remote changes, therefore, we don't recommend using provisioners, use ansible for alternatives](#terraform-wont-detect-remote-changes-therefore-we-dont-recommend-using-provisioners-use-ansible-for-alternatives)
+9. [Terraform Graph Command](#terraform-graph-command)
+10. [Terraform Workspace](#terraform-workspace)
+11. [Terraform Backend](#terraform-backend)
+12. [Terraform State Locking (Race condition)](#terraform-state-locking-race-condition)
+13. [Interview Highlights](#interview-highlights)
+14. [Deadlock condition in terraform (use self keyword)](#deadlock-condition-in-terraform-use-self-keyword)
+
+
 ## Basic Commands:
 1. `terraform init`: Initialize a Terraform working directory containing Terraform configuration files.
 2. `terraform plan`: Create an execution plan for changes to infrastructure.
