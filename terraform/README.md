@@ -167,7 +167,16 @@ workspace delete prod
 
 ## Terraform Backend
 ### Not recommended to use github
-
+#### S3 Remote Backend
+```
+terraform {
+  backend "s3" {
+    bucket = "lenovo-tf-state"
+    region = "us-east-1"
+    key = "terraform-tfstate"
+  }
+}
+```
 
 # Interview Highlights
 1. Lifecycle of Terraform
