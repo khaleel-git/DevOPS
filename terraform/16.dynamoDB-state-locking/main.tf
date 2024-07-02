@@ -17,3 +17,4 @@ resource "aws_instance" "newvm" {
     Name = "newnametflocalprovisioner"
   }
 }
+
