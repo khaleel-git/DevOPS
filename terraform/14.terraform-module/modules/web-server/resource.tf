@@ -1,5 +1,5 @@
 module "muimport" {
-  source = "../"
+  source = "../."
 }
 
 resource "aws_instance" "newvm" {
