@@ -181,6 +181,7 @@ terraform {
 `terraform init -migrate-state`
 
 ## Terraform State Locking (Race condition)
+### DynamoDB State Locking
 
 # Interview Highlights
 1. Lifecycle of Terraform

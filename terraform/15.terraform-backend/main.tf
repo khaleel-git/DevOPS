@@ -1,10 +1,10 @@
-# terraform {
-#   backend "s3" {
-#     bucket = "lenovo-tf-state"
-#     region = "us-east-1"
-#     key = "terraform-tfstate"
-#   }
-# }
+terraform {
+  backend "s3" {
+    bucket = "lenovo-tf-state"
+    region = "us-east-1"
+    key = "terraform-tfstate"
+  }
+}
 
 resource "aws_instance" "newvm" {
   ami                    = data.aws_ami.ami.id
