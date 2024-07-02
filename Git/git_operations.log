@@ -866,3 +866,9 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    cbeb18d..3036bc0  master -> master
 branch 'master' set up to track 'origin/master'.
+[master 9005850] terraform commit @ 2024-07-02 13:11:03
+ 2 files changed, 6 insertions(+), 2 deletions(-)
+ delete mode 100644 terraform/14.terraform-module/prod-terraform.tfvars
+To github.com:khaleel-git/DevOPS.git
+   3036bc0..9005850  master -> master
+branch 'master' set up to track 'origin/master'.
