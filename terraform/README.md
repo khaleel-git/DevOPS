@@ -177,6 +177,8 @@ terraform {
   }
 }
 ```
+### Migrate Remote backend
+terraform init -migrate-state
 
 # Interview Highlights
 1. Lifecycle of Terraform
