@@ -1,3 +1,5 @@
+
+
 resource "aws_instance" "newvm" {
   ami                    = data.aws_ami.ami.id
   instance_type          = var.instance_type
