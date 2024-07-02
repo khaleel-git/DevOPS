@@ -180,6 +180,8 @@ terraform {
 ### Migrate Remote backend
 `terraform init -migrate-state`
 
+## Terraform State Locking (Race condition)
+
 # Interview Highlights
 1. Lifecycle of Terraform
 2. Why Terraform?
