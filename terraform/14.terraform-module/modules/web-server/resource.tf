@@ -30,3 +30,7 @@ data "aws_ami" "ami" {
     values = ["hvm"]
   }
 }
+
+output "public_ip" {
+  value = aws_instance.newvm.public_ip
+}

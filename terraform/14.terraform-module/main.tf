@@ -7,5 +7,5 @@ module "web-server" {
 }
 
 output "public_ip" {
-  value = module.web-server.aws_instance.
+  value = module.web-server.public_ip
 }
