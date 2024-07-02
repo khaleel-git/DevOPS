@@ -3,10 +3,11 @@ variable "ports" {
 }
 
 variable "instance_type" {
+  type = string
 }
 
 variable "public_key" {
-  
+  type = string
 }
 
 variable "key_name" {
