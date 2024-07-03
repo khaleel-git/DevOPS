@@ -24,7 +24,7 @@
 [terraform-projects](terraform-projects)    `# Directory for general Terraform projects and configurations.`  
 
 ---
-# Table of Contents
+## Table of Contents
 0. [Directory Structure](#directory-structure)
 1. [Basic Commands](#basic-commands)
 2. [Terraform vars input methods](#terraform-vars-input-methods)
