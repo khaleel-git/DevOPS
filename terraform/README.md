@@ -192,6 +192,7 @@ terraform {
   }
 }
 ```
+---
 
 # Interview Highlights
 1. Lifecycle of Terraform
