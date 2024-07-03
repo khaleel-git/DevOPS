@@ -11,8 +11,7 @@
 5. [Terraform State Commands](#terraform-state-commands)
 6. [Terraform Import](#terraform-import)
 7. [Terraform Provisioners](#terraform-provisioners)
-8. [Don't use Terraform provisioners](### Terraform Provisioner Problems
-)
+8. [Terraform Provisioners Problems](### Terraform-Provisioner-Problems)
 9. [Terraform Graph Command](#terraform-graph-command)
 10. [Terraform Workspace](#terraform-workspace)
 11. [Terraform Backend](#terraform-backend)
