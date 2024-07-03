@@ -1,6 +1,6 @@
-# Setting Up SSH Access for Ansible on Fedora VM
+# Setting Up SSH Access for Ubuntu VM
 
-## Enable SSH on Ubuntu VM
+## Enable SSH on Ubuntu Virtual Machine
 
 1. **Install SSH Server:**
    If SSH server (`sshd`) is not already installed on your Fedora VM, you can install it using the following command:
