@@ -1,4 +1,4 @@
-output buildinfunction {
+output builtinfunction {
 	value="${join("-->",var.users)}"
 }
 
