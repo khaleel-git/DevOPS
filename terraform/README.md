@@ -129,7 +129,9 @@ resource "aws_instance" "webserver-2" {
   }
 ```
 ## Terraform Provisioner Problems
-#### Terraform won't detect remote changes, therefore, we don't recommend using provisioners, use ansible for alternatives
+```
+*Terraform won't detect remote changes, therefore, we don't recommend using provisioners, use ansible for alternatives*
+```
 ### Example below:
 #### First time run
 ```
