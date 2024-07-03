@@ -16,6 +16,8 @@
 13. [Interview Highlights](#interview-highlights)
 14. [Deadlock condition in terraform (use self keyword)](#deadlock-condition-in-terraform-use-self-keyword)
 
+---
+
 ## Basic Commands:
 1. `terraform init`: Initialize a Terraform working directory containing Terraform configuration files.
 2. `terraform plan`: Create an execution plan for changes to infrastructure.
