@@ -1,0 +1,2 @@
+[ubuntu]
+ubuntu.vmware ansible_host=192.168.80.130 ansible_user=root ansible_password=ah ansible_connection=ssh ansible_port=22
