@@ -6,5 +6,5 @@ output "userage" {
 #   value = "${lookup(var.username,var.userage)}"
 # }
 
-# below line pass map in 
+# below line pass map in command line
 # terraform plan -var 'usersage={ "gaurav":"23","saurav":"22","men":"25" }'
