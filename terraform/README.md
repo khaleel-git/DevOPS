@@ -33,7 +33,6 @@
 ❯ terraform console
 > var.username
 "khaleel"
-> var.token
 > var.github_repository.repo1.html_url
 "https://github.com/khaleel-git/git1"
 ```
