@@ -36,7 +36,7 @@
 ├── [13.terraform-workspace](13.terraform-workspace)        `# Examples and explanations for managing Terraform workspaces.`  
 ├── [14.terraform-module](14.terraform-module)              `# Terraform module examples and configurations.`  
 ├── [15.terraform-backend](15.terraform-backend)            `# Configurations and examples for setting up Terraform backend.`  
-└── [16.dynamoDB-state-locking](16.dynamoDB-state-locking)  `# Example configuration for using DynamoDB for Terraform state locking.  
+└── [16.dynamoDB-state-locking](16.dynamoDB-state-locking)  `# Example configuration for using DynamoDB for Terraform state locking.`  
 
 [README.md](README.md)                      # This README file for documentation.  
 [terraform-projects](terraform-projects)   # Directory for general Terraform projects and configurations.  
