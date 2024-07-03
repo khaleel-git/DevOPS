@@ -21,8 +21,8 @@
 ## Directory Structure
 
 📦 **terraform/**  
-├── [1.hello_world](1.hello_world)              # Example Terraform configuration for a simple "hello world" resource.  
-├── [2.variables](2.variables)                  # Contains examples and explanations for Terraform variables.  
+├── [1.hello_world](1.hello_world)              &emsp;# Example Terraform configuration for a simple "hello world" resource.  
+├── [2.variables](2.variables)                  &emsp;# Contains examples and explanations for Terraform variables.  
 ├── [3.functions](3.functions)                  # Additional helper functions or scripts used in Terraform configurations.  
 ├── [4.terraform.tfvars](4.terraform.tfvars)    # Default Terraform variable definitions.  
 ├── [5.terraform.tfvars_custom](5.terraform.tfvars_custom)  # Custom Terraform variable definitions.  
