@@ -13,8 +13,8 @@
 10. [Terraform Workspace](#terraform-workspace)
 11. [Terraform Backend](#terraform-backend)
 12. [Terraform State Locking (Race condition)](#terraform-state-locking-race-condition)
-13. [Interview Highlights](#interview-highlights)
-14. [Deadlock condition in terraform (use self keyword)](#deadlock-condition-in-terraform-use-self-keyword)
+13. [Deadlock condition in terraform (use self keyword)](#deadlock-condition-in-terraform-use-self-keyword)
+14. [Interview Highlights](#interview-highlights) 
 
 ---
 
@@ -192,7 +192,19 @@ terraform {
 }
 ```
 ## Deadlock condition in terraform (use self keyword)
-
+```
+ # replace self.public_ip with aws_instance.name.public_ip (this provisioner is called within the aws instance creation block)
+  provisioner "file" {
+    source      = "${path.module}/nginx.sh"
+    destination = "/tmp/nginx.sh"
+    connection {
+      type        = "ssh"
+      host        = self.public_ip
+      user        = "ubuntu"
+      private_key = file("/home/khaleel/.ssh/aws_rsa")
+    }
+  }
+  ```
 ---
 
 # Interview Highlights
@@ -235,16 +247,3 @@ sudo apt-get install nginx -y
 sudo echo "Hello Nginx" > /var/www/html/index.nginx-debian.html
 EOF
 ```
-## 9. Deadlock condition in terraform (use self keyword)
-```
-  # replace self.public_ip with aws_instance.name.public_ip (this provisioner is called within the aws instance creation block)
-  provisioner "file" {
-    source      = "${path.module}/nginx.sh"
-    destination = "/tmp/nginx.sh"
-    connection {
-      type        = "ssh"
-      host        = self.public_ip
-      user        = "ubuntu"
-      private_key = file("/home/khaleel/.ssh/aws_rsa")
-    }
-  }
