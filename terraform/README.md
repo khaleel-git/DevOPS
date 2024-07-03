@@ -21,22 +21,22 @@
 ## Directory Structure
 
 📦 **terraform/**  
-├── [1.hello_world](1.hello_world)              &emsp;# Example Terraform configuration for a simple "hello world" resource.  
-├── [2.variables](2.variables)                  &emsp;# Contains examples and explanations for Terraform variables.  
-├── [3.functions](3.functions)                  &emsp;# Additional helper functions or scripts used in Terraform configurations.  
-├── [4.terraform.tfvars](4.terraform.tfvars)    &emsp;# Default Terraform variable definitions.  
-├── [5.terraform.tfvars_custom](5.terraform.tfvars_custom)  &emsp;# Custom Terraform variable definitions.  
-├── [6.terraform.env.vars](6.terraform.env.vars)           &emsp;# Environment-specific Terraform variable definitions.  
-├── [7.github_provider](7.github_provider)      &emsp;# Terraform configuration examples using GitHub provider.  
-├── [8.terraform_console](8.terraform_console)  &emsp;# Examples and explanations for using Terraform console.  
-├── [9.terraform-aws](9.terraform-aws)          &emsp;# Terraform configurations specific to AWS resources.  
-├── [10.provisioners](10.provisioners)          &emsp;# Examples and explanations for using Terraform provisioners.  
-├── [11.aws-data_sources](11.aws-data_sources)  &emsp;# Examples of using AWS data sources in Terraform.  
-├── [12.graph-view](12.graph-view)              &emsp;# Contains scripts or configurations to generate Terraform resource dependency graphs.  
-├── [13.terraform-workspace](13.terraform-workspace)    &emsp;# Examples and explanations for managing Terraform workspaces.  
-├── [14.terraform-module](14.terraform-module)  &emsp;# Terraform module examples and configurations.  
-├── [15.terraform-backend](15.terraform-backend)  &emsp;# Configurations and examples for setting up Terraform backend.  
-└── [16.dynamoDB-state-locking](16.dynamoDB-state-locking)  &emsp;# Example configuration for using DynamoDB for Terraform state locking.  
+├── [1.hello_world](1.hello_world)                          # Example Terraform configuration for a simple "hello world" resource.  
+├── [2.variables](2.variables)                              # Contains examples and explanations for Terraform variables.  
+├── [3.functions](3.functions)                              # Additional helper functions or scripts used in Terraform configurations.  
+├── [4.terraform.tfvars](4.terraform.tfvars)                # Default Terraform variable definitions.  
+├── [5.terraform.tfvars_custom](5.terraform.tfvars_custom)  # Custom Terraform variable definitions.  
+├── [6.terraform.env.vars](6.terraform.env.vars)            # Environment-specific Terraform variable definitions.  
+├── [7.github_provider](7.github_provider)                  # Terraform configuration examples using GitHub provider.  
+├── [8.terraform_console](8.terraform_console)              # Examples and explanations for using Terraform console.  
+├── [9.terraform-aws](9.terraform-aws)          # Terraform configurations specific to AWS resources.  
+├── [10.provisioners](10.provisioners)          # Examples and explanations for using Terraform provisioners.  
+├── [11.aws-data_sources](11.aws-data_sources)  # Examples of using AWS data sources in Terraform.  
+├── [12.graph-view](12.graph-view)              # Contains scripts or configurations to generate Terraform resource dependency graphs.  
+├── [13.terraform-workspace](13.terraform-workspace)    # Examples and explanations for managing Terraform workspaces.  
+├── [14.terraform-module](14.terraform-module)  # Terraform module examples and configurations.  
+├── [15.terraform-backend](15.terraform-backend)  # Configurations and examples for setting up Terraform backend.  
+└── [16.dynamoDB-state-locking](16.dynamoDB-state-locking)  # Example configuration for using DynamoDB for Terraform state locking.  
 
 [README.md](README.md)                      # This README file for documentation.  
 [terraform-projects](terraform-projects)   # Directory for general Terraform projects and configurations.  
