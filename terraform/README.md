@@ -1,5 +1,5 @@
-# Terraform Commands Cheat Sheet
-### Docs: https://registry.terraform.io
+# Terraform Cheat Sheet
+#### Docs: https://registry.terraform.io
 #### HCL: Hashicorp Configuration Language
 
 # Table of Contents
