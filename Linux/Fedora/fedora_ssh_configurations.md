@@ -28,6 +28,8 @@
     curl ifconfig.io
     curl ipinfo.io/ip
 ```
-
-
-
+# Enable Root login
+```
+sudo nano /etc/ssh/sshd_config
+PermitRootLogin yes
+```
