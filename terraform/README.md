@@ -1,7 +1,7 @@
 # Terraform Cheat Sheet (HCL)
-## Docs: https://registry.terraform.io
-# Directory Structure
+### Docs: https://registry.terraform.io
 
+## Directory Structure
 📦 **terraform/**  
 ├── [1.hello_world](1.hello_world)                          `# Example Terraform configuration for a simple "hello world" resource.`  
 ├── [2.variables](2.variables)                              `# Contains examples and explanations for Terraform variables.`  
