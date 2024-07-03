@@ -32,7 +32,7 @@
 ├── [9.terraform-aws](9.terraform-aws)                      `# Terraform configurations specific to AWS resources.`  
 ├── [10.provisioners](10.provisioners)                      `# Examples and explanations for using Terraform provisioners.`  
 ├── [11.aws-data_sources](11.aws-data_sources)              `# Examples of using AWS data sources in Terraform.`  
-├── [12.graph-view](12.graph-view)                          `# Contains scripts or configurations to generate Terraform resource dependency graphs.`  
+├── [12.graph-view](12.graph-view)                          `# Contains configurations to generate Terraform resource dependency graphs.`  
 ├── [13.terraform-workspace](13.terraform-workspace)        `# Examples and explanations for managing Terraform workspaces.`  
 ├── [14.terraform-module](14.terraform-module)              `# Terraform module examples and configurations.`  
 ├── [15.terraform-backend](15.terraform-backend)            `# Configurations and examples for setting up Terraform backend.`  
