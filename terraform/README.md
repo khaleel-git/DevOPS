@@ -1,6 +1,6 @@
 # Terraform Cheat Sheet (HCL)
 ## Docs: https://registry.terraform.io
-## Directory Structure
+# Directory Structure
 
 📦 **terraform/**  
 ├── [1.hello_world](1.hello_world)                          `# Example Terraform configuration for a simple "hello world" resource.`  
