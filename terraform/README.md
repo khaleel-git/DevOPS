@@ -1,7 +1,7 @@
 # Terraform Cheat Sheet (HCL)
 ## Docs: https://registry.terraform.io
 # Table of Contents
-0. []
+0. [Directory Structure](#directory-structure)
 1. [Basic Commands](#basic-commands)
 2. [Terraform vars input methods](#terraform-vars-input-methods)
 3. [Terraform Taint](#terraform-taint)
@@ -19,6 +19,7 @@
 
 ---
 ## Directory Structure
+```pl
 📂 **terraform/**
 ├── 1.hello_world              # Example Terraform configuration for a simple "hello world" resource.
 ├── 2.variables                # Contains examples and explanations for Terraform variables.
@@ -39,7 +40,7 @@
 
 README.md                      # This README file for documentation.
 terraform-projects             # Directory for general Terraform projects and configurations.
-
+```
 ---
 
 ## Basic Commands:
