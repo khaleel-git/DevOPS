@@ -1,6 +1,8 @@
 # Terraform Cheat Sheet
+```
 #### Docs: https://registry.terraform.io
 #### HCL: Hashicorp Configuration Language
+```
 
 # Table of Contents
 
@@ -11,14 +13,13 @@
 5. [Terraform State Commands](#terraform-state-commands)
 6. [Terraform Import](#terraform-import)
 7. [Terraform Provisioners](#terraform-provisioners)
-8. [Terraform Provisioners Problems](##Terraform-Provisioner-Problems)
+8. [Terraform Provisioners Problems](#Terraform-Provisioner-Problems)
 9. [Terraform Graph Command](#terraform-graph-command)
 10. [Terraform Workspace](#terraform-workspace)
 11. [Terraform Backend](#terraform-backend)
 12. [Terraform State Locking (Race condition)](#terraform-state-locking-race-condition)
 13. [Interview Highlights](#interview-highlights)
 14. [Deadlock condition in terraform (use self keyword)](#deadlock-condition-in-terraform-use-self-keyword)
-
 
 ## Basic Commands:
 1. `terraform init`: Initialize a Terraform working directory containing Terraform configuration files.
@@ -41,10 +42,8 @@
 ```
 
 ## Terraform vars input methods
-
 ### passing a single var
 `terraform plan -var 'user=user_01'`
-
 ### using env variable
 ```
 export TF_VAR_username=khaleel
@@ -57,7 +56,6 @@ terraform plan
 `
 ### passing var file
 `terraform plan -var-file=custom.tfvars`
-
 ## Terraform Taint
 ### Definition:
 In Terraform, the `taint` command marks a resource as degraded or damaged, indicating it will be destroyed and recreated during the next apply operation.
@@ -65,15 +63,12 @@ In Terraform, the `taint` command marks a resource as degraded or damaged, indic
 - When you run `terraform apply` next time, that resource will be destroyed and re-created.
 - The configuration for the resource will not change, but the actual resource will be replaced.
 - Can cause problems in a collaborative environment.
-
 ### Taint Commands:
 1. `terraform taint {resource}`: Mark a resource for recreation. (manual)
 2. `terraform untaint {resource}`: Remove the taint from a resource.
-
 ### New Feature:
 - `terraform plan`, `terraform taint` -> `terraform plan -replaced`
 - `terraform plan -replace="resource_name.main"` (imperative)
-
 ## Terraform Logs:
 Levels: Info, Warning, Error, Debug, Trace
 
