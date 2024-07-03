@@ -1,23 +1,7 @@
 # Terraform Cheat Sheet (HCL)
 ## Docs: https://registry.terraform.io
 # Table of Contents
-0. [Directory Structure](#directory-structure)
-1. [Basic Commands](#basic-commands)
-2. [Terraform vars input methods](#terraform-vars-input-methods)
-3. [Terraform Taint](#terraform-taint)
-4. [Terraform Logs](#terraform-logs)
-5. [Terraform State Commands](#terraform-state-commands)
-6. [Terraform Import](#terraform-import)
-7. [Terraform Provisioners](#terraform-provisioners)
-8. [Terraform Provisioners Problems](#Terraform-Provisioner-Problems)
-9. [Terraform Graph Command](#terraform-graph-command)
-10. [Terraform Workspace](#terraform-workspace)
-11. [Terraform Backend](#terraform-backend)
-12. [Terraform State Locking (Race condition)](#terraform-state-locking-race-condition)
-13. [Deadlock condition in terraform (use self keyword)](#deadlock-condition-in-terraform-use-self-keyword)
-14. [Interview Highlights](#interview-highlights) 
 
----
 ## Directory Structure
 
 📦 **terraform/**  
@@ -40,6 +24,24 @@
 
 [README.md](README.md)                      `# This README file for documentation.`  
 [terraform-projects](terraform-projects)    `# Directory for general Terraform projects and configurations.`  
+
+---
+
+0. [Directory Structure](#directory-structure)
+1. [Basic Commands](#basic-commands)
+2. [Terraform vars input methods](#terraform-vars-input-methods)
+3. [Terraform Taint](#terraform-taint)
+4. [Terraform Logs](#terraform-logs)
+5. [Terraform State Commands](#terraform-state-commands)
+6. [Terraform Import](#terraform-import)
+7. [Terraform Provisioners](#terraform-provisioners)
+8. [Terraform Provisioners Problems](#Terraform-Provisioner-Problems)
+9. [Terraform Graph Command](#terraform-graph-command)
+10. [Terraform Workspace](#terraform-workspace)
+11. [Terraform Backend](#terraform-backend)
+12. [Terraform State Locking (Race condition)](#terraform-state-locking-race-condition)
+13. [Deadlock condition in terraform (use self keyword)](#deadlock-condition-in-terraform-use-self-keyword)
+14. [Interview Highlights](#interview-highlights) 
 
 ---
 
