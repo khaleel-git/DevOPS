@@ -191,6 +191,8 @@ terraform {
   }
 }
 ```
+## Deadlock condition in terraform (use self keyword)
+
 ---
 
 # Interview Highlights
