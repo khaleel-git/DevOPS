@@ -11,7 +11,8 @@
 5. [Terraform State Commands](#terraform-state-commands)
 6. [Terraform Import](#terraform-import)
 7. [Terraform Provisioners](#terraform-provisioners)
-8. [Don't use Terraform provisioners](#terraform-wont-detect-remote-changes-therefore-we-dont-recommend-using-provisioners-use-ansible-for-alternatives)
+8. [Don't use Terraform provisioners](### Terraform Provisioner Problems
+)
 9. [Terraform Graph Command](#terraform-graph-command)
 10. [Terraform Workspace](#terraform-workspace)
 11. [Terraform Backend](#terraform-backend)
@@ -141,8 +142,8 @@ resource "aws_instance" "webserver-2" {
     }
   }
 ```
-
-## Terraform won't detect remote changes, therefore, we don't recommend using provisioners, use ansible for alternatives
+## Terraform Provisioner Problems
+### Terraform won't detect remote changes, therefore, we don't recommend using provisioners, use ansible for alternatives
 ### Example below:
 #### First time run
 ```
