@@ -185,6 +185,16 @@ terraform {
 `terraform init -migrate-state`
 ## Terraform State Locking (Race condition)
 ### DynamoDB State Locking
+```
+terraform {
+  backend "s3" {
+    bucket = "lenovo-tf-state"
+    region = "us-east-1"
+    key = "terraform-tfstate"
+    dynamodb_table = "khaleel-tf-table"
+  }
+}
+```
 
 # Interview Highlights
 1. Lifecycle of Terraform
