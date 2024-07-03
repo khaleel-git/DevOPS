@@ -14,7 +14,7 @@
 ├── [10.provisioners](10.provisioners)                      `# Examples and explanations for using Terraform provisioners.`  
 ├── [11.aws-data_sources](11.aws-data_sources)              `# Examples of using AWS data sources in Terraform.`  
 ├── [12.graph-view](12.graph-view)                          `# Contains configurations to generate Terraform resource dependency graphs.`  
-├── [13.terraform-workspace](13.terraform-workspace)        `# Examples and explanations for managing Terraform workspaces.`  
+├── [13.terraform-workspace](13.terraform-workspace)        `# Examples for managing Terraform workspaces.`  
 ├── [14.terraform-module](14.terraform-module)              `# Terraform module examples and configurations.`  
 ├── [15.terraform-backend](15.terraform-backend)            `# Configurations for setting up Terraform backend.`  
 └── [16.dynamoDB-state-locking](16.dynamoDB-state-locking)  `# Example configuration for using DynamoDB for Terraform state locking.`  
