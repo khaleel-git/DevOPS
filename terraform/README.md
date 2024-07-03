@@ -76,12 +76,9 @@ Levels: Info, Warning, Error, Debug, Trace
   Example: `export TF_LOG=TRACE`
 - Save logs to a file: `export TF_LOG_PATH=/tmp/terraform.log`
 - Disable logs: `unset TF_LOG`
-
 ## Terraform State Commands:
-
 ### Important Points:
 - `for_each` (loop) does not accept a list. Convert the list to a set first.
-
 ## Terraform Import:
 - `terraform import aws_instance.webserver-2 i-023324324df7`
 - It does not update configuration, only the state file.
@@ -91,11 +88,9 @@ resource "aws_instance" "webserver-2" {
     # empty
 }
 ```
-
 ## Terraform Provisioners
 ### (1) file, (2) local-exec, (3) remote-exec
 #### If provisioner failed to run, terraform will mark it as tainted, so next time it will replace the resources
-
 ### By default provisioner runs at creation time
 ```
   # write public ip to local file
@@ -116,7 +111,6 @@ resource "aws_instance" "webserver-2" {
     }
   }
 ```
-
 ### Run Provisioner at Deletion time
 ```
 # local-exec at deletion of the instance
@@ -125,7 +119,6 @@ resource "aws_instance" "webserver-2" {
     command = "echo 'at Delete'"
   }
 ```
-
 ### Continue to apply even if some local-exec filed
 ```
  provisioner "local-exec" {
@@ -160,7 +153,6 @@ resource "aws_instance" "webserver-2" {
     ]
   }
 ```
-
 ## Terraform Graph Command:
 ```
 sudo apt-get install graphviz
@@ -168,7 +160,6 @@ terraform graph | dot -Tpdf > graph.pdf
 terraform graph | dot -Tsvg > graph.svg
 terraform graph | dot -Tpng > graph.png
 ```
-
 ## Terraform Workspace 
 ```
 terraform workspace list
@@ -177,7 +168,6 @@ terraform workspace show
 terraform workspace select dev
 workspace delete prod
 ```
-
 ## Terraform Backend
 ### Not recommended to use github
 #### S3 Remote Backend
@@ -192,7 +182,6 @@ terraform {
 ```
 ### Migrate Remote backend
 `terraform init -migrate-state`
-
 ## Terraform State Locking (Race condition)
 ### DynamoDB State Locking
 
