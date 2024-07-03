@@ -23,6 +23,10 @@
 # Determine IP Address of Fedora VM
 `ip a`
 
+## check dynamic ip address:\
+```bash
+curl ifconfig.io
+curl ipinfo.io/ip
 
 
 
