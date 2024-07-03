@@ -1,11 +1,10 @@
 # Terraform Cheat Sheet
 ```
-#### Docs: https://registry.terraform.io
-#### HCL: Hashicorp Configuration Language
+Docs: https://registry.terraform.io
+HCL: Hashicorp Configuration Language
 ```
 
 # Table of Contents
-
 1. [Basic Commands](#basic-commands)
 2. [Terraform vars input methods](#terraform-vars-input-methods)
 3. [Terraform Taint](#terraform-taint)
@@ -130,7 +129,7 @@ resource "aws_instance" "webserver-2" {
   }
 ```
 ## Terraform Provisioner Problems
-### Terraform won't detect remote changes, therefore, we don't recommend using provisioners, use ansible for alternatives
+#### Terraform won't detect remote changes, therefore, we don't recommend using provisioners, use ansible for alternatives
 ### Example below:
 #### First time run
 ```
