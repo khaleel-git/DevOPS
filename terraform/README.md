@@ -17,12 +17,6 @@
 14. [Interview Highlights](#interview-highlights) 
 
 ---
-
-ChatGPT
-Here's how you can structure the directory section in your README.md file based on your provided directory:
-
-markdown
-Copy code
 ## Directory Structure
 
 ```plaintext
@@ -45,7 +39,8 @@ Copy code
 16.dynamoDB-state-locking    # Example configuration for using DynamoDB for Terraform state locking.
 README.md                    # This README file for documentation.
 terraform-projects           # Directory for general Terraform projects and configurations.
-
+```
+---
 
 ## Basic Commands:
 1. `terraform init`: Initialize a Terraform working directory containing Terraform configuration files.
