@@ -19,7 +19,6 @@
 
 ---
 ## Directory Structure
-```pl
 📦 terraform/
 ├── [1.hello_world](1.hello_world)              # Example Terraform configuration for a simple "hello world" resource.
 ├── [2.variables](2.variables)                  # Contains examples and explanations for Terraform variables.
@@ -40,7 +39,6 @@
 
 [README.md](README.md)                      # This README file for documentation.
 [terraform-projects](terraform-projects)   # Directory for general Terraform projects and configurations.
-```
 ---
 
 ## Basic Commands:
