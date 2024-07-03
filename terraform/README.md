@@ -16,7 +16,7 @@
 10. [Terraform Workspace](#terraform-workspace)
 11. [Terraform Backend](#terraform-backend)
 12. [Terraform State Locking (Race condition)](#terraform-state-locking-race-condition)
-13. [Interview Highlights](#interview-highlights)
+13. [Terraform Interviews](#interview-highlights)
 14. [Deadlock condition in terraform (use self keyword)](#deadlock-condition-in-terraform-use-self-keyword)
 
 
