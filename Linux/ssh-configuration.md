@@ -12,4 +12,17 @@
    ```bash
     sudo systemctl start sshd
     sudo systemctl enable sshd
-    
+    ``
+
+3. **Configure Firewall:**
+    ```bash
+    sudo firewall-cmd --zone=public --add-service=ssh --permanent
+    sudo firewall-cmd --reload
+    ```
+
+# Determine IP Address of Fedora VM
+`ip a`
+
+
+
+
