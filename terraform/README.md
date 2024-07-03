@@ -38,8 +38,8 @@
 ├── [15.terraform-backend](15.terraform-backend)            `# Configurations and examples for setting up Terraform backend.`  
 └── [16.dynamoDB-state-locking](16.dynamoDB-state-locking)  `# Example configuration for using DynamoDB for Terraform state locking.`  
 
-[README.md](README.md)                      # This README file for documentation.  
-[terraform-projects](terraform-projects)   # Directory for general Terraform projects and configurations.  
+[README.md](README.md)                      `# This README file for documentation.`  
+[terraform-projects](terraform-projects)    `# Directory for general Terraform projects and configurations.`  
 
 ---
 
