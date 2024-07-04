@@ -32,5 +32,8 @@ ansible-config dump # Shows the current setting
 ```bash
 default_path: /etc/ansible/hosts
 Parameters:
-ansible_connection --sh
+ansible_connection -ssh/winrm/localhost
+ansible_port - 22/5986
+ansible_user - root/user1/user2
+ansible
 ```
