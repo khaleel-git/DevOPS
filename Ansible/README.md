@@ -77,4 +77,10 @@ ansible_ssh_pass
 ```
 -
     name: Add DNS server to resolv.conf
-    
+    hosts: localhost
+     vars:
+        dns_server: 10.1.250.10
+     tasks:
+        - lineinfile:
+            path: /etc/resolv.conf
+            line: 'nameserver {{}}
