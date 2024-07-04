@@ -27,3 +27,6 @@ ansible-config list # Lists all configurations
 ansible-config view # shows the current config file
 ansible-config dump # Shows the current setting
 ```
+
+## Default inventory file loc:
+`/etc/ansible/hosts`
