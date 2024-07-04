@@ -134,7 +134,8 @@ Variables in Ansible follow a specific precedence order, where higher levels tak
     register: result
 
 - debug: 
-  var
+  var: result.rc # rc means return code
+```
 
 ## Interview Highlights
 1. What is rc in register output?
