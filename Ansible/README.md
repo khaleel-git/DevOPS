@@ -124,5 +124,10 @@ Variables in Ansible follow a specific precedence order, where higher levels tak
 4. **Group Vars**  
    Variables defined for host groups in inventory files or directories (like `group_vars`). These variables apply to all hosts within a specific group.
 
+### Register output
+```yaml
+---
+- name
+
 ## Interview Highlights
 1. What is rc in register output?

@@ -2676,3 +2676,9 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    db70d34..6ec4edc  master -> master
 branch 'master' set up to track 'origin/master'.
+[master dce730c] Ansible Commit @ 2024-07-04 20:52:030
+ 3 files changed, 9 insertions(+), 1 deletion(-)
+ create mode 100644 Ansible/Pictures/rc-register-output.png
+To github.com:khaleel-git/DevOPS.git
+   6ec4edc..dce730c  master -> master
+branch 'master' set up to track 'origin/master'.
