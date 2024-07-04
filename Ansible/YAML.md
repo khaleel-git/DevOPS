@@ -11,3 +11,5 @@
 ![dictionary_in_dictionary](Pictures/dict_in_dict_yaml.png)
 ### List of String
 ![list_of_strs](Pictures/list_of_str.png)
+### List of Dictionaries
+![list_of_dictionaries](Pictures/list_of_dictionaries.png)
