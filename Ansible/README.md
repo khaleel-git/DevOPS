@@ -5,4 +5,8 @@
 ### It has various sections
 1. [defaults]
 2. [inventory]
-3.[previle]
+3. [previlege_escalation]
+4. [paramiko_connection]
+5. [ssh_connection]
+6. [persistent_connection]
+7. [colors]
