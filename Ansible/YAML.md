@@ -16,4 +16,4 @@
 ### Dictionary VS List
 ![list_vs_dict](Pictures/dict_vs_list.png)
 ### List of List and a Dictionary:
-![]
+![list_of_list_and_dictionary](Pictures/list_of_list_with_two_attributes.png)

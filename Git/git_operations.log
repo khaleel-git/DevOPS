@@ -1961,3 +1961,9 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    6c97fc8..2385e18  master -> master
 branch 'master' set up to track 'origin/master'.
+[master dc426bd] Ansible Commit @ 2024-07-04 16:59:020
+ 3 files changed, 8 insertions(+), 1 deletion(-)
+ create mode 100644 Ansible/Pictures/list_of_list_with_two_attributes.png
+To github.com:khaleel-git/DevOPS.git
+   2385e18..dc426bd  master -> master
+branch 'master' set up to track 'origin/master'.
