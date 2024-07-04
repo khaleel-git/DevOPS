@@ -188,9 +188,17 @@ The `hostvars` magic variable allows access to variables defined for other hosts
 ```
 #### 2. group_names
 The group_names magic variable lists all groups to which the current host belongs.
-Example Usage:*
+*Example Usage:*
+```yaml
+- name: Example Playbook using group_names
+  hosts: all
+  tasks:
+    - debug:
+        msg: "Groups for current host: {{ group_names }}"
+```
+#### 3. inventory_hostname
+The inventory_hostname magic variable provides the name of the current host as defined in the inventory.
+*Example Usage:*
+```yaml
 
-
-
-## Interview Highlights
-1. What is rc in register output?
+```
