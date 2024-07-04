@@ -15,3 +15,5 @@
 ![list_of_dictionaries](Pictures/list_of_dictionaries.png)
 ### Dictionary VS List
 ![list_vs_dict](Pictures/dict_vs_list.png)
+### List of List and a Dictionary:
+![]
