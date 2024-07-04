@@ -112,7 +112,7 @@ ansible_ssh_pass
 
 Variables in Ansible follow a specific precedence order, where higher levels take precedence over lower levels. Here's the precedence order from highest to lowest:
 
-1. **--extra-vars ""**  
+1. **--extra-vars**  
    Command-line extra variables (`-e` or `--extra-vars`) take the highest precedence. These variables are passed directly to the playbook command and override all other variable definitions.
 
 2. **Play Vars**  
