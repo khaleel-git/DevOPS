@@ -169,5 +169,11 @@ Variables defined at the play level in an Ansible playbook (vars section within 
 Command-line extra variables (-e or --extra-vars) take the highest precedence. These variables are passed directly to the playbook command and override all other variable definitions.
 **Example:**
 `ansible-playbook example.yml -e "extra_var=value"`
+
+### Magic Variables
+ans
+
+
+
 ## Interview Highlights
 1. What is rc in register output?
