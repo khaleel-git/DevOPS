@@ -83,4 +83,5 @@ ansible_ssh_pass
      tasks:
         - lineinfile:
             path: /etc/resolv.conf
-            line: 'nameserver {{}}
+            line: 'nameserver {{ dns_server }}'
+```
