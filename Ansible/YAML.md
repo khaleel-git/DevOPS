@@ -9,3 +9,5 @@
 ![list_dictionary](Pictures/list_containing_dict.png)
 ### Dictionary in Another Dictionary
 ![dictionary_in_dictionary](Pictures/dict_in_dict_yaml.png)
+### List of String
+![list_of_strs](Pictures/lis)
