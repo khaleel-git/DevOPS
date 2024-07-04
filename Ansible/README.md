@@ -76,25 +76,23 @@ ansible_ssh_pass
 ### Using variables inside other variables:
 ```
 -
-    - name: Add DNS server to resolv.conf
+    name: Add DNS server to resolv.conf
     hosts: localhost
     vars:
         dns_server: 10.1.250.10
-        dsn_server:
+        dns_server:
             - server1.example.com
             - server2.example.com
             - server3.example.com
-        dns_servers:
+        dns_server:
             server1: "server1.example.com"
             server2: "server2.example.com"
             server3: "server3.example.com"
-            
-        tasks:
-        - name: Add DNS servers to resolv.conf
-            lineinfile:
+         
+     tasks:
+        - lineinfile:
             path: /etc/resolv.conf
-            line: 'nameserver {{ dns_server }}'  # Using single variable dns_server
             line: 'nameserver {{ dns_server }}' # {{ }} is a jinja2 templating
             line: nameserver {{ dns_server[0] }} # using list variable
-            line: nameserver {{dns_server.nameservers}} # using dictionary variable
+            line: nameserver {{dns_server.server1}} # using dictionary variable
 ```
