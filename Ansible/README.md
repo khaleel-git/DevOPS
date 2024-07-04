@@ -64,3 +64,5 @@ db1 ansible_host=server4.company.com ansible_connection=winrm ansible_user=admin
 web_servers
 db_servers
 ```
+
+## Ansible Variables
