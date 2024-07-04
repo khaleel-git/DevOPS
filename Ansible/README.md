@@ -20,3 +20,11 @@ ANSIBLE_GATHERING=explicit ansible-playbook playbook.yml # only applicable to si
 export ANSIBLE_GATHERING=explicit
 ansible-playbook playbook.yml
 ```
+
+## View Configuration
+```bash
+ansible-config list # Lists all configurations
+ansible-config view # shows the current config file
+ansible-config dump # Shows the current setting
+
+```
