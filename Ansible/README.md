@@ -127,7 +127,14 @@ Variables in Ansible follow a specific precedence order, where higher levels tak
 ### Register output
 ```yaml
 ---
-- name
+- name: Check /etc/hosts file
+  hosts: all
+  tasks:
+  - shell: cat /etc/hosts
+    register: result
+
+- debug: 
+  var
 
 ## Interview Highlights
 1. What is rc in register output?
