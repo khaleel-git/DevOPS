@@ -107,3 +107,5 @@ ansible_ssh_pass
             path: /etc/resolv.conf
             line: 'nameserver {{ dns_server_names.server1 }}'  # Accessing specific server from dictionary dns_server_names
 ```
+
+### Variable Precedence
