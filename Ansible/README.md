@@ -28,5 +28,9 @@ ansible-config view # shows the current config file
 ansible-config dump # Shows the current setting
 ```
 
-## Default inventory file location and attributes:
-`/etc/ansible/hosts```
+## Default inventory file location and parameters:
+```bash
+default_path: /etc/ansible/hosts
+Parameters:
+ansible_connection --sh
+```
