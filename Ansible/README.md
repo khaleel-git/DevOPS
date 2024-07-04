@@ -69,5 +69,8 @@ db_servers
 ```
 ansible_connection
 ansible_port
-ansible_user - root/user1/user2
+ansible_user
 ansible_ssh_pass
+
+
+```
