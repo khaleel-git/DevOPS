@@ -109,3 +109,7 @@ ansible_ssh_pass
 ```
 
 ### Variable Precedence
+1. Group Vars
+2. Host Vars
+3. Play Vars
+4. --extra
