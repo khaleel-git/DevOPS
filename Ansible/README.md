@@ -151,6 +151,23 @@ ansible_ssh_pass: mypassword
 ```
 #### Play Scope
 Variables defined at the play level in an Ansible playbook (vars section within a play). These variables apply to all tasks within that play and are local to that play.
+**Example:
+```yaml
+---
+- name: Example Playbook with Play Scope Variables
+  hosts: all
+  vars:
+    play_var: "This variable is defined at the play level"
 
+  tasks:
+    - name: Task using play_var
+      debug:
+        msg: "{{ play_var }}"
+
+```
+#### Global Variables (--extra-vars)
+Command-line extra variables (-e or --extra-vars) take the highest precedence. These variables are passed directly to the playbook command and override all other variable definitions.
+**Example:***
+`ansible-playbook example.yml -e "extra_var=value"`
 ## Interview Highlights
 1. What is rc in register output?
