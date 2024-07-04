@@ -81,9 +81,13 @@ ansible_ssh_pass
      vars:
         dns_server: 10.1.250.10
         dsn_server:
-        - server1.example.com
-    - server2.example.com
-    - server3.example.com
+            - server1.example.com
+            - server2.example.com
+            - server3.example.com
+        dns_server:
+            server1: "server1.example.com"
+            server2: "server2.example.com"
+            server3: "server3.example.com"
          
      tasks:
         - lineinfile:
