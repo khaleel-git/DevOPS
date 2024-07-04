@@ -40,8 +40,8 @@ ansible_user - root/user1/user2
 ansible_ssh_pass - Password
 ```
 ### Example:
-```web ansible_host=server1.domain.com ansible_connection=ssh ansible_user=root # web is alias to ansible_host
-
+```
+web ansible_host=server1.domain.com ansible_connection=ssh ansible_user=root # web is alias to ansible_host
 # Web Servers
 [linux_servers]
 web1 ansible_host=server1.company.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Password123!
