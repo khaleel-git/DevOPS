@@ -171,16 +171,24 @@ Command-line extra variables (-e or --extra-vars) take the highest precedence. T
 `ansible-playbook example.yml -e "extra_var=value"`
 
 ### Magic Variables
-ansible creates 3 separate sub-processes for 3 hosts
-dns server ip address is unavaialbe for other hosts
-use magic vars
-magic variable:
-hostvars['web2'].dns_server
-hostvars['web2'].ansible_facts.architecutre
-hostvars['web2']['ansible_facts']['procesor']
-
-2nd magic variable is groups - group_names
-3. inventory_hostanmes
+Ansible provides several built-in magic variables that allow you to access information about hosts, groups, and the execution environment dynamically.
+#### 1. hostvars
+The `hostvars` magic variable allows access to variables defined for other hosts in your inventory.
+**Example Usage:**
+```yaml
+- name: Example Playbook using hostvars
+  hosts: web1
+  tasks:
+    - debug:
+        msg: "DNS Server of web2 is {{ hostvars['web2'].dns_server }}"
+    - debug:
+        msg: "Architecture of web2 is {{ hostvars['web2'].ansible_facts.architecture }}"
+    - debug:
+        msg: "Processor of web2 is {{ hostvars['web2']['ansible_facts']['processor'] }}"
+```
+#### 2. group_names
+The group_names magic variable lists all groups to which the current host belongs.
+Example Usage:*
 
 
 
