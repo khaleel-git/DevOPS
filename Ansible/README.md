@@ -66,3 +66,8 @@ db_servers
 ```
 
 ## Ansible Variables
+```
+ansible_connection
+ansible_port
+ansible_user - root/user1/user2
+ansible_ssh_pass
