@@ -84,4 +84,5 @@ ansible_ssh_pass
         - lineinfile:
             path: /etc/resolv.conf
             line: 'nameserver {{ dns_server }}' # {{ }} is a jinja2 templating
+            line: nameserver {{ dns_server[0] }} # call
 ```
