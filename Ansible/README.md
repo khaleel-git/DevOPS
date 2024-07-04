@@ -80,9 +80,12 @@ ansible_ssh_pass
     hosts: localhost
      vars:
         dns_server: 10.1.250.10
+        dsn_server:
+        
      tasks:
         - lineinfile:
             path: /etc/resolv.conf
             line: 'nameserver {{ dns_server }}' # {{ }} is a jinja2 templating
-            line: nameserver {{ dns_server[0] }} # call
+            line: nameserver {{ dns_server[0] }} # using list variable
+            line: nameserver {{dns_server.nameservers}} # using dictionary variable
 ```
