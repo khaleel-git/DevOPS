@@ -2162,3 +2162,22 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    f13bd44..cf462e8  master -> master
 branch 'master' set up to track 'origin/master'.
+[master ec93e56] Ansible Commit @ 2024-07-04 18:27:000
+ 1 file changed, 5 insertions(+)
+To github.com:khaleel-git/DevOPS.git
+   cf462e8..ec93e56  master -> master
+branch 'master' set up to track 'origin/master'.
+fatal: Unable to create '/home/khaleel/DevOPS/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+fatal: Unable to create '/home/khaleel/DevOPS/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
