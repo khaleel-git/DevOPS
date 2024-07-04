@@ -175,7 +175,8 @@ ansible creates 3 separate sub-processes for 3 hosts
 dns server ip address is unavaialbe for other hosts
 use magic vars
 magic variable:
-hostvars
+hostvars['web2'].dns_server
+hostvars['web2].ansible_facts.architecutre
 
 
 
