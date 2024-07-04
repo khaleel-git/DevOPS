@@ -1760,3 +1760,9 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    2de0792..3ee4206  master -> master
 branch 'master' set up to track 'origin/master'.
+[master 1da3dea] Ansible Commit @ 2024-07-04 16:20:030
+ 2 files changed, 5 insertions(+)
+ create mode 100644 Ansible/Pictures/spaces_mistake.png
+To github.com:khaleel-git/DevOPS.git
+   3ee4206..1da3dea  master -> master
+branch 'master' set up to track 'origin/master'.
