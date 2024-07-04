@@ -108,8 +108,8 @@ ansible_ssh_pass
             line: 'nameserver {{ dns_server_names.server1 }}'  # Accessing specific server from dictionary dns_server_names
 ```
 
-### Variable Precedence
+### Variable Precedence -> upper to lower (lower means highest precendence)
 1. Group Vars
 2. Host Vars
 3. Play Vars
-4. --extra
+4. --extra-vars "" # highest precedence
