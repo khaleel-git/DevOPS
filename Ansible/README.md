@@ -41,13 +41,26 @@ ansible_ssh_pass - Password
 ```
 ### Example:
 ```
-web ansible_host=server1.domain.com ansible_connection=ssh ansible_user=root # web is alias to ansible_host
+# Sample Inventory File
+
 # Web Servers
-[linux_servers]
 web1 ansible_host=server1.company.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Password123!
 web2 ansible_host=server2.company.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Password123!
 web3 ansible_host=server3.company.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Password123!
 
-[windows_db_server]
-db1  ansible_host=server4.company.com ansible_connection=winrm ansible_user=administrator ansible_password=Dbp@ssh123!
+# Database Servers
+db1 ansible_host=server4.company.com ansible_connection=winrm ansible_user=administrator ansible_password=Password123!
+
+
+[web_servers]
+web1 ansible_host=server1.company.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Password123!
+web2 ansible_host=server2.company.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Password123!
+web3 ansible_host=server3.company.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Password123!
+
+[db_servers]
+db1 ansible_host=server4.company.com ansible_connection=winrm ansible_user=administrator ansible_password=Password123!
+
+[all_servers:children]
+web_servers
+db_servers
 ```
