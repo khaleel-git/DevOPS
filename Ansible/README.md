@@ -171,6 +171,9 @@ Command-line extra variables (-e or --extra-vars) take the highest precedence. T
 `ansible-playbook example.yml -e "extra_var=value"`
 
 ### Magic Variables
+1. hostvars
+2. group_names
+3. 
 Ansible provides several built-in magic variables that allow you to access information about hosts, groups, and the execution environment dynamically.
 #### 1. hostvars
 The `hostvars` magic variable allows access to variables defined for other hosts in your inventory.
@@ -200,5 +203,9 @@ The group_names magic variable lists all groups to which the current host belong
 The inventory_hostname magic variable provides the name of the current host as defined in the inventory.
 *Example Usage:*
 ```yaml
-
+- name: Example Playbook using inventory_hostname
+  hosts: all
+  tasks:
+    - debug:
+        msg: "Hostname of current host: {{ inventory_hostname }}"
 ```
