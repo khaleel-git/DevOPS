@@ -13,3 +13,5 @@
 ![list_of_strs](Pictures/list_of_str.png)
 ### List of Dictionaries
 ![list_of_dictionaries](Pictures/list_of_dictionaries.png)
+### Dictionary VS List
+![list_vs_dict](Pictures/dict_vs_list.png)
