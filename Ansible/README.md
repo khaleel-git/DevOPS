@@ -30,10 +30,15 @@ ansible-config dump # Shows the current setting
 
 ## Default inventory file location and parameters:
 ```bash
-default_path: /etc/ansible/hosts
+Default_path: 
+/etc/ansible/hosts
+
 Parameters:
 ansible_connection -ssh/winrm/localhost
 ansible_port - 22/5986
 ansible_user - root/user1/user2
-ansible
+ansible_ssh_pass - Password
 ```
+### Example:
+```
+web ansible_host=server1.domain.com ansible_connection=ssh
