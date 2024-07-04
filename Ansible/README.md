@@ -95,4 +95,14 @@ ansible_ssh_pass
             line: 'nameserver {{ dns_server }}' # {{ }} is a jinja2 templating
             line: nameserver {{ dns_server[0] }} # using list variable
             line: nameserver {{dns_server.server1}} # using dictionary variable
+
+        - name: Add first DNS server from list to resolv.conf
+      lineinfile:
+        path: /etc/resolv.conf
+        line: 'nameserver {{ dsn_server[0] }}'  # Accessing first item from list dsn_server
+
+    - name: Add specific DNS server from dictionary to resolv.conf
+      lineinfile:
+        path: /etc/resolv.conf
+        line: 'nameserver {{ dns_server_names.server1 }}'  # Accessing specific server from dictionary dns_server_names
 ```
