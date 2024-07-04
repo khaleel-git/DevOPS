@@ -49,5 +49,5 @@ web2 ansible_host=server2.company.com ansible_connection=ssh ansible_user=root a
 web3 ansible_host=server3.company.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Password123!
 
 [windows_db_server]
-db1  ansible_host=server4.company.com ansible_connection=ssh ansible_user=administrator ansible_password=Dbp@ssh123!
+db1  ansible_host=server4.company.com ansible_connection=winrm ansible_user=administrator ansible_password=Dbp@ssh123!
 ```
