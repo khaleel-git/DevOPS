@@ -71,6 +71,10 @@ ansible_connection
 ansible_port
 ansible_user
 ansible_ssh_pass
-
-
 ```
+
+### Using variables inside other variables:
+```
+-
+    name: Add DNS server to resolv.conf
+    
