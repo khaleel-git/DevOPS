@@ -138,9 +138,19 @@ Variables in Ansible follow a specific precedence order, where higher levels tak
 ```
 
 ### Variable Scope
-1. Host Scope (accessible within a play)
-2. Play Score (local scope)
-3. Global Variables (--extra-vars)
+1. Host Scope
+2. Play Score
+3. Global Variables
+#### Host Scope
+Variables defined within a specific host context, such as `host_vars` or `group_vars` in inventory files or directories. These variables are accessible within tasks executed on those specific hosts or groups of hosts.
+**Example (`host_vars/server1.yml`):**
+```yaml
+# File: host_vars/server1.yml
+ansible_user: admin
+ansible_ssh_pass: mypassword
+```
+#### Play Scope
+Variables defined at the play level in an Ansible playbook (vars section within a play). These variables apply to all tasks within that play and are local to that play.
 
 ## Interview Highlights
 1. What is rc in register output?
