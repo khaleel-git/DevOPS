@@ -108,8 +108,33 @@ ansible_ssh_pass
             line: 'nameserver {{ dns_server_names.server1 }}'  # Accessing specific server from dictionary dns_server_names
 ```
 
-### Variable Precedence -> upper to lower (lower means highest precendence)
-1. Group Vars
-2. Host Vars
-3. Play Vars
-4. --extra-vars "" # highest precedence
+### Variable Precedence
+
+Variables in Ansible follow a specific precedence order, where higher levels take precedence over lower levels. Here's the precedence order from highest to lowest:
+
+1. **--extra-vars ""**  
+   Command-line extra variables (`-e` or `--extra-vars`) take the highest precedence. These variables are passed directly to the playbook command and override all other variable definitions.
+
+2. **Play Vars**  
+   Variables defined within a playbook (`vars` section at the play level) come next in precedence. They apply to all tasks within that specific play.
+
+3. **Host Vars**  
+   Variables defined for specific hosts in inventory files or directories (like `host_vars`) come next. These variables apply to tasks executed on those specific hosts.
+
+4. **Group Vars**  
+   Variables defined for host groups in inventory files or directories (like `group_vars`). These variables apply to all hosts within a specific group.
+
+### Example Usage:
+
+```yaml
+---
+- name: Example Playbook
+  hosts: all
+  vars:
+    playbook_var: "This variable is defined at the play level"
+
+  tasks:
+    - name: Task using playbook_var
+      debug:
+        msg: "{{ playbook_var }}"
+```
