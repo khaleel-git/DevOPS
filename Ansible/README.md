@@ -171,7 +171,11 @@ Command-line extra variables (-e or --extra-vars) take the highest precedence. T
 `ansible-playbook example.yml -e "extra_var=value"`
 
 ### Magic Variables
-ans
+ansible creates 3 separate sub-processes for 3 hosts
+dns server ip address is unavaialbe for other hosts
+use magic vars
+magic variable:
+hostvars
 
 
 
