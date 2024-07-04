@@ -90,6 +90,7 @@ ansible_ssh_pass
             server3: "server3.example.com"
          
      tasks:
+        - name: Add DNS server IP to resolv.conf (using variable dns_server_ip)
         - lineinfile:
             path: /etc/resolv.conf
             line: 'nameserver {{ dns_server }}' # {{ }} is a jinja2 templating
@@ -97,12 +98,12 @@ ansible_ssh_pass
             line: nameserver {{dns_server.server1}} # using dictionary variable
 
         - name: Add first DNS server from list to resolv.conf
-      lineinfile:
-        path: /etc/resolv.conf
-        line: 'nameserver {{ dsn_server[0] }}'  # Accessing first item from list dsn_server
+        lineinfile:
+            path: /etc/resolv.conf
+            line: 'nameserver {{ dsn_server[0] }}'  # Accessing first item from list dsn_server
 
-    - name: Add specific DNS server from dictionary to resolv.conf
-      lineinfile:
-        path: /etc/resolv.conf
-        line: 'nameserver {{ dns_server_names.server1 }}'  # Accessing specific server from dictionary dns_server_names
+        - name: Add specific DNS server from dictionary to resolv.conf
+        lineinfile:
+            path: /etc/resolv.conf
+            line: 'nameserver {{ dns_server_names.server1 }}'  # Accessing specific server from dictionary dns_server_names
 ```
