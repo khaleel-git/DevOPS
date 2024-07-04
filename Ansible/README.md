@@ -81,7 +81,7 @@ ansible_ssh_pass
      vars:
         dns_server: 10.1.250.10
         dsn_server:
-        
+         
      tasks:
         - lineinfile:
             path: /etc/resolv.conf
