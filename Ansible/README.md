@@ -26,5 +26,4 @@ ansible-playbook playbook.yml
 ansible-config list # Lists all configurations
 ansible-config view # shows the current config file
 ansible-config dump # Shows the current setting
-
 ```
