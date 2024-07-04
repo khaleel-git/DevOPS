@@ -138,6 +138,8 @@ Variables in Ansible follow a specific precedence order, where higher levels tak
 ```
 
 ### Variable Scope
+1. Host Scope (accessible within a play)
+2. Play Score (local scope)
 
 ## Interview Highlights
 1. What is rc in register output?
