@@ -179,7 +179,8 @@ hostvars['web2'].dns_server
 hostvars['web2'].ansible_facts.architecutre
 hostvars['web2']['ansible_facts']['procesor']
 
-2nd magic variable is groups
+2nd magic variable is groups - group_names
+3. inventory_hostanmes
 
 
 
