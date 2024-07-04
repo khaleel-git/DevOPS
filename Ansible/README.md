@@ -16,4 +16,7 @@
 
 ## Ansible Configuration Variables
 ```bash
-ANSIBLE_GATHERING
+ANSIBLE_GATHERING=explicit ansible-playbook playbook.yml # only applicable to single playbook
+# to 
+export ANSIBLE_GATHERING=explicit
+ansible-playbook playbook.yml
