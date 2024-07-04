@@ -12,3 +12,8 @@
 7. [colors]
 ### Overrite Ansible configs
 `$ANSIBLE_CONFIG=/opt/ansible-web.cfg ansible-playbook playbook.yml`
+
+
+## Ansible Configuration Variables
+```bash
+ANSIBLE_GATHERING
