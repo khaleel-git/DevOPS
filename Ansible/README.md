@@ -27,3 +27,4 @@ ansible-config list # Lists all configurations
 ansible-config view # shows the current config file
 ansible-config dump # Shows the current setting
 ```
+![Ansible-Config](Pictures/ansible-config.png)
