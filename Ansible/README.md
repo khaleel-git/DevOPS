@@ -1,7 +1,7 @@
 # Ansible Cheat Sheet
 
 ## Ansible Configuration Files
-`/etc/ansible/ansible.cfg`
+`/etc/ansible/ansible.cfg` #default config file 
 ### It has various sections
 1. [defaults]
 2. [inventory]
