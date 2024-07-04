@@ -173,7 +173,7 @@ Command-line extra variables (-e or --extra-vars) take the highest precedence. T
 ### Magic Variables
 1. hostvars
 2. group_names
-3. 
+3. inventory_hostname
 Ansible provides several built-in magic variables that allow you to access information about hosts, groups, and the execution environment dynamically.
 #### 1. hostvars
 The `hostvars` magic variable allows access to variables defined for other hosts in your inventory.
