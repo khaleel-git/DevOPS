@@ -41,7 +41,7 @@ ansible_ssh_pass - Password
 ```
 ### Example:
 ```
-# Sample Inventory File
+# Sample ini Inventory File
 
 # Web Servers
 web1 ansible_host=server1.company.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Password123!
