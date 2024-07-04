@@ -176,7 +176,10 @@ dns server ip address is unavaialbe for other hosts
 use magic vars
 magic variable:
 hostvars['web2'].dns_server
-hostvars['web2].ansible_facts.architecutre
+hostvars['web2'].ansible_facts.architecutre
+hostvars['web2']['ansible_facts']['procesor']
+
+2nd magic variable is groups
 
 
 
