@@ -10,3 +10,6 @@
 5. [ssh_connection]
 6. [persistent_connection]
 7. [colors]
+
+
+`$ANSIBLE_CONFIG=/opt/ansible-web.cfg ansible-playbook playbook.yml`
