@@ -1,3 +1,3 @@
 # YAML Syntax
-
-Pictures/xml_json_yaml.png
+## What is YAML
+![xml_json_yaml](Pictures/xml_json_yaml.png)
