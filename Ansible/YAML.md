@@ -6,4 +6,4 @@
 ### Spaces Mistake in yaml
 ![spaces_yaml](Pictures/spaces_mistake.png)
 ### List Containing Dictionaries
-![list_]
+![list_dictionary](Pictures/list_containing_dict.png)

@@ -1771,3 +1771,9 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    1da3dea..5164459  master -> master
 branch 'master' set up to track 'origin/master'.
+[master ea15770] Ansible Commit @ 2024-07-04 16:22:040
+ 3 files changed, 8 insertions(+), 1 deletion(-)
+ create mode 100644 Ansible/Pictures/list_containing_dict.png
+To github.com:khaleel-git/DevOPS.git
+   5164459..ea15770  master -> master
+branch 'master' set up to track 'origin/master'.
