@@ -4177,3 +4177,14 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    8c344842..58ddc31e  master -> master
 branch 'master' set up to track 'origin/master'.
+[master 72c85437] Ansible Commit @ 2024-07-05 18:43:000
+ 7 files changed, 8 insertions(+)
+ rename Ansible/{ => 0.Learn_YAML}/YAML.md (100%)
+ rename Ansible/{Ansible_Variables_Facts => 2.Ansible_Variables_and_Facts}/app_list.yaml (100%)
+ rename Ansible/{Ansible_Variables_Facts => 2.Ansible_Variables_and_Facts}/inventory (100%)
+ rename Ansible/{Ansible_Variables_Facts => 2.Ansible_Variables_and_Facts}/playbook.yaml (100%)
+ rename Ansible/{Ansible_Variables_Facts => 2.Ansible_Variables_and_Facts}/playbook_2.yaml (100%)
+ rename Ansible/{Ansible_Variables_Facts => 2.Ansible_Variables_and_Facts}/user_setup.yaml (100%)
+To github.com:khaleel-git/DevOPS.git
+   58ddc31e..72c85437  master -> master
+branch 'master' set up to track 'origin/master'.
