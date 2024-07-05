@@ -248,4 +248,5 @@ task:
 3. install a package
 4. shutdown/restart
 sample playbook, play1 and play2
-properties: name, hosts and tasks
+properties: [name, hosts and tasks (lists)](dict)
+hosts: set at play level, localhost, anyhost or group ()
