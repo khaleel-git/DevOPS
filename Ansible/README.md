@@ -239,64 +239,40 @@ By default, Ansible gathers system facts from remote hosts using the `setup` mod
      ```
 
 ## Ansible Playbooks
-written in yaml format
-single yaml file
-a task is a single action to be performed
-task:
-1. execute a command
-2. run a script
-3. install a package
-4. shutdown/restart
-sample playbook, play1 and play2
-properties: [name, hosts and tasks (lists)](dict)
-hosts: set at play level, localhost, anyhost or group (first define in inventory file)
-modules: difference action run by taks is called modules: command, script, yum, service
+Ansible playbooks are written in YAML format. Each playbook is a single YAML file containing tasks, which are individual actions to be performed.
 
-### verifying playbooks
-un-noticed error (significant downtime), that's why we need verification (production env)
-these issue lead to downtime, dataloss eg.
-several moduels to verify playbook 
-  1.check mode --check option[dont install but tell what it look like after install]
-  2.Diff Mode: shows the diff b/w current state and new state, --check -diff (check and diff)
-  3. Syntax Check: error-free, --syntax-check (check syntax) [ansible-playbook --syntax-check configure_ngnix.yml ]
+### Task Examples
+1. Execute a command
+2. Run a script
+3. Install a package
+4. Shutdown/restart a service
+
+### Sample Playbooks
+- `play1.yml` and `play2.yml`
+
+### Properties
+- **name**: Name of the playbook
+- **hosts**: Set at the play level (localhost, anyhost, or group defined in the inventory file)
+- **tasks**: List of tasks to be executed
+
+### Modules
+Different actions run by tasks are called modules:
+- `command`: Execute a command
+- `script`: Run a script
+- `yum`: Install packages (for Red Hat based systems)
+- `apt`: Install packages (for Debian based systems)
+- `service`: Manage services (start, stop, restart, etc.)
+
+### Verifying Playbooks
+Verification is crucial in production environments to avoid unnoticed errors that could lead to significant downtime or data loss. Methods include:
+1. **Check Mode**: `--check` option (simulates changes without applying them)
+2. **Diff Mode**: `--check --diff` (shows differences between current and desired states)
+3. **Syntax Check**: `ansible-playbook --syntax-check playbook.yml`
 
 ### Ansible-Lint
-command-line tool which performs linting on asible playbooks, roles and collections
-check code for errors, bugs, stylistic errors and suspicious constructs
-use feedback to refine your playbooks
+Ansible-Lint is a command-line tool that performs linting on Ansible playbooks, roles, and collections. It checks for errors, bugs, stylistic errors, and suspicious constructs to refine playbooks.
 
 ### Ansible Conditionals
-different os flavor use diff package managers
-single playbook that work for all hosts
-that's why conditional statement is handy
-when: ansible_os_family == "Debian" (or, and conditions)
-
-#### condionals in loops
-when: item.required == True
-loop: "{{ packages }}"
-
-#### condionals & register
-register: result
-when: result.stdout.find('down') != -1
-#### ansbile conditionals based on facts, variables, re-use
-system specific variables
-ansible.os.family (builtin variable)
-condition: when
-shell and command modules are similar in a way that they are used to execute a command on the system. However, shell executes the command inside a shell giving us access to environment variables and redirection using >>.
-#### ansible loops
-duplicate lines
-- user: name= "{{ item }}" state=present
-loop:
-- joe
-- george
-- mani
-- jazlan
-in terms of dict
-- user: name= "{{ item.name }}" state=present
-can also be written in with_items:
-- joe
-- george
-- ravi
-- mani
-loopkup plugins:
-with_file, with_url, with_items, with _mongodb, with_dict, with_etcd
+Conditional statements are useful for managing different OS flavors and ensuring playbooks work across all hosts:
+```yaml
+when: ansible_os_family == "Debian"
