@@ -6235,3 +6235,10 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    81656b8a..258469fc  master -> master
 branch 'master' set up to track 'origin/master'.
+[master 449742d4] Ansible Commit @ 2024-07-06 02:28:010
+ 3 files changed, 17 insertions(+)
+ create mode 100644 Ansible/4.Ansible_Conditionals/inventory
+ create mode 100644 Ansible/4.Ansible_Conditionals/nginx.yaml
+To github.com:khaleel-git/DevOPS.git
+   258469fc..449742d4  master -> master
+branch 'master' set up to track 'origin/master'.
