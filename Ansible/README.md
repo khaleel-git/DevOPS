@@ -293,4 +293,10 @@ loop:
 - jazlan
 in terms of dict
 - user: name= "{{ item.name }}" state=present
-can also be written in wit
+can also be written in with_items:
+- joe
+- george
+- ravi
+- mani
+
+with_file, with+url, with_items, with 
