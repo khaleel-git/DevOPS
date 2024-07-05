@@ -4,4 +4,4 @@
    become: yes
    tasks:
      -  service: 'name=nginx state=started'
-        when: inventory_hostname == node02
+        when: ansible_host == "node02"''
