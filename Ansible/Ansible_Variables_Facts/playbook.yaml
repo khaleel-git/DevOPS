@@ -9,6 +9,6 @@
         line: 'nameserver {{  nameserver_ip  }}'
     - name: 'Disable SNMP Port'
       firewalld:
-        port: '160-161'
+        port: '{{ snmp_port }}'
         permanent: true
         state: disabled
