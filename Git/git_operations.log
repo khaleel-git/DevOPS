@@ -6408,3 +6408,10 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    b521d4fc..2a5f4ff7  master -> master
 branch 'master' set up to track 'origin/master'.
+[master 3465cfa8] Ansible Commit @ 2024-07-06 03:01:000
+ 3 files changed, 5 insertions(+)
+ rename Ansible/5.Ansible_Loops/{fruits.yml => fruits.yaml} (100%)
+ rename Ansible/5.Ansible_Loops/{packages.yml => packages.yaml} (100%)
+To github.com:khaleel-git/DevOPS.git
+   2a5f4ff7..3465cfa8  master -> master
+branch 'master' set up to track 'origin/master'.
