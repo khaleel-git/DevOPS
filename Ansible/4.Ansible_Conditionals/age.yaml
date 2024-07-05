@@ -6,6 +6,8 @@
   tasks:
     - name: I am a Child
       command: 'echo "I am a Child"'
-      
+      when: age < 18
+
     - name: I am an Adult
       command: 'echo "I am an Adult"'
+      when: age >= 18
