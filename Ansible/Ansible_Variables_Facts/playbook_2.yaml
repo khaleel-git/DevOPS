@@ -9,7 +9,7 @@
     - command: 'echo "I live in the {{ country_name }}"'
     - command: 'echo "I work as a {{ title }}"'
 
-corrected by kodekloud below:
+# corrected by kodekloud below:
 ---
 - hosts: localhost
   vars:
