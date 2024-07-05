@@ -241,3 +241,9 @@ By default, Ansible gathers system facts from remote hosts using the `setup` mod
 ## Ansible Playbooks
 written in yaml format
 single yaml file
+a task is a single action to be performed
+task:
+1. execute a command
+2. run a script
+3. install a package
+4. shutdown/restart
