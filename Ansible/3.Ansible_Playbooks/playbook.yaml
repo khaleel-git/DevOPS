@@ -1,7 +1,7 @@
 ---
 - name: 'Run date command in shell'
   hosts: localhost
-  become: yes
+  become: true
   tasks:
     - name: 'Execute a date command'
-      command: date 
+      command: date
