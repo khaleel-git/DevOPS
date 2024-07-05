@@ -1,0 +1,6 @@
+---
+- hosts: localhost
+  tasks:
+    - command: 'echo "My car is BMW M3"'
+    - command: 'echo "I live in the USA"'
+    - command: 'echo "I work as a Systems Engineer"'
