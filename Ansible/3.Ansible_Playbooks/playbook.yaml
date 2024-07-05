@@ -1,0 +1,6 @@
+---
+- hosts: localhost
+  become: yes
+  tasks:
+    - name: 'Execute a date command'
+      command: date 
