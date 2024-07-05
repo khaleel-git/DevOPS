@@ -211,5 +211,29 @@ The inventory_hostname magic variable provides the name of the current host as d
 ```
 
 ## Ansible Facts
-setup moduel -> gathers facts
-disable ansible facts -> `/etc/ansible/ansible.cfg' (gathering = explicit)
+By default, Ansible gathers system facts from remote hosts using the `setup` module before executing tasks. This information is stored in variables and can be used in playbooks or templates. If you want to disable the automatic fact gathering and control when facts are collected, you can adjust the Ansible configuration file (`ansible.cfg`).
+### Steps to Disable Automatic Fact Gathering
+1. **Locate your `ansible.cfg` file:**
+   - The `ansible.cfg` file can typically be found in `/etc/ansible/ansible.cfg` or in the current directory where you run Ansible (`./ansible.cfg`).
+
+2. **Edit the `ansible.cfg` file:**
+   - Add or modify the `gathering` setting under the `[defaults]` section to explicitly disable automatic fact gathering.
+
+     ```ini
+     [defaults]
+     gathering = explicit
+     ```
+
+     Setting `gathering = explicit` means facts will not be gathered automatically. You will need to explicitly specify `gather_facts: yes` in your playbooks when you want to collect facts.
+
+3. **Explicitly gather facts in playbooks:**
+   - In your playbooks, where you need to gather facts, add `gather_facts: yes` at the play level.
+
+     ```yaml
+     ---
+     - hosts: your_hosts
+       gather_facts: yes
+       tasks:
+         - name: Your task here
+           # Your tasks go here
+     ```
