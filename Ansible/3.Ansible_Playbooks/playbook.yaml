@@ -1,10 +1,12 @@
 ---
-- name: 'Execute two commands on localhost'
-  hosts: web_nodes
+- name: 'Execute two commands on node01'
+  hosts: node01
   become: yes
   tasks:
     - name: 'Execute a date command'
       command: date
-    
-    - name: 'Task to display nameservers'
-      command: 'cat /etc/resolv.conf'
+    - name: 'Task to display hosts file on node01'
+      command: 'cat /etc/hosts'
+  
+
+- name: 
