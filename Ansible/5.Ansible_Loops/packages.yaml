@@ -9,5 +9,5 @@
       - vim
   tasks:
     - yum:
-        name: {{ packages.item }}
+        name: '{{ packages.item }}'
         state: present
