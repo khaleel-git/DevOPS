@@ -298,5 +298,5 @@ can also be written in with_items:
 - george
 - ravi
 - mani
-
-with_file, with+url, with_items, with 
+loopkup plugins:
+with_file, with_url, with_items, with _mongodb, with_dict, with_etcd
