@@ -4,7 +4,7 @@
   tasks:
     - name: Set up user
       user:
-        name: " {{user_details['username'] }}"
-        password: " {{user_details['username'] }}" "secret_pass"
-        comment: " {{user_details['username'] }}" "admin@example.com"
+        name: "{{ user_details['username'] }}"
+        password: "{{ user_details['secret_pass'] }}"
+        comment: "{{ user_details['admin@example.com'] }}"
         state: present
