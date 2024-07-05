@@ -5,6 +5,6 @@
     - name: Set up user
       user:
         name: "{{ user_details['username'] }}"
-        password: "{{ user_details['secret_pass'] }}"
+        password: "{{ user_details['password'] }}"
         comment: "{{ user_details['admin@example.com'] }}"
         state: present
