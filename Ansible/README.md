@@ -258,7 +258,7 @@ these issue lead to downtime, dataloss eg.
 several moduels to verify playbook 
   1.check mode --check option[dont install but tell what it look like after install]
   2.Diff Mode: shows the diff b/w current state and new state, --check -diff (check and diff)
-  3. Syntax Check: error-free, --syntax-check (check syntax) [ansible-playbook configure_ngnix.yml --syntax-check]
+  3. Syntax Check: error-free, --syntax-check (check syntax) [ansible-playbook --syntax-check configure_ngnix.yml ]
 
 ### Ansible-Lint
 command-line tool which performs linting on asible playbooks, roles and collections
