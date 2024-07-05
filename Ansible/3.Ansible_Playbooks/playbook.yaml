@@ -1,6 +1,6 @@
 ---
 - name: 'Execute two commands on localhost'
-  hosts: node01
+  hosts: web_nodes
   become: yes
   tasks:
     - name: 'Execute a date command'
