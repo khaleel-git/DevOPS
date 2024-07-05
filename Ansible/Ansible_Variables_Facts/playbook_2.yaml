@@ -1,5 +1,9 @@
 ---
 - hosts: localhost
+  vars:
+    car_model: "BMW M3"
+    country_name: "USA"
+    
   tasks:
     - command: 'echo "My car is BMW M3"'
     - command: 'echo "I live in the USA"'
