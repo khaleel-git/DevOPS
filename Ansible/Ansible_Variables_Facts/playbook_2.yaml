@@ -3,8 +3,8 @@
   vars:
     car_model: "BMW M3"
     country_name: "USA"
-    
+    title: "System Engineer"
   tasks:
-    - command: 'echo "My car is BMW M3"'
+    - command: 'echo "My car is {{}}"'
     - command: 'echo "I live in the USA"'
     - command: 'echo "I work as a Systems Engineer"'
