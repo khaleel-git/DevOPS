@@ -9,4 +9,5 @@
       command: 'cat /etc/hosts'
   
 
-- name: 
+- name: 'Execute a command on node02'
+  hosts: node
