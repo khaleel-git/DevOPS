@@ -255,5 +255,6 @@ modules: difference action run by taks is called modules: command, script, yum, 
 un-noticed error (significant downtime), that's why we need verification (production env)
 these issue lead to downtime, dataloss eg.
 several moduels to verify playbook 
-  (1.check mode --check option[dont install but tell what it look like after install]) 
-  2.Diff Mode: shows the diff b/w current state and 
+  1.check mode --check option[dont install but tell what it look like after install]
+  2.Diff Mode: shows the diff b/w current state and new state, --check -diff (check and diff)
+  3. Syntax Check: 
