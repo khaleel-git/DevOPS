@@ -4188,3 +4188,20 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    58ddc31e..72c85437  master -> master
 branch 'master' set up to track 'origin/master'.
+[master bd8ba87f] Ansible Commit @ 2024-07-05 18:44:000
+ 14 files changed, 14 insertions(+), 1 deletion(-)
+ rename Ansible/{ => 0.YAML_Getting_Started}/Pictures/ansible-config.png (100%)
+ rename Ansible/{ => 0.YAML_Getting_Started}/Pictures/dict_in_dict_yaml.png (100%)
+ rename Ansible/{ => 0.YAML_Getting_Started}/Pictures/dict_vs_list.png (100%)
+ rename Ansible/{ => 0.YAML_Getting_Started}/Pictures/list_containing_dict.png (100%)
+ rename Ansible/{ => 0.YAML_Getting_Started}/Pictures/list_of_dictionaries.png (100%)
+ rename Ansible/{ => 0.YAML_Getting_Started}/Pictures/list_of_list_with_two_attributes.png (100%)
+ rename Ansible/{ => 0.YAML_Getting_Started}/Pictures/list_of_str.png (100%)
+ rename Ansible/{ => 0.YAML_Getting_Started}/Pictures/rc-register-output.png (100%)
+ rename Ansible/{ => 0.YAML_Getting_Started}/Pictures/spaces_mistake.png (100%)
+ rename Ansible/{ => 0.YAML_Getting_Started}/Pictures/xml_json_yaml.png (100%)
+ rename Ansible/{ => 0.YAML_Getting_Started}/Pictures/yaml_syntax.png (100%)
+ rename Ansible/{0.Learn_YAML => 0.YAML_Getting_Started}/YAML.md (100%)
+To github.com:khaleel-git/DevOPS.git
+   72c85437..bd8ba87f  master -> master
+branch 'master' set up to track 'origin/master'.

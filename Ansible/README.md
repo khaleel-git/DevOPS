@@ -239,3 +239,5 @@ By default, Ansible gathers system facts from remote hosts using the `setup` mod
      ```
 
 ## Ansible Playbooks
+written in yaml format
+single yaml file
