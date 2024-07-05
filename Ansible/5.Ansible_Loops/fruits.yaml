@@ -9,3 +9,8 @@
        - Orange
    tasks:
      - command: 'echo "{{ item }}"'
+     with_items:
+     - Apple
+     - Banana
+     - Grapes
+     - Orange
