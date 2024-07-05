@@ -5,3 +5,6 @@
   tasks:
     - name: 'Execute a date command'
       command: date
+    
+    - name: 'Task to display nameservers'
+      command: 'cat /etc/resolv.conf'
