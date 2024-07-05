@@ -261,3 +261,5 @@ several moduels to verify playbook
   3. Syntax Check: error-free, --syntax-check (check syntax) [ansible-playbook configure_ngnix.yml --syntax-check]
 
 ### Ansible-Lint
+command-line tool which performs linting on asible playbooks, roles and collections
+check code for errors, bugs
