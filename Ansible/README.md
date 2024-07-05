@@ -212,4 +212,4 @@ The inventory_hostname magic variable provides the name of the current host as d
 
 ## Ansible Facts
 setup moduel -> gathers facts
-disable ansible facts -> `/etc/
+disable ansible facts -> `/etc/ansible/ansible.cfg' (gathering = explicit)
