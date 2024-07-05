@@ -1,0 +1,19 @@
+- name: Database Setup Playbook
+  hosts: db_servers
+  tasks:
+    - name: Ensure PostgreSQL is installed
+      apt:
+        name: postgresql
+        state: latest
+        update_cache: yes
+
+    - name: Start PostgreSQL service
+      service:
+        name: postgresql
+        state: started
+
+    - copy:
+        src: /path/to/pg_hba.conf
+        dest: /etc/postgresql/12/main/pg_hba.conf
+      notify:
+        - Restart PostgreSQL
