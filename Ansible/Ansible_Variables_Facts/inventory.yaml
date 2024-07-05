@@ -8,4 +8,4 @@ node02
 
 [all:vars]
 app_list=['vim', 'sqlite', 'jq']
-user_details={'username': 'admin', 'password': 'secret_pass', 'email': 'admin@example.com','nameserver':'nameserver 8.8.8.8'}
+user_details={'username': 'admin', 'password': 'secret_pass', 'email': 'admin@example.com'}
