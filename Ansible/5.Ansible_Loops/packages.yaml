@@ -2,11 +2,13 @@
 - name: 'Install required packages'
   hosts: localhost
   become: yes
+  vars:
+    packages:
+      - httpd
+      - make
+      - vim
   tasks:
     - yum:
-        name: "{{ items }}"
+        name: '{{ item }}'
         state: present
-        with_items:
-          - httpd
-          - make
-          - vim
+      with_items: '{{ packages }}'
