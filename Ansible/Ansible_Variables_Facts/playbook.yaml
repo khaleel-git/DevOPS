@@ -1,11 +1,9 @@
-localhost ansible_connection=local nameserver_ip=8.8.8.8 snmp_port=160-161
-node01 ansible_host=node01 ansible_ssh_pass=caleston123
-node02 ansible_host=node02 ansible_ssh_pass=caleston123
-
-[web_nodes]
-node01
-node02
-
-[all:vars]
-app_list=['vim', 'sqlite', 'jq']
-user_details={'username': 'admin', 'password': 'secret_pass', 'email': 'admin@example.com'}
+---
+- name: 'Add nameserver in resolv.conf file on localhost'
+  hosts: localhost
+  become: yes
+  tasks:
+    - name: 'Add nameserver in resolv.conf file'
+      lineinfile:
+        path: /tmp/resolv.conf
+        line: 'nameserver 8.8.8.8'
