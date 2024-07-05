@@ -64,6 +64,7 @@ db1 ansible_host=server4.company.com ansible_connection=winrm ansible_user=admin
 web_servers
 db_servers
 ```
+---
 
 ## Ansible Variables
 ```
@@ -107,6 +108,7 @@ ansible_ssh_pass
             path: /etc/resolv.conf
             line: 'nameserver {{ dns_server_names.server1 }}'  # Accessing specific server from dictionary dns_server_names
 ```
+---
 
 ### Variable Precedence
 
@@ -124,6 +126,7 @@ Variables in Ansible follow a specific precedence order, where higher levels tak
 4. **Group Vars**  
    Variables defined for host groups in inventory files or directories (like `group_vars`). These variables apply to all hosts within a specific group.
 
+---
 ### Register output
 ```yaml
 ---
@@ -137,6 +140,7 @@ Variables in Ansible follow a specific precedence order, where higher levels tak
   var: result.rc # rc means return code
 ```
 
+---
 ### Variable Scope
 1. Host Scope
 2. Play Score
