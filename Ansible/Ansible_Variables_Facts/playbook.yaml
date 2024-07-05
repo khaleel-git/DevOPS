@@ -7,4 +7,4 @@
       lineinfile:
         path: /tmp/resolv.conf
         line: 'nameserver 8.8.8.8'
-        line: '{{ hostvars[''] }}'
+        line: '{{ hostvars['user_details']['nameserver'] }}'
