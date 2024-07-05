@@ -252,3 +252,5 @@ properties: [name, hosts and tasks (lists)](dict)
 hosts: set at play level, localhost, anyhost or group (first define in inventory file)
 modules: difference action run by taks is called modules: command, script, yum, service
 ### verifying playbooks
+un-noticed error (significant downtime), that's why we need verification (production env)
+these 
