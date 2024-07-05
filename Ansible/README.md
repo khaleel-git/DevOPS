@@ -281,3 +281,4 @@ when: result.stdout.find('down') != -1
 #### ansbile conditionals based on facts, variables, re-use
 system specific variables
 ansible.os.family (builtin variable)
+condition: when
