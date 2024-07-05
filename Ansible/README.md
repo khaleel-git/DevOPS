@@ -262,4 +262,4 @@ several moduels to verify playbook
 
 ### Ansible-Lint
 command-line tool which performs linting on asible playbooks, roles and collections
-check code for errors, bugs
+check code for errors, bugs, stylistic errors and suspicious constructs
