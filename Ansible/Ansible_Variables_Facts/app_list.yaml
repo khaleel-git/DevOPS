@@ -7,6 +7,4 @@
         name: "{{ item }}"
         state: present
       with_items:
-        - app_list[0]
-        - app_list[1]
-        - app_list[2]
+        - "{{ app_list }}"
