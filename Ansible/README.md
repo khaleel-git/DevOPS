@@ -276,4 +276,5 @@ when: item.required == True
 loop: "{{ packages }}"
 
 #### condionals & register
-
+register: result
+when: result.stdout.find('down') != -1
