@@ -6,5 +6,4 @@
     - name: 'Add nameserver in resolv.conf file'
       lineinfile:
         path: /tmp/resolv.conf
-        line: 'nameserver 8.8.8.8'
-        line: '{{ hostvars['user_details']['nameserver'] }}'
+        line: 'nameserver {{ hostvars['user_details']['nameserver'] }}'
