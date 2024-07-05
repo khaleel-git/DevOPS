@@ -291,3 +291,6 @@ loop:
 - george
 - mani
 - jazlan
+in terms of dict
+- user: name= "{{ item.name }}" state=present
+can also be written in wit
