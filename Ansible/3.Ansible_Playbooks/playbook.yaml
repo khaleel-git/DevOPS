@@ -1,7 +1,7 @@
 ---
-- name: 'Execute a date command on localhost'
+- name: 'Execute a command to display hosts file on localhost'
   hosts: localhost
   become: yes
   tasks:
-     - name: 'Execute a date command'
-       command: date
+    - name: 'Task to display hosts file'
+    - command: 'cat /etc/hosts'
