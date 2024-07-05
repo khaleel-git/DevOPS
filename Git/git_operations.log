@@ -3981,3 +3981,13 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    9ce4c882..049ffff8  master -> master
 branch 'master' set up to track 'origin/master'.
+[master 341307df] Ansible Commit @ 2024-07-05 18:06:000
+ 1 file changed, 5 insertions(+)
+To github.com:khaleel-git/DevOPS.git
+   049ffff8..341307df  master -> master
+branch 'master' set up to track 'origin/master'.
+ssh_dispatch_run_fatal: Connection to 20.207.73.82 port 22: Connection timed out
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
