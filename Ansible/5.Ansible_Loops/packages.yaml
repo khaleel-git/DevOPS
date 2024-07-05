@@ -8,6 +8,6 @@
       - make
       - vim
   tasks:
-    - yum:
+    - apt:
         name: '{{ packages.item }}'
         state: present
