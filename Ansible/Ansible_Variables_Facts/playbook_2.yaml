@@ -5,6 +5,6 @@
     country_name: "USA"
     title: "System Engineer"
   tasks:
-    - command: 'echo "My car is {{}}"'
-    - command: 'echo "I live in the USA"'
-    - command: 'echo "I work as a Systems Engineer"'
+    - command: 'echo "My car is {{ car_model }}"'
+    - command: 'echo "I live in the {{ country_name }}"'
+    - command: 'echo "I work as a "'
