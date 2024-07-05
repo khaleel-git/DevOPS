@@ -283,3 +283,11 @@ system specific variables
 ansible.os.family (builtin variable)
 condition: when
 shell and command modules are similar in a way that they are used to execute a command on the system. However, shell executes the command inside a shell giving us access to environment variables and redirection using >>.
+#### ansible loops
+duplicate lines
+- user: name= "{{}}"
+loop:
+- joe
+- george
+- mani
+- jazlan
