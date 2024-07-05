@@ -4,4 +4,4 @@
    become: yes
    tasks:
      -  service: 'name=nginx state=started'
-        when: hosts == node02
+        when: inventory == node02
