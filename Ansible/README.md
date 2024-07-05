@@ -174,6 +174,7 @@ Command-line extra variables (-e or --extra-vars) take the highest precedence. T
 **Example:**
 `ansible-playbook example.yml -e "extra_var=value"`
 
+---
 ### Magic Variables
 1. hostvars
 2. group_names
@@ -213,7 +214,7 @@ The inventory_hostname magic variable provides the name of the current host as d
     - debug:
         msg: "Hostname of current host: {{ inventory_hostname }}"
 ```
-
+---
 ## Ansible Facts
 By default, Ansible gathers system facts from remote hosts using the `setup` module before executing tasks. This information is stored in variables and can be used in playbooks or templates. If you want to disable the automatic fact gathering and control when facts are collected, you can adjust the Ansible configuration file (`ansible.cfg`).
 ### Steps to Disable Automatic Fact Gathering
@@ -242,6 +243,7 @@ By default, Ansible gathers system facts from remote hosts using the `setup` mod
            # Your tasks go here
      ```
 
+---
 ## Ansible Playbooks
 Ansible playbooks are written in YAML format. Each playbook is a single YAML file containing tasks, which are individual actions to be performed.
 
