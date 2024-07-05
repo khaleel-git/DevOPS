@@ -301,5 +301,21 @@ Loops allow tasks to be repeated for multiple items:
     - mani
 ```
 #### Using with_items:
+```yaml
+- user: name="{{ item }}" state=present
+  with_items:
+    - joe
+    - george
+    - ravi
+    - mani
 ```
-
+### Lookup Plugins
+Useful plugins for looping:
+```yaml
+with_file
+with_url
+with_items
+with_dict
+with_etcd
+many more ...
+```
