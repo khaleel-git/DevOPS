@@ -7,4 +7,4 @@
   tasks:
     - command: 'echo "My car is {{ car_model }}"'
     - command: 'echo "I live in the {{ country_name }}"'
-    - command: 'echo "I work as a "'
+    - command: 'echo "I work as a {{ title }}"'
