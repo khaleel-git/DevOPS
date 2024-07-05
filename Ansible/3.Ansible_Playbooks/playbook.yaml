@@ -1,8 +1,7 @@
 ---
-- name: Run date command in shell
+- name: 'Run date command in shell'
   hosts: localhost
   become: true
   tasks:
-    - name: Execute a date command
-      ansible.builtin.command: date
-      changed_when: false
+    - name: 'Execute a date command'
+      command: date
