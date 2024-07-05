@@ -1,0 +1,10 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: Set up user
+      user:
+        name: ""
+        password: "secret_pass"
+        comment: "admin@example.com"
+        state: present
