@@ -10,4 +10,8 @@
   
 
 - name: 'Execute a command on node02'
-  hosts: node
+  hosts: node02
+  become: yes
+  tasks:
+    - name: 'Task to display hosts file on node02'
+      command: 'cat /etc/hosts'
