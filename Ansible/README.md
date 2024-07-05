@@ -272,4 +272,5 @@ that's why conditional statement is handy
 when: ansible_os_family == "Debian" (or, and conditions)
 
 #### condionals in loops
-
+when
+loop: "{{ packages }}"
