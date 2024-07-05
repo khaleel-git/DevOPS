@@ -209,3 +209,5 @@ The inventory_hostname magic variable provides the name of the current host as d
     - debug:
         msg: "Hostname of current host: {{ inventory_hostname }}"
 ```
+
+## Ansible Facts
