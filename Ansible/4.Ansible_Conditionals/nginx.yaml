@@ -3,5 +3,6 @@
    hosts: all
    become: yes
    tasks:
-     -  service: 'name=nginx state=started'
-        when: ansible_host == "node02"''
+     -  service: 'name=nginx 
+     state=started'
+        when: 'ansible_host == "node02"'
