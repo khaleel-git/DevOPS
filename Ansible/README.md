@@ -276,3 +276,14 @@ Ansible-Lint is a command-line tool that performs linting on Ansible playbooks, 
 Conditional statements are useful for managing different OS flavors and ensuring playbooks work across all hosts:
 ```yaml
 when: ansible_os_family == "Debian"
+```
+
+### Conditionals in Loops
+```yaml
+when: item.required == True
+loop:
+  - "{{ packages }}"
+```
+
+### Conditionals with Register
+
