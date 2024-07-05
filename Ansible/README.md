@@ -249,4 +249,5 @@ task:
 4. shutdown/restart
 sample playbook, play1 and play2
 properties: [name, hosts and tasks (lists)](dict)
-hosts: set at play level, localhost, anyhost or group ()
+hosts: set at play level, localhost, anyhost or group (first define in inventory file)
+modules: difference action run by taks is called modules: command, script, yum, service
