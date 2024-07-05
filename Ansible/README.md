@@ -251,10 +251,12 @@ sample playbook, play1 and play2
 properties: [name, hosts and tasks (lists)](dict)
 hosts: set at play level, localhost, anyhost or group (first define in inventory file)
 modules: difference action run by taks is called modules: command, script, yum, service
+
 ### verifying playbooks
 un-noticed error (significant downtime), that's why we need verification (production env)
 these issue lead to downtime, dataloss eg.
 several moduels to verify playbook 
   1.check mode --check option[dont install but tell what it look like after install]
   2.Diff Mode: shows the diff b/w current state and new state, --check -diff (check and diff)
-  3. Syntax Check: 
+  3. Syntax Check: error-free, --syntax-check (check syntax) [ansible-playbook configure_ngnix.yml --syntax-check]
+
