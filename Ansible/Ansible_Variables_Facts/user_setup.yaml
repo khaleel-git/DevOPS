@@ -6,5 +6,5 @@
       user:
         name: "{{ user_details['username'] }}"
         password: "{{ user_details['password'] }}"
-        comment: "{{ user_details['admin@example.com'] }}"
+        comment: "{{ user_details['email'] }}"
         state: present
