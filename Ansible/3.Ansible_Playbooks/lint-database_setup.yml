@@ -1,3 +1,4 @@
+# ansible-lint database_setup.yml
 - name: Database Setup Playbook
   hosts: db_servers
   tasks:
