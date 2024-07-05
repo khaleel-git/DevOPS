@@ -4169,3 +4169,11 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    61f529d4..8c344842  master -> master
 branch 'master' set up to track 'origin/master'.
+[master 58ddc31e] Ansible Commit @ 2024-07-05 18:42:000
+ 4 files changed, 5 insertions(+)
+ rename Ansible/{ => 1.Ansible_Inventory}/inventory (100%)
+ rename Ansible/{ => 1.Ansible_Inventory}/inventory_group (100%)
+ rename Ansible/{ => 1.Ansible_Inventory}/inventory_group_of_goups (100%)
+To github.com:khaleel-git/DevOPS.git
+   8c344842..58ddc31e  master -> master
+branch 'master' set up to track 'origin/master'.
