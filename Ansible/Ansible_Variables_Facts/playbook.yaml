@@ -6,4 +6,9 @@
     - name: 'Add nameserver in resolv.conf file'
       lineinfile:
         path: /tmp/resolv.conf
-        line: 'nameserver {{ nameserver_ip }}'
+        line: 'nameserver {{  nameserver_ip  }}'
+    - name: 'Disable SNMP Port'
+      firewalld:
+        port: '160-161'
+        permanent: true
+        state: disabled
