@@ -270,3 +270,6 @@ different os flavor use diff package managers
 single playbook that work for all hosts
 that's why conditional statement is handy
 when: ansible_os_family == "Debian" (or, and conditions)
+
+#### condionals in loops
+
