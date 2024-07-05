@@ -2,9 +2,9 @@
 - name: 'Print list of fruits'
   hosts: localhost
   tasks:
-  - command: 'echo "{{ item }}"'
-    with_items:
-    - Apple
-    - Banana
-    - Grapes
-    - Orange
+    - command: 'echo "{{ item }}"'
+      with_items:
+        - Apple
+        - Banana
+        - Grapes
+        - Orange
