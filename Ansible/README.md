@@ -286,4 +286,20 @@ loop:
 ```
 
 ### Conditionals with Register
+```yaml
+register: result
+when: result.stdout.find('down') != -1
+```
+
+### Ansible Loops
+Loops allow tasks to be repeated for multiple items:
+```yaml
+- user: name="{{ item }}" state=present
+  loop:
+    - joe
+    - george
+    - mani
+```
+#### Using with_items:
+```
 
