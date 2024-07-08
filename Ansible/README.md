@@ -379,3 +379,4 @@ share your code with the community (ansible galaxy)
 how to use role in playbook.yaml
 role dir structure:
 my-playbook -> roles -> mysql -> its structures
+or place it at a common directory like: `/etc/ansible/roles`
