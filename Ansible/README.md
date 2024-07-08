@@ -502,11 +502,11 @@ original:
       - nsupdate:
           server: "{{ dns_serve }}"
 
-Ansible convert it to:
+Ansible convert it to (actual execution):
 ---
   - name: update dns server
     hosts: all
     - nsupdate:
         server: 10.5.5.4
 ```
-
+### Additional filters
