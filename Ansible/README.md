@@ -426,5 +426,17 @@ community and vedor-created
 expanded functinality: `ansible-galaxy collection install amazon.aws`
 modularity and reuseablity : encapsulate, modularity
 simplified distribution and management: version and dependency management (requirement.yaml) `ansible-galaxy collection install -r requirements.yaml`
-a. ansible-galaxy collection install network.juniper
+`ansible-galaxy collection install network.juniper`: install network.juniper collection
+
+#### installed aws colleciton and use it:
+```yaml
+---
+- hosts: localhost
+  [MISSING LINE HERE]
+  tasks:
+    - name: Launch an EC2 instance
+      ec2_instance:
+        name: my-instance
+        region: us-west-1
+```
 
