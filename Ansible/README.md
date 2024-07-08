@@ -546,4 +546,8 @@ nameserver 8.8.8.8
 
 variable:
 name_server:
-  
+  - 10.1.1.2
+  - 10.1.1.3
+  - 8.8.8.8
+
+|Prompt: add example of template in roles
