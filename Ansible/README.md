@@ -473,4 +473,15 @@ Once installed, collections are referenced in playbooks:
 {% endfor %}
 ```
 ### Conditions:
-
+```jinja2
+{% for number in [0,1,2,3,4] %}
+{% if number == 2 %}
+{{ number }}
+{% endif %}
+{% endfor %}
+```
+### Jinja2 Templates for Dynamic Configs
+#### Additional Filters and Functions:
+- abs(), float(), lower(), round(), tojson(), etc.
+- Custom filters/extensions like b64decode(), basename(), mandatory(), etc.
+#### Example: Using basename() Filter:
