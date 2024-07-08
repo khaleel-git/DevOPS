@@ -1,5 +1,4 @@
-# generate-inventory.yml
-
+---
 - hosts: all
   tasks:
   - setup:
@@ -7,4 +6,6 @@
 - hosts: localhost
   tasks:
     - template:
-        src: inventory
+        src: inventory.csv.j2
+        dest: /tmp/inventory.csv
+      run_once: yes
