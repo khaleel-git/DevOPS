@@ -423,6 +423,6 @@ ansible collection is a way to distribute and package ansible content, roles, mo
 self-contained unit
 community and vedor-created
 ### benefits:
-expanded functinality
-modularity and reuseablity 
+expanded functinality: `ansible-galaxy collection install amazon.aws`
+modularity and reuseablity : encapsulate, modularity
 simplified distribution and management
