@@ -462,4 +462,7 @@ jinja2 Templates
   The name is {{ my_name | replace("Bond", "Bounce") }} => The name is Bounce
   {{ [1,2,3,4] | min }} => 1
   {{ [1,2,3,4] | max }} => 3
-  {{ [1,2,3,4] | unique }} => 12,3
+  {{ [1,2,3,2] | unique }} => 1,2,3
+  intersect
+  random
+  join
