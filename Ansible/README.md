@@ -326,7 +326,6 @@ with_etcd
 many more ...
 ```
 ---
----
 ## Ansible Modules
 system, commands (free_form, what is free_form), files, database, cloud, windows, service (start vs started, not free_form), more ...
 idempotency?
