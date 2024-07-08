@@ -1,0 +1,4 @@
+# generate-agent-info.yml
+- hosts: monitoring_server
+  become: yes
+  tasks:
