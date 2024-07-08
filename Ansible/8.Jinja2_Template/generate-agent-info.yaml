@@ -3,5 +3,5 @@
   become: yes
   tasks:
     template:
-      src: /home/bob/playbooks/monitoring-server/templates/agents.conf.j2
+      src: agents.conf.j2
       dest: /etc/agents.conf
