@@ -424,6 +424,20 @@ Roles can be stored in a common directory (configured in ansible.cfg) or downloa
 ### Check role configuration:
 `ansible-config dump | grep ROLE`
 ### Sharing Roles
+Roles can be shared on Ansible Galaxy by uploading them to GitHub and then referencing them using their Galaxy name.
 
+---
+## Ansible Collections
+Ansible Collections are a way to package and distribute Ansible content such as roles, modules, and plugins as self-contained units.
+
+### Installing Collections
+Collections are installed using ansible-galaxy:
+`ansible-galaxy collection install network.cisco`
+### Benefits of Collections
+Expanded functionality: Collections provide specialized functions (e.g., network automation for Cisco, Juniper, etc.).
+Modularity and reusability: Encapsulate functionality into reusable units.
+Simplified distribution and management: Manage versions and dependencies using requirements.yaml.
+Using Installed Collections
+Once installed, collections are referenced in playbooks:
 
 
