@@ -14,7 +14,7 @@
         dest: /tmp/file2.conf
       notify: Sample Handler
 
-  handlers:
+  handlers: # run only once at the end of the 
     - name: Sample Handler
       debug:
         msg: "Handler has been triggered!"
