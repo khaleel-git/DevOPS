@@ -1,4 +1,4 @@
-# Ansible Cheat Sheet
+# Ansible Cheat Sheet (YAML)
 ## Getting Started with Ansible
 Ansible is a powerful automation tool that simplifies configuration management, application deployment, and task automation. This cheat sheet provides essential commands and configurations to kickstart your journey with Ansible.
 ## Ansible Configuration Files
