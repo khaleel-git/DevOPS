@@ -5,3 +5,4 @@
   tasks:
     - name: 'Execute a script'
       script: '/tmp/install_script.sh'
+      service: 'started'
