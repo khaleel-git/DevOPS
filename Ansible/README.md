@@ -419,4 +419,10 @@ juniper -> network.juniper
 arista -> network.arista
 gain specilize func.
 `ansible-galaxy collection install network.cisco`
-ansible collection is a way to distribute and package ansible content
+ansible collection is a way to distribute and package ansible content, roles, modules, plugiin
+self-contained unit
+community and vedor-created
+### benefits:
+expanded functinality
+modularity and reuseablity 
+simplified distribution and management
