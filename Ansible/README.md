@@ -479,4 +479,6 @@ jinja2 Templates
     {% endif %}
   {% endfor %}
 
-## Jinja2 
+## Jinja2 Templates for Dynamic configs
+### Jinja2 filters:
+  abs(), float(), lower(), round(), tojson() ...
