@@ -409,3 +409,4 @@ use role:
       vars:
         mysql_user_name: db-user-name
 ```
+list: `ansible-galaxy list`
