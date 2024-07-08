@@ -554,4 +554,18 @@ name_server:
 
 Another example:
 ```yaml
+name.txt.j2:
+{{ dialogue | replace('Bourne', 'Bond') }}
+
+playbook.yaml:
+- hosts: localhost
+  connection: local
+  vars:
+    dialogue: "The name is Bourne, James Bourne!"
+  tasks:
+    - name: Generate name file
+      template:
+        src: name.txt.j2
+        dest: /tmp/name.txt
+```
 
