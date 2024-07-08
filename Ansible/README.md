@@ -551,3 +551,7 @@ name_server:
   - 8.8.8.8
 
 |Prompt: add example of template in roles
+
+Another example:
+```yaml
+
