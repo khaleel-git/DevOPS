@@ -5,14 +5,13 @@
   tasks:
     - name: 'Execute a script'
       script: '/tmp/install_script.sh'
-      
-    - name: 'Service status is started'
+    - name: 'Start httpd service'
       service:
         name: 'httpd'
         state: 'started'
-
-    - name: 'index.html append'
+    - name: "Update /var/www/html/index.html"
       lineinfile:
-        path: '/var/www/html/index.html'
-        line: 'Welcome to ansible-beginning course'
-        state: 'present'
+        path: /var/www/html/index.html
+        line: "Welcome to ansible-beginning course"
+        create: true
+    - name: 'c'
