@@ -497,4 +497,11 @@ web1 ansible_host=172.20.2.102 dns_server=10.5.5.4
 original: 
 ---
   - name: Update dns server
-  
+    hosts: all
+    tasks:
+      - nsupdate:
+          server: "{{ dns_serve }}"
+
+Ansible convert it to:
+---
+  -
