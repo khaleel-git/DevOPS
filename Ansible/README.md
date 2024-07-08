@@ -369,9 +369,13 @@ List Ansible hosts (from a custom script, e.g., host_custom.py):
 `ansible-inventory --list -i aws_inventory.py
 `
 
-## Ansible Handlers, Roles and Collections
-restart web servers, when confi file is modified, the handler will restart the service when necessary ( reduce human errors, special tasks, defined in playbooks.)
-handler 
+---
+## Ansible Handlers
+
+Handlers in Ansible are special tasks that are only executed when notified by other tasks. They are typically used to restart services or perform other actions when configuration files are modified. This helps in reducing human errors and ensures that specific tasks are performed only when necessary.
+
+Example playbook snippet using handlers:
+
 ```yaml
 - name: Update web server configuration
   hosts: webservers
@@ -388,71 +392,5 @@ handler
         name: webserver
         state: restarted
 ```
-
-## Ansible Roles
-share your code with the community (ansible galaxy)
-`ansible-galaxy init mysql` # create your own role
-how to use role in playbook.yaml
-role dir structure:
-my-playbook -> roles -> mysql -> its structures
-or place it at a common directory like: `/etc/ansible/roles` # defined in ansible conf file as: 
-```yaml
-/etc/ansible/ansible.cfg
-roles_path = /etc/ansible/roles
-```
-you can share your role to ansible-galaxy community by using github
-you can also search roles in ansible-galaxy like: 
-```yaml
-ansible-galaxy search mysql
-ansible-galaxy install khaleel.mysql
-```
-use role:
-```yaml
--
-  name: install and configure mysql
-  hosts: db-server
-  roles:
-    - khaleel.mysql
-
-    OR
-
-- 
-  name: Install and Configure Mysql
-  hosts: db-server
-  roles:
-    - role: khaleel.mysql
-      become: yes
-      vars:
-        mysql_user_name: db-user-name
-```
-list: `ansible-galaxy list`
-check configuration: `ansible-config dump | grep ROLE`
-install in the current dir: `ansible-galaxy install khaleel.mysql -p ./roles`
-
-## ansible collections
-cisco -> network.cisco
-juniper -> network.juniper
-arista -> network.arista
-gain specilize func.
-`ansible-galaxy collection install network.cisco`
-ansible collection is a way to distribute and package ansible content, roles, modules, plugiin
-self-contained unit
-community and vedor-created
-### benefits:
-expanded functinality: `ansible-galaxy collection install amazon.aws`
-modularity and reuseablity : encapsulate, modularity
-simplified distribution and management: version and dependency management (requirement.yaml) `ansible-galaxy collection install -r requirements.yaml`
-`ansible-galaxy collection install network.juniper`: install network.juniper collection
-
-#### installed aws colleciton and use it:
-```yaml
----
-- hosts: localhost
-  collections: [amazon.aws]
-  tasks:
-    - name: Launch an EC2 instance
-      ec2_instance:
-        name: my-instance
-        region: us-west-1
-```
+### Ansible Roles
 
