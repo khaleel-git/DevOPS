@@ -370,3 +370,5 @@ List Ansible hosts (from a custom script, e.g., host_custom.py):
 `
 
 ## Ansible Handlers, Roles and Collections
+restart web servers, when confi file is modified, the handler will restart the service when necessary ( reduce human errors, special tasks, defined in playbooks.)
+handler 
