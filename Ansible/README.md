@@ -485,3 +485,21 @@ Once installed, collections are referenced in playbooks:
 - abs(), float(), lower(), round(), tojson(), etc.
 - Custom filters/extensions like b64decode(), basename(), mandatory(), etc.
 #### Example: Using basename() Filter:
+`{{ "/etc/hosts" | basename }}`
+Output: hosts
+
+### How Jinja2 Templating Engine Works:
+#### Example template:
+```yaml
+/etc/ansible/hosts
+web1 ansible_host=172.20.2.102 dns_server=10.5.5.4
+web2 ansible_host=172.20.2.102 dns_server=10.5.5.4
+
+original:
+---
+- name: Update dns server
+  hosts: all
+  tasks:
+    - nsupdate:
+        server: "{{ dns_server }}"
+```
