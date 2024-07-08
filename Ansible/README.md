@@ -379,4 +379,9 @@ share your code with the community (ansible galaxy)
 how to use role in playbook.yaml
 role dir structure:
 my-playbook -> roles -> mysql -> its structures
-or place it at a common directory like: `/etc/ansible/roles`
+or place it at a common directory like: `/etc/ansible/roles` # defined in ansible conf file as: 
+```yaml
+/etc/ansible/ansible.cfg
+roles_path = /etc/ansible/roles
+```
+you can share your role to ansible-galaxy community by using github
