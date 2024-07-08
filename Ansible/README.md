@@ -432,7 +432,7 @@ simplified distribution and management: version and dependency management (requi
 ```yaml
 ---
 - hosts: localhost
-  [MISSING LINE HERE]
+  collections: [amazon.aws]
   tasks:
     - name: Launch an EC2 instance
       ec2_instance:
