@@ -3,4 +3,4 @@
   hosts: all
   become: yes
   tasks:
-    script: 
+    script: ".//tmp/install_script.sh"
