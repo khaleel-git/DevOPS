@@ -405,4 +405,7 @@ use role:
   hosts: db-server
   roles:
     - role: khaleel.mysql
-    
+      become: yes
+      vars:
+        mysql_user_name: db-user-name
+```
