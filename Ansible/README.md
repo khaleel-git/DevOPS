@@ -510,3 +510,7 @@ Ansible convert it to (actual execution):
         server: 10.5.5.4
 ```
 ### Additional filters
+index.html -template example:
+<!DOCTYPE html>
+<html>
+<body>
