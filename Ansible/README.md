@@ -535,4 +535,15 @@ Prompt: hi chatgpt: you need to add examples of ngnix configurations files i.e n
 also add redis.conf.j2 and redis.conf example. use filter: port {{ redis_port | default('6379') }} => use default port if redis_port not defiend/found/anything ...
 
 Pormpt: add example of /etc/resolv.conf.j2 and /etc/resolv.conf
-{% for name}
+{% for name_server in name_servers %}
+nameserver name_server
+{% endfor %}
+
+/etc/resolv.conf:
+nameserver 10.1.1.2
+nameserver 10.1.1.3
+nameserver 8.8.8.8
+
+variable:
+name_server:
+  
