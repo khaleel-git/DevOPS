@@ -6,3 +6,9 @@
         src: /path/to/webserver.conf
         dest: /etc/webserver/webserver.conf
       notify: Restart web server
+
+  handlers:
+    - name: Restart web server
+      service:
+        name: webserver
+        state: restarted
