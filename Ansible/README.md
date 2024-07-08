@@ -426,3 +426,5 @@ community and vedor-created
 expanded functinality: `ansible-galaxy collection install amazon.aws`
 modularity and reuseablity : encapsulate, modularity
 simplified distribution and management: version and dependency management (requirement.yaml) `ansible-galaxy collection install -r requirements.yaml`
+a. ansible-galaxy collection install network.juniper
+
