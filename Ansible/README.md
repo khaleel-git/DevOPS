@@ -553,4 +553,18 @@ tcp-keepalive 300;
 nameserver {{ name_server }}
 {% endfor %}
 ```
-#### example usage
+#### Example usage
+```
+name_servers:
+  - 10.1.1.2
+  - 10.1.1.3
+  - 8.8.8.8
+```
+#### Output in /etc/resolv.conf:
+```
+nameserver 10.1.1.2
+nameserver 10.1.1.3
+nameserver 8.8.8.8
+```
+
+### Template in Roles Example
