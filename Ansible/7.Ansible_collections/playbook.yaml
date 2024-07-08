@@ -2,7 +2,7 @@
 - hosts: localhost
   tasks:
     - name: Install the networking_tools collection
-      [company_xyz]:
+      ansible.builtin.ansible_galaxy_collection:
         name: [networking_tools]
         source: https://galaxy.ansible.com
 
