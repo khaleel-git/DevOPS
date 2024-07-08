@@ -3,6 +3,7 @@
   vars:
     dialogue: "The name is Bourne, James Bourne!"
   tasks:
-    template:
-      content: {{ dialogue | replace(Bource,Bond)}}
-      file: /tmp/name.txt
+    - name: Generate name file
+      template:
+        src: name.txt.j2
+        dest: /tmp/name.txt
