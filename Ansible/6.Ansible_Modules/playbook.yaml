@@ -6,5 +6,6 @@
     - name: 'Execute a script'
       script: '/tmp/install_script.sh'
       
-    - name: 'Service status '
-    service: 'started'
+    - name: 'Service status is started'
+      service: 'httpd'
+      status: 'started'
