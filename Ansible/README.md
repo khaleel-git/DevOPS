@@ -372,6 +372,22 @@ List Ansible hosts (from a custom script, e.g., host_custom.py):
 ## Ansible Handlers, Roles and Collections
 restart web servers, when confi file is modified, the handler will restart the service when necessary ( reduce human errors, special tasks, defined in playbooks.)
 handler 
+```yaml
+- name: Update web server configuration
+  hosts: webservers
+  tasks:
+    - name: Copy web server configuration file
+      copy:
+        src: /path/to/webserver.conf
+        dest: /etc/webserver/webserver.conf
+      notify: Restart web server
+
+  handlers:
+    - name: Restart web server
+      service:
+        name: webserver
+        state: restarted
+```
 
 ## Ansible Roles
 share your code with the community (ansible galaxy)
