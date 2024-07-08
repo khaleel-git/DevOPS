@@ -487,7 +487,7 @@ File filter:
 `{{ "/etc/hosts" | basename}}` => hosts
 
 ### How jinja2 templating engine works:
-```
+```yaml
 /etc/ansible/hosts
 web1 ansible_host=172.20.2.102 dns_server=10.5.5.4
 web2 ansible_host=172.20.2.102 dns_server=10.5.5.4
@@ -504,4 +504,9 @@ original:
 
 Ansible convert it to:
 ---
-  -
+  - name: update dns server
+    hosts: all
+    - nsupdate:
+        server: 10.5.5.4
+```
+
