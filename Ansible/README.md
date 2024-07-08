@@ -393,4 +393,16 @@ ansible-galaxy install khaleel.mysql
 use role:
 ```yaml
 -
-  name: install 
+  name: install and configure mysql
+  hosts: db-server
+  roles:
+    - khaleel.mysql
+
+    OR
+
+- 
+  name: Install and Configure Mysql
+  hosts: db-server
+  roles:
+    - role: khaleel.mysql
+    
