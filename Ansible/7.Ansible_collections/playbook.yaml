@@ -1,0 +1,16 @@
+---
+- hosts: localhost
+  tasks:
+    - name: Install the networking_tools collection
+      [MISSING MODULE NAME HERE]:
+        name: [MISSING COLLECTION NAME HERE]
+        source: https://galaxy.ansible.com
+
+- hosts: switches
+  collections:
+    - [MISSING LINE HERE]
+  tasks:
+    - name: Configure VLAN 10
+      [MISSING MODULE NAME HERE]:
+        vlan_id: 10
+        vlan_name: Admin_VLAN
