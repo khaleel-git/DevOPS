@@ -1,0 +1,8 @@
+# generate-inventory.yml
+
+- hosts: all
+  tasks:
+  - setup:
+
+- hosts: localhost
+  tasks:
