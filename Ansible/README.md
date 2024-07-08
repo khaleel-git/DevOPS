@@ -510,7 +510,7 @@ Ansible convert it to (actual execution):
         server: 10.5.5.4
 ```
 ### Additional filters
-index.html -template example:
+index.html.j2 example:
 <!DOCTYPE html>
 <html>
 <body>
@@ -519,3 +519,11 @@ This is {{ inventory_hostnmae }} server
 
 </body>
 </html>
+
+src:
+-
+  hosts: web_servers
+  tasks:
+    - name: Copy index.html to remote servers
+      template: # using template instead of copy
+        src: 
