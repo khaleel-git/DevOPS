@@ -511,6 +511,7 @@ Ansible convert it to (actual execution):
 ```
 ### Additional filters
 index.html.j2 example:
+```yaml
 <!DOCTYPE html>
 <html>
 <body>
@@ -526,4 +527,6 @@ src:
   tasks:
     - name: Copy index.html to remote servers
       template: # using template instead of copy
-        src: 
+        src: index.html.j2
+        dest: /var/www/nginx-default/index.html
+```
