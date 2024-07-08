@@ -7,5 +7,6 @@
       script: '/tmp/install_script.sh'
       
     - name: 'Service status is started'
-      service: 'httpd'
-      state: 'started'
+      service:
+        name: 'httpd'
+        state: 'started'
