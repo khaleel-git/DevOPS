@@ -470,4 +470,9 @@ jinja2 Templates
  Loops:
  {% for number in [0,1,2,3,4] %}
  {{ number }}
- {% endfor $}
+ {% endfor %}
+
+ Conditions:
+ {% if number == 2 %}
+    {{ number }}
+ {}
