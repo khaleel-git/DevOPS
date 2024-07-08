@@ -4,5 +4,5 @@
     dialogue: "The name is Bourne, James Bourne!"
   tasks:
     template:
-      content: {{ dialogue | replace(Bource,)}}
+      content: {{ dialogue | replace(Bource,Bond)}}
       file: /tmp/name.txt
