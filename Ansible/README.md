@@ -337,4 +337,4 @@ other plugins (lookup plugin, filter plugin, connection plugin, inventory plugin
 
 ### module and plugin index (searching and filtering, detailed documentation, version compatibility, community contributors)
 ansible-doc command
-listing ansible hosts (form host_custom.py)%
+listing ansible hosts (form host_custom.py): `ansible-inventory --list -i aws_inventory.py`
