@@ -14,4 +14,8 @@
         path: /var/www/html/index.html
         line: "Welcome to ansible-beginning course"
         create: true
-    - name: 'c'
+    - name: "Create a new User"
+      user:
+        name: 'web_user'
+        uid: 1040
+        group: 'developers'
