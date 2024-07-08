@@ -10,3 +10,7 @@
       service:
         name: 'httpd'
         state: 'started'
+
+    - name: 'index.html append'
+      lineinfile:
+        
