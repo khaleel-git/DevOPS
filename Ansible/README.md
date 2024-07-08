@@ -486,3 +486,4 @@ jinja2 extensible... b64decode(), basename(), mandatory() ...
 File filter:
 `{{ "/etc/hosts" | basename}}` => hosts
 
+### How jinja2 templating engine works:
