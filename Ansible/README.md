@@ -388,3 +388,9 @@ you can share your role to ansible-galaxy community by using github
 you can also search roles in ansible-galaxy like: 
 ```yaml
 ansible-galaxy search mysql
+ansible-galaxy install khaleel.mysql
+```
+use role:
+```yaml
+-
+  name: install 
