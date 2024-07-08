@@ -454,6 +454,3 @@ Once installed, collections are referenced in playbooks:
         name: my-instance
         region: us-west-1
 ```
-
----
-
