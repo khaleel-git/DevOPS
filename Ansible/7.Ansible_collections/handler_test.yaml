@@ -14,7 +14,7 @@
         dest: /tmp/file2.conf
       notify: Sample Handler
 
-  handlers: # run only once at the end of the 
+  handlers: # run only once at the end of the handler_test.yaml playbook
     - name: Sample Handler
       debug:
         msg: "Handler has been triggered!"
