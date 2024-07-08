@@ -503,3 +503,38 @@ original:
     - nsupdate:
         server: "{{ dns_server }}"
 ```
+#### Ansible converts it to (actual execution):
+```yaml
+---
+- name: Update dns server
+  hosts: all
+  tasks:
+    - nsupdate:
+        server: 10.5.5.4
+```
+### Nginx Configuration Example
+#### nginx.conf.j2:
+```
+worker_processes  1;
+error_log  /var/log/nginx/error.log;
+
+events {
+    worker_connections  1024;
+}
+
+http {
+    include       /etc/nginx/mime.types;
+    default_type  application/octet-stream;
+
+    server {
+        listen       {{ nginx_port | default('80') }};  # Default port 80 if nginx_port not defined
+        server_name  localhost;
+
+        location / {
+            root   /usr/share/nginx/html;
+            index  index.html index.htm;
+        }
+    }
+}
+```
+### Redis Configuration Example
