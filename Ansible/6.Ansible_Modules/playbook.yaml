@@ -13,4 +13,5 @@
 
     - name: 'index.html append'
       lineinfile:
-        path: Welcome to ansible-beginning course
+        path: '/var/www/html/index.html'
+        line: 'Welcome to ansible-beginning course'
