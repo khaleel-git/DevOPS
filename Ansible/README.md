@@ -515,7 +515,7 @@ index.html -template example:
 <html>
 <body>
 
-This is {{ name }} server
+This is {{ inventory_hostnmae }} server
 
 </body>
 </html>
