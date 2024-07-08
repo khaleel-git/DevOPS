@@ -15,3 +15,4 @@
       lineinfile:
         path: '/var/www/html/index.html'
         line: 'Welcome to ansible-beginning course'
+        state: 'append'
