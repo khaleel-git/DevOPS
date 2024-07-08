@@ -455,117 +455,22 @@ Once installed, collections are referenced in playbooks:
         region: us-west-1
 ```
 ---
-## Ansible Templates
-jinja2 Templates
-  string manipulation
-  The name is {{ my_name || upper }} => The is BOND (filters)
-  The name is {{ my_name | replace("Bond", "Bounce") }} => The name is Bounce
-  {{ [1,2,3,4] | min }} => 1
-  {{ [1,2,3,4] | max }} => 3
-  {{ [1,2,3,2] | unique }} => 1,2,3
-  intersect
-  random
-  join
+# Ansible Templates with Jinja2
 
- Loops:
- {% for number in [0,1,2,3,4] %}
- {{ number }}
- {% endfor %}
+## Jinja2 Templates - String Manipulation and Filters
 
- Conditions:
- {% for number in [0,1,2,3,4] %}
-    {% if number == 2 %}
-        {{ number }}
-    {% endif %}
-  {% endfor %}
+### Basic Filters:
+- `{{ my_name | upper }}` => Converts `my_name` to uppercase.
+- `{{ my_name | replace("Bond", "Bounce") }}` => Replaces "Bond" with "Bounce".
+- `{{ [1,2,3,4] | min }}` => Finds the minimum value in the list.
+- `{{ [1,2,3,4] | max }}` => Finds the maximum value in the list.
+- `{{ [1,2,3,2] | unique }}` => Removes duplicates from the list.
 
-## Jinja2 Templates for Dynamic configs
-### Jinja2 filters:
-  abs(), float(), lower(), round(), tojson() ...
-jinja2 extensible... b64decode(), basename(), mandatory() ...
-File filter:
-`{{ "/etc/hosts" | basename}}` => hosts
-
-### How jinja2 templating engine works:
-```yaml
-/etc/ansible/hosts
-web1 ansible_host=172.20.2.102 dns_server=10.5.5.4
-web2 ansible_host=172.20.2.102 dns_server=10.5.5.4
-web ansible_host=172.20.2.102 dns_server=10.5.5.4
-web1 ansible_host=172.20.2.102 dns_server=10.5.5.4
-
-original: 
----
-  - name: Update dns server
-    hosts: all
-    tasks:
-      - nsupdate:
-          server: "{{ dns_serve }}"
-
-Ansible convert it to (actual execution):
----
-  - name: update dns server
-    hosts: all
-    - nsupdate:
-        server: 10.5.5.4
-```
-### Additional filters
-index.html.j2 example:
-```yaml
-<!DOCTYPE html>
-<html>
-<body>
-
-This is {{ inventory_hostnmae }} server
-
-</body>
-</html>
-
-src:
--
-  hosts: web_servers
-  tasks:
-    - name: Copy index.html to remote servers
-      template: # using template instead of copy
-        src: index.html.j2
-        dest: /var/www/nginx-default/index.html
-```
-
-Prompt: hi chatgpt: you need to add examples of ngnix configurations files i.e nginx.conf.j2 and ngnix.conf
-also add redis.conf.j2 and redis.conf example. use filter: port {{ redis_port | default('6379') }} => use default port if redis_port not defiend/found/anything ...
-
-Pormpt: add example of /etc/resolv.conf.j2 and /etc/resolv.conf
-{% for name_server in name_servers %}
-nameserver name_server
+### Loops:
+```jinja2
+{% for number in [0,1,2,3,4] %}
+{{ number }}
 {% endfor %}
-
-/etc/resolv.conf:
-nameserver 10.1.1.2
-nameserver 10.1.1.3
-nameserver 8.8.8.8
-
-variable:
-name_server:
-  - 10.1.1.2
-  - 10.1.1.3
-  - 8.8.8.8
-
-|Prompt: add example of template in roles
-
-Another example:
-```yaml
-name.txt.j2:
-{{ dialogue | replace('Bourne', 'Bond') }}
-
-playbook.yaml:
-- hosts: localhost
-  connection: local
-  vars:
-    dialogue: "The name is Bourne, James Bourne!"
-  tasks:
-    - name: Generate name file
-      template:
-        src: name.txt.j2
-        dest: /tmp/name.txt
 ```
+### Conditions:
 
