@@ -368,3 +368,5 @@ To explore available modules and plugins, and for detailed documentation:
 List Ansible hosts (from a custom script, e.g., host_custom.py):
 `ansible-inventory --list -i aws_inventory.py
 `
+
+## Ansible Handlers, Roles and Collections
