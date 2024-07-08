@@ -312,7 +312,7 @@ Loops allow tasks to be repeated for multiple items:
   with_items:
     - joe
     - george
-    - ravi
+    - papan
     - mani
 ```
 ### Lookup Plugins
