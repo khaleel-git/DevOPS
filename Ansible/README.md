@@ -434,10 +434,19 @@ Ansible Collections are a way to package and distribute Ansible content such as 
 Collections are installed using ansible-galaxy:
 `ansible-galaxy collection install network.cisco`
 ### Benefits of Collections
-Expanded functionality: Collections provide specialized functions (e.g., network automation for Cisco, Juniper, etc.).
-Modularity and reusability: Encapsulate functionality into reusable units.
-Simplified distribution and management: Manage versions and dependencies using requirements.yaml.
-Using Installed Collections
+- Expanded functionality: Collections provide specialized functions (e.g., network automation for Cisco, Juniper, etc.).
+- Modularity and reusability: Encapsulate functionality into reusable units.
+- Simplified distribution and management: Manage versions and dependencies using requirements.yaml.
+### Using Installed Collections
 Once installed, collections are referenced in playbooks:
+```yaml
+- hosts: localhost
+  collections: [amazon.aws]
+  tasks:
+    - name: Launch an EC2 instance
+      ec2_instance:
+        name: my-instance
+        region: us-west-1
+```
 
 
