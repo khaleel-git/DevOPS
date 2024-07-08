@@ -461,4 +461,5 @@ jinja2 Templates
   The name is {{ my_name || upper }} => The is BOND (filters)
   The name is {{ my_name | replace("Bond", "Bounce") }} => The name is Bounce
   {{ [1,2,3,4] | min }} => 1
-  
+  {{ [1,2,3,4] | max }} => 3
+  {{ [1,2,3,4] | unique }} => 12,3
