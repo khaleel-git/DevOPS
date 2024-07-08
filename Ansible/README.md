@@ -418,4 +418,12 @@ Alternatively, with additional options:
 ```
 ### Managing Roles
 Roles can be stored in a common directory (configured in ansible.cfg) or downloaded directly from Ansible Galaxy:
+`ansible-galaxy install khaleel.mysql`
+### Listing installed roles:
+`ansible-galaxy list`
+### Check role configuration:
+`ansible-config dump | grep ROLE`
+### Sharing Roles
+
+
 
