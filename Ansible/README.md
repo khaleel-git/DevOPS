@@ -392,5 +392,11 @@ Example playbook snippet using handlers:
         name: webserver
         state: restarted
 ```
-### Ansible Roles
+---
+## Ansible Roles
+Roles in Ansible provide a way to organize and share code, making it easier to reuse and manage complex tasks across different playbooks. Roles are often shared with the community via Ansible Galaxy.
+## Creating a Role
+To create a new role (e.g., MySQL), use the ansible-galaxy command:
+`ansible-galaxy init mysql` # This creates the directory structure for the role.
+
 
