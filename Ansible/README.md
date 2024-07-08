@@ -385,3 +385,6 @@ or place it at a common directory like: `/etc/ansible/roles` # defined in ansibl
 roles_path = /etc/ansible/roles
 ```
 you can share your role to ansible-galaxy community by using github
+you can also search roles in ansible-galaxy like: 
+```yaml
+ansible-galaxy search mysql
