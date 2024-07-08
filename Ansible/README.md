@@ -395,8 +395,27 @@ Example playbook snippet using handlers:
 ---
 ## Ansible Roles
 Roles in Ansible provide a way to organize and share code, making it easier to reuse and manage complex tasks across different playbooks. Roles are often shared with the community via Ansible Galaxy.
-## Creating a Role
+### Creating a Role
 To create a new role (e.g., MySQL), use the ansible-galaxy command:
 `ansible-galaxy init mysql` # This creates the directory structure for the role.
-
+### Using a Role in a Playbook
+Roles can be included in playbooks by specifying them under the roles section:
+```yaml
+- name: Install and Configure MySQL
+  hosts: db-server
+  roles:
+    - khaleel.mysql
+```
+Alternatively, with additional options:
+```yaml
+- name: Install and Configure MySQL
+  hosts: db-server
+  roles:
+    - role: khaleel.mysql
+      become: yes
+      vars:
+        mysql_user_name: db-user-name
+```
+### Managing Roles
+Roles can be stored in a common directory (configured in ansible.cfg) or downloaded directly from Ansible Galaxy:
 
