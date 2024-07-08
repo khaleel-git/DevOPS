@@ -327,13 +327,42 @@ many more ...
 ```
 ---
 ## Ansible Modules
-system, commands (free_form, what is free_form), files, database, cloud, windows, service (start vs started, not free_form), more ...
-idempotency?
-lineinfile module (idempotent)
 
-## Ansible Plugins (dynamic plugin, module plugin, Action plugin)
-other plugins (lookup plugin, filter plugin, connection plugin, inventory plugin, callback plugin)
+Ansible modules are categorized into various types based on their functionalities:
 
-### module and plugin index (searching and filtering, detailed documentation, version compatibility, community contributors)
-ansible-doc command
-listing ansible hosts (form host_custom.py): `ansible-inventory --list -i aws_inventory.py`
+- **System modules**: Manage system-related tasks.
+- **Command modules**: Execute commands on remote hosts (`free_form` allows arbitrary commands).
+- **File modules**: Handle file operations like copying, deleting, etc.
+- **Database modules**: Manage database tasks.
+- **Cloud modules**: Interact with cloud platforms (AWS, Azure, etc.).
+- **Windows modules**: Perform tasks on Windows hosts.
+- **Service modules**: Manage services (ensure they are `started` or `stopped`).
+
+### Idempotency
+
+Ansible modules are designed to be idempotent, meaning their operations can be applied multiple times without changing the result beyond the initial application.
+
+- Example: The `lineinfile` module ensures that a particular line is present or absent in a file, making it idempotent.
+
+## Ansible Plugins
+
+Ansible also supports various plugins that extend its functionality:
+
+- **Dynamic plugins**: Loaded dynamically during playbook execution.
+- **Module plugins**: Extend module capabilities.
+- **Action plugins**: Custom actions within playbooks.
+- **Lookup plugins**: Retrieve data from external sources.
+- **Filter plugins**: Modify data within Ansible templates.
+- **Connection plugins**: Define how Ansible connects to managed nodes.
+- **Inventory plugins**: Generate inventory from external sources.
+- **Callback plugins**: Customize output and behavior during playbook runs.
+
+### Module and Plugin Index
+
+To explore available modules and plugins, and for detailed documentation:
+
+- Use `ansible-doc` command:
+  ```bash
+  ansible-doc <module_name>
+  ```
+List Ansible hosts (from a custom script, e.g., host_custom.py):
