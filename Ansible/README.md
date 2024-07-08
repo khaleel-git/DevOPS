@@ -460,3 +460,5 @@ jinja2 Templates
   string manipulation
   The name is {{ my_name || upper }} => The is BOND (filters)
   The name is {{ my_name | replace("Bond", "Bounce") }} => The name is Bounce
+  {{ [1,2,3,4] | min }} => 1
+  
