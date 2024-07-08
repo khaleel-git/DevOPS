@@ -8,9 +8,9 @@
 
 - hosts: switches
   collections:
-    - [configure_vlan]
+    - ['configure_vlan']
   tasks:
     - name: Configure VLAN 10
-      [MISSING MODULE NAME HERE]:
+      [Admin_VLAN]:
         vlan_id: 10
         vlan_name: Admin_VLAN
