@@ -410,3 +410,4 @@ use role:
         mysql_user_name: db-user-name
 ```
 list: `ansible-galaxy list`
+check configuration: `ansible-config dump | grep ROLE`
