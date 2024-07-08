@@ -326,5 +326,15 @@ with_etcd
 many more ...
 ```
 ---
+---
 ## Ansible Modules
-system, commands, files, database, cloud, windows, more ...
+system, commands (free_form, what is free_form), files, database, cloud, windows, service (start vs started, not free_form), more ...
+idempotency?
+lineinfile module (idempotent)
+
+## Ansible Plugins (dynamic plugin, module plugin, Action plugin)
+other plugins (lookup plugin, filter plugin, connection plugin, inventory plugin, callback plugin)
+
+### module and plugin index (searching and filtering, detailed documentation, version compatibility, community contributors)
+ansible-doc command
+listing ansible hosts (form host_custom.py)%
