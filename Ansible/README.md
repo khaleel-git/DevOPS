@@ -474,7 +474,9 @@ jinja2 Templates
 
  Conditions:
  {% for number in [0,1,2,3,4] %}
-  {% if number == 2 %}
-      {{ number }}
-  {% endif %}
-  {}
+    {% if number == 2 %}
+        {{ number }}
+    {% endif %}
+  {% endfor %}
+
+## Jinja2 
