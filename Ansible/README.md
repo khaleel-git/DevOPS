@@ -531,4 +531,5 @@ src:
         dest: /var/www/nginx-default/index.html
 ```
 
-
+Prompt: hi chatgpt: you need to add examples of ngnix configurations files i.e nginx.conf.j2 and ngnix.conf
+also add redis.conf.j2 and redis.conf example.
