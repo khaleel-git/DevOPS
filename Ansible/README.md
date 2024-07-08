@@ -425,4 +425,4 @@ community and vedor-created
 ### benefits:
 expanded functinality: `ansible-galaxy collection install amazon.aws`
 modularity and reuseablity : encapsulate, modularity
-simplified distribution and management
+simplified distribution and management: version and dependency management (requirement.yaml) `ansible-galaxy collection install -r requirements.yaml`
