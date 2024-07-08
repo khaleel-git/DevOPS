@@ -568,3 +568,17 @@ nameserver 8.8.8.8
 ```
 
 ### Template in Roles Example
+#### name.txt.j2:
+`{{ dialogue | replace('Bourne', 'Bond') }}`
+#### playbook.yaml:
+```yaml
+- hosts: localhost
+  connection: local
+  vars:
+    dialogue: "The name is Bourne, James Bourne!"
+  tasks:
+    - name: Generate name file
+      template:
+        src: name.txt.j2
+        dest: /tmp/name.txt
+```
