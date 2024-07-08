@@ -4,4 +4,5 @@
     dialogue: "The name is Bourne, James Bourne!"
   tasks:
     template:
-      dest: /tmp/
+      content: {{ dialogue | replace(Bource,)}}
+      file: /tmp/name.txt
