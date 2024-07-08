@@ -514,3 +514,8 @@ index.html -template example:
 <!DOCTYPE html>
 <html>
 <body>
+
+This is {{ name }} server
+
+</body>
+</html>
