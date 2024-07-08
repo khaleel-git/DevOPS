@@ -538,3 +538,19 @@ http {
 }
 ```
 ### Redis Configuration Example
+#### redis.conf.j2:
+```
+port {{ redis_port | default('6379') }}  # Default port 6379 if redis_port not defined
+bind 127.0.0.1;
+tcp-backlog 511;
+timeout 0;
+tcp-keepalive 300;
+```
+### /etc/resolv.conf Example
+#### /etc/resolv.conf.j2:
+```
+{% for name_server in name_servers %}
+nameserver {{ name_server }}
+{% endfor %}
+```
+#### example usage
