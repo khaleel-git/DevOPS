@@ -414,4 +414,8 @@ check configuration: `ansible-config dump | grep ROLE`
 install in the current dir: `ansible-galaxy install khaleel.mysql -p ./roles`
 
 ## ansible collections
-cisco
+cisco -> network.cisco
+juniper -> network.juniper
+arista -> network.arista
+gain specilize func.
+`ansible
