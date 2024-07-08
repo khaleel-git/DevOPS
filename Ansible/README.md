@@ -377,3 +377,5 @@ handler
 share your code with the community (ansible galaxy)
 `ansible-galaxy init mysql` # create your own role
 how to use role in playbook.yaml
+role dir structure:
+my-playbook -> roles -> mysql -> its structures
