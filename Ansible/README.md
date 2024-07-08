@@ -456,4 +456,7 @@ Once installed, collections are referenced in playbooks:
 ```
 ---
 ## Ansible Templates
-jinja
+jinja2 Templates
+  string manipulation
+  The name is {{ my_name || upper }} => The is BOND (filters)
+  The name is 
