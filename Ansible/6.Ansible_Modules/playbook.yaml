@@ -8,4 +8,4 @@
       
     - name: 'Service status is started'
       service: 'httpd'
-      status: 'started'
+      state: 'started'
