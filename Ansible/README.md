@@ -366,3 +366,5 @@ To explore available modules and plugins, and for detailed documentation:
   ansible-doc <module_name>
   ```
 List Ansible hosts (from a custom script, e.g., host_custom.py):
+`ansible-inventory --list -i aws_inventory.py
+`
