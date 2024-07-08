@@ -459,4 +459,4 @@ Once installed, collections are referenced in playbooks:
 jinja2 Templates
   string manipulation
   The name is {{ my_name || upper }} => The is BOND (filters)
-  The name is 
+  The name is {{ my_name | replace("Bond", "Bounce") }} => The name is Bounce
