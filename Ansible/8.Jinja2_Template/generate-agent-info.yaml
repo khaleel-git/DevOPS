@@ -3,5 +3,6 @@
   become: yes
   tasks:
     - name: make agents.conf file by using agents.conf.j2 template
-      src: /home/bob/playbooks/monitoring-server/templates/agents.conf.j2
-      dest: /etc/agents.conf
+      template:
+        src: /home/bob/playbooks/monitoring-server/templates/agents.conf.j2
+        dest: /etc/agents.conf
