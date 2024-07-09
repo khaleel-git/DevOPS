@@ -1,6 +1,6 @@
 ---
   - name: Create an empty file
-    hosts: all
+    hosts: node01
     tasks:
       - name: create an empty file
         command:  touch /opt/news/blog.txt & chgrp sam /opt/news/blog.txt
