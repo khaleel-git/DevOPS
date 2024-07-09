@@ -11,4 +11,4 @@
     become: yes
     tasks:
       - name: create another empty file and change its group
-        command: touch /opt/news/story.txt & chgrp sam /opt/news/story.txt
+        command: touch /opt/news/story.txt & chown sam /opt/news/story.txt
