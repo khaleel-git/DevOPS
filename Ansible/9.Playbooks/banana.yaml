@@ -10,4 +10,4 @@
     
     
     - command: 'echo "I am not a Banana"'
-      when: {{ fruit }} != "banana"
+      when: '{{ fruit }} != "banana"'
