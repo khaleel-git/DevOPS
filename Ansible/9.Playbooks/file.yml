@@ -1,2 +1,8 @@
 ---
-  - name: 
+  - name: create a file with content
+    hosts: node01
+    tasks:
+      - name: using file module
+        file:
+          path:/opt/file.txt
+          state: 
