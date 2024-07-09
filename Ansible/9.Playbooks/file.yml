@@ -5,4 +5,5 @@
       - name: using file module
         file:
           path: /opt/file.txt
-          state: 
+          state: file
+          content: This file is created by Ansible!
