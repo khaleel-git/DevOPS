@@ -1,7 +1,7 @@
 ---
   - name: create a file with content
     hosts: node01
-    become: true
+    become: true # become a sudo user
     tasks:
       - name: using file module
         copy:
