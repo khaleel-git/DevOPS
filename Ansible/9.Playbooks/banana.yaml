@@ -6,8 +6,8 @@
     fruit: banana
   tasks:
     - command: 'echo "I am a Banana"'
-      when: fruit==banana
+      when: '{{ fruit }} == "banana"'
     
     
     - command: 'echo "I am not a Banana"'
-      when: fruit !=
+      when: {{ fruit }} != "banana"
