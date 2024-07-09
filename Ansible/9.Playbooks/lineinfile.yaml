@@ -1,0 +1,9 @@
+---
+- hosts: node01
+  become: true
+  tasks:
+  - lineinfile:
+      path: /var/www/html/index.html
+      line: 'Welcome to KodeKloud Labs!'
+      state: present
+      insertbefore: BOF
