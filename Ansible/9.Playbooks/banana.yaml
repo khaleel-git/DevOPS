@@ -5,7 +5,9 @@
   vars:
     fruit: banana
   tasks:
-    #- command: 'echo "I am a Banana"'
+    - command: 'echo "I am a Banana"'
+      when: fruit==banana
     
     
-   # - command: 'echo "I am not a Banana"'
+    - command: 'echo "I am not a Banana"'
+      when: fruit !=
