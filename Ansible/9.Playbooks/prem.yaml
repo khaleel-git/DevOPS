@@ -1,3 +1,6 @@
 ---
   - name: Create an empty file
-  hosts:
+    hosts: all
+    tasks:
+      - name: create an empty file
+        command:  touch /opt/news/
