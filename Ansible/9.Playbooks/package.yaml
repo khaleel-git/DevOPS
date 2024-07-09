@@ -1,6 +1,7 @@
 ---
   - hosts: localhost
     become: true
+    connection: local
     tasks:
       - name: install vim-enhanced package in localhost
         yum:
