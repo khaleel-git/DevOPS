@@ -1,5 +1,5 @@
 ---
-    hosts: node01
+  - hosts: node01
     become: true
     tasks:
       - name: copy a file in node01
@@ -7,6 +7,10 @@
           src: /usr/src/blog/index.html
           dest: /opt/blog/index.html
 
-    hosts: node02
+  - hosts: node02
     become: true
     tasks:
+      - name: copy a fil ein node02
+        copy:
+          src: /usr/src/blog/index.html
+          dest: /opt/blog/index.html
