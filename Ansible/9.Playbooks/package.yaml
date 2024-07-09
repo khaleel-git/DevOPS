@@ -3,4 +3,5 @@
     become: true
     tasks:
       yum:
-        
+        name: vim-enhanced
+        state: present
