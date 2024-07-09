@@ -1,7 +1,8 @@
 ---
-  - hosts: localhost
+  - hosts: all
     become: true
     tasks:
-      yum:
-        name: vim-enhanced
-        state: present
+      - name: install vim-enhanced package in localhost
+        yum:
+          name: vim-enhanced
+          state: present
