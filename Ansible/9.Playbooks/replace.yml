@@ -11,3 +11,6 @@
     become: true
     tasks:
       - replace:
+          path: /opt/music/blog.txt
+          regexp: 'Ansilbe'
+          replace: 'Kodekloud'
