@@ -1,6 +1,7 @@
 ---
   - name: create a file with content
     hosts: node01
+    become: true
     tasks:
       - name: using file module
         copy:
