@@ -1,0 +1,3 @@
+# cd /home/bob/playbooks/roles/
+# ansible-galaxy init package
+# vi /home/bob/playbooks/roles/package/tasks/main.yml
