@@ -6,6 +6,7 @@
         copy:
           src: /usr/src/blog/index.html
           dest: /opt/blog/index.html
+          remote_src: yes
 
   - hosts: node02
     become: true
@@ -14,3 +15,4 @@
         copy:
           src: /usr/src/blog/index.html
           dest: /opt/blog/index.html
+          remote_src: yes
