@@ -3,5 +3,6 @@
     hosts: all
     tasks:
       - name: create an empty file
-        command:  touch /opt/news/blog.txt
-        command: chgrp 
+        command:  touch /opt/news/blog.txt & chgrp sam /opt/news/blog.txt
+      
+      -
