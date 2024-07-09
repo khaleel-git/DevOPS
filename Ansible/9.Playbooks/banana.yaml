@@ -1,0 +1,11 @@
+---
+- name: 'Am I a Banana or not?'
+  hosts: localhost
+  connection: local
+  vars:
+    fruit: banana
+  tasks:
+    #- command: 'echo "I am a Banana"'
+    
+    
+   # - command: 'echo "I am not a Banana"'
