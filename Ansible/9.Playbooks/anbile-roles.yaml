@@ -1,3 +1,22 @@
 # cd /home/bob/playbooks/roles/
 # ansible-galaxy init package
 # vi /home/bob/playbooks/roles/package/tasks/main.yml
+
+---
+# tasks file for nginx
+- name: Install Nginx
+  ansible.builtin.package:
+    name: nginx 
+    state: latest
+- name: Start Nginx Service
+  ansible.builtin.service:
+    name: nginx 
+    state: started
+
+
+# nano /home/bob/playbooks/role.yml
+# # ---
+# - hosts: node01
+#   become: true
+#   roles:
+#     - roles/package
