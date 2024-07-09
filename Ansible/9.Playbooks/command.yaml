@@ -1,0 +1,7 @@
+---
+ - name: Print content of a file
+   hosts: localhost
+   connection: local
+   tasks:
+     - name: Print the cotent of a file
+       command: cat /etc/resolv.conf
