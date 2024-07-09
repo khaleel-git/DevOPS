@@ -6,7 +6,7 @@
       - name: create an empty file
         file:
           path: /opt/news/blog.txt
-          command: touch
+          state: touch
           group: sam
     
   - name: create an empty file in node02  
@@ -16,5 +16,5 @@
       - name: create another empty file and change its group
         file:
           path: /opt/news/story.txt
-          command: touch
+          state: touch
           owner: sam
