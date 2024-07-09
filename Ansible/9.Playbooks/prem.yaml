@@ -4,11 +4,11 @@
     become: yes
     tasks:
       - name: create an empty file
-        command:  touch /opt/news/blog.txt & chgrp sam /opt/news/blog.txt
+        command:  touch /opt/news/blog.txt && chgrp sam /opt/news/blog.txt
     
   - name: create an empty file in node02  
     hosts: node02
     become: yes
     tasks:
       - name: create another empty file and change its group
-        command: touch /opt/news/story.txt & chown sam /opt/news/story.txt
+        command: touch /opt/news/story.txt && chown sam /opt/news/story.txt
