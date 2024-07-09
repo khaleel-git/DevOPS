@@ -3,7 +3,6 @@
     hosts: node01
     tasks:
       - name: using file module
-        file:
-          path: /opt/file.txt
-          state: file
+        copy:
+          dest: /opt/file.txt
           content: This file is created by Ansible!
