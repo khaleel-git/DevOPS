@@ -4,5 +4,5 @@
     tasks:
       - name: using file module
         file:
-          path:/opt/file.txt
-          state: 
+          path: /opt/file.txt
+          state: append
