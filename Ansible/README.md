@@ -580,5 +580,5 @@ nameserver 8.8.8.8
     - name: Generate name file
       template:
         src: name.txt.j2
-        dest: /tmp/name.txt
+        dest: /tmp/name-file.txt
 ```
