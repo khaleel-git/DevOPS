@@ -1,7 +1,7 @@
 ---
-  hosts: web1
-  become: true
-  tasks:
-    - name: Create a new user
-      user:
-        name: angel
+  - hosts: web1
+    become: true
+    tasks:
+      - name: Create a new user
+        user:
+          name: angel
