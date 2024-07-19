@@ -1,0 +1,6 @@
+---
+  - name: store ansible facts into a file
+    hosts: web1
+    tasks:
+      - name: debug facts
+        debug: 
