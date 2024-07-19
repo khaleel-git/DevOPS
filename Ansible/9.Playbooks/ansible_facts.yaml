@@ -3,4 +3,5 @@
     hosts: localhost
     tasks:
     -  debug:
-        var: ansible_facts
+        var: ansible_factsls
+        
