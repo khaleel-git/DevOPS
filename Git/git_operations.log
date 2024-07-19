@@ -2441,3 +2441,9 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    8e87e682..fe0646ca  master -> master
 branch 'master' set up to track 'origin/master'.
+[master 6ae78031] Ansible Commit @ 2024-07-19 12:50:010
+ 2 files changed, 5 insertions(+)
+ create mode 100644 Ansible/9.Playbooks/create-user.yaml
+To github.com:khaleel-git/DevOPS.git
+   fe0646ca..6ae78031  master -> master
+branch 'master' set up to track 'origin/master'.
