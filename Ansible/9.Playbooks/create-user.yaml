@@ -4,4 +4,4 @@
   tasks:
     - name: Create a new user
       user:
-        name: 
+        name: angel
