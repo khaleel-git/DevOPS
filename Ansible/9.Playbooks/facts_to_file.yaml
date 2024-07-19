@@ -1,6 +1,7 @@
 ---
   - name: store ansible facts into a file
     hosts: web1
+    become: true
     tasks:
       - name: debug facts
         debug: 
@@ -8,5 +9,5 @@
 
       - name: copy ansible facts into file
         copy:
-          content: {{ ansible_facts }}
+          content: "{{ ansible_facts }}"
           dest: /home/thor/playbooks/web/web-facts.txt
