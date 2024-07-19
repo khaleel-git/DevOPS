@@ -1,5 +1,5 @@
 ---
   - hosts: web2
     tasks:
-  - name: echo Welcome!
-      shell: 'echo "Welcome!" > /tmp/welcome.txt'
+      - name: echo Welcome!
+        shell: 'echo "Welcome!" > /tmp/welcome.txt'
