@@ -271,6 +271,7 @@ Verification is crucial in production environments to avoid unnoticed errors tha
 1. **Check Mode**: `--check` option (simulates changes without applying them)
 2. **Diff Mode**: `--check --diff` (shows differences between current and desired states)
 3. **Syntax Check**: `ansible-playbook --syntax-check playbook.yml`
+4. **Start at task**: `ansible-playbook playbook.yaml --start-at-task "Start httpd service"
 
 ### Ansible-Lint
 Ansible-Lint is a command-line tool that performs linting on Ansible playbooks, roles, and collections. It checks for errors, bugs, stylistic errors, and suspicious constructs to refine playbooks.
