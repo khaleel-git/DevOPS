@@ -3,3 +3,9 @@
 
 
 - handle 10,000 simultaneous connections
+- a directive is a key-value pair like:
+```
+http {
+
+}
+```
