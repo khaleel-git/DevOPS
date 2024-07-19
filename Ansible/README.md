@@ -279,7 +279,7 @@ Verification is crucial in production environments to avoid unnoticed errors tha
 `ansible-playbook playbook.yaml --tags "install"`
 
 ### Skips Tags
-`ansible-playbook playbook.yaml --skip
+`ansible-playbook playbook.yaml --skip-tags "install"`
 
 ### Ansible-Lint
 Ansible-Lint is a command-line tool that performs linting on Ansible playbooks, roles, and collections. It checks for errors, bugs, stylistic errors, and suspicious constructs to refine playbooks.
