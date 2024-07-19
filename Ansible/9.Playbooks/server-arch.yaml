@@ -1,0 +1,6 @@
+---
+- hosts: db1
+  tasks:
+    - name: Get server architecture
+      debug:
+        var: ansible_facts.architecture[thor@ansible-controller db]
