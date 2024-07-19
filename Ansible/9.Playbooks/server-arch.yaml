@@ -3,4 +3,4 @@
   tasks:
     - name: Get server architecture
       debug:
-        var: ansible_facts.architecture[thor@ansible-controller db]
+        var: ansible_facts.architecture
