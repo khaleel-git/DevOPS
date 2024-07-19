@@ -1,6 +1,6 @@
 ---
   - name:
-    hosts: all
+    hosts: localhost
     tasks:
     -  debug:
-    
+        var: ansible_facts
