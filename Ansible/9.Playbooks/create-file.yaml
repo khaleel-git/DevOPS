@@ -3,4 +3,4 @@
     hosts: web1
     tasks:
       - name: create a blank file
-
+        command: "touch /root/myfile.txt"
