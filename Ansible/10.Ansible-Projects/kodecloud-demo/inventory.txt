@@ -1,0 +1,2 @@
+centos.vmware ansible_host=centos.vmware ansible_ssh_pass=ah
+

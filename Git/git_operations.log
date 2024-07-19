@@ -1860,3 +1860,9 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    1ef2ec50..f3f8bb11  master -> master
 branch 'master' set up to track 'origin/master'.
+[master 861223cd] Ansible Commit @ 2024-07-19 10:04:010
+ 2 files changed, 5 insertions(+)
+ create mode 100644 Ansible/10.Ansible-Projects/kodecloud-demo/inventory.txt
+To github.com:khaleel-git/DevOPS.git
+   f3f8bb11..861223cd  master -> master
+branch 'master' set up to track 'origin/master'.
