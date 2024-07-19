@@ -1,0 +1,4 @@
+---
+  - name: create a file for web1
+  - hosts: web1
+
