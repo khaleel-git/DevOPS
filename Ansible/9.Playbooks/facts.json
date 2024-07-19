@@ -1,11 +1,4 @@
-
-PLAY [localhost] ***************************************************************
-
-TASK [Gathering Facts] *********************************************************
-ok: [localhost]
-
-TASK [debug] *******************************************************************
-ok: [localhost] => {
+{
     "ansible_facts": {
         "all_ipv4_addresses": [
             "172.31.158.39",
@@ -1070,7 +1063,3 @@ ok: [localhost] => {
         "virtualization_type": "wsl"
     }
 }
-
-PLAY RECAP *********************************************************************
-localhost                  : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-
