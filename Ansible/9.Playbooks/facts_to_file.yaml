@@ -3,4 +3,8 @@
     hosts: web1
     tasks:
       - name: debug facts
-        debug: 
+        debug: ansible_facts
+
+      - name: copy ansible facts into file
+        copy:
+          content: {{ ansible_facts }}
