@@ -8,3 +8,4 @@
       - name: copy ansible facts into file
         copy:
           content: {{ ansible_facts }}
+          dest: /home/thor/playbooks/web/web-facts.txt
