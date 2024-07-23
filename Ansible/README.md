@@ -5,6 +5,11 @@ Ansible is a powerful automation tool that simplifies configuration management, 
 **Default Configuration File**: `/etc/ansible/ansible.cfg`  
 Ansible's default configuration file organizes settings into various sections, ensuring flexibility and customization.
 
+```TOML
+[defaults]
+
+```
+
 ### Overriding Configuration
 Modify configuration on-the-fly with:
 ```bash
