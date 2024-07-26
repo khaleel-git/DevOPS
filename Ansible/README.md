@@ -1,9 +1,6 @@
 # Ansible Cheat Sheet (YAML)
 ## Getting Started with Ansible
 Ansible is a powerful automation tool that simplifies configuration management, application deployment, and task automation. This cheat sheet provides essential commands and configurations to kickstart your journey with Ansible.
-## Ansible Configuration Files
-**Default Configuration File**: `/etc/ansible/ansible.cfg`  
-Ansible's default configuration file organizes settings into various sections, ensuring flexibility and customization.
 
 ## Install Ansible
 ```centos
@@ -15,7 +12,9 @@ sudo pip install ansible
 # upgrade ansible
 sudo pip install --upgrade ansible
 ```
-
+## Ansible Configuration Files
+**Default Configuration File**: `/etc/ansible/ansible.cfg`  
+Ansible's default configuration file organizes settings into various sections, ensuring flexibility and customization.
 ```ini
 [defaults]
 
