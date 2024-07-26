@@ -13,7 +13,7 @@ sudo yum install python-pip
 sudo pip install ansible
 
 # upgrade ansible
-
+sudo pip install --upgrade ansible
 ```
 
 ```ini
