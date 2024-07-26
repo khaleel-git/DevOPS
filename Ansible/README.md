@@ -6,7 +6,15 @@ Ansible is a powerful automation tool that simplifies configuration management, 
 Ansible's default configuration file organizes settings into various sections, ensuring flexibility and customization.
 
 ## Install Ansible
+```centos
+# redhat/centos machine
+sudo yum install epel-release
+sudo yum install python-pip
+sudo pip install ansible
 
+# upgrade ansible
+
+```
 
 ```ini
 [defaults]
