@@ -62,6 +62,11 @@ ansible_port - 22/5986
 ansible_user - root/user1/user2
 ansible_ssh_pass - Password
 ```
+## Ansible logs (in ansible.cfg)
+```ini
+[defaults]
+log_path = /var/log/ansible/ansible.log
+```
 ### Example:
 ```
 # Sample ini Inventory File
