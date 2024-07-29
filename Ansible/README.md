@@ -613,3 +613,8 @@ nameserver 8.8.8.8
         src: name.txt.j2
         dest: /tmp/name-file.txt
 ```
+
+
+## ssh authentication
+ssh-keygen
+id_rsa id_rsa.pub
