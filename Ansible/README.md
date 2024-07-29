@@ -618,3 +618,4 @@ nameserver 8.8.8.8
 ## ssh authentication
 ssh-keygen
 id_rsa id_rsa.pub
+ssh-copy-id -i id_rsa user@server
