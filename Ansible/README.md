@@ -616,7 +616,7 @@ nameserver 8.8.8.8
 
 
 ## ssh authentication
-ssh-keygen
+ssh-keygen: ssh-keygen -t rsa -f ~/.ssh/id_rsa
 id_rsa id_rsa.pub
 ssh-copy-id -i id_rsa user@server
 /etc/ansible/hosts
