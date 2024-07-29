@@ -620,3 +620,4 @@ ssh-keygen
 id_rsa id_rsa.pub
 ssh-copy-id -i id_rsa user@server
 /etc/ansible/hosts
+web1 ansible_host=172.20.1.100 ansible_user=user ansible_ssh_private_key_file=/some-path/private-key
