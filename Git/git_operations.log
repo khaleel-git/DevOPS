@@ -23492,3 +23492,10 @@ To github.com:khaleel-git/DevOPS.git
 branch 'master' set up to track 'origin/master'.
 [master 1707e80a] Ansible Commit @ 2024-08-01 16:04:010
  1 file changed, 5 insertions(+)
+[master 03ccf119] Ansible Commit @ 2024-08-01 16:05:010
+ 1 file changed, 2 insertions(+)
+ssh: connect to host github.com port 22: Network is unreachable
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
