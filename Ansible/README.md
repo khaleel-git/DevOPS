@@ -635,4 +635,6 @@ ANSIBLE_HOST_KEY_CHECKING=False ansible -m ping -i /home/thor/playbooks/inventor
 ansible -a 'date' -i /home/thor/playbooks/inventory web1> /tmp/ansible_date.txt
 
 ## Ansible Shell Scripts
-
+shell-script.sh:
+``bash
+```
