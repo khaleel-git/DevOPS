@@ -667,3 +667,12 @@ chmod 755 shell-script.sh
 become: true (sudo)
 become_method: doa
 becomer_user: ngnix_user
+
+# this can also be set in 
+/etc/ansible/ansible.cfg
+```
+become = true
+become_method = doas
+become_user = nginx
+```
+
