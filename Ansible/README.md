@@ -663,7 +663,7 @@ chmod 755 shell-script.sh
 1. become a super user
 2. becoming another user (for ngnix, mysql)
 
-# add these in playbook.yaml
+### add these in playbook.yaml
 become: true (sudo)
 become_method: doa
 becomer_user: ngnix_user
@@ -678,5 +678,8 @@ become_user = nginx
 
 # this can also be set in inventory file
 ```ini
-node00 ansible_host=ip ansible_user=admin ansible_become=yes ansible_become
+node00 ansible_host=ip ansible_user=admin ansible_become=yes ansible_become_user=nginx
 ```
+
+### set in command line parameters
+ansible-playbook --become-method
