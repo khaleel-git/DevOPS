@@ -24753,3 +24753,10 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    1ad4bd17..a454d375  master -> master
 branch 'master' set up to track 'origin/master'.
+[master 6f196bdd] Ansible Commit @ 2024-08-06 20:11:040
+ 3 files changed, 9 insertions(+)
+ delete mode 100644 Ansible/10.Ansible-Projects/CentOS/.inventory.swp
+ create mode 100644 Ansible/10.Ansible-Projects/CentOS/inventory
+To github.com:khaleel-git/DevOPS.git
+   a454d375..6f196bdd  master -> master
+branch 'master' set up to track 'origin/master'.
