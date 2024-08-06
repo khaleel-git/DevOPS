@@ -637,4 +637,11 @@ ansible -a 'date' -i /home/thor/playbooks/inventory web1> /tmp/ansible_date.txt
 ## Ansible Shell Scripts
 shell-script.sh:
 ``bash
+export ANSIBLE_GATHERING=explicit
+
+ansible -m ping all
+
+ansible -a 'cat /etc/hosts' all
+
+ansible-playbook playbook.yml
 ```
