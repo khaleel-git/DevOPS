@@ -698,3 +698,6 @@ do not use when its an obvious place
 ```
 var: dns_server
 when: ansible_host != 'web'
+
+msg: "{{ dns_server }}
+msg: The dns server is {{ dns_server }}
