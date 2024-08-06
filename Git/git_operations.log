@@ -25418,3 +25418,10 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    740c1c24..2b5609f7  master -> master
 branch 'master' set up to track 'origin/master'.
+[master 84a7a6e0] Ansible Commit @ 2024-08-06 22:21:010
+ 3 files changed, 7 insertions(+)
+ delete mode 100644 Ansible/10.Ansible-Projects/Ansible_Shell_Scripts/.host_details.sh.swp
+ create mode 100644 Ansible/10.Ansible-Projects/Ansible_Shell_Scripts/host_details.sh
+To github.com:khaleel-git/DevOPS.git
+   2b5609f7..84a7a6e0  master -> master
+branch 'master' set up to track 'origin/master'.
