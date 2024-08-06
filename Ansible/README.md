@@ -622,6 +622,6 @@ ssh-copy-id -i id_rsa user@server: ssh-copy-id -i /home/thor/.ssh/ansible ansibl
 /etc/ansible/hosts
 web1 ansible_host=172.20.1.100 ansible_user=user ansible_ssh_private_key_file=~/.ssh/ansible
 
-## ansible adhoc command
+## ansible adhoc commands
 ansible -m ping -i inventory web1 # ansible adhoc command
 ansible -a 'cat /etc/hosts' all
