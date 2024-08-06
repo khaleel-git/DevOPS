@@ -679,7 +679,9 @@ node00 ansible_host=ip ansible_user=admin ansible_become=yes ansible_become_user
 become: true (sudo)
 become_method: doa
 becomer_user: ngnix_user
+become-user=nginx --ask-become-pass
+
 
 
 ### set in command line parameters
-ansible-playbook --become-method=doas --become-user=nginx
+ansible-playbook --become-method=doas --become-user=nginx --ask-become-pass
