@@ -669,17 +669,18 @@ chmod 755 shell-script.sh
 become = true
 become_method = doas
 become_user = nginx
+ask-become-pass = true
 ```
 ### this can also be set in inventory file
 ```ini
-node00 ansible_host=ip ansible_user=admin ansible_become=yes ansible_become_user=nginx
+node00 ansible_host=ip ansible_user=admin ansible_become=yes ansible_become_user=nginx ansible_ask-become-pass
 ```
 
 ### add these in playbook.yaml
 become: true (sudo)
 become_method: doa
 becomer_user: ngnix_user
-become-user=nginx --ask-become-pass
+ask-become-pass: true
 
 
 
