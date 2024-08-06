@@ -644,6 +644,10 @@ ansible -m ping all
 ansible -a 'cat /etc/hosts' all
 
 ansible-playbook playbook.yml
+
+ANSIBLE_HOST_KEY_CHECKING=False ansible -a 'cat /etc/hosts' -i inventory all
+
+ansible -m copy -a 'src=/etc/resolv.conf dest=/tmp/resolv.conf' -i inventory node00 
 ```
 
 Rum above as:
