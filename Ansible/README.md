@@ -634,7 +634,7 @@ ANSIBLE_HOST_KEY_CHECKING=False ansible -m ping -i /home/thor/playbooks/inventor
 ```
 ansible -a 'date' -i /home/thor/playbooks/inventory web1> /tmp/ansible_date.txt
 
-## Ansible Shell Scripts
+## Ansible Shell Scripts (execute ansible using shell script)
 shell-script.sh:
 ``bash
 export ANSIBLE_GATHERING=explicit
@@ -644,4 +644,12 @@ ansible -m ping all
 ansible -a 'cat /etc/hosts' all
 
 ansible-playbook playbook.yml
+```
+
+Rum above as:
+```bash
+sh shell-script.sh
+or
+chmod 755 shell-script.sh
+./shell-script.sh
 ```
