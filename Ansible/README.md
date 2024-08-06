@@ -627,5 +627,7 @@ ansible -m ping -i inventory web1 # ansible adhoc command
 ansible -m ping -i inventory all> /tmp/ansible_all.txt
 ansible -a 'cat /etc/hosts' all
 ansible -m setup localhost # gather the facts
+### adhoct command with host key checking False
 ```
 ANSIBLE_HOST_KEY_CHECKING=False ansible -m ping -i /home/thor/playbooks/inventory all > /tmp/ansible_all.txt
+```
