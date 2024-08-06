@@ -692,3 +692,8 @@ three dashes: used when you start a new yaml file
 and is used to merge different sections of yaml playbooks
 
 var {{ where to use and where to not}}
+use when referring to variables
+do not use when its an obvious place
+```
+var: dns_server
+when: ansible_host != 'web'
