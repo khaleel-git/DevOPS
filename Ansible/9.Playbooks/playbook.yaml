@@ -3,5 +3,4 @@
   become: true
 
   tasks:
-    - command:
-    'cat /etc/redhat-release'
+    - command: 'cat /etc/redhat-release'
