@@ -633,3 +633,6 @@ ansible -m setup localhost # gather the facts
 ANSIBLE_HOST_KEY_CHECKING=False ansible -m ping -i /home/thor/playbooks/inventory all > /tmp/ansible_all.txt
 ```
 ansible -a 'date' -i /home/thor/playbooks/inventory web1> /tmp/ansible_date.txt
+
+## Ansible Shell Scripts
+
