@@ -15,4 +15,4 @@ echo '''
 ''' > playbook.yml
 
 # Run playbook
-ansible-playbook -i inventory -vv
+ansible-playbook playbook.yaml -i inventory -vv
