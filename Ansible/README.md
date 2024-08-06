@@ -660,3 +660,6 @@ chmod 755 shell-script.sh
 
 ## Ansible Previlidge escalation
 
+1. become a super user
+2. becoming another user (for ngnix, mysql)
+
