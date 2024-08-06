@@ -676,3 +676,7 @@ become_method = doas
 become_user = nginx
 ```
 
+# this can also be set in inventory file
+```ini
+node00 ansible_host=ip ansible_user=admin ansible_become=yes ansible_become
+```
