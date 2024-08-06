@@ -625,3 +625,4 @@ web1 ansible_host=172.20.1.100 ansible_user=user ansible_ssh_private_key_file=~/
 ## ansible adhoc commands
 ansible -m ping -i inventory web1 # ansible adhoc command
 ansible -a 'cat /etc/hosts' all
+ansible -m setup localhost # gather the facts
