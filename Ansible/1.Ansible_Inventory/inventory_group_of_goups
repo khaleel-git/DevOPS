@@ -28,3 +28,21 @@ web_node3 ansible_host=web03.xyz.com ansible_connection=winrm ansible_user=admin
 [us_nodes:children]
 boston_nodes
 dallas_nodes
+
+
+
+
+
+
+# Inventory File
+[web_servers]
+lamp-web ansible_host=172.20.1.100 ansible_user=john ansible_ssh_pass=john ansible_connection=ssh ansible_port=22
+
+[db_servers]
+web_servers ansible_host=172.20.1.101 ansible_user=maria ansbile_pass=maria ansible_connection=ssh ansible_port=22
+
+[db_servers]
+lamp-db ansible_host=172.20.1.101 ansible_ssh_pass=maria ansible_user=maria
+
+[web_servers]
+lamp-web ansible_host=172.20.1.100 ansible_ssh_pass=john ansible_user=john
