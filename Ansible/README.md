@@ -687,7 +687,7 @@ ask-become-pass: true
 ### set in command line parameters
 ansible-playbook --become-method=doas --become-user=nginx --ask-become-pass
 
-FAQ:
+## FAQ:
 three dashes: used when you start a new yaml file
 and is used to merge different sections of yaml playbooks
 
