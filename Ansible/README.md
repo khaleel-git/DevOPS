@@ -701,3 +701,6 @@ when: ansible_host != 'web'
 
 msg: "{{ dns_server }}
 msg: The dns server is {{ dns_server }}
+
+ansible_ssh_pass (old way)
+ansible_password (new way)
