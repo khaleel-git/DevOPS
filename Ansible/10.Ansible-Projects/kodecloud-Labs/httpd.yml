@@ -3,7 +3,12 @@
     hosts: web1
     become: yes
     tasks:
-      - name: Install httpd package
+      - name: Install epel-release
         yum: 
           name: epel-release
+          state: present
+
+      - name: install httpd package
+        yum: 
+          name: httpd
           state: installed
