@@ -1,5 +1,6 @@
 - name: Deploy lamp stack application
   hosts: all
+  become: true
   tasks:
     - name: Install common dependencies
       yum:
