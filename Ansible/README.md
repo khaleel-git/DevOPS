@@ -741,10 +741,17 @@ create diretory, file, empty file, owner, group, mode
 - remote_src: yes
 
 ### cron
-```
+```yaml
 ---
   - hosts: all
     tasks:
       - name: create a scheduled task
         cron:
-          name: Run Daily
+          name: Run Daily health report
+          job: sh /opt/scripts/health.sh
+
+          month: 2
+          day: 19
+          hour: 8
+          minute: 10
+```
