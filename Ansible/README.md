@@ -725,3 +725,8 @@ enable the service
 
 ### firewall
 firewalld (centos)
+permanent: yes (reboot required)
+immediate: yes (immediate)
+
+### lvg (Storage)
+
