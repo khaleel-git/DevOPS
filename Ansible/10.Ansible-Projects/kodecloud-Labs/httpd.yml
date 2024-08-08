@@ -1,4 +1,4 @@
-hosts: web1
+- hosts: web1
   tasks:
     yum:
       name: httpd
