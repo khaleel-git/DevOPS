@@ -1,5 +1,4 @@
 ---
-  - name: installing httpd package on centos machine
   - hosts: web1
     tasks:
       - name: Install httpd package
