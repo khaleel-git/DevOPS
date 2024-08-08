@@ -1,5 +1,5 @@
 ---
-- host: all
+- host: centos.vmware
   tasks:
     - name: Install iotop package
       yum:
