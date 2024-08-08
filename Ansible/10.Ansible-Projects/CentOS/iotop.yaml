@@ -1,0 +1,8 @@
+---
+- host: all
+  tasks:
+    - name: Install iotop package
+      yum:
+        name: iotop
+        version: latest
+        state: present
