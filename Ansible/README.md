@@ -738,3 +738,6 @@ immediate: yes (immediate)
 create diretory, file, empty file, owner, group, mode
 
 ### Archive and unarchive module
+- remote_src: yes
+
+#
