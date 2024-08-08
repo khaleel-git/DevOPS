@@ -740,4 +740,11 @@ create diretory, file, empty file, owner, group, mode
 ### Archive and unarchive module
 - remote_src: yes
 
-#
+### cron
+```
+---
+  - hosts: all
+    tasks:
+      - name: create a scheduled task
+        cron:
+          name: Run Daily
