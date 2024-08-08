@@ -716,5 +716,8 @@ ansible_ssh_pass (old way)
 ansible_password (new way)
 
 ## Modules
+### Package
 yum, apt
 but use package (univeral)
+
+### Service
