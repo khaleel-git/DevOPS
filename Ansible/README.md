@@ -714,3 +714,7 @@ msg: The dns server is {{ dns_server }}
 
 ansible_ssh_pass (old way)
 ansible_password (new way)
+
+## Modules
+yum, apt
+but use package (univeral)
