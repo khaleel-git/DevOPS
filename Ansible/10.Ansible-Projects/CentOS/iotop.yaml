@@ -4,5 +4,4 @@
     - name: Install iotop package
       yum:
         name: iotop
-        version: latest
-        state: present
+        state: latest
