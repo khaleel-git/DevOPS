@@ -3,7 +3,8 @@
     hosts: web1
     become: yes
     tasks:
+      - name: update the system
+        command: yum update
+        
       - name: Install httpd package
-        yum: 
-         - name=httpd 
-         state=installed
+        yum: name=httpd state=installed
