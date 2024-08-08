@@ -1,4 +1,5 @@
 ---
 - hosts: web1
   tasks:
-    yum: name=httpd state=installed
+    - name: Install httpd package
+      yum: name=httpd state=installed
