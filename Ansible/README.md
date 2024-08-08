@@ -623,9 +623,9 @@ ssh-copy-id -i id_rsa user@server: ssh-copy-id -i /home/thor/.ssh/ansible ansibl
 web1 ansible_host=172.20.1.100 ansible_user=user ansible_ssh_private_key_file=~/.ssh/ansible
 
 ```
-ssh-keygen -f /home/thor/.ssh/maria and 
-ssh-keygen -f /home/thor/.ssh/john and 
-ssh-copy-id -i /home/thor/.ssh/maria  maria@lamp-db and 
+ssh-keygen -f /home/thor/.ssh/maria
+ssh-keygen -f /home/thor/.ssh/john
+ssh-copy-id -i /home/thor/.ssh/maria  maria@lamp-db
 ssh-copy-id -i /home/thor/.ssh/john  john@lamp-web
 ```
 
