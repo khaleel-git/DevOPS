@@ -750,9 +750,9 @@ create diretory, file, empty file, owner, group, mode
           name: Run Daily health report
           job: sh /opt/scripts/health.sh
 
-          month: 2
-          day: 19
+          month: *
+          day: *
           hour: 8
           minute: 10
-          
+          weekday: *
 ```
