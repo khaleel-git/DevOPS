@@ -622,6 +622,13 @@ ssh-copy-id -i id_rsa user@server: ssh-copy-id -i /home/thor/.ssh/ansible ansibl
 /etc/ansible/hosts
 web1 ansible_host=172.20.1.100 ansible_user=user ansible_ssh_private_key_file=~/.ssh/ansible
 
+```
+ssh-keygen -f /home/thor/.ssh/maria and 
+ssh-keygen -f /home/thor/.ssh/john and 
+ssh-copy-id -i /home/thor/.ssh/maria  maria@lamp-db and 
+ssh-copy-id -i /home/thor/.ssh/john  john@lamp-web
+```
+
 ## ansible adhoc commands
 with adhoct command, we can execute any commands inside remote hosts
 ansible -m ping -i inventory web1 # ansible adhoc command
