@@ -36,10 +36,10 @@ dallas_nodes
 
 # Inventory File
 [db_servers]
-lamp-db ansible_host=172.20.1.101 ansible_ssh_pass=maria ansible_user=maria mysqlservice=mysqld mysql_port=3306 dbname=ecomdb dbuser=ecomuser
+lamp-db ansible_host=172.20.1.101 ansible_ssh_pass=maria ansible_user=maria mysqlservice=mysqld mysql_port=3306 dbname=ecomdb dbuser=ecomuser dbpassword=ecompassword
 
 [web_servers]
-lamp-web ansible_host=172.20.1.100 ansible_ssh_pass=john ansible_user=john
+lamp-web ansible_host=172.20.1.100 ansible_ssh_pass=john ansible_user=john httpd_port=80
 
 
 
