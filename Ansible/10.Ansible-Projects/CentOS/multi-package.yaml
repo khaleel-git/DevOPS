@@ -1,5 +1,5 @@
 ---
-- hosts: web1
+- hosts: centos.vmware
   tasks:
   - yum: name=sudo state=latest
   - yum: name=vsftpd state=latest
