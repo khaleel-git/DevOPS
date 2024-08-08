@@ -1,5 +1,5 @@
 ---
 - name: install httpd on web1 hosts
   hosts: web1
-    - tasks:
-    - name: installing 
+  tasks:
+    
