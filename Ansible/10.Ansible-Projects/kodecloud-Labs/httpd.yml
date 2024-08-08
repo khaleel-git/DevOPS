@@ -1,6 +1,7 @@
 ---
   - name: installing httpd package on centos machine
     hosts: web1
+    become: yes
     tasks:
       - name: Install httpd package
         yum: name=httpd state=installed
