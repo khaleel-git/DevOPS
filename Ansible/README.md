@@ -721,3 +721,7 @@ yum, apt
 but use package (univeral)
 
 ### Service
+enable the service
+
+### firewall
+firewalld (centos)
