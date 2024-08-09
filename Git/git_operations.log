@@ -42331,3 +42331,13 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    36540dda..ce32a3b6  master -> master
 branch 'master' set up to track 'origin/master'.
+[master 2b7fad26] Ansible Commit @ 2024-08-09 13:52:040
+ 1 file changed, 5 insertions(+)
+To github.com:khaleel-git/DevOPS.git
+   ce32a3b6..2b7fad26  master -> master
+branch 'master' set up to track 'origin/master'.
+client_loop: send disconnect: Broken pipe
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
