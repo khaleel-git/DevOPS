@@ -45860,3 +45860,10 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    02ed544e..2319a007  master -> master
 branch 'master' set up to track 'origin/master'.
+[master 1ee87629] Ansible Commit @ 2024-08-10 16:36:070
+ 1 file changed, 5 insertions(+)
+ssh: Could not resolve hostname github.com: Temporary failure in name resolution
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
