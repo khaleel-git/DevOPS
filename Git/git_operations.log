@@ -45629,3 +45629,14 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    f7184e6b..3d4943c9  master -> master
 branch 'master' set up to track 'origin/master'.
+[master 8a9a98f4] Ansible Commit @ 2024-08-10 15:51:070
+ 7 files changed, 5 insertions(+)
+ rename Ansible/10.Ansible-Projects/kodecloud-Labs/{ => Labs - Modules - Firewalld}/block.yaml (100%)
+ rename Ansible/10.Ansible-Projects/kodecloud-Labs/{ => Labs - Modules - Firewalld}/firewall.yaml (100%)
+ rename Ansible/10.Ansible-Projects/kodecloud-Labs/{ => Labs - Modules - Firewalld}/httpd.yaml (100%)
+ rename Ansible/10.Ansible-Projects/kodecloud-Labs/{ => Labs - Modules - Firewalld}/httpd.yml (100%)
+ rename Ansible/10.Ansible-Projects/kodecloud-Labs/{ => Labs - Modules - Firewalld}/https.yaml (100%)
+ rename Ansible/10.Ansible-Projects/kodecloud-Labs/{ => Labs - Modules - Firewalld}/web2-config.yml (100%)
+To github.com:khaleel-git/DevOPS.git
+   3d4943c9..8a9a98f4  master -> master
+branch 'master' set up to track 'origin/master'.
