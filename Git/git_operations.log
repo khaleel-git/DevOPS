@@ -47395,3 +47395,15 @@ To github.com:khaleel-git/DevOPS.git
 branch 'master' set up to track 'origin/master'.
 [master 835bc5dc] Ansible Commit @ 2024-08-11 01:39:000
  1 file changed, 5 insertions(+)
+[master 8271a3db] Ansible Commit @ 2024-08-11 01:40:010
+ 1 file changed, 2 insertions(+)
+To github.com:khaleel-git/DevOPS.git
+   5d8c3fce..8271a3db  master -> master
+branch 'master' set up to track 'origin/master'.
+To github.com:khaleel-git/DevOPS.git
+ ! [rejected]          master -> master (non-fast-forward)
+error: failed to push some refs to 'github.com:khaleel-git/DevOPS.git'
+hint: Updates were rejected because the tip of your current branch is behind
+hint: its remote counterpart. If you want to integrate the remote changes,
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
