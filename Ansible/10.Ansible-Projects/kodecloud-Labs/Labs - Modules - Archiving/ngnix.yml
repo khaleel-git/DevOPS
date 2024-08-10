@@ -3,13 +3,19 @@
   tasks:
     - name: Install nginx
       yum: 
-        name:nginx 
-        state=installed
+        name: nginx 
+        state: installed
     - name: Start nginx
-      service: name=nginx state=started enabled=yes
+      service:
+        name: nginx 
+        state: started 
+        enabled: yes
 
     - name: Extract nginx.zip
-      unarchive: src=/root/nginx.zip dest=/usr/share/nginx/html remote_src=yes
+      unarchive: 
+      src: /root/nginx.zip 
+      dest=/usr/share/nginx/html 
+      remote_src=yes
 
     - name: Replace line in index.html
       replace:
