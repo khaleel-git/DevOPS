@@ -44742,3 +44742,9 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    05b867d6..bee80fe1  master -> master
 branch 'master' set up to track 'origin/master'.
+[master b33f4f2f] Ansible Commit @ 2024-08-10 13:02:070
+ 2 files changed, 18 insertions(+)
+ create mode 100644 Ansible/10.Ansible-Projects/CentOS/firewall.yaml
+To github.com:khaleel-git/DevOPS.git
+   bee80fe1..b33f4f2f  master -> master
+branch 'master' set up to track 'origin/master'.

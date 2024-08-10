@@ -1,6 +1,6 @@
 ---
 - name: start firewall
-  hosts: web1
+  hosts: centos.vmware
   become: yes
   tasks:
   - name: make sure firewalld is installed
