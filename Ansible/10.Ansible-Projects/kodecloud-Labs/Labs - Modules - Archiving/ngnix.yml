@@ -11,6 +11,6 @@
 
     - name: Replace line in index.html
       replace:
-      path: /usr/share/nginx/html/index.html
-      regexp: This is sample html code
-      replace: This is KodeKloud Ansible lab
+        path: /usr/share/nginx/html/index.html
+        regexp: This is sample html code
+        replace: This is KodeKloud Ansible lab
