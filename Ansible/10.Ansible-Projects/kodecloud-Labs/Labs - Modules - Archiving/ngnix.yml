@@ -13,9 +13,9 @@
 
     - name: Extract nginx.zip
       unarchive: 
-      src: /root/nginx.zip 
-      dest=/usr/share/nginx/html 
-      remote_src=yes
+        src: /root/nginx.zip 
+        dest: /usr/share/nginx/html 
+        remote_src: yes
 
     - name: Replace line in index.html
       replace:
