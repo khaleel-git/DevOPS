@@ -1,6 +1,6 @@
 ---
   - name: installing httpd package on centos machine
-    hosts: centos.vmware
+    hosts: web1
     become: yes
     tasks:
       - name: Install httpd package
