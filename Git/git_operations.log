@@ -46299,3 +46299,9 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    695ce58f..b2cb318d  master -> master
 branch 'master' set up to track 'origin/master'.
+[master d164104d] Ansible Commit @ 2024-08-10 20:35:010
+ 2 files changed, 16 insertions(+)
+ create mode 100644 Ansible/10.Ansible-Projects/kodecloud-Labs/Labs - Modules - Archiving/unzip_and_del.yml
+To github.com:khaleel-git/DevOPS.git
+   b2cb318d..d164104d  master -> master
+branch 'master' set up to track 'origin/master'.
