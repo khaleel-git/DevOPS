@@ -5,5 +5,5 @@ cd /home/khaleel/DevOPS
 git add .
 #git commit -m "terraform commit @ $(date +'%Y-%m-%d %H:%M:%S')"  
 #git commit -m  "Ubuntu ssh configurations@ $(date +'%Y-%m-%d %H:%M:%S')"
-git commit -m   "Ansible Commit @ $(date +'%Y-%m-%d %H:%M:%S')"0
+git commit -m   "Commit @ $(date +'%Y-%m-%d %H:%M:%S')"
 git push -u origin master

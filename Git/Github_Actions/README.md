@@ -4,7 +4,7 @@
 3. Steps
 4. Runner
 
-![Github Actions](Github Actions.png)
+![Github Actions](Github-Actions.png)
 
 ## Runner
 1. Github hosted Runner (vm provided by github, new clean instance, cannot customize runners beyond selecting the type of runner eg. ubuntu, windows, macos, paid, github plans)
