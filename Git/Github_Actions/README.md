@@ -13,3 +13,6 @@
 Why CI/CD:
 Feature branch:
 commit, pull request, review, approve (merged)
+
+Continous Integration:
+![Continous Integration CI](Continous-Integration-CI.png)

@@ -48749,3 +48749,9 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    3ee325b1..1d93a9b3  master -> master
 branch 'master' set up to track 'origin/master'.
+[master ffa18730] Commit @ 2024-08-11 23:31:01
+ 2 files changed, 5 insertions(+)
+ create mode 100644 Git/Github_Actions/Continous-Integration-CI.png
+To github.com:khaleel-git/DevOPS.git
+   1d93a9b3..ffa18730  master -> master
+branch 'master' set up to track 'origin/master'.
