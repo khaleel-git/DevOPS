@@ -48841,3 +48841,9 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    490f8e8b..fb9dfde8  master -> master
 branch 'master' set up to track 'origin/master'.
+[master a0ac42ef] Commit @ 2024-08-11 23:49:01
+ 2 files changed, 6 insertions(+)
+ create mode 100644 Git/README.md
+To github.com:khaleel-git/DevOPS.git
+   fb9dfde8..a0ac42ef  master -> master
+branch 'master' set up to track 'origin/master'.
