@@ -48780,3 +48780,9 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    000c4df7..c329f9d3  master -> master
 branch 'master' set up to track 'origin/master'.
+[master 71732b7f] Commit @ 2024-08-11 23:37:01
+ 3 files changed, 9 insertions(+), 1 deletion(-)
+ create mode 100644 Git/Github_Actions/continous-deployment-CD.png
+To github.com:khaleel-git/DevOPS.git
+   c329f9d3..71732b7f  master -> master
+branch 'master' set up to track 'origin/master'.
