@@ -17,3 +17,5 @@ commit, pull request, review, approve (merged)
 Continous Integration:
 ![Continous Integration CI](Continous-Integration-CI.png)
 
+live testing before proceeding to production env
+CI to CD (non prod/staging)
