@@ -19,3 +19,6 @@ Continous Integration:
 
 live testing before proceeding to production env
 CI to CD (non prod/staging)
+
+Continous Deployment/Delivery (CD):
+![Continous Deployment/Delivery (CD)](continous-deployment-CD.png)
