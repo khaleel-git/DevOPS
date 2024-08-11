@@ -10,3 +10,6 @@ Commited Files
 git restore file.txt (restore from modified state to destroy)
 git restore --staged file.txt (move out file.txt from stagging area to modified state)
 git rm --cached or git rm -force
+git log -n 5 --oneline
+git log -n 5
+git log
