@@ -7,4 +7,4 @@
  man man
  man 1 printf
  man 2 printf
- apropos directive
+ apropos director
