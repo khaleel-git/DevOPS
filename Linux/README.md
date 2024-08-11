@@ -8,3 +8,4 @@
  man 1 printf
  man 2 printf
  apropos director
+ apropos -s 1,8 director
