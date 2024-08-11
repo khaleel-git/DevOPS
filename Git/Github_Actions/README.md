@@ -9,3 +9,5 @@
 2. Self-hosted Runner (self environemnt, vms, multiple runner on same vm)
 
 Why CI/CD:
+Feature branch:
+commit, pull request, review, approve (merged)
