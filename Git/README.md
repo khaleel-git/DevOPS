@@ -13,3 +13,4 @@ git rm --cached or git rm -force
 git log -n 5 --oneline
 git log -n 5
 git log
+git log --name-only (name committed files)
