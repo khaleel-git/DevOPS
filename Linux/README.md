@@ -14,3 +14,10 @@
  cd / (go to root dir)
  cd - (go to previous dir)
  cd / cd ~ (go to home dir)
+
+ ## Hard link
+ ln path_to_target_file path_to_link_file (hard link, point to same inode)
+
+ useradd -a -G family aaron
+ useradd -a -G family jane
+ chmod 660 /home/aaron/Pictures/family_dog.jpg
