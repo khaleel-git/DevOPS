@@ -9,3 +9,8 @@
  man 2 printf
  apropos director
  apropos -s 1,8 director
+ 
+ ls -lah (l=detail, a=all, h=humand readable format)
+ cd / (go to root dir)
+ cd - (go to previous dir)
+ cd / cd ~ (go to home dir)
