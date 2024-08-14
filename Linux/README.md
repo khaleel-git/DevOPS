@@ -16,8 +16,18 @@
  cd / cd ~ (go to home dir)
 
  ## Hard link
- ln path_to_target_file path_to_link_file (hard link, point to same inode)
+ ln path_to_target_file path_to_link_file (hard link, point to same inode, only file)
 
  useradd -a -G family aaron
  useradd -a -G family jane
  chmod 660 /home/aaron/Pictures/family_dog.jpg
+
+ ## Soft Link
+ folder to folder, file to file, its a shortcut
+ ln -s target_file link_file
+
+ ## Copy with preserve
+ `cp --preserve /home/bob/myfile.txt /home/bob/data/myfile.txt`
+
+ ## mov
+ do not add -r (recursive) in mov attribute
