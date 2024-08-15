@@ -9,16 +9,44 @@
           - python3-libsemanage
           - firewalld
           - mariadb-server
-          - MySQL-python
-
-          # old package
-          # - libselinux-python
-          # - libsemanage-python
-          # - firewalld
-        state: installed
+          - python3-PyMySQL
+        state: latest
 
     - name: copy files/my.cnf to /etc/my.cnf
       copy:
         src: files/my.cnf
         dest: /etc/my.cnf
+
+    - name: enable services
+      service:
+        name: mariadb
+        enabled: true
+        state: started
+
+    - name: start firewalld
+      service:
+        name: firewalld
+        state: started
+        enabled: true
+
+    - name: allow firewalld for MySQL-python
+      firewalld:
+        port: "{{ mysql_port }}/tcp"
+        zone: public
+        state: enabled
+        immediate: yes
+        permanent: yes
+
+---
+- name: Configure database
+  hosts: centos.vmware
+  tasks:
+    - name: create database
+      mysql_db:
+        name: {{ d}}
+        state:
+        config_file: 
+
+
+
 

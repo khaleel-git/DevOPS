@@ -51152,3 +51152,11 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    8d81439d..7b8e0eea  master -> master
 branch 'master' set up to track 'origin/master'.
+[master 9e6b6e9e] Commit @ 2024-08-15 17:30:01
+ 6 files changed, 213 insertions(+), 4 deletions(-)
+ create mode 100644 Ansible/10.Ansible-Projects/ecommerce-website/files/db-load-script.sql
+ create mode 100644 Ansible/10.Ansible-Projects/ecommerce-website/files/index.php
+ create mode 100644 Ansible/10.Ansible-Projects/ecommerce-website/files/my.cnf
+To github.com:khaleel-git/DevOPS.git
+   7b8e0eea..9e6b6e9e  master -> master
+branch 'master' set up to track 'origin/master'.
