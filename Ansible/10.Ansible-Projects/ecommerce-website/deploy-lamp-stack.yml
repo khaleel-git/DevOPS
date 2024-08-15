@@ -1,5 +1,5 @@
 - name: Deploy lamp stack application
-  hosts: all
+  hosts: centos.vmware
   become: yes
   tasks:
     - name: Install common dependencies
