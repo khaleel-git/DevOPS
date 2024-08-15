@@ -31,3 +31,18 @@
 
  ## mov
  do not add -r (recursive) in mov attribute
+
+ ## ownership (group)
+ chgrp group_name file/directory
+ groups
+ chown (owner) only root user can change the owner of a file - `sudo chown jane file.txt`
+
+ ## File and Directory Permission
+ d (Directory)
+ - (Regular File)
+ c (character device)
+ | (link)
+ p pipe
+ s (socket file)
+ b (block device)
+
