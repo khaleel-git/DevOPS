@@ -50997,3 +50997,12 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    dccc9f6a..d2d9b657  master -> master
 branch 'master' set up to track 'origin/master'.
+[master 8310df79] Commit @ 2024-08-15 13:00:00
+ 3 files changed, 28 insertions(+)
+ create mode 100644 Ansible/10.Ansible-Projects/ecommerce-website/inventory
+kex_exchange_identification: read: Connection reset by peer
+Connection reset by 20.207.73.82 port 22
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
