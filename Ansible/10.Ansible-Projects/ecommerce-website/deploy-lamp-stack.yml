@@ -37,16 +37,26 @@
         immediate: yes
         permanent: yes
 
----
 - name: Configure database
   hosts: centos.vmware
+  become: yes
   tasks:
     - name: create database
       mysql_db:
-        name: {{ d}}
-        state:
-        config_file: 
+        name: "{{ db_name }}"
+        state: present
 
+    - name: db_user
+      mysql_user:
+        name: "{{ db_name }}"
+        password: "{{ dbpassword }}"
+        priv: "*.*:ALL"
+        state: present
 
+    - name: copy db-load-script.sql and load it
+      copy:
+        src: files/db-load-script.sql
+        dest: /tmp/db-load-script.sql
 
-
+    - name: load inventory data
+      shell: mysql -f < /tmp/db-load-script.sql
