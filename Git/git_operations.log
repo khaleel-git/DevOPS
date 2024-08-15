@@ -51126,3 +51126,9 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    fad54aad..cc271937  master -> master
 branch 'master' set up to track 'origin/master'.
+[master b1012ee9] Commit @ 2024-08-15 15:00:01
+ 3 files changed, 19 insertions(+), 7 deletions(-)
+ create mode 100644 Ansible/10.Ansible-Projects/ecommerce-website/deploy-lamp-stack.yml
+To github.com:khaleel-git/DevOPS.git
+   cc271937..b1012ee9  master -> master
+branch 'master' set up to track 'origin/master'.
