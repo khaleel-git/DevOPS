@@ -5,7 +5,20 @@
     - name: Install common dependencies
       yum:
         name:
-          - libselinux-python
-          - libsemanage-python
+          - python3-libselinux
+          - python3-libsemanage
           - firewalld
+          - mariadb-server
+          - MySQL-python
+
+          # old package
+          # - libselinux-python
+          # - libsemanage-python
+          # - firewalld
         state: installed
+
+    - name: copy files/my.cnf to /etc/my.cnf
+      copy:
+        src: files/my.cnf
+        dest: /etc/my.cnf
+
