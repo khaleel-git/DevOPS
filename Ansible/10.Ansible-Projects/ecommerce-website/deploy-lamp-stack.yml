@@ -85,7 +85,13 @@
         zone: public
         immediate: yes
         permanent: yes
-
+    
+    - name: replace index.html to index.php in DirectoryIndex
+      replace:
+        path: /etc/httpd/conf/httpd.conf
+        regexp : DirectoryIndex index.html
+        replace: DirectoryIndex index.php
+    
     - name: start and enable httpd service
       service:
         name: httpd
