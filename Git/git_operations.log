@@ -51395,3 +51395,10 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    508587cc..bde16b58  master -> master
 branch 'master' set up to track 'origin/master'.
+[master f92eb4ad] Commit @ 2024-08-17 20:30:01
+ 1 file changed, 5 insertions(+)
+ssh: Could not resolve hostname github.com: Temporary failure in name resolution
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
