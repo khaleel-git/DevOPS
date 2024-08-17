@@ -20,14 +20,14 @@
     - name: enable services
       service:
         name: mariadb
-        enabled: true
+        enabled: yes
         state: started
 
     - name: start firewalld
       service:
         name: firewalld
         state: started
-        enabled: true
+        enabled: yes
 
     - name: allow firewalld for MySQL-python
       firewalld:
@@ -60,3 +60,34 @@
 
     - name: load inventory data
       shell: mysql -f < /tmp/db-load-script.sql
+
+- name: configure web server and index.php
+  hosts: centos.vmware
+  become: yes
+  tasks:
+    - name: httpd (apache)
+      yum: 
+        name:
+          - httpd
+          - php
+          - php-mysql
+        state: present
+
+    - name: install git
+      yum: 
+        name:
+          - git
+        state: installed
+
+    - name: configure firewall for httpd
+      firewalld:
+        port: "{{ httpd_port }}/tcp"
+        zone: public
+        immediate: yes
+        permanent: yes
+
+    - name: start and enable httpd service
+      service:
+        name: httpd
+        state: started
+        enabled: yes
