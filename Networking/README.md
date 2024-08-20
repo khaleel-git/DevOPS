@@ -26,12 +26,16 @@ https://www.youtube.com/watch?v=MMDhvHYAF7E
 A quick mathematical formula
 Document, count the number of E's, List it on the back, don't tell what it means, if the total number of E's match, the document isn't moified
 
-## OSI Model
+# OSI Model
 [OSI and TCP IP Models](https://www.youtube.com/watch?v=3b_TAYtzuho)
 
-- its a reference, guidelines
+## Overview
+The OSI (Open Systems Interconnection) Model is a conceptual framework used to understand and design network protocols. It divides network communication into seven layers, each with specific functions, ensuring standardized interactions between network devices and protocols.
+
+```plaintext
+# Video Notes
+- OSI model is a reference, guidelines
 - Encapsulation (going down in stack, critical for communication), Decapsulation(moving up from Layer 1 to Layer 7)
-```
 ----------------------------------------------
             Layer 5 to 7, first three layers are accomplished under the application layer
 ----------------------------------------------
@@ -55,11 +59,6 @@ Network Access Layer
 Layer 2: Data Link        # (Frame) Ethernet, source/dest addresses (interface card)
 Layer 1: Physical         # Bits -> Signals
 ```
-# OSI Model
-
-## Overview
-
-The OSI (Open Systems Interconnection) Model is a conceptual framework used to understand and design network protocols. It divides network communication into seven layers, each with specific functions, ensuring standardized interactions between network devices and protocols.
 
 ## OSI Model Diagram
 
