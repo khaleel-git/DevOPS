@@ -35,7 +35,7 @@ The OSI (Open Systems Interconnection) Model is a conceptual framework used to u
 ```plaintext
 # Video Notes
 - OSI model is a reference, guidelines
-- Encapsulation (going down in stack, critical for communication), Decapsulation(moving up from Layer 1 to Layer 7)
+- Encapsulation (going down in stack, critical for communication), Decapsulation (moving up from Layer 1 to Layer 7)
 ----------------------------------------------
             Layer 5 to 7, first three layers are accomplished under the application layer
 ----------------------------------------------
