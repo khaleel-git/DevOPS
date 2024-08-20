@@ -9,7 +9,7 @@ The three-way handshake is a fundamental process for establishing a TCP connecti
 2. **SYN-ACK**: The server acknowledges the client's request and sends a synchronization acknowledgment.
 3. **ACK**: The client acknowledges the server's response, and the connection is established.
 
-For more information, watch the video: [Cisco Systems - Three-Way Handshake](https://www.youtube.com/@CiscoSystems).
+For more information, watch the video: [Cisco Systems - Three-Way Handshake](https://www.youtube.com/watch?v=LyDqA-dAPW4&t=184s).
 
 ## TCP (Transmission Control Protocol)
 - **Function**: Provides reliable, ordered, and error-checked delivery of data.
