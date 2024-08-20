@@ -35,25 +35,25 @@ Document, count the number of E's, List it on the back, don't tell what it means
 ----------------------------------------------
             Layer 5 to 7, first three layers are accomplished under the application layer
 ----------------------------------------------
-Layer 7: Application      ` identify 0's and 1's by a file extension e.g, .exe (0's and 1's), .jpeg (0's and 1's to display a picture/color)
-Layer 6: Presentation     ` PDU (protocol data unit)
-Layer 5: Session          ` Data 10010101000011 (really trivial, dont its email, voice, phone, internet, tv)
+Layer 7: Application      # identify 0's and 1's by a file extension e.g, .exe (0's and 1's), .jpeg (0's and 1's to display a picture/color)
+Layer 6: Presentation     # PDU (protocol data unit)
+Layer 5: Session          # Data 10010101000011 (really trivial, dont its email, voice, phone, internet, tv)
 ----------------------------------------------
 
-Layer 4: Transport        ` identification in networking, application or service, what application is making request, what service recives it, port addressing
-                          ` source / destination, PDU for transport layer is called segments
-                          ` TCP, sacrifice time over reliability
-                          ` pass the segments to network layer called packet
-                          ` layer 5,6,7 and layer 4 produces segments
+Layer 4: Transport        # identification in networking, application or service, what application is making request, what service recives it, port addressing
+                          # source / destination, PDU for transport layer is called segments
+                          # TCP, sacrifice time over reliability
+                          # pass the segments to network layer called packet
+                          # layer 5,6,7 and layer 4 produces segments
 
 
-Layer 3: Network          ` IP, packet, the packet is passed down to data link layer called a frame
+Layer 3: Network          # IP, packet, the packet is passed down to data link layer called a frame
 
 ----------------------------------------------
 Network Access Layer
 ----------------------------------------------
-Layer 2: Data Link        ` (Frame) Ethernet, source/dest addresses (interface card)
-Layer 1: Physical         ` Bits -> Signals
+Layer 2: Data Link        # (Frame) Ethernet, source/dest addresses (interface card)
+Layer 1: Physical         # Bits -> Signals
 ```
 # OSI Model
 
@@ -69,7 +69,7 @@ The OSI (Open Systems Interconnection) Model is a conceptual framework used to u
 ----------------------------------------------
 **Layer 7: Application**  
 - **Function**: Interfaces directly with end-user applications.  
-- **Examples**: Identifies 0's and 1's by file extensions such as `.exe` (for executables) or `.jpeg` (for images).  
+- **Examples**: Identifies 0's and 1's by file extensions such as `.exe# (for executables) or `.jpeg# (for images).  
 - **Purpose**: Handles data that applications understand and use.  
 
 **Layer 6: Presentation**  
@@ -78,7 +78,7 @@ The OSI (Open Systems Interconnection) Model is a conceptual framework used to u
 
 **Layer 5: Session**  
 - **Function**: Manages sessions and connections between applications.  
-- **Example Data**: Trivial data representation like `10010101000011` (handles email, voice, internet, etc.).  
+- **Example Data**: Trivial data representation like `10010101000011# (handles email, voice, internet, etc.).  
 
 ----------------------------------------------
 **Layer 4: Transport**  
@@ -113,7 +113,7 @@ The OSI (Open Systems Interconnection) Model is a conceptual framework used to u
 ## Data Flow and Encapsulation
 
 1. **Sending Data**:
-   - **Application Layer**: Data is prepared (e.g., `.jpeg` image).
+   - **Application Layer**: Data is prepared (e.g., `.jpeg# image).
    - **Presentation Layer**: Data is formatted or encrypted.
    - **Session Layer**: Session management is applied.
    - **Transport Layer**: Data is segmented and TCP headers are added.
