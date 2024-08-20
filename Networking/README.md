@@ -33,8 +33,6 @@ For more information, watch the video: [Cisco Systems - Three-Way Handshake](htt
 ## TCP & UDP: Comparing Transport Protocols
 For an in-depth comparison of TCP and UDP, including their advantages and disadvantages, refer to this video: [TCP vs UDP](https://www.youtube.com/watch?v=MMDhvHYAF7E).
 
-![TCP vs UDP](Pictures/tcp_vs_udp.png)
-
 ## Checksum (Layers 2 & 4)
 A checksum is a mathematical formula used to verify data integrity:
 - **Purpose**: Detects errors in data transmission by comparing the calculated checksum value against the transmitted value.
