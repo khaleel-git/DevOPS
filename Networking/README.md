@@ -8,6 +8,7 @@ https://www.youtube.com/@CiscoSystems
 ### TCP: 
 syn, ack, syn ack
 email
+file sharing Downloading
 
 
 ### TCP & UDP: Comparing Transport Protocols
