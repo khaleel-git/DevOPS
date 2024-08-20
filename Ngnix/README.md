@@ -39,3 +39,6 @@ http {
 - each server is distinct with the port assigned (keep track to every request to the server)
 - server block tells where to find raw files
 - when user navigate to our domain, it knows where to find the root of our website
+
+## Reverse Proxy
+![Reverse Proxy](nginx.conf.png)
