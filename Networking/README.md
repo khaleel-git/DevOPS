@@ -33,11 +33,24 @@ Document, count the number of E's, List it on the back, don't tell what it means
 - Encapsulation (going down in stack, critical for communication), Decapsulation(moving up from Layer 1 to Layer 7)
 
 ----------------------------------------------
-            Layer 5 to 7, Data
+            Layer 5 to 7, first three layers are accomplished under the application layer
 ----------------------------------------------
-Layer 7: Application      #### | identify 0's and 1's by a file extension e.g, .exe (0's and 1's), .jpeg (0's and 1's to display a picture/color)
-Layer 6: Presentation     #### | PDU (protocol data unit)
-Layer 5: Session          #### | Data 10010101000011 (really trivial, dont its email, voice, phone, internet, tv)
+Layer 7: Application      ` identify 0's and 1's by a file extension e.g, .exe (0's and 1's), .jpeg (0's and 1's to display a picture/color)
+Layer 6: Presentation     ` PDU (protocol data unit)
+Layer 5: Session          ` Data 10010101000011 (really trivial, dont its email, voice, phone, internet, tv)
 ----------------------------------------------
 
-Layer 4: Transport        #### | identification in networking, application or service, 
+Layer 4: Transport        ` identification in networking, application or service, what application is making request, what service recives it, port addressing
+                          ` source / destination, PDU for transport layer is called segments
+                          ` TCP, sacrifice time over reliability
+                          ` pass the segments to network layer called packet
+                          ` layer 5,6,7 and layer 4 produces segments
+
+
+Layer 3: Network          ` IP, packet, the packet is passed down to data link layer called a frame
+
+----------------------------------------------
+Network Access Layer
+----------------------------------------------
+Layer 2: Data Link        ` (Frame) Ethernet, source/dest addresses (interface card)
+Layer 1: Physical         ` Bits -> Signals
