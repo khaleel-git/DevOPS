@@ -130,32 +130,6 @@ The OSI (Open Systems Interconnection) Model is a conceptual framework used to u
    - **Presentation Layer**: Data is formatted or decrypted.
    - **Application Layer**: File is reconstructed and used by the application.
 
-## Common Interview Questions
-
-1. **What is the OSI Model and why is it important?**
-   - The OSI Model is a conceptual framework used to understand and design network protocols. It divides network communication into seven layers, each with specific functions, helping to standardize interactions between network devices and protocols.
-
-2. **How does encapsulation work in the OSI Model?**
-   - Encapsulation involves adding protocol information to data as it moves down the OSI layers. Each layer adds its own header or trailer, wrapping the data until it reaches the physical layer as bits.
-
-3. **What are the functions of the Application Layer (Layer 7)?**
-   - The Application Layer interfaces directly with end-user applications, providing services such as file transfers, email, and web browsing. It ensures that data is formatted in a way that applications can understand.
-
-4. **What is the difference between TCP and UDP?**
-   - TCP (Transmission Control Protocol) is a connection-oriented protocol that provides reliable, ordered, and error-checked delivery of data. UDP (User Datagram Protocol) is connectionless and offers faster transmission without guaranteed delivery.
-
-5. **Explain the role of the Network Layer (Layer 3).**
-   - The Network Layer is responsible for logical addressing and routing of packets across networks. It determines the best path for data to travel from source to destination using IP addresses.
-
-6. **What does the Data Link Layer (Layer 2) do?**
-   - The Data Link Layer manages node-to-node data transfer and ensures error detection and correction. It formats data into frames and handles MAC addresses for proper delivery within a local network segment.
-
-7. **Describe the Physical Layer (Layer 1).**
-   - The Physical Layer transmits raw bit streams over physical media. It deals with the hardware aspects of data transmission, such as cables, switches, and signals.
-
-Use this document to understand and review the OSI model for networking concepts and prepare for technical interviews or exams.
-
-
 ## OSI Model Diagram
 
 ```plaintext
@@ -213,3 +187,27 @@ Use this document to understand and review the OSI model for networking concepts
   |  (e.g., Bits, Signals)   |
   +--------------------------+
 
+## Common Interview Questions
+
+1. **What is the OSI Model and why is it important?**
+   - The OSI Model is a conceptual framework used to understand and design network protocols. It divides network communication into seven layers, each with specific functions, helping to standardize interactions between network devices and protocols.
+
+2. **How does encapsulation work in the OSI Model?**
+   - Encapsulation involves adding protocol information to data as it moves down the OSI layers. Each layer adds its own header or trailer, wrapping the data until it reaches the physical layer as bits.
+
+3. **What are the functions of the Application Layer (Layer 7)?**
+   - The Application Layer interfaces directly with end-user applications, providing services such as file transfers, email, and web browsing. It ensures that data is formatted in a way that applications can understand.
+
+4. **What is the difference between TCP and UDP?**
+   - TCP (Transmission Control Protocol) is a connection-oriented protocol that provides reliable, ordered, and error-checked delivery of data. UDP (User Datagram Protocol) is connectionless and offers faster transmission without guaranteed delivery.
+
+5. **Explain the role of the Network Layer (Layer 3).**
+   - The Network Layer is responsible for logical addressing and routing of packets across networks. It determines the best path for data to travel from source to destination using IP addresses.
+
+6. **What does the Data Link Layer (Layer 2) do?**
+   - The Data Link Layer manages node-to-node data transfer and ensures error detection and correction. It formats data into frames and handles MAC addresses for proper delivery within a local network segment.
+
+7. **Describe the Physical Layer (Layer 1).**
+   - The Physical Layer transmits raw bit streams over physical media. It deals with the hardware aspects of data transmission, such as cables, switches, and signals.
+
+Use this document to understand and review the OSI model for networking concepts and prepare for technical interviews or exams.
