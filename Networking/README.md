@@ -61,6 +61,63 @@ Layer 1: Physical         # Bits -> Signals
 
 The OSI (Open Systems Interconnection) Model is a conceptual framework used to understand and design network protocols. It divides network communication into seven layers, each with specific functions, ensuring standardized interactions between network devices and protocols.
 
+## OSI Model Diagram
+
+```plaintext
+  +--------------------------+
+  |       Layer 7:           |
+  |      Application         |
+  |  (e.g., .exe, .jpeg)     |
+  +--------------------------+
+             |
+             | Encapsulation
+             |
+  +--------------------------+
+  |       Layer 6:           |
+  |      Presentation        |
+  |  (e.g., PDU format)      |
+  +--------------------------+
+             |
+             | Encapsulation
+             |
+  +--------------------------+
+  |       Layer 5:           |
+  |        Session           |
+  |  (e.g., Data streams)    |
+  +--------------------------+
+             |
+             | Encapsulation
+             |
+  +--------------------------+
+  |       Layer 4:           |
+  |      Transport           |
+  |  (e.g., Segments, TCP/UDP) |
+  +--------------------------+
+             |
+             | Encapsulation
+             |
+  +--------------------------+
+  |       Layer 3:           |
+  |        Network           |
+  |  (e.g., Packets, IP)     |
+  +--------------------------+
+             |
+             | Encapsulation
+             |
+  +--------------------------+
+  |       Layer 2:           |
+  |       Data Link          |
+  |  (e.g., Frames, MAC)     |
+  +--------------------------+
+             |
+             | Encapsulation
+             |
+  +--------------------------+
+  |       Layer 1:           |
+  |       Physical           |
+  |  (e.g., Bits, Signals)   |
+  +--------------------------+
+```
 ## Layer Breakdown
 
 ----------------------------------------------
@@ -129,64 +186,6 @@ The OSI (Open Systems Interconnection) Model is a conceptual framework used to u
    - **Session Layer**: Session data is processed.
    - **Presentation Layer**: Data is formatted or decrypted.
    - **Application Layer**: File is reconstructed and used by the application.
-
-## OSI Model Diagram
-
-```plaintext
-  +--------------------------+
-  |       Layer 7:           |
-  |      Application         |
-  |  (e.g., .exe, .jpeg)     |
-  +--------------------------+
-             |
-             | Encapsulation
-             |
-  +--------------------------+
-  |       Layer 6:           |
-  |      Presentation        |
-  |  (e.g., PDU format)      |
-  +--------------------------+
-             |
-             | Encapsulation
-             |
-  +--------------------------+
-  |       Layer 5:           |
-  |        Session           |
-  |  (e.g., Data streams)    |
-  +--------------------------+
-             |
-             | Encapsulation
-             |
-  +--------------------------+
-  |       Layer 4:           |
-  |      Transport           |
-  |  (e.g., Segments, TCP/UDP) |
-  +--------------------------+
-             |
-             | Encapsulation
-             |
-  +--------------------------+
-  |       Layer 3:           |
-  |        Network           |
-  |  (e.g., Packets, IP)     |
-  +--------------------------+
-             |
-             | Encapsulation
-             |
-  +--------------------------+
-  |       Layer 2:           |
-  |       Data Link          |
-  |  (e.g., Frames, MAC)     |
-  +--------------------------+
-             |
-             | Encapsulation
-             |
-  +--------------------------+
-  |       Layer 1:           |
-  |       Physical           |
-  |  (e.g., Bits, Signals)   |
-  +--------------------------+
-
 ## Common Interview Questions
 
 1. **What is the OSI Model and why is it important?**
