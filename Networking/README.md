@@ -1,30 +1,49 @@
 
 
 
-## Networking 
-### What Is a Three-Way Handshake in TCP?
-https://www.youtube.com/@CiscoSystems
+# Networking
 
-### TCP: 
-syn, ack, syn ack
-email
-file sharing Downloading
+## What Is a Three-Way Handshake in TCP?
+The three-way handshake is a fundamental process for establishing a TCP connection. It involves three steps:
+1. **SYN**: The client sends a synchronization request to the server.
+2. **SYN-ACK**: The server acknowledges the client's request and sends a synchronization acknowledgment.
+3. **ACK**: The client acknowledges the server's response, and the connection is established.
 
-### UDP:
-user datagram protocol
-voice over ip
-voice, video call
+For more information, watch the video: [Cisco Systems - Three-Way Handshake](https://www.youtube.com/@CiscoSystems).
+
+## TCP (Transmission Control Protocol)
+- **Function**: Provides reliable, ordered, and error-checked delivery of data.
+- **Common Uses**:
+  - **Email**: Ensures complete and accurate delivery of messages.
+  - **File Sharing**: Manages file transfers by establishing a connection and ensuring data integrity.
+  - **Downloading**: Guarantees that downloaded files are complete and correctly ordered.
+
+## UDP (User Datagram Protocol)
+- **Function**: Offers a faster, connectionless communication method without error recovery.
+- **Common Uses**:
+  - **Voice over IP (VoIP)**: Enables real-time voice communication over the internet.
+  - **Voice and Video Calls**: Provides low-latency communication for calls and video streaming.
 
 ### UDP Header (DATA)
-16-Bit Source Port, 16-Bit Destination Port
-16-Bit UDP Length, 16-Bit UDP Checksum 
-### TCP & UDP: Comparing Transport Protocols
-https://www.youtube.com/watch?v=MMDhvHYAF7E
-![tcp vs udp](Pictures/tcp_vs_udp.png)
+- **16-Bit Source Port**: Identifies the sending port.
+- **16-Bit Destination Port**: Identifies the receiving port.
+- **16-Bit UDP Length**: Indicates the length of the UDP header and data.
+- **16-Bit UDP Checksum**: Ensures data integrity by checking for errors in the UDP packet.
 
-### Checksum (Layer 2 & 4)
-A quick mathematical formula
-Document, count the number of E's, List it on the back, don't tell what it means, if the total number of E's match, the document isn't moified
+## TCP & UDP: Comparing Transport Protocols
+For an in-depth comparison of TCP and UDP, including their advantages and disadvantages, refer to this video: [TCP vs UDP](https://www.youtube.com/watch?v=MMDhvHYAF7E).
+
+![TCP vs UDP](Pictures/tcp_vs_udp.png)
+
+## Checksum (Layers 2 & 4)
+A checksum is a mathematical formula used to verify data integrity:
+- **Purpose**: Detects errors in data transmission by comparing the calculated checksum value against the transmitted value.
+- **Example Method**: 
+  - Document a text (e.g., count the number of specific characters like 'E').
+  - List the count on the back of the document.
+  - If the total count of 'E's matches the listed value, the document is assumed to be unmodified.
+
+**Note**: This method is a simplified example of how checksums work. In practice, more complex algorithms are used for data verification in networking.
 
 # OSI Model
 [OSI and TCP IP Models](https://www.youtube.com/watch?v=3b_TAYtzuho)
@@ -34,6 +53,7 @@ The OSI (Open Systems Interconnection) Model is a conceptual framework used to u
 
 ```plaintext
 # Video Notes
+
 - OSI model is a reference, guidelines
 - Encapsulation (going down in stack, critical for communication), Decapsulation (moving up from Layer 1 to Layer 7)
 ----------------------------------------------
@@ -207,5 +227,3 @@ Layer 1: Physical         # Bits -> Signals
 
 7. **Describe the Physical Layer (Layer 1).**
    - The Physical Layer transmits raw bit streams over physical media. It deals with the hardware aspects of data transmission, such as cables, switches, and signals.
-
-Use this document to understand and review the OSI model for networking concepts and prepare for technical interviews or exams.
