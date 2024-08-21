@@ -4,17 +4,47 @@
 # Networking
 
 ## TCP (Transmission Control Protocol) 4th Layer in OSI Model
+[TCP and the THREE-WAY Handshake Explained](https://www.youtube.com/watch?v=wMc0H22nyA4)
 - **Function**: Provides reliable, ordered, and error-checked delivery of data.
 - **Common Uses**:
   - **Email**: Ensures complete and accurate delivery of messages.
   - **File Sharing**: Manages file transfers by establishing a connection and ensuring data integrity.
   - **Downloading**: Guarantees that downloaded files are complete and correctly ordered.
 
+### SEQ Number
+0 to 65535
+why do we need seq number:
+when you send a packet you need to check whether the packet is sent. send packets 1 to 100, if some packet is not sent lets say 101 is not sent then server asks to send it again, it send back
+
+### TCP deeply
+packets are sent on time, the integrit is not compromised
+windowing (negotiate: window of packets)
+window slowly increase, depending on the size of window you can send data in one go
+if server can't handle, the server will tell you windows_size=0, it means server is overloaded
+increase the speed of the data. 
+seq number is important
+if seq x not get there, the client will send again the seq x
+
+
+### Error detection
+it ensure you recieve the right packet, checksum
+
+### Checksum (Layers 2 & 4)
+A checksum is a mathematical formula used to verify data integrity:
+- **Purpose**: Detects errors in data transmission by comparing the calculated checksum value against the transmitted value.
+- **Example Method**: 
+  - Document a text (e.g., count the number of specific characters like 'E').
+  - List the count on the back of the document.
+  - If the total count of 'E's matches the listed value, the document is assumed to be unmodified.
+
+### Wireshark demonstration
+
+
 ## What Is a Three-Way Handshake in TCP?
 The three-way handshake is a fundamental process for establishing a TCP connection. It involves three steps:
 1. **SYN**: The client sends a synchronization request to the server.
 2. **SYN-ACK**: The server acknowledges the client's request and sends a synchronization acknowledgment.
-3. **ACK**: The client acknowledges the server's response, and the connection is established.
+3. **ACK**: The client acknowledges the server's response, and the TCP connection is established.
 
 For more information, watch the video: [Cisco Systems - Three-Way Handshake](https://www.youtube.com/watch?v=LyDqA-dAPW4&t=184s).
 
@@ -32,16 +62,6 @@ For more information, watch the video: [Cisco Systems - Three-Way Handshake](htt
 
 ## TCP & UDP: Comparing Transport Protocols
 For an in-depth comparison of TCP and UDP, including their advantages and disadvantages, refer to this video: [TCP vs UDP](https://www.youtube.com/watch?v=MMDhvHYAF7E).
-
-## Checksum (Layers 2 & 4)
-A checksum is a mathematical formula used to verify data integrity:
-- **Purpose**: Detects errors in data transmission by comparing the calculated checksum value against the transmitted value.
-- **Example Method**: 
-  - Document a text (e.g., count the number of specific characters like 'E').
-  - List the count on the back of the document.
-  - If the total count of 'E's matches the listed value, the document is assumed to be unmodified.
-
-**Note**: This method is a simplified example of how checksums work. In practice, more complex algorithms are used for data verification in networking.
 
 # OSI Model
 [OSI and TCP IP Models](https://www.youtube.com/watch?v=3b_TAYtzuho)
