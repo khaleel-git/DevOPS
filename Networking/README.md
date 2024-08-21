@@ -3,14 +3,20 @@
 
 # Networking
 
-
-
-## TCP (Transmission Control Protocol)
+## TCP (Transmission Control Protocol) 4th Layer in OSI Model
 - **Function**: Provides reliable, ordered, and error-checked delivery of data.
 - **Common Uses**:
   - **Email**: Ensures complete and accurate delivery of messages.
   - **File Sharing**: Manages file transfers by establishing a connection and ensuring data integrity.
   - **Downloading**: Guarantees that downloaded files are complete and correctly ordered.
+
+## What Is a Three-Way Handshake in TCP?
+The three-way handshake is a fundamental process for establishing a TCP connection. It involves three steps:
+1. **SYN**: The client sends a synchronization request to the server.
+2. **SYN-ACK**: The server acknowledges the client's request and sends a synchronization acknowledgment.
+3. **ACK**: The client acknowledges the server's response, and the connection is established.
+
+For more information, watch the video: [Cisco Systems - Three-Way Handshake](https://www.youtube.com/watch?v=LyDqA-dAPW4&t=184s).
 
 ## UDP (User Datagram Protocol)
 - **Function**: Offers a faster, connectionless communication method without error recovery.
