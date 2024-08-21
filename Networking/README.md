@@ -58,8 +58,8 @@ The OSI (Open Systems Interconnection) Model is a conceptual framework used to u
             Layer 5 to 7, first three layers are accomplished under the application layer
 ----------------------------------------------
 Layer 7: Application      # identify 0's and 1's by a file extension e.g, .exe (0's and 1's), .jpeg (0's and 1's to display a picture/color)
-Layer 6: Presentation     # PDU (protocol data unit)
-Layer 5: Session          # Data 10010101000011 (really trivial, dont its email, voice, phone, internet, tv)
+Layer 6: Presentation     # PDU Format (protocol data unit)
+Layer 5: Session          # Data Streams, Data 10010101000011 (really trivial, dont its email, voice, phone, internet, tv)
 ----------------------------------------------
 
 Layer 4: Transport        # identification in networking, application or service, what application is making request, what service recives it, port addressing
@@ -67,76 +67,19 @@ Layer 4: Transport        # identification in networking, application or service
                           # TCP, sacrifice time over reliability
                           # pass the segments to network layer called packet
                           # layer 5,6,7 and layer 4 produces segments
+                          # Segments, TCP/UDP
 
 
-Layer 3: Network          # IP, packet, the packet is passed down to data link layer called a frame
+Layer 3: Network          # IP, packets, the packet is passed down to data link layer called a frame
 
 ----------------------------------------------
 Network Access Layer
 ----------------------------------------------
-Layer 2: Data Link        # (Frame) Ethernet, source/dest addresses (interface card)
+Layer 2: Data Link        # Frames, MAC -> Ethernet, source/dest addresses (interface card)
 Layer 1: Physical         # Bits -> Signals
 ```
 
-## OSI Model Diagram
-
-```plaintext
-  +--------------------------+
-  |       Layer 7:           |
-  |      Application         |
-  |  (e.g., .exe, .jpeg)     |
-  +--------------------------+
-             |
-             | Encapsulation
-             |
-  +--------------------------+
-  |       Layer 6:           |
-  |      Presentation        |
-  |  (e.g., PDU format)      |
-  +--------------------------+
-             |
-             | Encapsulation
-             |
-  +--------------------------+
-  |       Layer 5:           |
-  |        Session           |
-  |  (e.g., Data streams)    |
-  +--------------------------+
-             |
-             | Encapsulation
-             |
-  +--------------------------+
-  |       Layer 4:           |
-  |      Transport           |
-  |  (e.g., Segments, TCP/UDP) |
-  +--------------------------+
-             |
-             | Encapsulation
-             |
-  +--------------------------+
-  |       Layer 3:           |
-  |        Network           |
-  |  (e.g., Packets, IP)     |
-  +--------------------------+
-             |
-             | Encapsulation
-             |
-  +--------------------------+
-  |       Layer 2:           |
-  |       Data Link          |
-  |  (e.g., Frames, MAC)     |
-  +--------------------------+
-             |
-             | Encapsulation
-             |
-  +--------------------------+
-  |       Layer 1:           |
-  |       Physical           |
-  |  (e.g., Bits, Signals)   |
-  +--------------------------+
-```
 ## Layer Breakdown
-
 ----------------------------------------------
 **Layers 5 to 7**: The first three layers (5 to 7) are often grouped under the Application Layer.
 
