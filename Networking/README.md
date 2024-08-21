@@ -18,7 +18,7 @@ when you send a packet you need to check whether the packet is sent. send packet
 
 ### TCP deeply
 packets are sent on time, the integrit is not compromised
-windowing (negotiate: window of packets)
+windowing (negotiate: window of packets) window size 2B
 window slowly increase, depending on the size of window you can send data in one go
 if server can't handle, the server will tell you windows_size=0, it means server is overloaded
 increase the speed of the data. 
