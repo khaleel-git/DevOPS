@@ -3,42 +3,53 @@
 
 # Networking
 
-## TCP (Transmission Control Protocol) 4th Layer in OSI Model
+# TCP (Transmission Control Protocol) - 4th Layer in OSI Model
+
+## Overview
 [TCP and the THREE-WAY Handshake Explained](https://www.youtube.com/watch?v=wMc0H22nyA4)
-- **Function**: Provides reliable, ordered, and error-checked delivery of data.
-- **Common Uses**:
-  - **Email**: Ensures complete and accurate delivery of messages.
-  - **File Sharing**: Manages file transfers by establishing a connection and ensuring data integrity.
-  - **Downloading**: Guarantees that downloaded files are complete and correctly ordered.
 
-### SEQ Number
-0 to 65535
-why do we need seq number:
-when you send a packet you need to check whether the packet is sent. send packets 1 to 100, if some packet is not sent lets say 101 is not sent then server asks to send it again, it send back
+**Function**: TCP ensures reliable, ordered, and error-checked delivery of data between applications over a network. It is crucial for applications where data integrity and order are essential.
 
-### TCP deeply
-packets are sent on time, the integrit is not compromised
-windowing (negotiate: window of packets) window size 2B
-window slowly increase, depending on the size of window you can send data in one go
-if server can't handle, the server will tell you windows_size=0, it means server is overloaded
-increase the speed of the data. 
-seq number is important
-if seq x not get there, the client will send again the seq x
+## Common Uses
+- **Email**: Guarantees the complete and accurate delivery of messages.
+- **File Sharing**: Manages file transfers by establishing a connection and ensuring the integrity of the files being transferred.
+- **Downloading**: Ensures that files downloaded are complete and correctly ordered.
 
+-> Sequence Numbers track what is sent 
+-> Acknowledge Numbers track what is received 
 
-### Error detection
-it ensure you recieve the right packet, checksum
+Bob sent (SEQ=101)
+Alice sent (ACK=102)
 
-### Checksum (Layers 2 & 4)
-A checksum is a mathematical formula used to verify data integrity:
-- **Purpose**: Detects errors in data transmission by comparing the calculated checksum value against the transmitted value.
-- **Example Method**: 
-  - Document a text (e.g., count the number of specific characters like 'E').
-  - List the count on the back of the document.
-  - If the total count of 'E's matches the listed value, the document is assumed to be unmodified.
+Bob sent (SEQ=102)
+Alice sent (ACK=103)
 
-### Wireshark demonstration
+## Sequence Numbers
+- **Range**: 0 to 65535
+- **Purpose**: Sequence numbers are used to keep track of packets in a TCP connection. Each packet is assigned a unique sequence number which helps in:
+  - **Tracking**: Ensuring that all packets are received and in the correct order.
+  - **Retransmission**: If a packet (e.g., packet 101) is not received, the server requests a retransmission of the missing packet.
 
+## TCP Deep Dive
+
+### Windowing
+- **Concept**: Windowing is used to manage the flow of data between sender and receiver. It involves negotiating a "window size" that determines the number of packets that can be sent before requiring an acknowledgment.
+- **Window Size**: Initially set to 2 bytes (or other sizes depending on configuration). The window size adjusts dynamically based on network conditions and receiver's capacity:
+  - **Increasing Window Size**: Allows sending more data in one go, improving throughput.
+  - **Window Size 0**: Indicates that the receiver is overloaded and cannot handle more data at the moment. The sender must wait until the window size increases before sending more data.
+
+### Error Detection
+- **Mechanism**: TCP uses checksums to ensure data integrity. Each packet includes a checksum value calculated based on the packet's contents. The receiver recalculates the checksum and verifies it against the transmitted value to detect any errors.
+- **Retransmission**: If a packet's checksum does not match, the packet is retransmitted to ensure correct data delivery.
+
+## Checksum (Layers 2 & 4)
+A checksum is a mathematical formula used to verify the integrity of data during transmission.
+
+- **Purpose**: To detect errors in data transmission and ensure that the data received is exactly what was sent.
+- **Example Method**:
+  1. **Document a Text**: For example, count specific characters like 'E' in a document.
+  2. **List the Count**: Note the total count of 'E's on the back of the document.
+  3. **Verification**: At the receiving end, if the count of 'E's matches the listed value, the document is considered unmodified. Any discrepancies indicate potential data corruption.
 
 ## What Is a Three-Way Handshake in TCP?
 The three-way handshake is a fundamental process for establishing a TCP connection. It involves three steps:
