@@ -1,13 +1,13 @@
 ---
 - name: help me fix it playbook
-  hosts: centos.vmware
+  hosts: all
   gather_facts: no
   tasks:
     - name: alternative way to gather facts about remote host
       setup: filter='ansible_dist*'
       register: facts
-      
-    - debug: 
-      var: facts
 
-    # - shell: echo "{{facts.ansible_distribution}}" > output.txt
+    - debug: 
+        var: facts
+
+    - shell: echo "{{facts.ansible_facts}}" > /tmp/output.txt

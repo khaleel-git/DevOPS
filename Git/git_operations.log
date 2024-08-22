@@ -51769,3 +51769,12 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    f56ba3f3..80444abb  master -> master
 branch 'master' set up to track 'origin/master'.
+[master f37a372b] Commit @ 2024-08-22 21:00:01
+ 6 files changed, 46 insertions(+), 1 deletion(-)
+ create mode 100644 Ansible/10.Ansible-Projects/kodecloud-Labs/Labs - Variable Register/help_me_fix_it.yml
+ create mode 100644 Ansible/10.Ansible-Projects/kodecloud-Labs/Labs - Variable Register/inventory
+ create mode 100644 Ansible/10.Ansible-Projects/kodecloud-Labs/Labs - Variable Register/playbook.yml
+ create mode 100644 Ansible/10.Ansible-Projects/kodecloud-Labs/Labs - Variable Register/uptime.yml
+To github.com:khaleel-git/DevOPS.git
+   80444abb..f37a372b  master -> master
+branch 'master' set up to track 'origin/master'.
