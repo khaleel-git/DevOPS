@@ -22,8 +22,8 @@
 
     - name: copy files/my.cnf to /etc/my.cnf
       copy:
-        src: files/my.cnf
-        dest: /etc/my.cnf
+        src: files/.my.cnf
+        dest: /etc/.my.cnf
 
     - name: enable services
       service:
@@ -48,28 +48,20 @@
 - name: Configure database
   hosts: centos.vmware
   become: yes
-  vars:
-    mysql_root_password: 3242135khdbpasswordroot
-    mysql_dbname: ecomdb
-    mysql_user: ecomuser
-    mysql_password: ecomuser
-  
   tasks:
     - name: Create the database
       mysql_db:
-        name: "{{ mysql_dbname }}"
+        name: "{{ dbname }}"
         state: present
         login_user: root
-        login_password: "{{ mysql_root_password }}"
 
     - name: Create a new user and grant privileges
       mysql_user:
-        name: "{{ mysql_user }}"
-        password: "{{ mysql_password }}"
-        priv: "{{ mysql_dbname }}.*:ALL"
+        name: "{{ dbuser }}"
+        password: "{{ dbpassword }}"
+        priv: "{{ dbname }}.*:ALL"
         state: present
         login_user: root
-        login_password: "{{ mysql_root_password }}"
 
     - name: copy db-load-script.sql and load it
       copy:
