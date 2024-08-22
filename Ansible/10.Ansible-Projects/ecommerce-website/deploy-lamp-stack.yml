@@ -22,8 +22,8 @@
 
     - name: copy files/my.cnf to /etc/my.cnf
       copy:
-        src: files/.my.cnf
-        dest: /etc/.my.cnf
+        src: files/my.cnf
+        dest: /etc/my.cnf
 
     - name: enable services
       service:
@@ -53,7 +53,6 @@
       mysql_db:
         name: "{{ dbname }}"
         state: present
-        login_user: root
 
     - name: Create a new user and grant privileges
       mysql_user:
@@ -61,7 +60,6 @@
         password: "{{ dbpassword }}"
         priv: "{{ dbname }}.*:ALL"
         state: present
-        login_user: root
 
     - name: copy db-load-script.sql and load it
       copy:
