@@ -1,0 +1,14 @@
+---
+- hosts: centos.vmware
+  gather_facts: false
+  tasks:
+    - name: stat module help to find the file info
+      stat:
+        path: /var/run
+      register: your_variable
+
+    # for your reference, check the outputs of these
+    - debug: var=your_variable.stat
+
+    # your code goes here...
+    - shell: echo "{{your_variable.stat}}" > by_ansible

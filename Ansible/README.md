@@ -155,7 +155,7 @@ Variables in Ansible follow a specific precedence order, where higher levels tak
    Variables defined for host groups in inventory files or directories (like `group_vars`). These variables apply to all hosts within a specific group.
 
 ---
-### Register output
+### Register output - Debug variable
 ```yaml
 ---
 - name: Check /etc/hosts file
@@ -169,6 +169,8 @@ Variables in Ansible follow a specific precedence order, where higher levels tak
   var: result.stdout # print stdout
   var: result
   # rc 0 means the code runs successfully, 
+  # ansible-playbook deploy-lamp-stack.yml -i inventory -v -> can also show debug variables
+  # register variables stores in memory
 ```
 
 ---
