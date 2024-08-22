@@ -1,6 +1,6 @@
 # Deploying an E-Commerce App on a LAMP Stack with Ansible
 
-Mediam Article: 
+Mediam Article: https://medium.com/@khaleel.org/deploying-an-ecommerce-app-on-lamp-stack-with-ansible-9d9cb956362e
 
 Deploying a robust e-commerce application can be a complex and time-consuming task, especially when setting up the underlying infrastructure. Fortunately, Ansible provides a streamlined way to automate the deployment of a LAMP (Linux, Apache, MySQL, PHP) stack, making the process faster and more efficient. In this guide, I'll walk you through deploying an e-commerce application using Ansible on a CentOS server.
 
