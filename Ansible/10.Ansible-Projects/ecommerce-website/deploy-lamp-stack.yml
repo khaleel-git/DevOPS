@@ -48,18 +48,28 @@
 - name: Configure database
   hosts: centos.vmware
   become: yes
+  vars:
+    mysql_root_password: 3242135khdbpasswordroot
+    mysql_dbname: ecomdb
+    mysql_user: ecomuser
+    mysql_password: ecomuser
+  
   tasks:
-    - name: create database
+    - name: Create the database
       mysql_db:
-        name: "{{ db_name }}"
+        name: "{{ mysql_dbname }}"
         state: present
+        login_user: root
+        login_password: "{{ mysql_root_password }}"
 
-    - name: db_user
+    - name: Create a new user and grant privileges
       mysql_user:
-        name: "{{ db_name }}"
-        password: "{{ dbpassword }}"
-        priv: "*.*:ALL"
+        name: "{{ mysql_user }}"
+        password: "{{ mysql_password }}"
+        priv: "{{ mysql_dbname }}.*:ALL"
         state: present
+        login_user: root
+        login_password: "{{ mysql_root_password }}"
 
     - name: copy db-load-script.sql and load it
       copy:
