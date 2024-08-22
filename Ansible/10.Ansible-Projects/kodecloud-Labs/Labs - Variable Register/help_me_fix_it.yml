@@ -10,4 +10,4 @@
     - debug: 
         var: facts
 
-    - shell: echo "{{facts.ansible_facts}}" > /tmp/output.txt
+    - shell: echo "{{facts.ansible_facts.ansible_distribution}}" > output.txt
