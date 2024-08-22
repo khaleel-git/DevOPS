@@ -8,9 +8,17 @@
           - python3-libselinux
           - python3-libsemanage
           - firewalld
+
+- name: Deploy lamp stack application
+  hosts: centos.vmware
+  become: yes
+  tasks:
+    - name: yum install packages
+      yum: 
+        name:
           - mariadb-server
           - python3-PyMySQL
-        state: latest
+        state: installed
 
     - name: copy files/my.cnf to /etc/my.cnf
       copy:
@@ -100,7 +108,7 @@
 
     - name: Copy the code from repository
       git: 
-        repo: {{ repository }} 
+        repo: "{{ repository }}" 
         dest: /var/www/html/  
         force: yes
 
