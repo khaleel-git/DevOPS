@@ -49,19 +49,23 @@
   hosts: centos.vmware
   become: yes
   tasks:
-    - name: Create the database
-      mysql_db:
-        check_implicit_admin: true
-        name: "{{ dbname }}"
-        state: present
+  #   - name: Create the database
+  #     mysql_db:
+  #       check_implicit_admin: true
+  #       name: "{{ dbname }}"
+  #       state: present
+  #       login_user: root
+  #       login_password: mysqlpasswd
 
-    - name: Create a new user and grant privileges
-      mysql_user:
-        check_implicit_admin: true
-        name: "{{ dbuser }}"
-        password: "{{ dbpassword }}"
-        priv: "{{ dbname }}.*:ALL"
-        state: present
+  #   - name: Create a new user and grant privileges
+  #     mysql_user:
+  #       check_implicit_admin: true
+  #       login_user: root
+  #       login_password: mysqlpasswd
+  #       name: "{{ dbuser }}"
+  #       password: "{{ dbpassword }}"
+  #       priv: "{{ dbname }}.*:ALL"
+  #       state: present
 
     - name: copy db-load-script.sql and load it
       copy:
@@ -80,7 +84,7 @@
         name:
           - httpd
           - php
-          - php-mysql
+          - php-mysqlnd
         state: present
 
     - name: install git
@@ -95,6 +99,7 @@
         zone: public
         immediate: yes
         permanent: yes
+        state: enabled
     
     - name: replace index.html to index.php in DirectoryIndex
       replace:
@@ -105,8 +110,8 @@
     - name: start and enable httpd service
       service:
         name: httpd
-        state: started
         enabled: yes
+        state: started
 
     - name: Copy the code from repository
       git: 
