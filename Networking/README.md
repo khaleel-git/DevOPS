@@ -15,6 +15,9 @@
 - **File Sharing**: Manages file transfers by establishing a connection and ensuring the integrity of the files being transferred.
 - **Downloading**: Ensures that files downloaded are complete and correctly ordered.
 
+TCP - 12 simple ideas to explain the Transmission Control Protocol
+https://www.youtube.com/watch?v=JFch3ctY6nE
+
 -> Sequence Numbers track what is sent 
 -> Acknowledge Numbers track what is received 
 
