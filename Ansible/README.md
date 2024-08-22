@@ -166,6 +166,9 @@ Variables in Ansible follow a specific precedence order, where higher levels tak
 
 - debug: 
   var: result.rc # rc means return code
+  var: result.stdout # print stdout
+  var: result
+  # rc 0 means the code runs successfully, 
 ```
 
 ---
