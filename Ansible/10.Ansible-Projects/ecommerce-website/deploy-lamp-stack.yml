@@ -51,11 +51,13 @@
   tasks:
     - name: Create the database
       mysql_db:
+        check_implicit_admin: true
         name: "{{ dbname }}"
         state: present
 
     - name: Create a new user and grant privileges
       mysql_user:
+        check_implicit_admin: true
         name: "{{ dbuser }}"
         password: "{{ dbpassword }}"
         priv: "{{ dbname }}.*:ALL"

@@ -7,5 +7,7 @@
 ; [web_servers]
 ; lamp-web
 
-centos.vmware ansible_host=centos.vmware ansible_ssh_private_key_file=/home/khaleel/.ssh/khaleel ansible_become_password=ah ansible_user=khaleel httpd_port=80 repository=https://github.com/kodekloudhub/learning-app-ecommerce.git mysqlservice=mysqld mysql_port=3306 dbname=ecomdb dbuser=ecomuser dbpassword=ecompassword
+; centos.vmware ansible_host=centos.vmware ansible_ssh_private_key_file=/home/khaleel/.ssh/khaleel ansible_become_password=ah ansible_user=khaleel httpd_port=80 repository=https://github.com/kodekloudhub/learning-app-ecommerce.git mysqlservice=mysqld mysql_port=3306 dbname=ecomdb dbuser=ecomuser dbpassword=ecompassword
+
+centos.vmware ansible_host=centos.vmware ansible_ssh_private_key_file=/home/khaleel/.ssh/root ansible_become_password=ah ansible_user=root httpd_port=80 repository=https://github.com/kodekloudhub/learning-app-ecommerce.git mysqlservice=mysqld mysql_port=3306 dbname=ecomdb dbuser=ecomuser dbpassword=ecompassword
 
