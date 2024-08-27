@@ -1,7 +1,7 @@
-# Use the official Node.js image as the base image
+# Use an official Node.js image as the base image
 FROM node:14
 
-# Set the working directory
+# Set the working directory inside the container
 WORKDIR /app
 
 # Copy package.json and package-lock.json
@@ -13,8 +13,8 @@ RUN npm install
 # Copy the rest of the application code
 COPY . .
 
-# Expose port 3000
+# Expose the port the app runs on
 EXPOSE 3000
 
-# Command to run the application
+# Start the application
 CMD ["npm", "start"]
