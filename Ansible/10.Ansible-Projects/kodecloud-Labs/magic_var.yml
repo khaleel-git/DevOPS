@@ -1,0 +1,5 @@
+---
+  - hosts: all
+    tasks:
+      - name: get dns variable from node1.host
+        shell: "echo {{ host[node1.host].dns_server }} >> /tmp/variable.txt"
