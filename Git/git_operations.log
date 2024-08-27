@@ -52103,3 +52103,27 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    efecb91e..ddaaed7b  master -> master
 branch 'master' set up to track 'origin/master'.
+warning: adding embedded git repository: Projects/sonarqube
+hint: You've added another git repository inside your current repository.
+hint: Clones of the outer repository will not contain the contents of
+hint: the embedded repository and will not know how to obtain it.
+hint: If you meant to add a submodule, use:
+hint: 
+hint: 	git submodule add <url> Projects/sonarqube
+hint: 
+hint: If you added this path by mistake, you can remove it from the
+hint: index with:
+hint: 
+hint: 	git rm --cached Projects/sonarqube
+hint: 
+hint: See "git help submodule" for more information.
+[master f638d6eb] Commit @ 2024-08-27 19:00:01
+ 6 files changed, 6 insertions(+), 48 deletions(-)
+ delete mode 100644 Projects/SonarQube/.dockerignore
+ delete mode 100644 Projects/SonarQube/Dockerfile
+ delete mode 100644 Projects/SonarQube/package.json
+ delete mode 100644 Projects/SonarQube/src/index.js
+ create mode 160000 Projects/sonarqube
+To github.com:khaleel-git/DevOPS.git
+   ddaaed7b..f638d6eb  master -> master
+branch 'master' set up to track 'origin/master'.
