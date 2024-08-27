@@ -52074,3 +52074,12 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    866f7e70..2c0a28a7  master -> master
 branch 'master' set up to track 'origin/master'.
+[master 2a023cc2] Commit @ 2024-08-27 16:30:01
+ 5 files changed, 38 insertions(+)
+ create mode 100644 Projects/SonarQube/.dockerignore
+ create mode 100644 Projects/SonarQube/Dockerfile
+ create mode 100644 Projects/SonarQube/package.json
+ create mode 100644 Projects/SonarQube/src/index.js
+To github.com:khaleel-git/DevOPS.git
+   2c0a28a7..2a023cc2  master -> master
+branch 'master' set up to track 'origin/master'.
