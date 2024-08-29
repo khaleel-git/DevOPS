@@ -1,0 +1,8 @@
+---
+  - nane: unzip local.zip file
+    hosts: web1
+    tasks:
+      - name: unizp now
+        unarchive:
+          src: local.zip
+          dest: /tmp
