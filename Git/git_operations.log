@@ -52581,3 +52581,10 @@ and the repository exists.
 To github.com:khaleel-git/DevOPS.git
    045d9be5..7f6c0b96  master -> master
 branch 'master' set up to track 'origin/master'.
+[master 2988636a] Commit @ 2024-09-01 11:00:01
+ 1 file changed, 5 insertions(+)
+ssh: Could not resolve hostname github.com: Temporary failure in name resolution
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
