@@ -1,5 +1,5 @@
 ---
-  - nane: unzip local.zip file
+  - name: unzip local.zip file
     hosts: web1
     tasks:
       - name: unizp now
