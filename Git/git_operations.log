@@ -52857,3 +52857,15 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    fcfb534b..262e1a88  master -> master
 branch 'master' set up to track 'origin/master'.
+[master c4f11daa] Commit @ 2024-09-05 01:00:01
+ 9 files changed, 31 insertions(+), 3 deletions(-)
+ create mode 100644 Ansible/10.Ansible-Projects/kodecloud-Labs/Labs - Magic Variables/hostinfo.yml
+ create mode 100644 Ansible/10.Ansible-Projects/kodecloud-Labs/Labs - Magic Variables/hosts.yml
+ rename Ansible/10.Ansible-Projects/kodecloud-Labs/{Labs - Magic Variables => Labs - Modules - Firewalld}/deploy-lamp-stack.yml (100%)
+ rename Ansible/10.Ansible-Projects/kodecloud-Labs/{Labs - Magic Variables => Labs - Modules - Firewalld}/inventory.txt (100%)
+ rename Ansible/10.Ansible-Projects/kodecloud-Labs/{Labs - Magic Variables => Labs - Modules - Firewalld}/iotop.yaml (100%)
+ rename Ansible/10.Ansible-Projects/kodecloud-Labs/{Labs - Magic Variables => Labs - Modules - Firewalld}/multi-package.yaml (100%)
+ rename Ansible/10.Ansible-Projects/kodecloud-Labs/{Labs - Magic Variables => Labs - Modules - Firewalld}/unzip.yaml (100%)
+To github.com:khaleel-git/DevOPS.git
+   262e1a88..c4f11daa  master -> master
+branch 'master' set up to track 'origin/master'.
