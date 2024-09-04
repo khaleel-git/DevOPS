@@ -1,0 +1,7 @@
+---
+- name: populate agents.conf.j2 file
+  hosts: lamp_app
+  tasks:
+    - template:
+        src: templates/agents.conf.j2
+        dest: /etc/monitor/agents.conf

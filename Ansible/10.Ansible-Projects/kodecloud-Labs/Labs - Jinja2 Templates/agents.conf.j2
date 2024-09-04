@@ -1,0 +1,3 @@
+hostname, ipaddress, monitor_port, type, protocol
+{% for i in groups['lamp_app'] %}
+{{i}}, {{hostvars['host'].ansible_host}}, {{hostvars['host'].monitor_port}}, {{hostvars['host'].type}}
