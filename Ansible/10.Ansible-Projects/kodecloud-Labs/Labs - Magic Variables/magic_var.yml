@@ -1,0 +1,5 @@
+---
+- name: magic variable accessibility
+  hosts: all
+  tasks:
+    - shell: "echo {{hostvars['node01.host'].dns_server}} >> /tmp/variable.txt"

@@ -1,0 +1,8 @@
+---
+- name: create a user account with group attached
+  hosts: all
+  become: true
+  tasks:  
+    - user:
+        name: neymarsabin
+        expires: 1704067199
