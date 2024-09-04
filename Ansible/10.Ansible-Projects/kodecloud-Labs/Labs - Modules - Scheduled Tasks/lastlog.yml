@@ -1,0 +1,10 @@
+---
+- name: cronjob to clear logs
+  hosts: node00
+  tasks:
+    - name: using cronjob scheduling
+      cron:
+        name: "clear logs"
+        minute: "0"
+        hour: "0" # 12:00 am
+        job: "echo '' > /var/log/lastlog"

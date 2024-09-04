@@ -1,0 +1,8 @@
+---
+- name: remove old configured cronjob
+  hosts: node00
+  tasks:
+    - name: removing an old cronjob
+      cron:
+        name: Check Memory
+        state: absent

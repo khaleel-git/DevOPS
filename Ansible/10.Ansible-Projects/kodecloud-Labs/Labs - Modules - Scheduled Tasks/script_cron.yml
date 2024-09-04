@@ -1,0 +1,10 @@
+---
+- name: run free.sh via cronjob
+  hosts: node00
+  tasks:
+    - name: run cronjob at every 2 hours
+      cron: 
+        name: Free Memory Check
+        minute: "0"
+        hour: "*/2"
+        job: "sh /root/free.sh"
