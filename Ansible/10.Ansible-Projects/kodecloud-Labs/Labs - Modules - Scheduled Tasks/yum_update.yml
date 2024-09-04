@@ -1,0 +1,13 @@
+---
+- name: every sunday @8:05 update the system
+  hosts: node00
+  tasks:
+    - cron:
+        name: yum update
+        minute: "5"
+        hour: "8"
+        weekday: "0"
+        user: root
+        job: "yum -y update"
+        cron_file: "/etc/cron.d/ansible_yum"
+

@@ -52825,3 +52825,13 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    e54abcd2..d6f68ea4  master -> master
 branch 'master' set up to track 'origin/master'.
+[master 952b84cd] Commit @ 2024-09-04 23:30:02
+ 6 files changed, 41 insertions(+)
+ delete mode 100644 Ansible/10.Ansible-Projects/kodecloud-Labs/Labs - Modules - Scheduled Tasks/abc
+ create mode 100644 Ansible/10.Ansible-Projects/kodecloud-Labs/Labs - Modules - Scheduled Tasks/lastlog.yml
+ create mode 100644 Ansible/10.Ansible-Projects/kodecloud-Labs/Labs - Modules - Scheduled Tasks/reboot.yml
+ create mode 100644 Ansible/10.Ansible-Projects/kodecloud-Labs/Labs - Modules - Scheduled Tasks/remove_cron.yml
+ create mode 100644 Ansible/10.Ansible-Projects/kodecloud-Labs/Labs - Modules - Scheduled Tasks/script_cron.yml
+To github.com:khaleel-git/DevOPS.git
+   d6f68ea4..952b84cd  master -> master
+branch 'master' set up to track 'origin/master'.

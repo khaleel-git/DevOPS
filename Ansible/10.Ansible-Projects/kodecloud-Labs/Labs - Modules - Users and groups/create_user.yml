@@ -1,0 +1,13 @@
+---
+- name: create a user account with group attached
+  hosts: all
+  become: true
+  tasks:
+    - group:
+        name: admin
+        state: present
+        
+    - user:
+        name: admin
+        uid: 2048
+        group: admin
