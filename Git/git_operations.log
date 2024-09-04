@@ -52842,3 +52842,18 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    952b84cd..fcfb534b  master -> master
 branch 'master' set up to track 'origin/master'.
+[master 262e1a88] Commit @ 2024-09-05 00:30:02
+ 11 files changed, 31 insertions(+), 5 deletions(-)
+ rename Ansible/10.Ansible-Projects/kodecloud-Labs/{ => Labs - Magic Variables}/deploy-lamp-stack.yml (100%)
+ rename Ansible/10.Ansible-Projects/kodecloud-Labs/{ => Labs - Magic Variables}/inventory.txt (100%)
+ rename Ansible/10.Ansible-Projects/kodecloud-Labs/{ => Labs - Magic Variables}/iotop.yaml (100%)
+ create mode 100644 Ansible/10.Ansible-Projects/kodecloud-Labs/Labs - Magic Variables/magic_var.yml
+ rename Ansible/10.Ansible-Projects/kodecloud-Labs/{ => Labs - Magic Variables}/multi-package.yaml (100%)
+ create mode 100644 Ansible/10.Ansible-Projects/kodecloud-Labs/Labs - Magic Variables/templates/hostinfo.j2
+ rename Ansible/10.Ansible-Projects/kodecloud-Labs/{ => Labs - Magic Variables}/unzip.yaml (100%)
+ create mode 100644 Ansible/10.Ansible-Projects/kodecloud-Labs/Labs - Modules - Users and groups/add_user.yml
+ create mode 100644 Ansible/10.Ansible-Projects/kodecloud-Labs/Labs - Modules - Users and groups/remove_user.yml
+ delete mode 100644 Ansible/10.Ansible-Projects/kodecloud-Labs/magic_var.yml
+To github.com:khaleel-git/DevOPS.git
+   fcfb534b..262e1a88  master -> master
+branch 'master' set up to track 'origin/master'.
