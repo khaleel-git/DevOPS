@@ -52900,3 +52900,10 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    c6dfe786..a3a262e4  master -> master
 branch 'master' set up to track 'origin/master'.
+[master f39e45b2] Commit @ 2024-09-05 14:00:01
+ 4 files changed, 24 insertions(+), 1 deletion(-)
+ create mode 100644 Ansible/10.Ansible-Projects/kodecloud-Labs/Labs - Jinja2 Templates/generate-inventory.yml
+ create mode 100644 Ansible/10.Ansible-Projects/kodecloud-Labs/Labs - Jinja2 Templates/inventory.csv.j2
+To github.com:khaleel-git/DevOPS.git
+   a3a262e4..f39e45b2  master -> master
+branch 'master' set up to track 'origin/master'.
