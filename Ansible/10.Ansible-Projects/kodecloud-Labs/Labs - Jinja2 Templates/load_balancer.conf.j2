@@ -4,7 +4,7 @@
 http {
    upstream backend {
       {% for i in groups['web'] %}
-      {{ hostvars[i].ansible_host }};
+      server {{ hostvars[i].ansible_host }};
       {% endfor %}
    }
 
