@@ -1,0 +1,7 @@
+---
+- name: configure load balancer
+  hosts: load_balancer
+  tasks:
+    - template:
+        src: templates/load-balancer.conf.j2
+        dest: /etc/nginx/conf.d/load-balancer.conf

@@ -52883,3 +52883,11 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    80754240..d43d5f50  master -> master
 branch 'master' set up to track 'origin/master'.
+[master c6dfe786] Commit @ 2024-09-05 02:30:01
+ 4 files changed, 21 insertions(+)
+ create mode 100644 Ansible/10.Ansible-Projects/kodecloud-Labs/Labs - Jinja2 Templates/agents.conf.j2
+ create mode 100644 Ansible/10.Ansible-Projects/kodecloud-Labs/Labs - Jinja2 Templates/generate-agent-info.yml
+ create mode 100644 Ansible/10.Ansible-Projects/kodecloud-Labs/Labs - Jinja2 Templates/sample_agents.conf
+To github.com:khaleel-git/DevOPS.git
+   d43d5f50..c6dfe786  master -> master
+branch 'master' set up to track 'origin/master'.

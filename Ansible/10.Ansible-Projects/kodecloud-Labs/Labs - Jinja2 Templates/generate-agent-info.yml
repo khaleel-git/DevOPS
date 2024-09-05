@@ -1,6 +1,6 @@
 ---
 - name: populate agents.conf.j2 file
-  hosts: lamp_app
+  hosts: monitoring_server
   tasks:
     - template:
         src: templates/agents.conf.j2
