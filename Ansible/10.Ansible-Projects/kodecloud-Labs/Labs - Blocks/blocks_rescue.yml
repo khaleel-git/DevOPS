@@ -1,0 +1,15 @@
+---
+- hosts: all
+  tasks:
+    - name: Install and configure httpd web server
+      block:
+        - yum:
+            name: httpd
+            state: present
+        - service:
+            name: httpd
+            state: started
+      rescue:
+        - debug: 
+            msg: "Playbook has failed for {{ inventory_hostname }} node"    
+      when: ansible_facts['distribution'] == 'CentOS'

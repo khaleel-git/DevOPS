@@ -3,5 +3,5 @@
   hosts: all
   tasks:
     - block:
-        yum: name=httpd state=present
+      - yum: name=httpd state=present
       when: ansible_distribution == 'CentOS'
