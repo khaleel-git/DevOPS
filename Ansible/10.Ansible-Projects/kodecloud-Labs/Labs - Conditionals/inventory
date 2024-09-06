@@ -1,0 +1,3 @@
+[centos]
+centos.vmware ansible_host=centos.vmware ansible_user=root ansible_password=ah ansible_connection=ssh ansible_port=22
+

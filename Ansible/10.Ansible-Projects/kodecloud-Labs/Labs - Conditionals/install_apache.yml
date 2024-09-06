@@ -1,0 +1,16 @@
+---
+- name: install apache on ubuntu and centos
+  hosts: all
+  become: true
+  tasks:
+    - name: install apache on ubuntu
+      apt:
+        name: apache2 
+        state: present
+      when: ansible_distribution == 'Ubuntu'
+
+    - name: install apache on centos
+      yum:
+        name: httpd
+        state: present
+      when: ansible_distribution == 'CentOS'
