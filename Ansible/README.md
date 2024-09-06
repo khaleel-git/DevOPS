@@ -773,3 +773,14 @@ ignore_erros: true # ignore errors on specific task
   register: command_output
   failed_when: 'ERROR' in command_output.stdout
 ```
+
+## Ansible Strategy
+1. linear strategy (default strategy) 
+  -> runs tasks one by one on all servers, if one server is slower it slows down the process for all server 
+  -> Batch Stragey: `serial: 3` # ansible runs task on 3 servers first then it proceeds to next batch
+2. parallel strategy
+  -> `stragey: free` # does not wait
+
+## Fork
+ansible can create 5 forks at a time
+increase fork in the configuration file as you wish but it will consume more cpu and ram

@@ -1,0 +1,26 @@
+---
+- name: Install and configure httpd
+  hosts: web1
+  gather_facts: no
+  tasks:
+    - block:
+        - name: Install httpd
+          yum:
+            name: httpd
+            state: present
+
+        - name: Start httpd service
+          service:
+            name: httpd
+            state: started
+          when: ansible_facts['pkg_mgr'] == 'yum'
+
+        - name: Check httpd error logs for 'ERROR'
+          command: cat /var/log/httpd/error_log
+          register: results
+
+        - name: Create a file
+          file:
+            path: /tmp/file
+            state: touch
+      failed_when: "'ERROR' in results.stdout"
