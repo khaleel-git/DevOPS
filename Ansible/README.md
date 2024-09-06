@@ -766,3 +766,10 @@ create diretory, file, empty file, owner, group, mode
 any_errors_fatal: true # fail tasks on all nodes
 max_fail_percentage: 30 # if one task is failing for over more than 30% of servers, stop the play
 ignore_erros: true # ignore errors on specific task
+
+## Checks Server Log
+```yml
+- command: cat /var/log/server.log
+  register: command_output
+  failed_when: 'ERROR' in command_output.stdout
+```
