@@ -1,0 +1,7 @@
+---
+- name: httpd on centos using blocks
+  hosts: all
+  tasks:
+    - block:
+        yum: name=httpd state=present
+      when: ansible_distribution == 'CentOS'
