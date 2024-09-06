@@ -1,7 +1,8 @@
----
-- name: populate agents.conf.j2 file
-  hosts: monitoring_server
+- hosts: all
+  gather_facts: yes
   tasks:
     - template:
-        src: templates/agents.conf.j2
-        dest: /etc/monitor/agents.conf
+        src: report.csv.j2
+        dest: /tmp/report.csv
+      delegate_to: reporting_server
+      run_once: yes

@@ -1,7 +1,18 @@
 ---
 - name: generate hosts.txt file for each host
-  hosts: all
+  hosts: dns_server_america
   tasks:
     - template:
         src: templates/hosts.j2
         dest: /tmp/hosts.txt
+      vars:
+        GROUP_NAME: america
+
+- name: 2nd group
+  hosts: dns_server_asia 
+  tasks:
+    - template: 
+        src: templates/hosts.j2
+        dest: /tmp/hosts.txt
+      vars: 
+        GROUP_NAME: asia
