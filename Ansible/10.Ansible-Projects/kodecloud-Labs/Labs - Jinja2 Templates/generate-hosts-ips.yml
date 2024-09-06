@@ -1,0 +1,7 @@
+---
+- name: generate hosts.txt file for each host
+  hosts: all
+  tasks:
+    - template:
+        src: templates/hosts.j2
+        dest: /tmp/hosts.txt
