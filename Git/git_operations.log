@@ -53066,3 +53066,10 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    ae75418a..d5bc78ec  master -> master
 branch 'master' set up to track 'origin/master'.
+[master 498cb75e] Commit @ 2024-09-07 11:30:04
+ 4 files changed, 27 insertions(+), 1 deletion(-)
+ rename Ansible/10.Ansible-Projects/kodecloud-Labs/Labs - Parellelism/{httpd.yml => free_strategy_httpd.yml} (100%)
+ create mode 100644 Ansible/10.Ansible-Projects/kodecloud-Labs/Labs - Parellelism/linear(serial)_strategy_httpd.yml
+To github.com:khaleel-git/DevOPS.git
+   d5bc78ec..498cb75e  master -> master
+branch 'master' set up to track 'origin/master'.
