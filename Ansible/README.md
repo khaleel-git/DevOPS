@@ -784,3 +784,7 @@ ignore_erros: true # ignore errors on specific task
 ## Fork
 ansible can create 5 forks at a time
 increase fork in the configuration file as you wish but it will consume more cpu and ram
+
+## Ansible-file separation
+## ansible include-vars
+## Ansible include-tasks

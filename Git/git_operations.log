@@ -53059,3 +53059,10 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    4ee36f04..ae75418a  master -> master
 branch 'master' set up to track 'origin/master'.
+[master d5bc78ec] Commit @ 2024-09-07 01:00:03
+ 5 files changed, 74 insertions(+), 16 deletions(-)
+ create mode 100644 Ansible/10.Ansible-Projects/kodecloud-Labs/Labs - Error Handling/httpd_check_errors.yml
+ create mode 100644 Ansible/10.Ansible-Projects/kodecloud-Labs/Labs - Parellelism/httpd.yml
+To github.com:khaleel-git/DevOPS.git
+   ae75418a..d5bc78ec  master -> master
+branch 'master' set up to track 'origin/master'.
