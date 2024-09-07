@@ -53145,3 +53145,13 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    cdb639ce..8a182b6e  master -> master
 branch 'master' set up to track 'origin/master'.
+[master f2dcabc3] Commit @ 2024-09-07 23:30:01
+ 8 files changed, 91 insertions(+), 73 deletions(-)
+ delete mode 100644 Ansible/10.Ansible-Projects/kodecloud-Labs/Project - File Separation/db.yml
+ rename Ansible/10.Ansible-Projects/kodecloud-Labs/Project - File Separation/{ => tasks}/common.yml (100%)
+ create mode 100644 Ansible/10.Ansible-Projects/kodecloud-Labs/Project - File Separation/tasks/db.yml
+ create mode 100644 Ansible/10.Ansible-Projects/kodecloud-Labs/Project - File Separation/tasks/web.yml
+ delete mode 100644 Ansible/10.Ansible-Projects/kodecloud-Labs/Project - File Separation/web.yml
+To github.com:khaleel-git/DevOPS.git
+   8a182b6e..f2dcabc3  master -> master
+branch 'master' set up to track 'origin/master'.
