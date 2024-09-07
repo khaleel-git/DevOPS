@@ -53082,3 +53082,10 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    498cb75e..409cadb4  master -> master
 branch 'master' set up to track 'origin/master'.
+[master f45da1b2] Commit @ 2024-09-07 12:30:02
+ 3 files changed, 24 insertions(+)
+ create mode 100644 Ansible/10.Ansible-Projects/kodecloud-Labs/Labs - File Separation/playbook-2.yml
+ create mode 100644 Ansible/10.Ansible-Projects/kodecloud-Labs/Labs - File Separation/playbook.yml
+To github.com:khaleel-git/DevOPS.git
+   409cadb4..f45da1b2  master -> master
+branch 'master' set up to track 'origin/master'.
