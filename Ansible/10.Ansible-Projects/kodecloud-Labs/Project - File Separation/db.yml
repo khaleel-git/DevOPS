@@ -1,6 +1,0 @@
-    - name: Install MariaDB package
-      yum:
-        name:
-          - mariadb-server
-          - MySQL-python
-        state: installed

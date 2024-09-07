@@ -788,3 +788,5 @@ increase fork in the configuration file as you wish but it will consume more cpu
 ## Ansible-file separation
 ## ansible include-vars
 ## Ansible include-tasks
+
+## Ansible-Role

@@ -53131,3 +53131,17 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    581a9762..cdb639ce  master -> master
 branch 'master' set up to track 'origin/master'.
+[master 8a182b6e] Commit @ 2024-09-07 23:00:01
+ 10 files changed, 117 insertions(+)
+ create mode 100644 Ansible/10.Ansible-Projects/kodecloud-Labs/Project - File Separation/common.yml
+ create mode 100644 Ansible/10.Ansible-Projects/kodecloud-Labs/Project - File Separation/db.yml
+ create mode 100644 Ansible/10.Ansible-Projects/kodecloud-Labs/Project - File Separation/deploy_lamp_stack.yml
+ create mode 100644 Ansible/10.Ansible-Projects/kodecloud-Labs/Project - File Separation/group_vars/db_servers.yml
+ create mode 100644 Ansible/10.Ansible-Projects/kodecloud-Labs/Project - File Separation/group_vars/web_servers.yml
+ create mode 100644 Ansible/10.Ansible-Projects/kodecloud-Labs/Project - File Separation/host_vars/lamp-db.yml
+ create mode 100644 Ansible/10.Ansible-Projects/kodecloud-Labs/Project - File Separation/host_vars/lampweb.yml
+ create mode 100644 Ansible/10.Ansible-Projects/kodecloud-Labs/Project - File Separation/inventory
+ create mode 100644 Ansible/10.Ansible-Projects/kodecloud-Labs/Project - File Separation/web.yml
+To github.com:khaleel-git/DevOPS.git
+   cdb639ce..8a182b6e  master -> master
+branch 'master' set up to track 'origin/master'.
