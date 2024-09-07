@@ -1,0 +1,18 @@
+---
+- name: Deploy lamp stack application
+  hosts: all
+  become: yes
+  roles:
+    - name: common
+
+- name: Deploy lamp stack application
+  hosts: lamp-db
+  become: yes
+  roles:
+  - name: mysql
+  
+- name: Deploy lamp stack application
+  hosts: lampweb
+  become: yes
+  roles:
+    - name: httpd-php
