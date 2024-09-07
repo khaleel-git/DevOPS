@@ -1,0 +1,8 @@
+---
+- name: Print DB server data
+  hosts: all
+  gather_facts: no
+  tasks:
+    - include_vars: /home/thor/playbooks/general/common/db/db.yml
+    - debug:
+        var: db_version
