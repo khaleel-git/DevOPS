@@ -790,3 +790,12 @@ increase fork in the configuration file as you wish but it will consume more cpu
 ## Ansible include-tasks
 
 ## Ansible-Role
+
+## Ansible Vault
+```bash
+ansible-vault create inventory
+ansible-vault view inventory
+ansible-playbook play.yml -i inventory --ask-vault-pass
+ansible-playbook play.yml -i inventory -vault-password-file ~./vault_pass.txt
+ansible-playbook play.yml -i inventory -vault-password-file ~./vault_pass.py # fetch from remote location runtime
+```
