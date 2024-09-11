@@ -1,0 +1,36 @@
+---
+- name: add users defined in users.yml file
+  hosts: node00
+  vars: 
+    admin_pass: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          34363162303036633234386435346433393265376633326430346564363163313832666561343066
+          3331343663633664653666376462313361363862633737640a653535346336363166663231353461
+          38393433616533643464636330353839636231383732353266356563376238376335336431353937
+          3731633233373339660a663830383339313165653361333362356230616338393462633637353234
+          3035
+
+    developer_pass: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          62306363326137353864343464623838373762323064323031393562313634373134326335353761
+          3364386338313730303862393661316462636663326439310a383730663931373465353631343065
+          30626439323937383636633132653836643637663038373462643534303564336637303235613664
+          6431383539343731630a333062366132336432303133346639313932626537636236316236383038
+          6666
+  tasks:
+    - include_vars:
+      file: users.yml
+
+    - name: create admin related users
+      user:
+        name: {{ item }}
+        password: "{{ admin_pass | string | password_hash('sha512') }}"
+        group: wheel
+      with_items: "{{ admins | list }}"
+    
+    - name: create develper related users
+      user: 
+        name: {{ item }}
+        password: "{{ develpers_pass | string | password_hash('sha512') }}"
+        home: /var/www
+      with_items: "{{ developers | list }}"
