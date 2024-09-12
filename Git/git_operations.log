@@ -53393,3 +53393,10 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    f99dbe0a..498e3c17  master -> master
 branch 'master' set up to track 'origin/master'.
+[master e5b33530] Commit @ 2024-09-11 23:30:01
+ 3 files changed, 45 insertions(+)
+ create mode 100644 Ansible/10.Ansible-Projects/kodecloud-Labs/Lab: Mock Exam - 1/add_users.yml
+ create mode 100644 Ansible/10.Ansible-Projects/kodecloud-Labs/Lab: Mock Exam - 1/inventory
+To github.com:khaleel-git/DevOPS.git
+   498e3c17..e5b33530  master -> master
+branch 'master' set up to track 'origin/master'.

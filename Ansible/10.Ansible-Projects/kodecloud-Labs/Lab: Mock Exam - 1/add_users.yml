@@ -18,19 +18,20 @@
           6431383539343731630a333062366132336432303133346639313932626537636236316236383038
           6666
   tasks:
-    - include_vars:
-      file: users.yml
+    - name: Include user.yml
+      include_vars:
+        file: data/users.yml
 
     - name: create admin related users
       user:
-        name: {{ item }}
+        name: "{{ item }}"
         password: "{{ admin_pass | string | password_hash('sha512') }}"
         group: wheel
       with_items: "{{ admins | list }}"
     
     - name: create develper related users
       user: 
-        name: {{ item }}
-        password: "{{ develpers_pass | string | password_hash('sha512') }}"
+        name: "{{ item }}"
+        password: "{{ developer_pass | string | password_hash('sha512') }}"
         home: /var/www
       with_items: "{{ developers | list }}"
