@@ -1,0 +1,13 @@
+--- 
+- name: task 3 about database in mock exam 1
+  hosts: node02
+  tasks:
+    - name: start mariadb and ngnix
+      service:
+        - name: mariadb
+          state: started
+
+        - name: ngnix
+          state: started
+    - name: delete all files from ngnix document root
+      
