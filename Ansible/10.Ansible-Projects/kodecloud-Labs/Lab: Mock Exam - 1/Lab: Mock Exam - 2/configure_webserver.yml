@@ -2,9 +2,16 @@
 - name: configuring webserver
   hosts: all
   tasks:
-    - yum: 
-        - nginx
-      state: present
+    - package:
+        name: nginx
+        state: present
 
-    
+    - copy:
+        src: /home/thor/playbooks/index.html
+        dest: /usr/share/nginx/html/index.html
+        remote_src: yes
+
+    - service:
+        name: nginx
+        state: started
 
