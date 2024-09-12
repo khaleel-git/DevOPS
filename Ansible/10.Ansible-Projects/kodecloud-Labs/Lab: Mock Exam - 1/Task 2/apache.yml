@@ -1,0 +1,10 @@
+---
+- name: install apache
+  hosts: node00
+  tasks:
+    - name: install httpd
+      yum:  
+        - name: httpd
+        - name: php
+      state: present
+      
