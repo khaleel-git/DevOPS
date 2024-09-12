@@ -4,10 +4,31 @@
   tasks:
     - name: start mariadb and ngnix
       service:
-        - name: mariadb
-          state: started
+        name: "{{ item }}"
+        state: started
+      with_items:
+        - mariadb
+        - nginx  
 
-        - name: ngnix
-          state: started
     - name: delete all files from ngnix document root
-      
+      shell: rm -rf /usr/share/nginx/html/*
+
+    - unarchive:
+        src: https://github.com/indercodes/ansible-1100-mock-nginx/raw/master/index.php.zip
+        dest: /usr/share/nginx/html/
+        remote_src: yes
+    
+    - name: replace configurations in index.php
+      replace:
+        path: /usr/share/nginx/html/index.php
+        regexp: '{{ item.1 }}'
+        replace: '{{ item.2 }}'
+      with_items:
+        - { 1: '$database = "database";', 2: '$database = "mydb";' }
+        - { 1: '$username = "user";', 2: '$username = "myuser";' }
+        - { 1: '$password = "password";', 2: '$password = "mypassword";' }
+
+    - name: restart nginx
+      service:
+        name: nginx
+        state: restarted
