@@ -1,10 +1,43 @@
 ---
 - name: install apache
-  hosts: node00
+  hosts: node01
   tasks:
     - name: install httpd
-      yum:  
-        - name: httpd
-        - name: php
-      state: present
-      
+      yum: 
+        name: 
+          - httpd
+          - php
+        state: present
+
+    - name: create new doc
+      file:
+        path: /var/www/html/myroot
+        state: directory
+        owner: apache
+        group: apache
+  
+    - name: change apache default document root
+      replace:
+        path: /etc/httpd/conf/httpd.conf
+        regexp: 'DocumentRoot /var/www/html'
+        replace: 'DocumentRoot /var/www/html/myroot'
+
+    - name: copy phpinfo.php.j2 template to apache docuemnt root as phpinfo.php
+      template: 
+        src: /templates/phpinfo.php.j2
+        dest: /var/www/html/myroot/phpinfo.php
+        owner: apache
+        group: apache
+
+    - name: start and enable httpd service
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+
+    - name: filewalld rule for openning port 80
+      firewalld:
+        port: 80/tcp
+        zone: public
+        state: enabled
+        permanent: yes
