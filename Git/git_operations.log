@@ -53446,3 +53446,13 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    46b81c06..d2f94c08  master -> master
 branch 'master' set up to track 'origin/master'.
+[master adb99c0a] Commit @ 2024-09-12 15:00:02
+ 7 files changed, 57 insertions(+), 51 deletions(-)
+ create mode 100644 Ansible/10.Ansible-Projects/kodecloud-Labs/Lab: Mock Exam - 1/Task 1/add_users.yml
+ rename Ansible/10.Ansible-Projects/kodecloud-Labs/Lab: Mock Exam - 1/{ => Task 1}/inventory (100%)
+ rename Ansible/10.Ansible-Projects/kodecloud-Labs/Lab: Mock Exam - 1/{ => Task 1}/secret-pass.txt (100%)
+ rename Ansible/10.Ansible-Projects/kodecloud-Labs/Lab: Mock Exam - 1/{ => Task 1}/users.yml (100%)
+ delete mode 100644 Ansible/10.Ansible-Projects/kodecloud-Labs/Lab: Mock Exam - 1/add_users.yml
+To github.com:khaleel-git/DevOPS.git
+   d2f94c08..adb99c0a  master -> master
+branch 'master' set up to track 'origin/master'.
