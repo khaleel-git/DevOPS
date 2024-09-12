@@ -1,0 +1,10 @@
+---
+- name: configuring webserver
+  hosts: all
+  tasks:
+    - yum: 
+        - nginx
+      state: present
+
+    
+

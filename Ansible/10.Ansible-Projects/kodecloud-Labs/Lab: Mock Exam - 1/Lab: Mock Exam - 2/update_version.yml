@@ -1,0 +1,9 @@
+---
+- name: aws cli updated
+  hosts: all
+  become: yes
+  tasks:
+    - pip:
+        name: awscli
+        state: latest
+        executable: pip3
