@@ -53525,3 +53525,11 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    fd20567b..7f7341b1  master -> master
 branch 'master' set up to track 'origin/master'.
+[master ccf07659] Commit @ 2024-09-13 12:00:01
+ 3 files changed, 17 insertions(+), 4 deletions(-)
+ create mode 100644 Ansible/10.Ansible-Projects/kodecloud-Labs/Lab: Mock Exam - 3/firewall.yml
+Connection closed by 20.207.73.82 port 22
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
