@@ -5,12 +5,9 @@
     - name: install httpd 
       block:
       - package: 
-          name: 
-            - httpd
+          name: httpd
           state: present
 
-    - name: restart httpd service
-      block:
       - service: 
           name: httpd
           state: restarted
