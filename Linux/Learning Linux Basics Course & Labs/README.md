@@ -48,6 +48,7 @@ tar -zcf (reduce size, compress)
 
 bzip2, gzip, xz (bunzip2, gunzip, unxz) - add short introductiona and example
 zcat/bzcat/...cat (??)
+zcat /usr/share/man/man1/tail.1.gz > pipes
 ```
 bob@caleston-lp10:~$ tar -cf python.tar reptile/snake/python/
 bob@caleston-lp10:~$ ls
@@ -69,6 +70,7 @@ search word:
 grep second sample.txt (print only line matching, its case senstivie)
 for case insentive grep -i
 grep -r "third line" /home/michael -> search pattern recursively
+`sudo grep -ir 172.16.238.197 /etc/`
 grep -v "printed" sample.txt (ignore pattern)
 
 grep -w exam example.txt (word matching)
