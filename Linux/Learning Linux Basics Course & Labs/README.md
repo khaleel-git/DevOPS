@@ -236,7 +236,7 @@ search mycompany.com prod.mycompany.com # next time within mycompany servers, we
 ```
 dont need in ets/hosts file
 
-cat /etc/nsswitch.conf
+cat /etc/nsswitch.conf #change order
 ```
 hosts: files dns
 ```
@@ -255,10 +255,40 @@ nslookup # does not look for /etc/hosts
 dig # more detailed than nslookup
 
 
+## Network Basics
+### Switching
+```
+# in this switch network all nodes and send and recive their packets
+Switching: A -- B: `ip link`
+Switch ip is: 192.168.1.0
+Assign ip to node A: `ip addr add 192.168.1.10/24 dev eth0'
+Assign ip to node B: 'ip addr add 182.168.1.11/24 dev eth0'
+```
 
+### Routing
+router helps connect two networks together
+routing table and default gateway
 
+ip link: list and modify interface on the host
+ip addr: see ip addresses on the interface 
+ip addr add ip/24 dev eth0
+ip route: used to view routing tables
+ip route add ip/24 via ip: used to add entries in the ip tables
 
+make interface up: 
+`sudo ip link set dev eth0 up`
 
+make/set a default gateway:
+`sudo ip r add default via 172.16.238.1`
+
+## Troubleshooting network issue
+```
+ip link # first check if the interface is up
+nslookup domain.com # then check dns resolution
+ping domain.com # ping is not an efficient tool to check connectivity issue as many nodes disables it
+traceroute domain.com # this troubleshoot connectivity across 30 hopes
+netstat -an | grep 80 | grep -i LISTEN
+```
 
 
 
