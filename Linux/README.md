@@ -46,28 +46,3 @@
  s (socket file)
  b (block device)
 
-
-kodekloud course link: https://learn.kodekloud.com/user/courses/learning-linux-basics-course-labs
- ## Package management
- .RPM -> RHEL, CentOS, Fedora
- .DEB -> Ubuntu, Debian, Linux Mint (DPKG)
-
- RedHAT(paid, support) vs CentOS (community driven, fork from redhat)
-
- Package: compress archive, software, contains all the files to function together e.g: gimp.deb package (binaries, metadata etc)
- install, trusted source, simplify, powerful querying option, remove, updating, managing dependancies, fix depency hell
- 
-
- # Types of package
- dpkg -> apt -> apt-get
- rpm -> yum  (frontend for the rpm) -> dnf (more feautre rich)
-
-# RPM
-```
-rmp -ivh telnet.rpm -> i: install, v: verbose, h: 
-
-
-
-
-
-
