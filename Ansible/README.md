@@ -761,41 +761,95 @@ create diretory, file, empty file, owner, group, mode
           minute: 10
           weekday: *
 ```
+## Task Failure Handling
 
-## Task Failure
-any_errors_fatal: true # fail tasks on all nodes
-max_fail_percentage: 30 # if one task is failing for over more than 30% of servers, stop the play
-ignore_erros: true # ignore errors on specific task
+- **any_errors_fatal**: `true`  
+  Ensures that if a task fails on any node, it will stop tasks on all nodes.
 
-## Checks Server Log
-```yml
+- **max_fail_percentage**: `30`  
+  Specifies the maximum percentage of failed nodes allowed before stopping the entire playbook.
+
+- **ignore_errors**: `true`  
+  Allows ignoring errors on specific tasks, so the playbook continues even if a task fails.
+
+## Checking Server Log Example
+
+This task checks the server log for errors. If the string `ERROR` is found in the `server.log`, the task will be marked as failed.
+
+```yaml
 - command: cat /var/log/server.log
   register: command_output
-  failed_when: 'ERROR' in command_output.stdout
+  failed_when: "'ERROR' in command_output.stdout"
 ```
 
 ## Ansible Strategy
-1. linear strategy (default strategy) 
-  -> runs tasks one by one on all servers, if one server is slower it slows down the process for all server 
-  -> Batch Stragey: `serial: 3` # ansible runs task on 3 servers first then it proceeds to next batch
-2. parallel strategy
-  -> `stragey: free` # does not wait
 
-## Fork
-ansible can create 5 forks at a time
-increase fork in the configuration file as you wish but it will consume more cpu and ram
+### 1. Linear Strategy (Default)
+- Runs tasks one by one on all servers. If one server is slow, it slows down the process for all servers.
+  
+  **Batch Strategy**:  
+  Run tasks on a batch of servers:
+  
+  ```yaml
+  serial: 3
+  ```
+  This runs the task on 3 servers at a time, then proceeds to the next batch.
 
-## Ansible-file separation
-## ansible include-vars
-## Ansible include-tasks
+### 2. Parallel Strategy
+- Use the `free` strategy to run tasks in parallel without waiting for each task to finish on all nodes.
 
-## Ansible-Role
+  ```yaml
+  strategy: free
+  ```
+
+## Fork in Ansible
+
+- By default, Ansible can create 5 forks (parallel task executions) at a time.
+- You can increase the number of forks in the Ansible configuration file as needed, but be aware that this will consume more CPU and memory resources.
+
+## Ansible File Separation
+
+### Include Vars
+- `include_vars` is used to include variables from an external file, helping in organizing variable management.
+  
+  ```yaml
+  - include_vars: path/to/vars.yml
+  ```
+
+### Include Tasks
+- `include_tasks` is used to include tasks from an external task file. It helps break down large playbooks into smaller, reusable components.
+
+  ```yaml
+  - include_tasks: path/to/tasks.yml
+  ```
+
+## Ansible Role
+- Ansible roles are a way to organize playbooks into reusable units, consisting of tasks, handlers, variables, templates, and more.
+- Roles can be created using the following command:
+  
+  ```bash
+  ansible-galaxy init role_name
+  ```
 
 ## Ansible Vault
+
+- To securely manage sensitive data such as passwords, API keys, etc.
+
 ```bash
+# Create an encrypted file
 ansible-vault create inventory
+
+# View the contents of an encrypted file
 ansible-vault view inventory
+
+# Run a playbook with an encrypted inventory file
 ansible-playbook play.yml -i inventory --ask-vault-pass
-ansible-playbook play.yml -i inventory -vault-password-file ~./vault_pass.txt
-ansible-playbook play.yml -i inventory -vault-password-file ~./vault_pass.py # fetch from remote location runtime
+
+# Use a vault password file for decryption
+ansible-playbook play.yml -i inventory --vault-password-file ~/.vault_pass.txt
+
+# Fetch vault password from a remote location using a Python script
+ansible-playbook play.yml -i inventory --vault-password-file ~/.vault_pass.py
 ```
+
+Ansible provides multiple strategies, tools, and methods to ensure efficient and secure automation workflows. Whether it's handling task failures, parallel execution, role management, or securely handling secrets, Ansible offers powerful solutions to simplify the management of complex infrastructures.
