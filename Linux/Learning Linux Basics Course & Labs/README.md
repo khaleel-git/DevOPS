@@ -174,7 +174,7 @@ Linux distributions use different package formats and managers to handle softwar
   ```bash
   echo $SHELL | tee shell.txt  # Write to file and stdout
   echo $SHELL | tee -a shell.txt  # Append to file and stdout
-  ```
+ ```
 
 ## Vim Editor
 update-alternatives --display editor: check default editors
@@ -208,7 +208,7 @@ update-alternatives --display editor: check default editors
     x: remove a letter
     yy: copy a line
     p: paste a line
-    dd: cut or delte
+    dd: cut or delte a line
     d3d: delete first 3 lines
     u: undo
     ctr + r: redo
@@ -217,6 +217,62 @@ update-alternatives --display editor: check default editors
 
 
 # Networking
+/etc/hosts: add local dns entries (Name resolution)
+```
+192.168.0.1 db-server
+192.168.0.2 web-server
+192.168.0.3 nfs
+```
+NSLookup
+Dig
+
+## DNS Server
+ip: 192.168.1.100
+cat /etc/resolv.conf
+```
+nameserver 192.168.1.100
+nameserver 8.8.8.8 # knows wordwide name resolution list
+search mycompany.com prod.mycompany.com # next time within mycompany servers, we can access prod server by using its first name
+```
+dont need in ets/hosts file
+
+cat /etc/nsswitch.conf
+```
+hosts: files dns
+```
+Resolution of dns:
+apps.google.com, org DNS, Root DNS, .com DNS, Google DNS (apps.google.com, 216.58.221.78)
+org DNS may cache the dns for few seconds
+
+
+## Record Type
+A record: ip4
+AAAA record: ipv6
+CNAME: food.mycompany.com -> eat.mycompany.com, hungry.mycompany.com
+
+# Test Dns resolution4
+nslookup # does not look for /etc/hosts
+dig # more detailed than nslookup
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
