@@ -1,0 +1,16 @@
+---
+- name: install httpd web server and start its service
+  hosts: all 
+  tasks: 
+    - name: install httpd 
+      block:
+      - package: 
+          name: 
+            - httpd
+          state: present
+
+    - name: restart httpd service
+      block:
+      - service: 
+          name: httpd
+          state: restarted

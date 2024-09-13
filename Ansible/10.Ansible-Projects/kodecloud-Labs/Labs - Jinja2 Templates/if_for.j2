@@ -1,4 +1,4 @@
-{% for host in hosts -%}
+{% for host in hosts %}
 {% if "web" in host.name %}
 {{ host.name }} {{ host.ip_address }}
 {% endif %}

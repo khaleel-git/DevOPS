@@ -53501,3 +53501,15 @@ branch 'master' set up to track 'origin/master'.
 To github.com:khaleel-git/DevOPS.git
    e88cd5d2..a54ced66  master -> master
 branch 'master' set up to track 'origin/master'.
+[master e15a2162] Commit @ 2024-09-13 10:30:01
+ 8 files changed, 10 insertions(+)
+ rename Ansible/10.Ansible-Projects/kodecloud-Labs/{Lab: Mock Exam - 1 => }/Lab: Mock Exam - 2/configure_webserver.yml (100%)
+ rename Ansible/10.Ansible-Projects/kodecloud-Labs/{Lab: Mock Exam - 1 => }/Lab: Mock Exam - 2/copy_secrets.yml (100%)
+ rename Ansible/10.Ansible-Projects/kodecloud-Labs/{Lab: Mock Exam - 1 => }/Lab: Mock Exam - 2/give_ssh_access.yml (100%)
+ rename Ansible/10.Ansible-Projects/kodecloud-Labs/{Lab: Mock Exam - 1 => }/Lab: Mock Exam - 2/patch_system.yml (100%)
+ rename Ansible/10.Ansible-Projects/kodecloud-Labs/{Lab: Mock Exam - 1 => }/Lab: Mock Exam - 2/update_version.yml (100%)
+ create mode 100644 Ansible/10.Ansible-Projects/kodecloud-Labs/Lab: Mock Exam - 3/resolv.conf.j2
+ create mode 100644 Ansible/10.Ansible-Projects/kodecloud-Labs/Lab: Mock Exam - 3/sample_resolv.conf
+To github.com:khaleel-git/DevOPS.git
+   a54ced66..e15a2162  master -> master
+branch 'master' set up to track 'origin/master'.
