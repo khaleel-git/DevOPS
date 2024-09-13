@@ -1,0 +1,8 @@
+---
+- name: logging rotation
+  hosts: all
+  roles:
+      - arillso.logrotate
+  tasks:  
+    - 
+    

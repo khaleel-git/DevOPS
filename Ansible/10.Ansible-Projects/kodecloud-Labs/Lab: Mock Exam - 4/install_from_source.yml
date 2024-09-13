@@ -1,0 +1,30 @@
+---
+- name: installing mosh tool via github
+  hosts: all
+  tasks:
+    - package:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - git
+        - make
+        - autoconf
+        - automake
+        - protobuf-devel
+        - libutempter-devel
+        - ncurses-devel
+        - openssl-devel
+        - devtoolset-7-gcc*
+
+    - name: git clone
+      git:
+        repo: https://github.com/mobile-shell/mosh
+        dest: /tmp/mosh
+
+    - name: execute shell scripts
+      shell: |
+        ./autogen.sh
+        scl enable devtoolset-7 -- ./configure
+        scl enable devtoolset-7 -- make && make install
+      args:
+        chdir: /tmp/mosh
