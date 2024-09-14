@@ -1222,5 +1222,5 @@ systemctl start project.service
 ---
 
 Storage in Linux:
-df -h # overall
-du 
+df -h  # overall
+du -lh # check space for a file
