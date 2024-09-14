@@ -526,3 +526,17 @@ The `/etc/shadow` file includes fields for password aging:
 - **warn**: Number of days before the password expires, the user will be warned.
 
 ---
+
+File Permissions and Ownership
+
+ls -l bash-script.sh
+-rwxrwxr-x 1 bob bob 89 Mar 17 01:35 bash-script.sh
+
+-rwxrwxr-x
+owner, group, other -> u,g,0 
+r,read,4
+w,write,2
+x,execute,1
+-,no permission, 0
+
+file/directory permission are sequential
