@@ -1224,3 +1224,6 @@ systemctl start project.service
 Storage in Linux:
 df -h  # overall
 du -lh # check space for a file
+
+Disk Partitions:
+linux filesystem, partions, nfs, external storage devices (DAS/NAS/SAN), logical volume manage (LVM)
