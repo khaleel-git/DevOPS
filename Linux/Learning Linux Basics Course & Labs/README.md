@@ -80,7 +80,7 @@ Linux distributions use different package formats and managers to handle softwar
   ```bash
   du -sk test.img  # Size in KB
   du -sh test.img  # Size in MB
-  ls -lh test.img  # Human-readable size
+  du -lh test.img  # Human-readable size
   ```
 
 - **Archive files**:
@@ -1222,4 +1222,5 @@ systemctl start project.service
 ---
 
 Storage in Linux:
-df -h
+df -h # overall
+du 
