@@ -1236,4 +1236,4 @@ sda1, sda2, sda3
 
 each block device has major and minor number
 
-1 ram, 3 hard disk or cd rom, 6 parralel printers, 8 scsi disk, 
+1 ram, 3 hard disk or cd rom, 6 parralel printers, 8 scsi disk, fix naming conventions which starts with sd, 
