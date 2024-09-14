@@ -1137,6 +1137,10 @@ systemctl reload docker
 systemctl enable docker
 systemctl disable docker
 systemctl status
+
+# after making changes to service unit file
+systemctl daemon-reload
+
 ```
 
 
