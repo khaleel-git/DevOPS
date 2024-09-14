@@ -1108,5 +1108,6 @@ ExecStart= /bin/bash /usr/bin/project.sh
 ```
 systemclt start project.service
 
-systemctl status project.service #start service
-systemctl 
+systemctl status project.service # service status
+systemctl start project.service  # service start
+systemctl stop project.service   # service stop
