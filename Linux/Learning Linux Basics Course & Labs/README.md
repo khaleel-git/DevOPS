@@ -737,3 +737,8 @@ copy public key:
 ssh-copy-id user@hostname
 public key location: ~/.ssh/authorized_keys
 
+### SCP
+allows to copy data b/w servers via ssh
+scp /home/bob/myfile.txt devapp:/home/bob
+scp -pr /home/bob/media/ devapp:/home/bob # preserve ownership & permissions
+
