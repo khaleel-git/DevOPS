@@ -853,39 +853,159 @@ Disabling SSH access for the root user enhances security by forcing users to log
 # In /etc/ssh/sshd_config:
 PermitRootLogin no
 ```
+---
+# Network Security with IPTables and Firewalld
 
-Network Security
-IPTABLES and firewalld
-chain of rules
+This guide covers the essentials of network security using **IPTables** and **Firewalld** on Linux. These tools allow you to define rules to control incoming and outgoing traffic, helping secure your system against unauthorized access and attacks.
 
-iptables -A INPUT -p tcp -s ip --dport 22 -j ACCEPT
--A: Add Rule, -p: Protocol, -s: Source, -d: Destination, --dport: Destination Port, -j Action take
-iptables -A INPUT -p tcp --dport 22 -j DROP: reject connection for all other source ips
+---
 
-its top to bottom.
+## Introduction to IPTables
 
-iptables -A OUTPUT -p tcp -d ip --dport 5432 -j ACCEPT
-iptables -A OUTPUT -p tcp -d ip --dport 80 -j ACCEPT
+**IPTables** is a command-line firewall utility that uses policy chains to control the incoming and outgoing packets. Each packet that traverses the system is checked against a chain of rules to determine whether it should be allowed or denied.
 
-iptables -A OUTPUT -p tcp --dport 80 -j DROP
-iptables -A OUTPUT -p tcp --dport 443 -j DROP
+- **Chain of Rules**: The firewall processes rules from top to bottom. As soon as a rule matches the packet, the action specified in the rule is executed, and the packet stops moving through the chain.
+- **Common Chains**: 
+  - `INPUT`: Controls incoming packets.
+  - `OUTPUT`: Controls outgoing packets.
+  - `FORWARD`: Controls packets being routed through your system.
 
-iptables -A INPUT  -p tcp -s ip --dport 80 -j ACCEPT
+---
 
+## Basic IPTables Syntax
+
+Each rule follows a similar pattern:
+```bash
+iptables [CHAIN] [OPTIONS] -p [PROTOCOL] -s [SOURCE_IP] -d [DEST_IP] --dport [PORT] -j [ACTION]
+```
+- `-A`: Adds a rule to the chain.
+- `-p`: Protocol (e.g., TCP, UDP, ICMP).
+- `-s`: Source IP address.
+- `-d`: Destination IP address.
+- `--dport`: Destination port.
+- `-j`: Action to take (e.g., ACCEPT, DROP, REJECT).
+
+### Example: Allowing SSH Traffic
+
+```bash
+iptables -A INPUT -p tcp -s 192.168.1.100 --dport 22 -j ACCEPT
+```
+- This rule allows incoming **SSH** connections from the IP `192.168.1.100` to port `22` on the local machine.
+
+### Example: Dropping SSH Traffic from All Other IPs
+
+```bash
+iptables -A INPUT -p tcp --dport 22 -j DROP
+```
+- After allowing specific IPs for SSH, this rule will drop any other connection attempts to port 22.
+
+### Processing Order: Top to Bottom
+
+IPTables evaluates rules from top to bottom. The first matching rule determines the action taken on the packet. Be mindful of rule order to avoid unexpected behavior.
+
+---
+
+## Outgoing Traffic Control
+
+You can also control **outgoing** traffic with the `OUTPUT` chain.
+
+### Example: Allowing Specific Outbound Connections
+
+```bash
+iptables -A OUTPUT -p tcp -d 203.0.113.1 --dport 5432 -j ACCEPT  # Allow PostgreSQL to a specific IP
+iptables -A OUTPUT -p tcp -d 203.0.113.2 --dport 80 -j ACCEPT    # Allow HTTP to a specific IP
+```
+
+### Example: Blocking All Other Outbound HTTP and HTTPS
+
+```bash
+iptables -A OUTPUT -p tcp --dport 80 -j DROP   # Block all HTTP traffic
+iptables -A OUTPUT -p tcp --dport 443 -j DROP  # Block all HTTPS traffic
+```
+
+### Inserting Rules with `-I`
+
+Use the `-I` option to insert a rule at a specific position within the chain, rather than appending it to the end.
+
+```bash
+iptables -I OUTPUT 1 -p tcp -d 203.0.113.3 --dport 443 -j ACCEPT  # Insert a rule at position 1
+```
+
+### Deleting a Rule
+
+If you need to delete a rule, you can do so by specifying its position in the chain.
+
+```bash
+iptables -D OUTPUT 5  # Delete the 5th rule in the OUTPUT chain
+```
+
+---
+
+## Example: Database Access Control
+
+Here’s how you can secure your database by only allowing access from specific IP addresses and blocking all other traffic:
+
+```bash
+iptables -A INPUT -p tcp -s 203.0.113.4 --dport 5432 -j ACCEPT  # Allow PostgreSQL from a specific IP
+iptables -A INPUT -p tcp --dport 5432 -j DROP                   # Block all other PostgreSQL traffic
+```
+
+### Verifying Rules
+
+To check the status of your rules, you can use:
+
+```bash
 iptables -L
+```
 
--I option:
-iptables -I OUTPUT -p tcp -d ip --dport 443 -j ACCEPT # insert on first position of the chain
+To inspect the listening ports and connections:
 
-# delte a rule
-iptables -D OUTPUT 5
+```bash
+netstat -an | grep 5432  # Check PostgreSQL port status
+```
 
-DB iptables rule -> accept port 5432 for specific ip then block all others
-iptables -A INPUT -p tcp -s ip --dport 5432 -j ACCEPT
-iptables -A INPUT -p tcp --dport -j DROP
+---
 
-check rule:
-netstat -am | grep 5432
+## Ephemeral Port Range
 
-linux kernal:
-ephemeral port range -> 32768 - 60999
+The Linux kernel uses ephemeral ports (dynamic ports) for client-side connections. By default, the range is between **32768 and 60999**. These ports are temporarily assigned for short-lived connections.
+
+```bash
+cat /proc/sys/net/ipv4/ip_local_port_range
+```
+
+---
+
+## Firewalld
+
+**Firewalld** is a more modern and user-friendly alternative to IPTables. It supports dynamic rules, which means you don’t need to reload the entire rule set when making changes.
+
+### Basic Firewalld Commands
+
+To start or stop `firewalld`:
+```bash
+sudo systemctl start firewalld
+sudo systemctl stop firewalld
+```
+
+### Open a Port in Firewalld
+
+```bash
+sudo firewall-cmd --permanent --add-port=5432/tcp  # Open PostgreSQL port
+sudo firewall-cmd --reload                         # Reload the firewall
+```
+
+### Blocking a Port
+
+```bash
+sudo firewall-cmd --permanent --remove-port=5432/tcp  # Block PostgreSQL port
+sudo firewall-cmd --reload                            # Reload the firewall
+```
+
+### Listing Active Rules
+
+```bash
+sudo firewall-cmd --list-all
+```
+
+---
