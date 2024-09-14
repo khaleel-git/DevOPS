@@ -1231,3 +1231,9 @@ linux filesystem, partions, nfs, external storage devices (DAS/NAS/SAN), logical
 Block devices:
 ssd, hdd, found under dev, because data is written in blocks/chunks
 lsblk
+ls -l /dev/ | grep "^b"
+sda1, sda2, sda3
+
+each block device has major and minor number
+
+1 ram, 3 hard disk or cd rom, 
