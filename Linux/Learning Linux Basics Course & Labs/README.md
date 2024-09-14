@@ -1099,3 +1099,9 @@ tail /var/log/syslog
 
 # Service Management
 Systemd -> systemctl, systemjournal
+
+create a service:
+```
+# /etc/systemd/system/project.service
+[Service]
+ExecStart= /bin/bash /usr/bin/project.sh
