@@ -1105,3 +1105,8 @@ create a service:
 # /etc/systemd/system/project.service
 [Service]
 ExecStart= /bin/bash /usr/bin/project.sh
+```
+systemclt start project.service
+
+systemctl status project.service #start service
+systemctl 
