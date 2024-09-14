@@ -290,6 +290,11 @@ traceroute domain.com # this troubleshoot connectivity across 30 hopes
 netstat -an | grep 80 | grep -i LISTEN
 ```
 
+Linx Accounts:
+
+Access control, pam, network security, ssh handling, SELinux, etc.
+
+
 
 
 
