@@ -1105,6 +1105,10 @@ create a service:
 # /etc/systemd/system/project.service
 [Service]
 ExecStart= /bin/bash /usr/bin/project.sh
+User=my_user
+Restart=on-failure
+RestartSec=10
+
 
 [Install]
 WantedBy graphical.target
