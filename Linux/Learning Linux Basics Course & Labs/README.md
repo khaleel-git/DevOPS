@@ -854,25 +854,9 @@ Disabling SSH access for the root user enhances security by forcing users to log
 PermitRootLogin no
 ```
 
-### Use Fail2Ban to Protect Against Brute Force Attacks
+Network Security
+IPTABLES and firewalld
+chain of rules
 
-Fail2Ban monitors failed login attempts and bans IPs with multiple failed attempts in a short period:
-```bash
-sudo apt-get install fail2ban
-```
-
-Configure it to protect SSH:
-```bash
-sudo nano /etc/fail2ban/jail.local
-
-# Add the following:
-[sshd]
-enabled = true
-port = 22
-filter = sshd
-logpath = /var/log/auth.log
-maxretry = 5
-```
----
-
-For more detailed information on SSH, SCP, and related security practices, check out the official [OpenSSH Documentation](https://www.openssh.com/manual.html).
+iptables -A INPUT -p tcp -s ip --dport 22 -j ACCEPT
+-A: Add Rule, -p: Protocol, -s: Source, -d: Destination, --dport: Destination Port, -j Action take
