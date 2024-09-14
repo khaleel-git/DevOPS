@@ -1227,3 +1227,7 @@ du -lh # check space for a file
 
 Disk Partitions:
 linux filesystem, partions, nfs, external storage devices (DAS/NAS/SAN), logical volume manage (LVM)
+
+Block devices:
+ssd, hdd, found under dev, because data is written in blocks/chunks
+lsblk
