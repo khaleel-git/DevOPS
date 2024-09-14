@@ -1126,3 +1126,6 @@ WantedBy graphical.target
 ```
 systemctl daemon-reload
 systemctl start project.service
+
+# Systemctl
+manage service, start/stop servie, enable/disable, list and manga
