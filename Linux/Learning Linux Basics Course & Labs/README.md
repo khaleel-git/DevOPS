@@ -171,11 +171,12 @@ Linux distributions use different package formats and managers to handle softwar
   ```
 
 - **Tee command**:
-  ```bash
+```bash
   echo $SHELL | tee shell.txt  # Write to file and stdout
   echo $SHELL | tee -a shell.txt  # Append to file and stdout
- ```
+```
 
+## VIM Editor
 - **Insert mode**:
   Press `i` to enter insert mode.
 
