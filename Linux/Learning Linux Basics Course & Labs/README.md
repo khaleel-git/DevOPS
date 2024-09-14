@@ -610,6 +610,7 @@ Read,Write,Execute: 7
 Read,Write,-      : 6
 Read,-,Execute    : 5
 -,Write,Execute   : 3
+chmod u+rwx,g+r-x,o-rwx         # combined
 ```
 ---
 
@@ -715,3 +716,24 @@ chown [owner]:[group] filename
 - For collaborative environments, set group permissions properly to control access.
 
 ---
+
+## SSH and SCP
+Port 22
+ssh hostname or ip address
+ssh user@hostname or user@ip
+ssh -l user hostname 
+ssh -l user ip
+
+using-ssh keys
+key pair = private key + public key
+server has public key, a user having a privat key can login to server
+
+create:
+ssh-keygen -t rsa
+public key:  ~/.ssh/id_rsa.pub
+private key: ~/.ssh/id_rsa
+
+copy public key:
+ssh-copy-id user@hostname
+public key location: ~/.ssh/authorized_keys
+
