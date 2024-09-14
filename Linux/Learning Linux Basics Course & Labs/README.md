@@ -1146,7 +1146,7 @@ systemctl edit project.service --full
 
 systemctl get-default
 system set-default multi-user.target
-
+systemctl list-units --all
 ```
 
 
@@ -1154,4 +1154,8 @@ system set-default multi-user.target
 #JournalCtl
 query systemd journal
 troubleshooting tool
+check logs entries
+```
+journalctl # see logs
+journalctl 
 
