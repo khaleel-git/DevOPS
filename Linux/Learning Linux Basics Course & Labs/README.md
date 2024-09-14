@@ -1240,3 +1240,10 @@ each block device has major and minor number
 
 fdisk:
 sudo fdisk -l /dev/sda
+can create partitions
+gpt disk label
+
+partition types: 
+1. primay, 
+2.extended partition, 
+3.logical partition
