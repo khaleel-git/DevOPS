@@ -1244,6 +1244,6 @@ can create partitions
 gpt disk label
 
 partition types: 
-1. primay, 
-2.extended partition, 
+1. primay (max 4)
+2.extended partition (can't be used by its own, must used with primary partition)
 3.logical partition
