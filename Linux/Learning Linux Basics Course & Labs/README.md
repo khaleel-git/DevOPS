@@ -1157,5 +1157,7 @@ troubleshooting tool
 check logs entries
 ```
 journalctl # see logs
-journalctl 
+journalctl -b
+journalctl -u unit -> journalctl -u docker.service
+```
 
