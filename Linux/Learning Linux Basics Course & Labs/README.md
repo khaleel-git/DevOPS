@@ -1219,5 +1219,7 @@ systemctl start project.service
     journalctl --since "2023-09-01 10:00:00"  # View logs since a specific date and time
     journalctl --until "2023-09-01 12:00:00"  # View logs up until a specific date and time
     ```
-
 ---
+
+Storage in Linux:
+df -h
