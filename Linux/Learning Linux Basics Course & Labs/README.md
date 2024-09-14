@@ -309,9 +309,6 @@ sudo ip r add default via 172.16.238.1
 
 ---
 
-Here's a dedicated `README.md` file for the Linux accounts section with detailed information and examples:
-
-```markdown
 # Linux Accounts Management
 
 In Linux, managing users, groups, and access control is a key part of system administration. This guide provides detailed instructions on managing Linux accounts, access control, and other related areas.
