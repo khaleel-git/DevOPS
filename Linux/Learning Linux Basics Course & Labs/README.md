@@ -1141,6 +1141,12 @@ systemctl status
 # after making changes to service unit file
 systemctl daemon-reload
 
+# make changes / edit by service editor
+systemctl edit project.service --full
+
+systemctl get-default
+system set-default multi-user.target
+
 ```
 
 
