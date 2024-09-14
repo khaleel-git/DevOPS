@@ -1249,3 +1249,5 @@ partition types:
 3.logical partition (created withing extended partition)
 
 GPT: GUid partition table
+unlimited no of partitions per disk, limited by os
+always the best choice
