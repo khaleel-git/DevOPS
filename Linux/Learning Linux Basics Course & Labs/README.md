@@ -1009,3 +1009,49 @@ sudo firewall-cmd --list-all
 ```
 
 ---
+
+Cronjobs:
+run uptime at 9 pm everyday
+crontab -e
+```
+m h dom mon dow
+0 21 * * * uptime >> /tmp/system-report.txt # dont use sudo for crontab -e
+
+08:10 am 19th feb monday -> 
+minutes     hour    day     month   weekday
+10          8       19      2       1
+
+# 08:10 am 19th feb any weekday
+minutes     hour    day     month   weekday
+10          8       19      2       *
+
+# 08:10 am 19th every month any weekday
+minutes     hour    day     month   weekday
+10          8       19      *       *
+
+# 08:10 am everyday every month any weekday
+minutes     hour    day     month   weekday
+10          8       *      *        *
+
+# 10th Minute of everyhour everyday every month any weekday
+minutes    hour    day     month   weekday
+10          *       *      *        *
+
+# every Minute of everyhour everyday every month any weekday
+minutes    hour    day     month   weekday
+*          *       *      *        *
+
+# every 2 Minute of everyhour everyday every month any weekday
+minutes    hour    day     month   weekday
+*/2          *       *      *       *
+
+# every day at 9 pm 
+minutes    hour    day     month   weekday
+0          21      *      *       *
+```
+
+list all cronjobs:
+cronta -l
+
+check logs of cronjob:
+tail /var/log/syslog
