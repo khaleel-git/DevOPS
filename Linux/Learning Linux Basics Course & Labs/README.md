@@ -1128,4 +1128,11 @@ systemctl daemon-reload
 systemctl start project.service
 
 # Systemctl
-manage service, start/stop servie, enable/disable, list and manga
+manage service, start/stop servie, enable/disable, list and manage units, list and update targets
+
+
+
+#JournalCtl
+query systemd journal
+troubleshooting tool
+
