@@ -292,7 +292,59 @@ netstat -an | grep 80 | grep -i LISTEN
 
 Linx Accounts:
 
-Access control, pam, network security, ssh handling, SELinux, etc.
+Access control, pam, network security (iptables, firewalld), ssh hardening (authorized user can access ssh), SELinux (security policies isolating applications running on the same system), etc. (explain)
+
+
+user, uid, gid store in /etc/passwd, a user can have multiple groups, if no group assigned it can have same gid as of uid
+group, /etc/group, gid
+
+`id user`# uid, gid, groups
+grep -i user /etc/passwd
+
+admin, super user, uid = 0, sudoers
+systm account, ssh, mail uid 100 or between 500 - 1000
+service account, nginx
+
+see details:
+id
+who
+last
+
+switch user:
+su - # switch to root
+su -c "whoami"
+
+Sudo:
+give admin access,
+/etc/sudoers
+visudo /etc/sudoers
+
+nologin shell:
+grep -i ^root /etc/passwd
+/root:x:0:0:root:/root:/usr/sbin/nologin
+
+explain: ALL-(ALL) ALL explain any other permissions in vissudo sudoers
+
+## Access Control Files
+grep -i ^bob /etc/passwd
+
+passwords are store in : /etc/shadow # hashed password
+username:password:uid:gid:gecos:homedir:shell
+bob:x:1001:1001::/home/bob:/bin/bash #gecos: store info about contact address etc.
+
+/etc/shadow:
+grep -i ^bob /etc/shadow
+username:password:laschange:minage:maxage:warn:inactive:expdate
+bob:hashedpassword:181888:9:99999:7:::
+
+/etc/group: grep -i ^bob /etc/group # group file
+name:password:gid:memebers
+developer:x:1001:bob
+
+## user management
+useradd bob # system admin command `grep -i bob /etc/passwd` -> bob:x:1002:1002::/home/bob:/bin/sh, `grep -i bob /etc/shadow` -> bob:!:18341:0:99999:7:::
+passwd bob # set password
+user can change its password by running `passwd` command without argument
 
 
 
