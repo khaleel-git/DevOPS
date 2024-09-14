@@ -1098,3 +1098,4 @@ tail /var/log/syslog
 --- 
 
 # Service Management
+Systemd -> systemctl, systemjournal
