@@ -860,3 +860,9 @@ chain of rules
 
 iptables -A INPUT -p tcp -s ip --dport 22 -j ACCEPT
 -A: Add Rule, -p: Protocol, -s: Source, -d: Destination, --dport: Destination Port, -j Action take
+iptables -A INPUT -p tcp --dport 22 -j DROP: reject connection for all other source ips
+iptables -L
+
+its top to bottom.
+
+iptables -A INPUT -p tcp --dport 5432 -j ACCEPT
