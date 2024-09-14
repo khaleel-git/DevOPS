@@ -1244,6 +1244,8 @@ can create partitions
 gpt disk label
 
 partition types: 
-1. primay (max 4)
-2.extended partition (can't be used by its own, must used with primary partition)
-3.logical partition
+1. primay (max 4) MBR: master boot record, max size: 2TB
+2.extended partition (can't be used by its own, must used with other partitoin)
+3.logical partition (created withing extended partition)
+
+GPT: GUid partition table
