@@ -1129,6 +1129,15 @@ systemctl start project.service
 
 # Systemctl
 manage service, start/stop servie, enable/disable, list and manage units, list and update targets
+```
+systemctl start docker
+systemclt stop docker
+systemctl restart docker
+systemctl reload docker
+systemctl enable docker
+systemctl disable docker
+systemctl status
+```
 
 
 
