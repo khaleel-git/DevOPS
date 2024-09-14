@@ -176,193 +176,198 @@ Linux distributions use different package formats and managers to handle softwar
   echo $SHELL | tee -a shell.txt  # Append to file and stdout
  ```
 
+
+Here's a detailed `README.md` file based on your input:
+
+```markdown
+# Linux and Vim Basics
+
 ## Vim Editor
-update-alternatives --display editor: check default editors
-- **Basic Commands**:
-  - **Open file**:
-    ```bash
-    vim filename
-    ```
 
-  - **Insert mode**:
-    Press `i` to enter insert mode.
+Vim is a powerful text editor commonly used in Linux environments. Below are some useful commands to get started.
 
-  - **Save and exit**:
-    Press `Esc`, then type `:wq` and press `Enter`.
+### Basic Commands
 
-  - **Exit without saving**:
-    Press `Esc`, then type `:q!` and press `Enter`.
+- **Open file**:
+  ```bash
+  vim filename
+  ```
 
-  - **Search within file**:
-    Press `Esc`, then type `/search_term` and press `Enter`.
+- **Insert mode**:
+  Press `i` to enter insert mode.
 
-  - **Replace text**:
-    Press `Esc`, then type `:%s/old_text/new_text/g` and press `Enter`.
+- **Save and exit**:
+  Press `Esc`, then type `:wq` and press `Enter`.
 
-  - **Navigate**:
-    - `j`: Move down
-    - `k`: Move up
-    - `h`: Move left
-    - `l`: Move right
+- **Exit without saving**:
+  Press `Esc`, then type `:q!` and press `Enter`.
 
-    x: remove a letter
-    yy: copy a line
-    p: paste a line
-    dd: cut or delte a line
-    d3d: delete first 3 lines
-    u: undo
-    ctr + r: redo
+- **Search within file**:
+  Press `Esc`, then type `/search_term` and press `Enter`.
 
-    insert mode: AIOaio
+- **Replace text**:
+  Press `Esc`, then type `:%s/old_text/new_text/g` and press `Enter`.
 
+- **Navigate**:
+  - `j`: Move down
+  - `k`: Move up
+  - `h`: Move left
+  - `l`: Move right
+  - `x`: Remove a character
+  - `yy`: Copy a line
+  - `p`: Paste a line
+  - `dd`: Delete a line
+  - `d3d`: Delete the first 3 lines
+  - `u`: Undo
+  - `Ctrl + r`: Redo
 
-# Networking
-/etc/hosts: add local dns entries (Name resolution)
+- **Insert mode shortcuts**:
+  - `A`: Move to the end of the line and insert.
+  - `I`: Move to the beginning of the line and insert.
+
+### Checking Default Editors
+
+```bash
+update-alternatives --display editor
 ```
+
+---
+
+## Networking
+
+### /etc/hosts
+
+You can use the `/etc/hosts` file to add local DNS entries for quick name resolution.
+
+```bash
 192.168.0.1 db-server
 192.168.0.2 web-server
 192.168.0.3 nfs
 ```
-NSLookup
-Dig
 
-## DNS Server
-ip: 192.168.1.100
-cat /etc/resolv.conf
-```
+### DNS Server Setup
+
+You can configure DNS servers in the `/etc/resolv.conf` file:
+
+```bash
 nameserver 192.168.1.100
-nameserver 8.8.8.8 # knows wordwide name resolution list
-search mycompany.com prod.mycompany.com # next time within mycompany servers, we can access prod server by using its first name
+nameserver 8.8.8.8  # Google's public DNS
+search mycompany.com prod.mycompany.com
 ```
-dont need in ets/hosts file
 
-cat /etc/nsswitch.conf #change order
-```
+For more information about DNS resolution, check `/etc/nsswitch.conf` and modify the order of DNS lookups:
+
+```bash
 hosts: files dns
 ```
-Resolution of dns:
-apps.google.com, org DNS, Root DNS, .com DNS, Google DNS (apps.google.com, 216.58.221.78)
-org DNS may cache the dns for few seconds
 
+### Record Types
 
-## Record Type
-A record: ip4
-AAAA record: ipv6
-CNAME: food.mycompany.com -> eat.mycompany.com, hungry.mycompany.com
+- **A Record**: Maps domain to IPv4 address.
+- **AAAA Record**: Maps domain to IPv6 address.
+- **CNAME**: Maps a domain to another domain.
 
-# Test Dns resolution4
-nslookup # does not look for /etc/hosts
-dig # more detailed than nslookup
+### Test DNS Resolution
 
+- `nslookup`: Basic DNS query tool.
+- `dig`: More detailed DNS query tool.
+
+---
 
 ## Network Basics
+
 ### Switching
-```
-# in this switch network all nodes and send and recive their packets
-Switching: A -- B: `ip link`
-Switch ip is: 192.168.1.0
-Assign ip to node A: `ip addr add 192.168.1.10/24 dev eth0'
-Assign ip to node B: 'ip addr add 182.168.1.11/24 dev eth0'
+
+Assign IP addresses to nodes within a network switch:
+
+```bash
+ip addr add 192.168.1.10/24 dev eth0  # Assign IP to node A
+ip addr add 192.168.1.11/24 dev eth0  # Assign IP to node B
 ```
 
 ### Routing
-router helps connect two networks together
-routing table and default gateway
 
-ip link: list and modify interface on the host
-ip addr: see ip addresses on the interface 
-ip addr add ip/24 dev eth0
-ip route: used to view routing tables
-ip route add ip/24 via ip: used to add entries in the ip tables
+Routers connect different networks, and you can view and modify routing tables with the following commands:
 
-make interface up: 
-`sudo ip link set dev eth0 up`
-
-make/set a default gateway:
-`sudo ip r add default via 172.16.238.1`
-
-## Troubleshooting network issue
-```
-ip link # first check if the interface is up
-nslookup domain.com # then check dns resolution
-ping domain.com # ping is not an efficient tool to check connectivity issue as many nodes disables it
-traceroute domain.com # this troubleshoot connectivity across 30 hopes
-netstat -an | grep 80 | grep -i LISTEN
+```bash
+ip route                # View routing table
+ip route add ip/24 via ip # Add routes to the table
 ```
 
-Linx Accounts:
+Make an interface active:
 
-Access control, pam, network security (iptables, firewalld), ssh hardening (authorized user can access ssh), SELinux (security policies isolating applications running on the same system), etc. (explain)
+```bash
+sudo ip link set dev eth0 up
+```
 
+Set a default gateway:
 
-user, uid, gid store in /etc/passwd, a user can have multiple groups, if no group assigned it can have same gid as of uid
-group, /etc/group, gid
+```bash
+sudo ip r add default via 172.16.238.1
+```
 
-`id user`# uid, gid, groups
-grep -i user /etc/passwd
+### Troubleshooting Network Issues
 
-admin, super user, uid = 0, sudoers
-systm account, ssh, mail uid 100 or between 500 - 1000
-service account, nginx
+- **Check interface status**:
+  ```bash
+  ip link
+  ```
 
-see details:
-id
-who
-last
+- **Check DNS resolution**:
+  ```bash
+  nslookup domain.com
+  ```
 
-switch user:
-su - # switch to root
-su -c "whoami"
+- **Check network connectivity**:
+  ```bash
+  traceroute domain.com
+  ```
 
-Sudo:
-give admin access,
-/etc/sudoers
-visudo /etc/sudoers
+- **Check open ports**:
+  ```bash
+  netstat -an | grep 80 | grep -i LISTEN
+  ```
 
-nologin shell:
-grep -i ^root /etc/passwd
-/root:x:0:0:root:/root:/usr/sbin/nologin
+---
 
-explain: ALL-(ALL) ALL explain any other permissions in vissudo sudoers
+## Linux Accounts
 
-## Access Control Files
-grep -i ^bob /etc/passwd
+### User and Group Information
 
-passwords are store in : /etc/shadow # hashed password
-username:password:uid:gid:gecos:homedir:shell
-bob:x:1001:1001::/home/bob:/bin/bash #gecos: store info about contact address etc.
+User and group data is stored in `/etc/passwd` and `/etc/group`.
 
-/etc/shadow:
-grep -i ^bob /etc/shadow
-username:password:laschange:minage:maxage:warn:inactive:expdate
-bob:hashedpassword:181888:9:99999:7:::
+- **Check user details**:
+  ```bash
+  id username
+  ```
 
-/etc/group: grep -i ^bob /etc/group # group file
-name:password:gid:memebers
-developer:x:1001:bob
+- **Admin users**:
+  Root user has UID 0. Admin permissions are managed through `/etc/sudoers`.
 
-## user management
-useradd bob # system admin command `grep -i bob /etc/passwd` -> bob:x:1002:1002::/home/bob:/bin/sh, `grep -i bob /etc/shadow` -> bob:!:18341:0:99999:7:::
-passwd bob # set password
-user can change its password by running `passwd` command without argument
+### User Management
 
+- **Add a new user**:
+  ```bash
+  useradd bob
+  passwd bob
+  ```
 
+- **Delete a user**:
+  ```bash
+  userdel bob
+  ```
 
+- **Add a group**:
+  ```bash
+  groupadd -g 1011 developer
+  ```
 
+- **Delete a group**:
+  ```bash
+  groupdel developer
+  ```
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-For more details and practical examples, check out the [KodeKloud Linux Basics Course](https://learn.kodekloud.com/user/courses/learning-linux-basics-course-labs).
-Happy Learning!
-
+- **Switch user**:
+  ```bash
+  su -c "whoami"
+  ```
