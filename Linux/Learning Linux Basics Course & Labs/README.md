@@ -1251,3 +1251,7 @@ partition types:
 GPT: GUid partition table
 unlimited no of partitions per disk, limited by os
 always the best choice
+
+
+sdb:
+gdisk /dev/sdb # create parition, imporved version of fdisk
