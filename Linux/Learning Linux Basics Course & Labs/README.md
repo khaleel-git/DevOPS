@@ -1103,18 +1103,18 @@ Systemd -> systemctl, systemjournal
 create a service:
 ```
 # /etc/systemd/system/project.service
+[Unit]
+Description python django for my project
+
 [Service]
 ExecStart= /bin/bash /usr/bin/project.sh
 User=my_user
 Restart=on-failure
 RestartSec=10
 
-
 [Install]
 WantedBy graphical.target
 ```
 systemclt start project.service
-
 systemctl status project.service # service status
-systemctl start project.service  # service start
 systemctl stop project.service   # service stop
