@@ -604,6 +604,11 @@ If the owner does not have execute (`x`) permissions but the group does, Linux w
 - **3** — Write, execute
 - **0** — No permission
 
+# siple representation
+Read,Write,Execute: 7
+Read,Write,-      : 6
+Read,-,Execute    : 5
+-,Write,Execute   : 3
 ---
 
 ## Changing Permissions
