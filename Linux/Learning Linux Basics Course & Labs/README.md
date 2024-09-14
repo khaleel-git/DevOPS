@@ -527,16 +527,189 @@ The `/etc/shadow` file includes fields for password aging:
 
 ---
 
-File Permissions and Ownership
+# Linux File Permissions and Ownership
 
+Each file and directory in Linux has permissions assigned to three categories of users:
+
+- **Owner (u)**: The user who owns the file.
+- **Group (g)**: A group of users assigned to the file.
+- **Other (o)**: Any other user who has access to the file.
+
+The permissions define what each category can do with the file:
+
+- **r** (read): View the file's contents.
+- **w** (write): Modify or delete the file.
+- **x** (execute): Run the file as a program (if it's a script or executable).
+
+---
+
+### Example: Listing File Permissions
+
+```bash
 ls -l bash-script.sh
+```
+Output:
+```
 -rwxrwxr-x 1 bob bob 89 Mar 17 01:35 bash-script.sh
+```
 
+Breaking this down:
+
+- `-rwxrwxr-x` — File permissions (owner, group, other).
+- `bob` — The owner of the file.
+- `bob` — The group that owns the file.
+- `89` — The file size (in bytes).
+- `Mar 17 01:35` — Last modified date and time.
+- `bash-script.sh` — The file name.
+
+### Permission Breakdown:
+```
 -rwxrwxr-x
-owner, group, other -> u,g,0 
-r,read,4
-w,write,2
-x,execute,1
--,no permission, 0
+|  |  |  |    
+|  |  |  └─  Other: r-x (Read, no Write, Execute)
+|  |  └───── Group: rwx (Read, Write, Execute)
+|  └──────── Owner: rwx (Read, Write, Execute)
+└─────────── File type: - (regular file)
+```
 
-file/directory permission are sequential
+---
+
+### Numeric Representation of Permissions
+
+Each permission (read, write, execute) has a corresponding numeric value:
+- **Read (r)**: 4
+- **Write (w)**: 2
+- **Execute (x)**: 1
+- **No permission (-)**: 0
+
+Permissions for the owner, group, and others are expressed as a three-digit number. Each digit is the sum of the values for read, write, and execute.
+
+Example:
+- **rwx** = 4 + 2 + 1 = **7**
+- **rw-** = 4 + 2 + 0 = **6**
+- **r-x** = 4 + 0 + 1 = **5**
+
+So, `rwxrwxr-x` can be represented as **775**.
+
+---
+
+### Special Permission Scenarios
+
+If the owner does not have execute (`x`) permissions but the group does, Linux will still apply the owner's permissions, effectively overriding the group permissions.
+
+### Common Permission Values:
+- **7** — Read, write, execute
+- **6** — Read, write
+- **5** — Read, execute
+- **3** — Write, execute
+- **0** — No permission
+
+---
+
+## Changing Permissions
+
+Use the `chmod` command to modify file permissions.
+
+### Basic Syntax:
+```bash
+chmod [who]=[permissions] filename
+```
+Where `who` can be:
+- **u**: Owner (user)
+- **g**: Group
+- **o**: Others
+- **a**: All (Owner, Group, and Others)
+
+### Examples:
+
+- **Grant full access to the owner**:
+  ```bash
+  chmod u+rwx file.txt
+  ```
+  Resulting permissions: `rwx------`
+
+- **Grant read-only access to everyone**:
+  ```bash
+  chmod a+r file.txt
+  ```
+  Resulting permissions: `r--r--r--`
+
+- **Remove all permissions from others**:
+  ```bash
+  chmod o-rwx file.txt
+  ```
+  Resulting permissions: `rwxrwx---`
+
+### Numeric Mode:
+You can also use numeric values to set permissions more quickly.
+
+- **Grant full access to owner, group, and others**:
+  ```bash
+  chmod 777 file.txt
+  ```
+  Resulting permissions: `rwxrwxrwx`
+
+- **Grant read and execute access to owner, group, and others**:
+  ```bash
+  chmod 555 file.txt
+  ```
+  Resulting permissions: `r-xr-xr-x`
+
+- **Grant read/write access to owner and group, no access for others**:
+  ```bash
+  chmod 660 file.txt
+  ```
+  Resulting permissions: `rw-rw----`
+
+- **Grant full access to owner, read/execute to group, no access to others**:
+  ```bash
+  chmod 750 file.txt
+  ```
+  Resulting permissions: `rwxr-x---`
+
+---
+
+## Changing File Ownership
+
+The **owner** and **group** can be changed using the `chown` command.
+
+### Basic Syntax:
+```bash
+chown [owner]:[group] filename
+```
+
+### Examples:
+
+- **Change the owner of a file**:
+  ```bash
+  chown bob bash-script.sh
+  ```
+  This command changes the owner of `bash-script.sh` to `bob`.
+
+- **Change the owner and group of a file**:
+  ```bash
+  chown bob:developer file.txt
+  ```
+  This changes the owner to `bob` and the group to `developer`.
+
+- **Change the group of a file**:
+  ```bash
+  chgrp android file.txt
+  ```
+  This changes the group of `file.txt` to `android`.
+
+---
+
+## Practical Tips
+
+- Always be cautious when setting file permissions—giving write access to others can pose a security risk.
+- Use `chmod` carefully on sensitive files (like scripts and config files).
+- Use numeric permissions for quicker commands, but symbolic mode (`u`, `g`, `o`) for more clarity.
+- For collaborative environments, set group permissions properly to control access.
+
+---
+
+## Summary
+
+Mastering Linux file permissions and ownership is crucial for managing system security and user collaboration. Whether you need to restrict access to a private file or allow group collaboration, the `chmod`, `chown`, and `chgrp` commands provide the flexibility to configure the system according to your needs.
+---
