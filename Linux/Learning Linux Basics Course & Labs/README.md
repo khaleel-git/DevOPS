@@ -1221,6 +1221,3 @@ systemctl start project.service
     ```
 
 ---
-
-This guide covers the essentials of managing Linux services using `systemd` and `systemctl`, as well as querying logs with `journalctl`. With these tools, you can efficiently control services and troubleshoot issues.
-
