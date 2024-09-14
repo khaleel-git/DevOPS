@@ -1105,6 +1105,9 @@ create a service:
 # /etc/systemd/system/project.service
 [Service]
 ExecStart= /bin/bash /usr/bin/project.sh
+
+[Install]
+WantedBy graphical.target
 ```
 systemclt start project.service
 
