@@ -1463,4 +1463,7 @@ resize filesystem on vol1:
 vgs # list vg detail, we used 1gb out of 29GB, we are fine, we can resize
 lvresize -L +1G -n /dev/caleston_vg/vol1
 df -hP /mnt/vol1 # still have a capacity 
-reseize2fs /dev/caleston_vg/vol1 # filesystem create inside logical volution can resize to match the logcal volume, we dont have to stop or unmount filesystem4
+reseize2fs /dev/caleston_vg/vol1 # filesystem create inside logical volution can resize to match the logcal volume, we dont have to stop or unmount filesystem
+df -hP /mnt/vol1 # 
+/dev/mapper/caleston_vg-vol1# both are the same, one under
+/dev/caleston_vg/vol1
