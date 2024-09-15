@@ -1367,4 +1367,10 @@ dedicated to single server, no ideal for enterprice, only sutiable for small bus
 NAS:
 host network, data traffic, may be located in the same rack of data center
 nfs server, host a, host b, shared storage
-ideal for centralazed storage, hightly avaiable, 
+ideal for centralazed storage, hightly avaiable, backend storage for web server, even run databases
+not a recommended storage to install an os
+
+SAN:
+same as nas, business critical application high , low latecny, 
+
+SAN device, firebre channel switches, host q, hostb,
