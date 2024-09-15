@@ -1561,4 +1561,3 @@ sudo mount 192.168.10.100:/srv/shared_data /mnt/nfs_share
 df -h /mnt/nfs_share
 
 ```
----
