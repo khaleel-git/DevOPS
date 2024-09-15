@@ -1547,22 +1547,4 @@ sudo mount 192.168.10.100:/srv/shared_data /mnt/nfs_share
 # Verify
 df -h /mnt/nfs_share
 ```
-
-### SAN with iSCSI Example:
-Set up a SAN environment where multiple servers can access block storage over the network using **iSCSI**.
-
-```bash
-# On the SAN server, configure the iSCSI target
-sudo tgtadm --lld iscsi --op new --mode target --tid 1 -T iqn.2024-09.com.example:storage.target1
-sudo tgtadm --lld iscsi --op new --mode logicalunit --tid 1 --lun 1 -b /dev/sdc
-
-# On the client server, discover and mount the iSCSI target
-sudo iscsiadm -m discovery -t st -p 192.168.10.100
-sudo iscsiadm -m node --login
-```
-create pv:
-sudo pvcreate /dev/vdb and sudo pvcreate /dev/vdc
-
-create a new volume group:
-sudo vgcreate caleston_vg /dev/vdb /dev/vdc
 ---
