@@ -88,6 +88,8 @@ Linux distributions use different package formats and managers to handle softwar
   tar -cf test.tar file1 file2 file3  # Create tar archive
   tar -xf test.tar  # Extract tar archive
   tar -zcf test.tar.gz file1 file2  # Create gzip compressed tar archive
+
+  sudo tar -C /opt/ -xvf caleston-code.tar.gz # unarchive
   ```
 
 ### Compression Utilities
@@ -306,6 +308,7 @@ sudo ip r add default via 172.16.238.1
 - **Check open ports**:
   ```bash
   netstat -an | grep 80 | grep -i LISTEN
+  sudo netstat -natulp | grep postgres | grep LISTEN
   ```
 
 ---
@@ -1143,6 +1146,31 @@ RestartSec=10
 WantedBy=graphical.target
 ```
 
+### A service for Django app
+Create a new service called mercury.service with the following requirements.
+
+Service name: - mercury.service, WorkingDirectory: - /opt/caleston-code/mercuryProject/, Command to run: /usr/bin/python3 manage.py runserver 0.0.0.0:8000.
+
+Restart on failure and enable for multi-user.target.
+
+Run as user mercury.
+
+Set description: Project Mercury Web Application.
+
+Create the unit file under /etc/systemd/system. Once done, enable and start the mercury.service.
+```bash
+[Unit]
+Description=Python Django for my project
+
+[Service]ExecStart=/usr/bin/python3 manage.py runserver 0.0.0.0:8000   
+Restart=on-failure
+WorkingDirectory=/opt/caleston-code/mercuryProject/
+user=mercury
+Description="Project Mercury Web Application"
+
+[Install]
+WantedBy=multi-user.target
+```
 After updating a service unit file, reload the systemd manager configuration:
 ```bash
 systemctl daemon-reload   # Reloads systemd configurations
