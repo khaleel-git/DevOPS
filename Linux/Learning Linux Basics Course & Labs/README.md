@@ -1497,9 +1497,9 @@ lsblk
    Once the LV is created, create a filesystem and mount it.
 
    ```bash
-   sudo mkfs.ext4 /dev/storage_vg/data_lv
+   sudo mkfs.ext4 /dev/storage_vg-data_lv
    sudo mkdir /mnt/data
-   sudo mount /dev/storage_vg/data_lv /mnt/data
+   sudo mount /dev/storage_vg-data_lv /mnt/data
    ```
 
 5. **Verify Storage**:
@@ -1514,7 +1514,7 @@ One of the key advantages of LVM is the ability to resize volumes without downti
 
 ```bash
 # Extend the LV by 2GB
-sudo lvextend -L +2G /dev/storage_vg/data_lv
+sudo lvextend -L +2G -n /dev/storage_vg/data_lv
 
 # Resize the filesystem to match the new LV size
 sudo resize2fs /dev/storage_vg/data_lv
