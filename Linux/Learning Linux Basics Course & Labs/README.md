@@ -1128,25 +1128,6 @@ systemctl stop project.service    # Stop the service
 
 ### Updating the Service
 
-You can update the service with more detailed configurations like dependencies, restart policies, etc.:
-
-```bash
-# /etc/systemd/system/project.service
-[Unit]
-Description=Python Django for my project
-After=postgresql.service
-
-[Service]
-ExecStart=/bin/bash /usr/bin/project.sh
-User=my_user
-Restart=on-failure
-RestartSec=10
-
-[Install]
-WantedBy=graphical.target
-```
-
-### A service for Django app
 Create a new service called mercury.service with the following requirements.
 
 Service name: - mercury.service, WorkingDirectory: - /opt/caleston-code/mercuryProject/, Command to run: /usr/bin/python3 manage.py runserver 0.0.0.0:8000.
