@@ -1458,3 +1458,7 @@ lvcreate -L 1G -n vol1 caleston_vg
 lvdisplay
 lvs
 mkfs.ext4 /dev/caleston_vg/vol1
+mount -t ext4 /dev/caleston_vg/vol1 /mnt/vol1
+resize filesystem on vol1:
+vgs # list vg detail, we used 1gb out of 29GB, we are fine, we can resize
+l
