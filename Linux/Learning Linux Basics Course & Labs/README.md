@@ -1384,4 +1384,9 @@ softrware/repo directory, can be shared to many servers, /mnt/sofware/repos
 client, server,
 /etc/exports configurations file, defien client shich should be accessed
 ```
-/sofrware/repos 10.61.35.2021 ip2
+/sofrware/repos 10.61.35.2021 node1-ip node2-ip
+```
+specific ports have to be open bcz firewall exists in nfs
+exportsfs -a
+exports fs -0 ip:/softare/repos
+can be mounted on a local directoyr: /mnt/software/repos
