@@ -37,6 +37,37 @@ lsblk (give information of block devices) major:minor
 lscpu (list cpu architecture, core, model etc)
 32 bit (2^32 = 4G store registers) and 64 bit (can address 2^64 18EB)
 
+lsmem --summary
+free -m
+lshw
+
+The boot process can be broken down into four stages
+
+BIOS POST (power on self test)
+Boot Loader (GRUB2) - grand unified boot loader version 2
+Kernel Initialization - decompress kernel, load into memory, initizilation
+INIT Process (systemd)
+
+In most of the current day linux distribution, the INIT function then calls the systemd daemon.
+The systemd is responsible for bringing the linux host to usable state.
+systemd is responsible for mounting the file systems, starting and managing system services.
+systemd is the universal standard these days, but not too long ago another initialization process called system V (five) init was used. It is also called **Sys5
+For example these were used in RHEL 6 or CentOS 6 distribution
+Once of the key advantages of using systemd over system V(five) init is that it reduces the system startup time by parallelizing the startup of services.
+To check the init system used run ls -l /sbin/init, if it is systemd then you will see a pointer to /lib/systemd/systemd
+
+$ ls -l /sbin/init
+
+Systemd Targets (Run Levels)
+
+graphical interface: runlevel 5 (need display manager service), graphical target
+cmd mode: runlevel 3, multi user target
+
+systemctl get-default
+ls -ltr /etc/systemd/system/default.target
+systemctl set-default multi-user.target # change run level
+
+
 ## Package Management
 
 Linux distributions use different package formats and managers to handle software installations and updates. Here’s a brief overview:
