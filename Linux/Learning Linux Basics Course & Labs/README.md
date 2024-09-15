@@ -1,4 +1,21 @@
 # Linux Basics Guide
+Linux core concepts
+Linux kernal
+Linux Boot Sequence
+System targets (runlevels)
+
+linux kernal -> memory, cpu, devices and applications/process [communication]
+memory management, process management, device drivers, system calls and security, monolithic, modular
+kernal version: `uname`
+```
+uname -r
+4.15.0-72-generic
+4: kernal version
+15: major version
+0: minor version
+72: patch level
+generic: distro specific info
+
 
 ## Package Management
 
