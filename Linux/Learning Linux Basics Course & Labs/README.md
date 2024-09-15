@@ -1454,3 +1454,7 @@ vgdisplay
 ```
 
 create logical volume:
+lvcreate -L 1G -n vol1 caleston_vg
+lvdisplay
+lvs
+mkfs.ext4 /dev/caleston_vg/vol1
