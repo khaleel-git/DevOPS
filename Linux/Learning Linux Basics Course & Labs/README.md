@@ -1301,3 +1301,7 @@ mkdri /mnt/ext4
 mount /dev/sdb1 /mnt/ext4
 mount | grep .edev/sdb1
 df -hP | grep /dev/sdb1
+
+vi /etc/fstab
+```
+/dev/sda1 / ext4 defaults,re
