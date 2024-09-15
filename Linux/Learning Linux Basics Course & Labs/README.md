@@ -1382,3 +1382,6 @@ does not store in blocks
 store dta as file
 softrware/repo directory, can be shared to many servers, /mnt/sofware/repos
 client, server,
+/etc/exports configurations file, defien client shich should be accessed
+```
+/sofrware/repos 10.61.35.2021 ip2
