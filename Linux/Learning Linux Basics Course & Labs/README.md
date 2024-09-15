@@ -1467,3 +1467,4 @@ reseize2fs /dev/caleston_vg/vol1 # filesystem create inside logical volution can
 df -hP /mnt/vol1 # 
 /dev/mapper/caleston_vg-vol1# both are the same, one under
 /dev/caleston_vg/vol1
+/dev/mapper/caleston_vg-vol1
