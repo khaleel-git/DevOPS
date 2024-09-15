@@ -1356,5 +1356,7 @@ bob@caleston-lp10:~$ sudo blkid /dev/vdc
 /dev/vdc: UUID="a98c1340-b8d6-4305-a6e4-a39786374e3c" TYPE="ext2"
 ```
 ---
-DAS, NAX and SAN
-attach an external drive
+DAS: Direct attach storage, NAS: Network Attached Storage, and SAN: Storage Area Network
+attach an external drive, enterprice storage with high available
+
+
