@@ -1307,3 +1307,4 @@ vi /etc/fstab
 <filesystem>  <mount point>  <type>   <options>                              <dump>    <pass>
 /dev/sda1    /               ext4     defaults,relatime,errors=panic  0      1          ~
 ```
+echo "/dev/sdb1   /mnt/ext4    ext4   rw 0  0" >> /etc/fstab
