@@ -1359,4 +1359,10 @@ bob@caleston-lp10:~$ sudo blkid /dev/vdc
 DAS: Direct attach storage, NAS: Network Attached Storage, and SAN: Storage Area Network
 attach an external drive, enterprice storage with high available
 
+DAS:
+external storage is directly attached to the server
+excellent performance, fast, no firewall
+dedicated to single server, no ideal for enterprice, only sutiable for small busines
+
+NAS:
 
