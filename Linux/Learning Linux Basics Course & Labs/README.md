@@ -1255,3 +1255,4 @@ always the best choice
 
 sdb:
 gdisk /dev/sdb # create parition, imporved version of fdisk
+lsblk /dev/vdc
