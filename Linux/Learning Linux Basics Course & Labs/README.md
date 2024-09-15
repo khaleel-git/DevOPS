@@ -1503,7 +1503,7 @@ LVM allows dynamic management of disk space, offering flexibility in resizing vo
 
 ---
 
-## Example Command Output (Consistency in Naming):
+## Example Command Output:
 
 ### Physical Volume Display:
 ```bash
