@@ -1286,3 +1286,4 @@ Do you want to proceed? (Y/N): y
 OK; writing new GUID partition table (GPT) to /dev/vdb.
 The operation has completed successfully.
 bob@caleston-lp10:~$ 
+```
