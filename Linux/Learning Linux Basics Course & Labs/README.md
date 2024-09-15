@@ -1374,3 +1374,5 @@ SAN:
 same as nas, business critical application high , low latecny, 
 
 SAN device, firebre channel switches, host q, hostb,
+raw disk, can create partionot, mount on nodes, FC, iSCSI, block storage, fast secure and reliable, expensive
+san over nas: can host mission critical workloads, databse, mssql, vmware, kvm, ms hyperv
