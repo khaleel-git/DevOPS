@@ -1220,10 +1220,6 @@ systemctl start project.service
     journalctl --until "2023-09-01 12:00:00"  # View logs up until a specific date and time
     ```
 ---
-Here’s the corrected and structured README.md file for **Storage in Linux**, including improvements for clarity, formatting, and fixing any errors in the raw content you provided:
-
----
-
 # Storage in Linux
 
 ## Disk Usage
