@@ -16,6 +16,26 @@ uname -r
 72: patch level
 generic: distro specific info
 
+first kernal by: linux torvalds
+
+memory management:
+kernel space - kernal, device drivers (kernel code, kernel extensions, device drivers)
+user space -> applications/programs (c,java,python,ruby,docker containers) -> makes system calls -> hardware (open a file, write to a file, list processed, defining a vaiable) and cat /etc/os-release
+
+
+usb device -> kernal space (device driver) detects -> ueevents -> user space (udev) -> /dev/sdb1 (usb attached disk is visible here)
+
+dmesg (ring buffer) -> kernel message, logs, hardware logs, config, 
+dmesg | grep -i usb
+udevadm info --query=path --nme=/dev/sda5
+
+udevadm monitor (get detail of removed or attached drive)
+
+lspci  (ehter card, raid controller, preferlan controller of interconnector)
+lsblk (give information of block devices) major:minor
+
+lscpu (list cpu architecture, core, model etc)
+32 bit (2^32 = 4G store registers) and 64 bit (can address 2^64 18EB)
 
 ## Package Management
 
