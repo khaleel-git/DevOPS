@@ -1398,4 +1398,7 @@ unlimited number of disk can be grouped together,
 can be resized dynamically
 /home /var /tmp on laptop can be resized
 apt install lvm2
-physical volume object
+physical volume object, pv, /dev/sdb1 unused
+pvcreate /dev/sdb
+vgcreate caleston_vg /dev/sdb # volume group
+pvdisplay
