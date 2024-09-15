@@ -1561,4 +1561,4 @@ sudo mount 192.168.10.100:/srv/shared_data /mnt/nfs_share
 df -h /mnt/nfs_share
 
 ```
-Credits: [Learning Linux Basics Course & Labs](https://learn.kodekloud.com/user/courses/learning-linux-basics-course-labs/)
+**Credits**: [Learning Linux Basics Course & Labs](https://learn.kodekloud.com/user/courses/learning-linux-basics-course-labs/)
