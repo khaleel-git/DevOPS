@@ -1355,181 +1355,212 @@ bob@caleston-lp10:~$ sudo blkid /dev/vdc
 [sudo] password for bob: 
 /dev/vdc: UUID="a98c1340-b8d6-4305-a6e4-a39786374e3c" TYPE="ext2"
 ```
-# Linux Storage Management: DAS, NAS, and SAN
-
-This guide explores the different types of storage systems, including DAS (Direct Attached Storage), NAS (Network Attached Storage), and SAN (Storage Area Network), as well as a comparison between NFS (Network File System) and SAN. It also covers how to manage storage in Linux using LVM (Logical Volume Manager).
+Here's a creative, practical guide in `.md` format based on your references, but with a fresh perspective and unique examples. It provides a thorough explanation of storage management, including DAS, NAS, SAN, and NFS, along with LVM setup and management, using commands and explanations tailored for clarity.
 
 ---
 
-## Storage Types
+# Linux Storage Management: DAS, NAS, and SAN with NFS & LVM
+
+In enterprise environments, efficient storage management is critical for high performance and scalability. This guide covers three primary storage architectures—**Direct Attached Storage (DAS)**, **Network Attached Storage (NAS)**, and **Storage Area Network (SAN)**—along with a comparison of **NFS** and **SAN**. Finally, we'll walk through setting up **LVM** (Logical Volume Manager) to manage storage dynamically in Linux.
+
+---
+
+## 1. Storage Types Overview
 
 ### Direct Attached Storage (DAS)
-- **DAS** is external storage directly attached to a server (e.g., HDD, SSD).
-- Offers excellent performance with fast data access and no firewall.
-- **Limitations:** Dedicated to a single server, making it unsuitable for enterprise environments. Best for small businesses.
 
-### Network Attached Storage (NAS)
-- **NAS** is a network-based storage system where data traffic occurs over a network.
-- Utilizes protocols like **NFS** (Network File System) for shared storage between multiple hosts.
-- **Advantages:** Highly available, ideal for centralized storage and backend systems for web servers and databases.
-- **Limitations:** Not ideal for hosting OS installations.
+- **DAS** refers to external storage devices like **HDD** or **SSD** connected directly to a server.
+- **Advantages**: High-speed access, simplicity, and no network overhead.
+- **Limitations**: Limited scalability as it serves only the local server, making it suitable for small-scale setups.
 
-### Storage Area Network (SAN)
-- **SAN** provides block-level storage accessible to multiple servers. It’s designed for mission-critical applications requiring high performance and low latency.
-- **Advantages:** Fast, secure, and reliable; can handle databases, VMs, and high-performance applications.
-- **SAN vs NAS:** SAN stores data in blocks, making it ideal for applications like **VMware**, **Hyper-V**, and **databases**, while NAS stores data as files, better suited for shared directories and software repositories.
+**Example:**
+You plug in an SSD directly to your Linux server via SATA or USB, and it's recognized under `/dev/sdb`. You format and mount it locally.
 
----
-
-## NFS vs SAN
-
-### NFS (Network File System)
-- Stores data as files.
-- Commonly used for shared software/repo directories across multiple servers.
-- Example configuration in `/etc/exports`:
-  ```bash
-  /software/repos 10.61.35.2021 node1-ip node2-ip
-  ```
-  This file configures which clients can access the NFS shares.
-  
-- **Mount NFS on a local directory:**
-  ```bash
-  mount 10.61.35.2021:/software/repos /mnt/software/repos
-  ```
-
-### SAN (Storage Area Network)
-- Stores data in blocks, offering faster and more secure access.
-- Suitable for mission-critical workloads (e.g., databases, virtualization, VMs).
-
----
-
-## Working with LVM (Logical Volume Manager)
-
-LVM allows dynamic management of disk space, offering flexibility in resizing volumes without downtime.
-
-### Steps for LVM Configuration:
-
-1. **Physical Volume (PV) Creation:**
-   ```bash
-   pvcreate /dev/sdb
-   ```
-
-2. **Volume Group (VG) Creation:**
-   ```bash
-   vgcreate caleston_vg /dev/sdb
-   ```
-
-3. **Logical Volume (LV) Creation:**
-   ```bash
-   lvcreate -L 1G -n vol1 caleston_vg
-   ```
-
-4. **Create Filesystem and Mount:**
-   ```bash
-   mkfs.ext4 /dev/caleston_vg/vol1
-   mkdir /mnt/vol1
-   mount /dev/caleston_vg/vol1 /mnt/vol1
-   ```
-
-### Resizing Logical Volume:
-- If more space is required, you can dynamically resize the logical volume and the filesystem:
-   ```bash
-   lvresize -L +1G /dev/caleston_vg/vol1
-   resize2fs /dev/caleston_vg/vol1
-   ```
-
-- Verify the new size:
-   ```bash
-   df -hP /mnt/vol1
-   ```
-
-### LVM Information Commands:
-
-- **Display Physical Volumes (PVs):**
-  ```bash
-  pvdisplay
-  ```
-
-- **Display Volume Groups (VGs):**
-  ```bash
-  vgdisplay
-  ```
-
-- **Display Logical Volumes (LVs):**
-  ```bash
-  lvdisplay
-  ```
-
----
-
-## Disk Partitioning and Filesystem
-
-### Block Devices
-- Linux recognizes block devices like SSDs and HDDs.
-- View block devices:
-  ```bash
-  lsblk
-  ```
-
-### Working with Disk Partitions
-- Partition a disk using **`gdisk`**:
-  ```bash
-  gdisk /dev/sdb
-  ```
-
-- Example of creating a new partition of 500MB:
-  ```bash
-  Command (? for help): n
-  First sector (34-2097118, default = 2048) or {+-}size{KMGTP}: +500M
-  ```
-
-### Filesystem Types in Linux:
-- **EXT2/EXT3**: Older filesystem types, with limitations on file and volume sizes.
-- **EXT4**: Modern filesystem with support for large files and fast recovery.
-  - Create an EXT4 filesystem:
-    ```bash
-    mkfs.ext4 /dev/sdb1
-    ```
-
-- **Mount Filesystem:**
-  ```bash
-  mount /dev/sdb1 /mnt/ext4
-  ```
-
-- **Update `/etc/fstab` to persist mounts:**
-  ```bash
-  echo "/dev/sdb1 /mnt/ext4 ext4 rw 0 0" >> /etc/fstab
-  ```
-
----
-
-## Example Command Output:
-
-### Physical Volume Display:
 ```bash
-[root@caleston ~]# pvdisplay
-  --- Physical volume ---
-  PV Name               /dev/sda2
-  VG Name               caleston_vg
-  PV Size               <29.00 GiB / not usable 3.00 MiB
-  Allocatable           yes
-  PE Size               4.00 MiB
-  Total PE              7423
-  Free PE               0
-  Allocated PE          7423
-  PV UUID               gMRUl2-ne2r-SkV7-a17B-G55f-9lln-0YNh6d
+# Check if the device is connected
+lsblk
+
+# Create a filesystem
+sudo mkfs.ext4 /dev/sdb1
+
+# Mount it to a directory
+sudo mount /dev/sdb1 /mnt/storage
+
+# Verify
+df -h /mnt/storage
 ```
 
-### Volume Group Display:
+---
+
+### Network Attached Storage (NAS)
+
+- **NAS** allows data storage over a network, where multiple clients access the shared storage.
+- Typically uses protocols like **NFS** (Network File System).
+- **Advantages**: Centralized storage, high availability, and supports file-level access.
+- **Use Cases**: Ideal for shared repositories, home directories, or file backups.
+
+**Example:**
+A NAS device serves a shared directory over the network via NFS. Two clients, `HostA` and `HostB`, can mount and access the same directory.
+
 ```bash
-[root@caleston ~]# vgdisplay
-  --- Volume group ---
-  VG Name               caleston_vg
-  VG Size               <29.00 GiB
-  PE Size               4.00 MiB
-  Total PE              7423
-  Alloc PE / Size       7423 / <29.00 GiB
-  Free PE / Size        0 / 0
+# On the NAS server, export the shared directory via NFS
+echo "/srv/nas *(rw,sync,no_subtree_check)" >> /etc/exports
+
+# Start the NFS server
+sudo exportfs -a
+sudo systemctl restart nfs-server
+
+# On the clients (HostA & HostB), mount the NFS share
+sudo mount 192.168.1.100:/srv/nas /mnt/nas
+
+# Verify the mount
+df -h /mnt/nas
+```
+
+---
+
+### Storage Area Network (SAN)
+
+- **SAN** offers block-level storage shared across multiple servers.
+- Uses **Fibre Channel (FC)** or **iSCSI** for data transmission, providing low latency and high-speed data access.
+- **Advantages**: Ideal for mission-critical applications, databases, and virtual machines (e.g., VMware, Hyper-V).
+- **Use Cases**: Highly scalable and suitable for large enterprises needing centralized storage with redundancy.
+
+**Example:**
+You set up an iSCSI SAN where `HostA` and `HostB` both access a shared block device over the network. These block devices are treated like locally attached drives on the servers.
+
+```bash
+# On the SAN server, configure an iSCSI target
+sudo apt install tgt
+sudo tgtadm --lld iscsi --op new --mode target --tid 1 -T iqn.2024-09.com.example:storage.target1
+
+# Create a LUN (Logical Unit)
+sudo tgtadm --lld iscsi --op new --mode logicalunit --tid 1 --lun 1 -b /dev/sdc
+
+# On the clients, discover and login to the iSCSI target
+sudo iscsiadm -m discovery -t st -p 192.168.1.100
+sudo iscsiadm -m node --login
+
+# Verify the new block device
+lsblk
+```
+
+---
+
+## 2. NFS vs SAN
+
+| **Feature**        | **NFS (Network File System)**                              | **SAN (Storage Area Network)**                         |
+|--------------------|------------------------------------------------------------|--------------------------------------------------------|
+| **Data Access**     | File-level access                                         | Block-level access                                     |
+| **Usage**           | Shared file directories, backups, software repositories   | Databases, virtual machines, high-performance workloads|
+| **Protocols**       | NFS (over TCP/UDP)                                        | iSCSI, Fibre Channel                                   |
+| **Performance**     | Moderate, depends on network                              | High performance, low latency                          |
+| **Example**         | Shared repository for multiple servers                    | Shared block device for VM storage                     |
+
+---
+
+## 3. Setting Up LVM (Logical Volume Manager)
+
+**LVM** allows you to manage disk storage flexibly, creating volumes that can be resized dynamically as needed. It abstracts physical storage into logical volumes, making storage management more versatile.
+
+### LVM Workflow:
+
+1. **Initialize the Physical Volume (PV)**:
+   First, identify the unused physical disk (e.g., `/dev/sdb`) and initialize it as a PV.
+
+   ```bash
+   sudo pvcreate /dev/sdb
+   ```
+
+2. **Create a Volume Group (VG)**:
+   Combine one or more PVs into a volume group.
+
+   ```bash
+   sudo vgcreate storage_vg /dev/sdb
+   ```
+
+3. **Create Logical Volumes (LV)**:
+   Logical volumes are created from the available space in the volume group.
+
+   ```bash
+   sudo lvcreate -L 5G -n data_lv storage_vg
+   ```
+
+4. **Create a Filesystem and Mount**:
+   Once the LV is created, create a filesystem and mount it.
+
+   ```bash
+   sudo mkfs.ext4 /dev/storage_vg/data_lv
+   sudo mkdir /mnt/data
+   sudo mount /dev/storage_vg/data_lv /mnt/data
+   ```
+
+5. **Verify Storage**:
+   Check the mounted filesystem using `df`.
+
+   ```bash
+   df -h /mnt/data
+   ```
+
+### Expanding a Logical Volume:
+One of the key advantages of LVM is the ability to resize volumes without downtime.
+
+```bash
+# Extend the LV by 2GB
+sudo lvextend -L +2G /dev/storage_vg/data_lv
+
+# Resize the filesystem to match the new LV size
+sudo resize2fs /dev/storage_vg/data_lv
+```
+
+---
+
+## 4. Practical Examples and Use Cases
+
+### DAS Setup Example:
+You've connected a new SSD to your server and wish to use it as direct-attached storage.
+
+```bash
+# List block devices
+lsblk
+
+# Create a new partition
+sudo fdisk /dev/sdb
+
+# Format the partition as EXT4
+sudo mkfs.ext4 /dev/sdb1
+
+# Mount the partition
+sudo mount /dev/sdb1 /mnt/das_storage
+```
+
+### NAS with NFS Example:
+Configure a shared directory using **NFS** on your NAS device that multiple servers can access.
+
+```bash
+# On the NAS server, configure NFS
+echo "/srv/shared_data *(rw,sync,no_root_squash)" >> /etc/exports
+sudo exportfs -a
+sudo systemctl restart nfs-server
+
+# On the client servers, mount the NFS share
+sudo mount 192.168.10.100:/srv/shared_data /mnt/nfs_share
+
+# Verify
+df -h /mnt/nfs_share
+```
+
+### SAN with iSCSI Example:
+Set up a SAN environment where multiple servers can access block storage over the network using **iSCSI**.
+
+```bash
+# On the SAN server, configure the iSCSI target
+sudo tgtadm --lld iscsi --op new --mode target --tid 1 -T iqn.2024-09.com.example:storage.target1
+sudo tgtadm --lld iscsi --op new --mode logicalunit --tid 1 --lun 1 -b /dev/sdc
+
+# On the client server, discover and mount the iSCSI target
+sudo iscsiadm -m discovery -t st -p 192.168.10.100
+sudo iscsiadm -m node --login
 ```
 
 ---
