@@ -1220,92 +1220,138 @@ systemctl start project.service
     journalctl --until "2023-09-01 12:00:00"  # View logs up until a specific date and time
     ```
 ---
+Here’s the corrected and structured README.md file for **Storage in Linux**, including improvements for clarity, formatting, and fixing any errors in the raw content you provided:
 
-Storage in Linux:
-df -h  # overall
-du -lh # check space for a file
+---
 
-Disk Partitions:
-linux filesystem, partions, nfs, external storage devices (DAS/NAS/SAN), logical volume manage (LVM)
+# Storage in Linux
 
-Block devices:
-ssd, hdd, found under dev, because data is written in blocks/chunks
-lsblk
-ls -l /dev/ | grep "^b"
-sda1, sda2, sda3
+## Disk Usage
 
-each block device has major and minor number
-
-1 ram, 3 hard disk or cd rom, 6 parralel printers, 8 scsi disk, fix naming conventions which starts with sd
-
-fdisk:
-sudo fdisk -l /dev/sda
-can create partitions
-gpt disk label
-
-partition types: 
-1. primay (max 4) MBR: master boot record, max size: 2TB
-2.extended partition (can't be used by its own, must used with other partitoin)
-3.logical partition (created withing extended partition)
-
-GPT: GUid partition table
-unlimited no of partitions per disk, limited by os
-always the best choice
-
-
-sdb:
-gdisk /dev/sdb # create parition, imporved version of fdisk
-lsblk /dev/vdc
-# create a new gpt partion of 500MB
+### Check Overall Disk Usage
+```bash
+df -h   # Shows disk space usage in human-readable format
 ```
-bob@caleston-lp10:~$ sudo gdisk /dev/vdb
+
+### Check Space Used by a Specific File or Directory
+```bash
+du -lh  # Shows space used by files or directories in human-readable format
+```
+
+---
+
+## Disk Partitions
+
+Linux manages storage through disk partitions. Partitions can be part of internal drives, external storage devices (DAS, NAS, SAN), or managed using Logical Volume Management (LVM).
+
+### Types of Storage Devices:
+- **Block Devices**: SSD, HDD, etc. Found under `/dev/` since data is written in blocks.
+- **Common Tools**:
+  - `lsblk`: Lists information about all block devices.
+  - `ls -l /dev/ | grep "^b"`: Lists block devices.
+  - `sda1`, `sda2`, `sda3`: Example of block devices (SSD/HDD partitions).
+
+### Block Device Naming:
+Each block device has a major and minor number. Here are some common naming conventions:
+- `1`: RAM devices
+- `3`: Hard disks or CD-ROMs
+- `6`: Parallel printers
+- `8`: SCSI disks
+
+---
+
+## Working with Fdisk
+
+`fdisk` is a utility to view and manage disk partitions on MBR and GPT-based disks.
+
+### View Disk Partitions:
+```bash
+sudo fdisk -l /dev/sda
+```
+
+### Partition Types:
+- **Primary Partition** (MBR): Up to 4 partitions, max size 2TB.
+- **Extended Partition**: Cannot be used on its own, used to contain logical partitions.
+- **Logical Partition**: Created within an extended partition.
+
+### GPT (GUID Partition Table):
+- Supports a larger number of partitions (limited by OS).
+- Ideal for disks larger than 2TB.
+- Preferred for modern systems.
+
+---
+
+## Creating Partitions with Gdisk
+
+`gdisk` is a modern alternative to `fdisk` for managing GPT partitions.
+
+### Create a New GPT Partition of 500MB:
+```bash
+sudo gdisk /dev/vdb
+
 GPT fdisk (gdisk) version 1.0.3
 
-Partition table scan:
-  MBR: not present
-  BSD: not present
-  APM: not present
-  GPT: not present
-
-Creating new GPT entries.
-
 Command (? for help): n
-Partition number (1-128, default 1): 
-First sector (34-2097118, default = 2048) or {+-}size{KMGTP}: 
+Partition number (1-128, default 1):
+First sector (34-2097118, default = 2048) or {+-}size{KMGTP}:
 Last sector (2048-2097118, default = 2097118) or {+-}size{KMGTP}: +500M
 Current type is 'Linux filesystem'
 Hex code or GUID (L to show codes, Enter = 8300): 8300
-Changed type of partition to 'Linux filesystem'
 
 Command (? for help): w
-
-Final checks complete. About to write GPT data. THIS WILL OVERWRITE EXISTING
-PARTITIONS!!
-
 Do you want to proceed? (Y/N): y
-OK; writing new GUID partition table (GPT) to /dev/vdb.
-The operation has completed successfully.
-bob@caleston-lp10:~$ 
 ```
 
-file System in Linux
-when you create a parition it, does not writeable able, before using the partition we need to create a filesystem
-EXT2 & EXT3, 2TB file size and 4TB volume size.
-in ext2 if systme powers fail, it can take some time to boot back in
-in ext3 it does not have drawback, qucker boot in terms of failure
-ext4, 6TB filezide, 1EXabyte , can be mounted as ex3 or ext2
+The above commands will create a new GPT partition of 500MB on `/dev/vdb`.
 
-Working with EXT4:
-mkfs.ext4 /dev/sdb1
-mkdri /mnt/ext4
-mount /dev/sdb1 /mnt/ext4
-mount | grep .edev/sdb1
-df -hP | grep /dev/sdb1
+---
 
+## Filesystems in Linux
+
+When a partition is created, it is not yet usable. To make it functional, a **filesystem** must be created on the partition.
+
+### Common Filesystems:
+- **EXT2 & EXT3**: Support 2TB file size and 4TB volume size. EXT3 improves on EXT2 by offering faster boot times after power failures.
+- **EXT4**: Supports 16TB file size and 1EB volume size. Can be mounted as EXT2 or EXT3.
+
+### Creating and Mounting EXT4 Filesystem:
+
+1. **Create Filesystem**:
+    ```bash
+    mkfs.ext4 /dev/sdb1
+    ```
+
+2. **Create Mount Point**:
+    ```bash
+    mkdir /mnt/ext4
+    ```
+
+3. **Mount the Partition**:
+    ```bash
+    mount /dev/sdb1 /mnt/ext4
+    ```
+
+4. **Verify Mounting**:
+    ```bash
+    df -hP | grep /dev/sdb1
+    ```
+
+### Persisting Mounts with fstab
+
+To ensure the partition is mounted automatically on boot, add it to the `/etc/fstab` file:
+
+```bash
 vi /etc/fstab
+
+# Example fstab entry
+/dev/sdb1   /mnt/ext4   ext4   defaults   0   0
 ```
-<filesystem>  <mount point>  <type>   <options>                              <dump>    <pass>
-/dev/sda1    /               ext4     defaults,relatime,errors=panic  0      1          ~
-```
-echo "/dev/sdb1   /mnt/ext4    ext4   rw 0  0" >> /etc/fstab
-rw = read/write, 0 disabling backup, pass=0, priority check for filesystem check
+
+Explanation:
+- `/dev/sdb1`: The block device.
+- `/mnt/ext4`: The mount point.
+- `ext4`: Filesystem type.
+- `defaults`: Mount options (`rw`, `relatime`, etc.).
+- `0 0`: Disable backups and filesystem checks.
+
+---
