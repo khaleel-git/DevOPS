@@ -1287,3 +1287,6 @@ OK; writing new GUID partition table (GPT) to /dev/vdb.
 The operation has completed successfully.
 bob@caleston-lp10:~$ 
 ```
+
+file System in Linux
+when you create a parition it, does not writeable able, before using the partition we need to create a filesystem
