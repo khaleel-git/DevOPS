@@ -1342,7 +1342,6 @@ vi /etc/fstab
 # Example fstab entry
 /dev/sdb1   /mnt/ext4   ext4   defaults   0   0
 ```
-
 Explanation:
 - `/dev/sdb1`: The block device.
 - `/mnt/ext4`: The mount point.
@@ -1350,5 +1349,10 @@ Explanation:
 - `defaults`: Mount options (`rw`, `relatime`, etc.).
 - `0 0`: Disable backups and filesystem checks.
 
-
+### Check filesystem of a disk
+```bash
+bob@caleston-lp10:~$ sudo blkid /dev/vdc
+[sudo] password for bob: 
+/dev/vdc: UUID="a98c1340-b8d6-4305-a6e4-a39786374e3c" TYPE="ext2"
+```
 ---
