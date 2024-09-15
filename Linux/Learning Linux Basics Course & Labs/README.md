@@ -1461,4 +1461,6 @@ mkfs.ext4 /dev/caleston_vg/vol1
 mount -t ext4 /dev/caleston_vg/vol1 /mnt/vol1
 resize filesystem on vol1:
 vgs # list vg detail, we used 1gb out of 29GB, we are fine, we can resize
-l
+lvresize -L +1G -n /dev/caleston_vg/vol1
+df -hP /mnt/vol1 # still have a capacity 
+reseize2fs /dev/caleston_vg/vol1 # filesystem create inside logical volution can resize to match the logcal volume, we dont have to stop or unmount filesystem4
