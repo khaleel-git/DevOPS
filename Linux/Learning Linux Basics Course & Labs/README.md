@@ -1560,5 +1560,6 @@ sudo tgtadm --lld iscsi --op new --mode logicalunit --tid 1 --lun 1 -b /dev/sdc
 sudo iscsiadm -m discovery -t st -p 192.168.10.100
 sudo iscsiadm -m node --login
 ```
-
+create pv:
+sudo pvcreate /dev/vdb and sudo pvcreate /dev/vdc
 ---
