@@ -1393,4 +1393,9 @@ can be mounted on a local directoyr: /mnt/software/repos
 
 
 LVM: logical volume manager
-volume group: vol1, vol2, vol3
+volume group: vol1, vol2, vol3, /dev/sda1, /dev/sda2, /dev/sdb1
+unlimited number of disk can be grouped together, 
+can be resized dynamically
+/home /var /tmp on laptop can be resized
+apt install lvm2
+physical volume object
