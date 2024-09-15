@@ -1308,4 +1308,4 @@ vi /etc/fstab
 /dev/sda1    /               ext4     defaults,relatime,errors=panic  0      1          ~
 ```
 echo "/dev/sdb1   /mnt/ext4    ext4   rw 0  0" >> /etc/fstab
-rw = read/write, 0 disabling backup, 
+rw = read/write, 0 disabling backup, pass=0, priority check for filesystem check
