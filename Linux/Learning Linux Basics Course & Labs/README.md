@@ -1290,3 +1290,4 @@ bob@caleston-lp10:~$
 
 file System in Linux
 when you create a parition it, does not writeable able, before using the partition we need to create a filesystem
+EXT2 & EXT3, 2TB file size and 4TB volume size.
