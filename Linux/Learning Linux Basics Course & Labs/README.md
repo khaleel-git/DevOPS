@@ -1256,3 +1256,33 @@ always the best choice
 sdb:
 gdisk /dev/sdb # create parition, imporved version of fdisk
 lsblk /dev/vdc
+# create a new gpt partion of 500MB
+```
+bob@caleston-lp10:~$ sudo gdisk /dev/vdb
+GPT fdisk (gdisk) version 1.0.3
+
+Partition table scan:
+  MBR: not present
+  BSD: not present
+  APM: not present
+  GPT: not present
+
+Creating new GPT entries.
+
+Command (? for help): n
+Partition number (1-128, default 1): 
+First sector (34-2097118, default = 2048) or {+-}size{KMGTP}: 
+Last sector (2048-2097118, default = 2097118) or {+-}size{KMGTP}: +500M
+Current type is 'Linux filesystem'
+Hex code or GUID (L to show codes, Enter = 8300): 8300
+Changed type of partition to 'Linux filesystem'
+
+Command (? for help): w
+
+Final checks complete. About to write GPT data. THIS WILL OVERWRITE EXISTING
+PARTITIONS!!
+
+Do you want to proceed? (Y/N): y
+OK; writing new GUID partition table (GPT) to /dev/vdb.
+The operation has completed successfully.
+bob@caleston-lp10:~$ 
