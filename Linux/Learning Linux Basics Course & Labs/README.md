@@ -1536,15 +1536,29 @@ sudo mount /dev/sdb1 /mnt/das_storage
 Configure a shared directory using **NFS** on your NAS device that multiple servers can access.
 
 ```bash
-# On the NAS server, configure NFS
-echo "/srv/shared_data *(rw,sync,no_root_squash)" >> /etc/exports
-sudo exportfs -a
-sudo systemctl restart nfs-server
+# On NAS server, install NFS server
+sudo apt update && sudo apt install nfs-kernel-server
 
-# On the client servers, mount the NFS share
+# Create a shared directory
+sudo mkdir -p /srv/shared_data
+
+# Configure NFS to share the directory
+echo "/srv/shared_data *(rw,sync,no_root_squash)" | sudo tee -a /etc/exports # send out to terminal and a file
+
+# Restart NFS service to apply changes
+sudo exportfs -a && sudo systemctl restart nfs-kernel-server
+
+# On client servers, install NFS client
+sudo apt update && sudo apt install nfs-common
+
+# Create a mount point on client
+sudo mkdir -p /mnt/nfs_share
+
+# Mount the shared directory from NAS
 sudo mount 192.168.10.100:/srv/shared_data /mnt/nfs_share
 
-# Verify
+# Verify the mount
 df -h /mnt/nfs_share
+
 ```
 ---
