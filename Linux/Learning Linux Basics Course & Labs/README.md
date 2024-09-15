@@ -1402,3 +1402,27 @@ physical volume object, pv, /dev/sdb1 unused
 pvcreate /dev/sdb
 vgcreate caleston_vg /dev/sdb # volume group
 pvdisplay
+```
+[root@localhost ~]# pvdisplay
+  --- Physical volume ---
+  PV Name               /dev/sda2
+  VG Name               cs
+  PV Size               <29.00 GiB / not usable 3.00 MiB
+  Allocatable           yes (but full)
+  PE Size               4.00 MiB
+  Total PE              7423
+  Free PE               0
+  Allocated PE          7423
+  PV UUID               gMRUl2-ne2r-SkV7-a17B-G55f-9lln-0YNh6d
+
+[root@localhost ~]# df -hP
+Filesystem           Size  Used Avail Use% Mounted on
+devtmpfs             4.0M     0  4.0M   0% /dev
+tmpfs                1.8G     0  1.8G   0% /dev/shm
+tmpfs                726M   11M  715M   2% /run
+/dev/mapper/cs-root   26G  6.4G   20G  25% /
+/dev/sda1            960M  347M  614M  37% /boot
+tmpfs                363M   52K  363M   1% /run/user/42
+tmpfs                363M   36K  363M   1% /run/user/0
+[root@localhost ~]#
+```
