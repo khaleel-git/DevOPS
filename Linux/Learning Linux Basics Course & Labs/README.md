@@ -1390,3 +1390,7 @@ specific ports have to be open bcz firewall exists in nfs
 exportsfs -a
 exports fs -0 ip:/softare/repos
 can be mounted on a local directoyr: /mnt/software/repos
+
+
+LVM: logical volume manager
+volume group: vol1, vol2, vol3
