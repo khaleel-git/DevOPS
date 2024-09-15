@@ -1402,7 +1402,7 @@ physical volume object, pv, /dev/sdb1 unused
 pvcreate /dev/sdb
 vgcreate caleston_vg /dev/sdb # volume group
 pvdisplay
-```
+```bash
 [root@localhost ~]# pvdisplay
   --- Physical volume ---
   PV Name               /dev/sda2
@@ -1426,3 +1426,31 @@ tmpfs                363M   52K  363M   1% /run/user/42
 tmpfs                363M   36K  363M   1% /run/user/0
 [root@localhost ~]#
 ```
+vgdisplay
+```bash
+[root@localhost ~]# vgdisplay
+  --- Volume group ---
+  VG Name               cs
+  System ID
+  Format                lvm2
+  Metadata Areas        1
+  Metadata Sequence No  3
+  VG Access             read/write
+  VG Status             resizable
+  MAX LV                0
+  Cur LV                2
+  Open LV               2
+  Max PV                0
+  Cur PV                1
+  Act PV                1
+  VG Size               <29.00 GiB
+  PE Size               4.00 MiB
+  Total PE              7423
+  Alloc PE / Size       7423 / <29.00 GiB
+  Free  PE / Size       0 / 0
+  VG UUID               oqmyXA-P5r1-DtBd-5zTA-32V4-ofB2-MENHtX
+
+[root@localhost ~]#
+```
+
+create logical volume:
