@@ -1562,4 +1562,7 @@ sudo iscsiadm -m node --login
 ```
 create pv:
 sudo pvcreate /dev/vdb and sudo pvcreate /dev/vdc
+
+create a new volume group:
+sudo vgcreate caleston_vg /dev/vdb /dev/vdc
 ---
