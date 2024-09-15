@@ -1304,5 +1304,6 @@ df -hP | grep /dev/sdb1
 
 vi /etc/fstab
 ```
-filesystem   <mount point>  <type>   <options>                              <dump>    <pass>
+<filesystem>  <mount point>  <type>   <options>                              <dump>    <pass>
 /dev/sda1    /               ext4     defaults,relatime,errors=panic  0      1          ~
+```
