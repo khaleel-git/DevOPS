@@ -1293,4 +1293,11 @@ when you create a parition it, does not writeable able, before using the partiti
 EXT2 & EXT3, 2TB file size and 4TB volume size.
 in ext2 if systme powers fail, it can take some time to boot back in
 in ext3 it does not have drawback, qucker boot in terms of failure
-ext4, 6TB filezide, 1EXabyte , 
+ext4, 6TB filezide, 1EXabyte , can be mounted as ex3 or ext2
+
+Working with EXT4:
+mkfs.ext4 /dev/sdb1
+mkdri /mnt/ext4
+mount /dev/sdb1 /mnt/ext4
+mount | grep .edev/sdb1
+df -hP | grep /dev/sdb1
