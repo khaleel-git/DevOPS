@@ -1365,4 +1365,6 @@ excellent performance, fast, no firewall
 dedicated to single server, no ideal for enterprice, only sutiable for small busines
 
 NAS:
-
+host network, data traffic, may be located in the same rack of data center
+nfs server, host a, host b, shared storage
+ideal for centralazed storage, hightly avaiable, 
