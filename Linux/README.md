@@ -56,7 +56,8 @@ This guide covers essential Linux commands and concepts for the LFCS exam. Each 
 
 ## Essential Commands
 
-- 
+- **mkdir with parent directory***
+  `mkdir -p /tmp/1/2/3/4/5/6/7/8/9`
 
 - **List Files**:
   ```bash
