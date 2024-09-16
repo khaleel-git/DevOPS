@@ -54,7 +54,9 @@ This guide covers essential Linux commands and concepts for the LFCS exam. Each 
 
 ---
 
-## Create, Delete, Copy, and Move Files/Directories
+## Essential Commands
+
+- 
 
 - **List Files**:
   ```bash
@@ -70,9 +72,9 @@ This guide covers essential Linux commands and concepts for the LFCS exam. Each 
 
 ---
 
-## Links (Hard & Soft Links)
+### Links (Hard & Soft Links)
 
-### Hard Links
+#### Hard Links
 
 - **Create a Hard Link**:  
   Hard links point to the same inode and are only for files.
@@ -86,7 +88,7 @@ This guide covers essential Linux commands and concepts for the LFCS exam. Each 
   - Only for files (no directories).
   - Can't span across different filesystems.
 
-### Soft Links (Symbolic Links)
+#### Soft Links (Symbolic Links)
 
 - **Create a Soft Link**:  
   Soft links are shortcuts, and they can link files or directories across filesystems.
@@ -103,36 +105,6 @@ This guide covers essential Linux commands and concepts for the LFCS exam. Each 
     ```bash
     lrwxrwxrwx. 1 user family_dog_shortcut.jpg -> /home/aaron/Pictures/family_dog.jpg
     ```
-
----
-
-## Permissions and User Management
-
-- **Add User to Group**:
-  ```bash
-  usermod -aG groupname username
-  ```
-  
-- **Modify Permissions**:
-  - **660** permissions allow read and write access to the owner and group:
-    ```bash
-    chmod 660 /path/to/file
-    ```
-
----
-
-## Basic Networking
-
-- **View IP Address**:
-  ```bash
-  ip a
-  ```
-
-- **SSH into Remote Server**:
-  ```bash
-  ssh user@ip_address
-  ```
-
 ---
 
 ## System Monitoring
