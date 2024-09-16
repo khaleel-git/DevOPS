@@ -4,14 +4,26 @@
 
 Linux login, cli and gui
 console (linux boot console), virtual terminal (ctrl+alt+f2 open vertual terminal, its a run level 3 , terminal emulator (grphical emulator terminal)
+Remote GUI: vnc, rdp
+ssh: open ssh daemon (secure shell), use strong encryption
+telnet (highly insecure)
+ip a
 
-## New Commands learnt:
  cat /etc/*release*
+
+ Read and Use System Documentation
+journalctl --help
+man journalctl
  man man
  man 1 printf
- man 2 printf
- apropos director
+ man 3 printf
+ apropos director # search throuh man pages, relies on database 
+ sudo mandb
  apropos -s 1,8 director
+
+ man grep
+ command tab tab
+ quickly look for help with --help or man page
  
  ls -lah (l=detail, a=all, h=humand readable format)
  cd / (go to root dir)
