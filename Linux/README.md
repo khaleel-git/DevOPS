@@ -339,4 +339,131 @@ chown [owner]:[group] filename
 
 ---
 
-# SUID, SGID, and Sticky Bit
+# SUID, SGID, and Sticky Bit in Linux
+
+This guide explains the concepts and usage of **SUID**, **SGID**, and **Sticky Bit** in Linux file permissions with practical examples.
+
+## SUID (Set User ID)
+SUID allows users to execute a file with the permissions of the file owner. It's most commonly used on executables owned by `root` to allow non-root users to perform tasks that require root privileges.
+
+### How it works:
+- SUID is set by adding a `4` to the permissions.
+- Only applies to executable files.
+- When a user runs the file, it executes with the file owner's permissions.
+
+### Example:
+1. **Create a file**:
+   ```bash
+   touch suidfile
+   ls -l suidfile
+   # -rw-rw-r-- 1 user user 0 May 8 01:22 suidfile
+   ```
+
+2. **Set the SUID bit**:
+   ```bash
+   chmod 4664 suidfile
+   ls -l suidfile
+   # -rwSrw-r-- 1 user user 0 May 8 01:22 suidfile  # 'S' indicates SUID is set, but no execute permission
+   ```
+
+3. **Set SUID with execute permission**:
+   ```bash
+   chmod 4764 suidfile
+   ls -l suidfile
+   # -rwsrw-r-- 1 user user 0 May 8 01:22 suidfile  # 's' indicates SUID with execute permission
+   ```
+
+## SGID (Set Group ID)
+SGID allows users to execute a file or access a directory with the group permissions of the file's group. It is mostly used on directories, ensuring that files created within inherit the group of the directory.
+
+### How it works:
+- SGID is set by adding a `2` to the permissions.
+- Files and directories behave differently under SGID.
+- On directories, new files inherit the group of the directory, not the creating user's group.
+
+### Example:
+1. **Create a file and set SGID**:
+   ```bash
+   touch sgidfile
+   chmod 2674 sgidfile
+   ls -l sgidfile
+   # -rw-rwsr-- 1 user user 0 May 8 01:25 sgidfile  # 's' indicates SGID is set for the group
+   ```
+
+2. **Set SGID on a directory**:
+   ```bash
+   mkdir sgiddir
+   chmod 2775 sgiddir
+   ls -ld sgiddir
+   # drwxrwsr-x 2 user user 4096 May 8 01:29 sgiddir  # 's' indicates SGID is set on the directory
+   ```
+
+### Finding SGID Files:
+To find all SGID files in a directory:
+```bash
+find . -perm /2000
+```
+
+## Sticky Bit
+The Sticky Bit is mainly used on directories to restrict the deletion or renaming of files by users who do not own the file. Even if a directory is writable, users can only delete their own files.
+
+### How it works:
+- Applied on directories to restrict file deletion.
+- Often used in shared directories like `/tmp`.
+
+### Example:
+1. **Create a directory**:
+   ```bash
+   mkdir stickydir
+   ls -ld stickydir/
+   # drwxrwxr-x 2 user user 4096 May 8 01:29 stickydir/
+   ```
+
+2. **Set the Sticky Bit**:
+   ```bash
+   chmod +t stickydir/  # or chmod 1777 stickydir/
+   ls -ld stickydir/
+   # drwxrwxrwt 2 user user 4096 May 8 01:29 stickydir/  # 't' indicates Sticky Bit is set
+   ```
+
+3. **Without Execute Permission**:
+   If the directory doesn't have execute permission, you will see a capital `T` instead of `t`:
+   ```bash
+   chmod 1666 stickydir/
+   ls -ld stickydir/
+   # drwxrwxrwT 2 user user 4096 May 8 01:29 stickydir/  # 'T' indicates no execute permission
+   ```
+
+### Sticky Bit on `/tmp`:
+The `/tmp` directory is a good example where the Sticky Bit is set:
+```bash
+ls -ld /tmp
+# drwxrwxrwt 10 root root 4096 May 8 01:29 /tmp
+```
+
+### Finding Sticky Bit Directories:
+To find directories with the Sticky Bit set:
+```bash
+find / -type d -perm +1000
+```
+
+---
+
+## Finding SUID, SGID, and Sticky Bit Files
+To search for files with special permissions:
+
+1. **Find SUID files**:
+   ```bash
+   find / -perm /4000
+   ```
+
+2. **Find SGID files**:
+   ```bash
+   find / -perm /2000
+   ```
+
+3. **Find Sticky Bit files**:
+   ```bash
+   find / -perm /1000
+   ```
+---
