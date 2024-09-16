@@ -1,58 +1,157 @@
-# Linux Boot Process
-![Linux Boot Process](How-linux-boot.png)
-[Watch the Linux Boot Process Video](https://www.youtube.com/watch?v=XpFsMB6FoOs&ab_channel=ByteByteGo)
+# Linux Foundation Certified System Administrator (LFCS) Guide
 
-Linux login, cli and gui
-console (linux boot console), virtual terminal (ctrl+alt+f2 open vertual terminal, its a run level 3 , terminal emulator (grphical emulator terminal)
-Remote GUI: vnc, rdp
-ssh: open ssh daemon (secure shell), use strong encryption
-telnet (highly insecure)
-ip a
+This guide covers essential Linux commands and concepts for the LFCS exam. Each section provides practical examples for better understanding.
 
- cat /etc/*release*
+---
 
- Read and Use System Documentation
-journalctl --help
-man journalctl
- man man
- man 1 printf
- man 3 printf
- apropos director # search throuh man pages, relies on database 
- sudo mandb
- apropos -s 1,8 director
+## Linux Login, CLI, and GUI
 
- man grep
- command tab tab
- quickly look for help with --help or man page
- man ssh
- ssh -V
+- **Virtual Console**:  
+  Use `Ctrl + Alt + F2` to open a virtual terminal (runlevel 3).
+  
+- **Remote GUI**:  
+  Access Linux remotely using VNC or RDP.
+  
+- **SSH**:  
+  Secure Shell is the most commonly used for remote access.  
+  Example:
+  ```bash
+  ssh user@remote_server_ip
+  ```
 
-Create, Delete, Copy, and Move Files and Directories
- ls -lah (l=detail, a=all, h=humand readable format)
- cd / (go to root dir)
- cd - (go to previous dir)
-cd ~ or cd (go to home dir)
-cd .. (move one dir up)
+- **View IP Info**:  
+  ```bash
+  ip a
+  ```
 
-inod kep track of blocks of data, links: 1
-hard link to dog.jpg will have all the content under ionod
- ## Hard link (copy all the content, if source data is 2G then we have to copy 2G more to the destination i.e hard link)
- ln path_to_target_file path_to_link_file (hard link, point to same inode, only file)
- same as: cp path
+- **Check OS Info**:  
+  ```bash
+  cat /etc/*release*
+  ```
 
- useradd -a -G family aaron
- useradd -a -G family jane
- chmod 660 /home/aaron/Pictures/family_dog.jpg
+---
 
- ## Soft Link
- folder to folder, file to file, its a shortcut
- ln -s target_file link_file
+## System Documentation
 
- ## Copy with preserve
- `cp --preserve /home/bob/myfile.txt /home/bob/data/myfile.txt`
+- **Get Help**:  
+  Use `--help` for quick command options or `man` for detailed documentation.  
+  Examples:
+  ```bash
+  man journalctl
+  journalctl --help
+  ```
+  
+- **Search Man Pages**:  
+  Use `apropos` to search for related commands.
+  ```bash
+  apropos hostname
+  ```
 
- ## mov
- do not add -r (recursive) in mov attribute
+- **Update Man Page Database**:  
+  ```bash
+  sudo mandb
+  ```
+
+---
+
+## Create, Delete, Copy, and Move Files/Directories
+
+- **List Files**:
+  ```bash
+  ls -lah
+  ```
+  
+- **Navigate Directories**:
+  ```bash
+  cd /    # Root directory
+  cd ~    # Home directory
+  cd -    # Previous directory
+  ```
+
+---
+
+## Links (Hard & Soft Links)
+
+### Hard Links
+
+- **Create a Hard Link**:  
+  Hard links point to the same inode and are only for files.
+  ```bash
+  ln /path/to/original_file /path/to/hard_link
+  ```
+  - Example:  
+    If `/home/aaron/family_dog.jpg` has 2 hard links and one is deleted, the content remains accessible through the other link.
+  
+- **Limitations**:
+  - Only for files (no directories).
+  - Can't span across different filesystems.
+
+### Soft Links (Symbolic Links)
+
+- **Create a Soft Link**:  
+  Soft links are shortcuts, and they can link files or directories across filesystems.
+  ```bash
+  ln -s /path/to/original /path/to/shortcut
+  ```
+  
+- **View Soft Links**:  
+  The path of the original file is stored in the symbolic link:
+  ```bash
+  ls -l
+  ```
+  - Output:
+    ```bash
+    lrwxrwxrwx. 1 user family_dog_shortcut.jpg -> /home/aaron/Pictures/family_dog.jpg
+    ```
+
+---
+
+## Permissions and User Management
+
+- **Add User to Group**:
+  ```bash
+  usermod -aG groupname username
+  ```
+  
+- **Modify Permissions**:
+  - **660** permissions allow read and write access to the owner and group:
+    ```bash
+    chmod 660 /path/to/file
+    ```
+
+---
+
+## Basic Networking
+
+- **View IP Address**:
+  ```bash
+  ip a
+  ```
+
+- **SSH into Remote Server**:
+  ```bash
+  ssh user@ip_address
+  ```
+
+---
+
+## System Monitoring
+
+- **View System Logs**:
+  ```bash
+  journalctl
+  ```
+
+- **View Active Processes**:
+  ```bash
+  top
+  ```
+
+- **Check Disk Usage**:
+  ```bash
+  df -h
+  ```
+---
 
  ## ownership (group)
  chgrp group_name file/directory
