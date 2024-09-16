@@ -26,14 +26,19 @@ man journalctl
  quickly look for help with --help or man page
  man ssh
  ssh -V
- 
+
+Create, Delete, Copy, and Move Files and Directories
  ls -lah (l=detail, a=all, h=humand readable format)
  cd / (go to root dir)
  cd - (go to previous dir)
- cd / cd ~ (go to home dir)
+cd ~ or cd (go to home dir)
+cd .. (move one dir up)
 
- ## Hard link
+inod kep track of blocks of data, links: 1
+hard link to dog.jpg will have all the content under ionod
+ ## Hard link (copy all the content, if source data is 2G then we have to copy 2G more to the destination i.e hard link)
  ln path_to_target_file path_to_link_file (hard link, point to same inode, only file)
+ same as: cp path
 
  useradd -a -G family aaron
  useradd -a -G family jane
