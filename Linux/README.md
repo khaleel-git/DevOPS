@@ -140,7 +140,7 @@ This guide covers essential Linux commands and concepts for the LFCS exam. Each 
  s (socket file)
  b (block device)
 
-# Linux File Permissions and Ownership
+# List, Set, and Change Standard File Permissions
 
 Each file and directory in Linux has permissions assigned to three categories of users:
 
@@ -198,9 +198,9 @@ Each permission (read, write, execute) has a corresponding numeric value:
 Permissions for the owner, group, and others are expressed as a three-digit number. Each digit is the sum of the values for read, write, and execute.
 
 Example:
-- **rwx** = 4 + 2 + 1 = **7**
-- **rw-** = 4 + 2 + 0 = **6**
-- **r-x** = 4 + 0 + 1 = **5**
+- **rwx** 111 (binary) = 4 + 2 + 1 = **7**
+- **rw-** 110 (binary) = 4 + 2 + 0 = **6**
+- **r-x** 101 (binary) = 4 + 0 + 1 = **5**
 
 So, `rwxrwxr-x` can be represented as **775**.
 
@@ -338,3 +338,5 @@ chown [owner]:[group] filename
 - For collaborative environments, set group permissions properly to control access.
 
 ---
+
+# SUID, SGID, and Sticky Bit
