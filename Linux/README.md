@@ -2,6 +2,9 @@
 ![Linux Boot Process](How-linux-boot.png)
 [Watch the Linux Boot Process Video](https://www.youtube.com/watch?v=XpFsMB6FoOs&ab_channel=ByteByteGo)
 
+Linux login, cli and gui
+console (linux boot console), virtual terminal (ctrl+alt+f2 open vertual terminal, its a run level 3 , terminal emulator (grphical emulator terminal)
+
 ## New Commands learnt:
  cat /etc/*release*
  man man

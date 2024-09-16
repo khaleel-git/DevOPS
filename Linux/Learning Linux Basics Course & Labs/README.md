@@ -65,7 +65,8 @@ cmd mode: runlevel 3, multi user target
 
 systemctl get-default
 ls -ltr /etc/systemd/system/default.target
-systemctl set-default multi-user.target # change run level
+systemctl set-default multi-user.target # change run level to 3
+systemctl set-defualt grahical.target
 
 
 ## Package Management
