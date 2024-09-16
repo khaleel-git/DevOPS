@@ -24,6 +24,8 @@ man journalctl
  man grep
  command tab tab
  quickly look for help with --help or man page
+ man ssh
+ ssh -V
  
  ls -lah (l=detail, a=all, h=humand readable format)
  cd / (go to root dir)
