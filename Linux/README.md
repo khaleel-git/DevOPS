@@ -600,7 +600,7 @@ Find files that are **not** world-readable:
 find \! -perm -o=r
 ```
 - **\! -perm -o=r**: Exclude files with read access for "others."
-```
+
 ### Additional examples:
 ```bash
 bob@ubuntu-host ~ ➜  sudo find /var/log/ -perm -g=w ! -perm /o=rw
