@@ -446,12 +446,7 @@ To find directories with the Sticky Bit set:
 ```bash
 find / -type d -perm +1000
 ```
-
 ---
-```markdown
-# File Permissions and Search with `find` Command
-
-This guide explains how to search for files with special permissions (SUID, SGID, and Sticky Bit) and various ways to use the `find` command effectively.
 
 ## Finding SUID, SGID, and Sticky Bit Files
 The `find` command allows you to search for files based on their permissions. Below are examples for searching files with **SUID**, **SGID**, and **Sticky Bit**.
