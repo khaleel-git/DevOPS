@@ -653,9 +653,37 @@ sudo chmod 0100 /home/bob/LFCS
 
 bob@ubuntu-host ~ ➜  chmod 0755 some_directory/
 ```
+# compare and manipulate file content
+view, edit, transform , compare text file
+cat  file.txt
+tac file.txt # read from bottom
+tail /var/log/apt/term.log # last 10 lines
+tail -n 20 /var/log/apt/term.log # view last 20 lines
+head /var/log/apt/term.log # view first 9 lines of text and 1 blank line
+head -n 20 /var/log/apt/term.log # view first 20 lines
 
-## Conclusion
-By mastering the `find` command, you can search for files and directories based on multiple criteria such as name, size, modification time, and permissions. The flexibility provided by combining parameters like AND, OR, and NOT conditions makes it a powerful tool for system administrators.
-```
+sed 's/canada/canada/g' userinfo.txt # stream editor, single qoute s:search, g: global, only preview
+sed 's/canda/canada/' userinfo.txt # wihout global, only one line, preivew
 
+sed -i 's/canada/canada/g' userinfo.txt --in-place # -i means real change, --in-placye
 
+cut -d ' ' -f 1 userinfo.txt # extract only first row
+cut -d ',' -f 3 userinfo > countries.txt # extract 3rd field
+
+uniq countries.txt  # only remove two lines consective to each other
+sort countries.txt | uniq # get uniq country list
+
+# compare two files
+```bash
+diff file1 file2 # identical lines are not showing 
+1c1
+< only exists in file 1 # < less than means content exists in the first file
+---
+> only exist in file 2 # > greater than means the content exists in the 2nd file
+4c4
+< only exist in file 1
+---
+> only exists in file 2
+
+diff -c file1 file2 # shows us context
+diff -y file1 file2  # side by side comparison
