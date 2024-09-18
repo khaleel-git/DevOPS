@@ -467,3 +467,17 @@ To search for files with special permissions:
    find / -perm /1000
    ```
 ---
+
+## Search for Files
+find /user/share -name '*.jpg'
+find /lib64/ -size +10M # search file larger than 10M
+find /dev/ -mmin -1 # search for file ...
+find -nam file.txt # not path -> search current directory
+Go there -> find it.
+find -name felix # case sensitive
+find -iname felix # case insensitive
+find -name "f*" # wild card search
+find -mmin [minute] # modified minute
+find -mmin 5 # exacly 12:00
+find -mmin -5 # 
+find -mmin +5 # counts skip current time
