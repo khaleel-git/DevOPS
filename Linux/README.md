@@ -687,3 +687,45 @@ diff file1 file2 # identical lines are not showing
 
 diff -c file1 file2 # shows us context
 diff -y file1 file2  # side by side comparison
+sdiff file1 file2 # same as diff -y
+
+## Pagers and VI
+less: sudo less /var/log/syslog # bottom left column is the filename, search: /search -> highlight searched word, -i: ignore case, shift+n, press q to quit
+more: sudo more /var/log/systlog # more features,  more with percentage, press spacebar, press q key
+
+Vim:
+vi improved,
+mode sensitive
+
+## VIM Editor
+- **Insert mode**:
+  Press `i` to enter insert mode.
+
+- **Save and exit**:
+  Press `Esc`, then type `:wq` and press `Enter`.
+
+- **Exit without saving**:
+  Press `Esc`, then type `:q!` and press `Enter`.
+
+- **Search within file**:
+  Press `Esc`, then type `/search_term` and press `Enter`.
+
+- **Replace text**:
+  Press `Esc`, then type `:%s/old_text/new_text/g` and press `Enter`.
+
+- **Navigate**:
+  - `j`: Move down
+  - `k`: Move up
+  - `h`: Move left
+  - `l`: Move right
+  - `x`: Remove a character
+  - `yy`: Copy a line
+  - `p`: Paste a line
+  - `dd`: Delete a line
+  - `d3d`: Delete the first 3 lines
+  - `u`: Undo
+  - `Ctrl + r`: Redo
+
+- **Insert mode shortcuts**:
+  - `A`: Move to the end of the line and insert.
+  - `I`: Move to the beginning of the line and insert.
