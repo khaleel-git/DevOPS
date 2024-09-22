@@ -729,3 +729,18 @@ mode sensitive
 - **Insert mode shortcuts**:
   - `A`: Move to the end of the line and insert.
   - `I`: Move to the beginning of the line and insert.
+
+  Search File using grep
+
+grep 'password' /etc/ssh/ssh_config
+grep -i 'password' /etc/ssh/sshh_config # case insensitive
+grep -r 'password' /etc/ # recursive search in a dir
+grep -ri 'password' dir
+sudo grep -ri 'password' /etc/ # output is not color coded
+sudo grep -ri --color 'password' /etc/ # colored option
+sudo -vi 'password' /etc/ssh/sshd_config # inverse search, dont' look for password keyword
+grep -wi 'password' /etc/ssh/sshd_config # search complete word match
+grep -oi 'password' /etc/ssh/sshd_config # --only-matching option
+
+# Analyze Text Using Basic Regular Expressions
+
