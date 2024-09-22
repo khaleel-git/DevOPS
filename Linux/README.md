@@ -778,5 +778,7 @@ egrep -r 'c[au]t' /etc/ #
 egrep -r '/dev/.*' /etc/
 egrep -r '/dev/[a-z]*' /etc/
 egrep -r '/dev/[a-z]*[0-9]?' /etc
-egrep -r '/dev/([a-z]*[0-9]?)* /etc/
-egrep -r '/dev/(([a-z]|[A-Z])*[0-9]?)* /etc/
+egrep -r '/dev/([a-z]*[0-9]?)*' /etc/
+egrep -r '/dev/(([a-z]|[A-Z])*[0-9]?)*' /etc/
+egrep -r 'https[^:]' /etc # elements at carot location should not exist
+egrep -r 'http[^s]' /etc 
