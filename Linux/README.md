@@ -744,3 +744,22 @@ grep -oi 'password' /etc/ssh/sshd_config # --only-matching option
 
 # Analyze Text Using Basic Regular Expressions
 ^: carrot, $ dollar sign, .: period, *: asterisk, +: plus, {}: brces, ?: question mark, | vertical pipe, []: bracket, (): prenthesis, square bracket with caroot: [^], #: pound sign
+
+grep '^#' /etc/login.defs # see all comments in a file
+grep -v '^#' /etc/login.defs # dont begin with a pound line
+grep '^PASS' /etc/login.defs # see lines begin with exact these lines
+grep -w '7$' /etc/login.defs # variable 7
+grep 'mail$' /etc/login.def  # $ last means end line
+^: beginning of the search pattern, $ ends of the search pattern
+grep -r 'c.t' /etc/ # find any character in place of dot
+grep -wr 'c.t' /etc/
+grep '.' /etc/login.def # wont work
+grep '\.' /etc/login.def
+let* -> letttt....
+grep -r '/.*' /etc/ Begins with /: has 0 or more characters between; ends with a/
+grep -r '0*' /etc/ # find at leas one zero or multiiple zeroes, also print all lines becasue * print zero times caharacter
+0+ -> 00000
+grep -r '0+' /etc/ # wont work
+grep -r '0\+' /etc/
+
+Extended regex
