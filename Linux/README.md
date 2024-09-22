@@ -762,4 +762,21 @@ grep -r '0*' /etc/ # find at leas one zero or multiiple zeroes, also print all l
 grep -r '0+' /etc/ # wont work
 grep -r '0\+' /etc/
 
-Extended regex
+Extended Regular Expressions
+grep -Er '0+' /etc/ -> egrep -r '0+' /etc/
+always use egrep
+egrep -r '0{3,}' /etc/ # finds 3 or more than 3 zeros
+egrep -r '10{,3}' /etc/ # 1 or 
+egrep -r '0{3}' /etc/ # find exactly 3 zeros
+egrep -r 'disabled?' /etc/ # ? before skip or dont skip (last d is optional)
+egrep -r 'enabled|disabled' /etc/ # match enable or disable
+
+[]: Ranges or Sets
+egrep -r 'c[au]t' /etc/ # 
+[a-z]: matches a to z, [0-9]: matches 0 to 9, [abz954] match in this exact range
+
+egrep -r '/dev/.*' /etc/
+egrep -r '/dev/[a-z]*' /etc/
+egrep -r '/dev/[a-z]*[0-9]?' /etc
+egrep -r '/dev/([a-z]*[0-9]?)* /etc/
+egrep -r '/dev/(([a-z]|[A-Z])*[0-9]?)* /etc/
