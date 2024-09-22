@@ -743,4 +743,4 @@ grep -wi 'password' /etc/ssh/sshd_config # search complete word match
 grep -oi 'password' /etc/ssh/sshd_config # --only-matching option
 
 # Analyze Text Using Basic Regular Expressions
-
+^: carrot, $ dollar sign, .: period, *: asterisk, +: plus, {}: brces, ?: question mark, | vertical pipe, []: bracket, (): prenthesis, square bracket with caroot: [^], #: pound sign
