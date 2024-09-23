@@ -1332,3 +1332,10 @@ git branch --delete name
 git branch --list
 git branch
 git checkout 1.1-testing
+
+git log 
+git log --raw
+git show hash
+
+merging braching:
+git merge 1.1-testing (test to master)
