@@ -1298,3 +1298,37 @@ openssl req -newkey rsa:2048 -keyout key.pem -out req.pem
 ```bash
 openssl req -x509 -noenc -newkey rsa:4096 -days 365 -keyout myprivate.key -out mycertificate.crt
 ```
+
+Git - Basic Operations
+git config --global user.name "jeremy"
+git config --global user.email "myemail@domain.com"
+git status
+git add file1 file2
+git reset file2
+git add "*.html"
+git add "products/*.html"
+git add products/
+git reset products/
+git commit -m "message"
+
+Dealing with bug
+```bash
+git add file3
+git commit -m "new bug"
+git rm file3 # remove a file from a working area
+```
+
+Git Branches:
+project -> multiple versions
+1.0 Branch
+1.1 Branch
+
+Brances can be merged later on
+
+master branceh (1.0 Branch) -> 1.1 -testing (make new branch)
+
+git branch 1.1-testing
+git branch --delete name
+git branch --list
+git branch
+git checkout 1.1-testing
