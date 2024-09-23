@@ -1086,5 +1086,42 @@ tar --create --file archive.tar file1 = tar cf arhive.tar file1
 tar --append --file archive.tar file2 = tar rf archive.tar file2
 tar --crate --file archive.tar Pictures/
 
-before archiving:
-tar --l
+before unarchiving:
+tar --list --file archive.tar = tar tf archive.tar
+
+unarchiving
+tar --extract --file archive.tar = tar xf archive.tar # by default it extract to current directory
+tar --extract --file archive.tar --directory /tmp/ = tar xf archive.tar -C /tmp/  # unarhive to diff dir
+
+Compress and Uncompress Files
+gzip, bsip2, xz
+gunzip, bunzip, unxz
+
+#keep:
+gzip --keep file1
+bzip2 --keep file2
+xz --keep file3
+
+gzip --list file1
+
+zip archive file1 = zip archive.zip file1
+zip -r arvhive.zip Pictures # recursively compress every file in pictures dir
+unzip archive.zip
+
+# zip supports both packing and compression
+why using zip?
+so we have to first pack with tar and then compress with gzip
+
+zip do this in a once
+
+Back Up Files to a Remote System
+rsync local remote (ssh daemon must run)
+rsync local local
+
+Disk imaging:
+sudo dd if=/dev/vda of=diskimage.raw bs=1M status=progress #if = input path, of: output path, bs: block size
+
+reverse if and of option to un-disk imaging (restore complete disk i.e restore)
+
+restore:
+sudo dd if=diskimage.raw of=/dev/vda bs=1M status=progress
