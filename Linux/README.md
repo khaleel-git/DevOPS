@@ -968,17 +968,11 @@ To display only the matching part of the lines that contain "password":
 grep -oi 'password' /etc/ssh/sshd_config
 ```
 
-Here’s a comprehensive `README.md` file for analyzing text using Basic and Extended Regular Expressions, with your examples clarified and structured.
-
-```markdown
 # Analyzing Text Using Regular Expressions
 
 Regular expressions (regex) are powerful tools for searching and manipulating text. They allow for sophisticated pattern matching, making it easier to analyze and extract information from files.
 
-
-
 ### Common Basic Regex Patterns
-
 - `^`: Matches the beginning of a line.
 - `$`: Matches the end of a line.
 - `.`: Matches any single character.
@@ -993,7 +987,6 @@ Regular expressions (regex) are powerful tools for searching and manipulating te
 - `#`: Used to denote comments (in certain contexts).
 
 ### Examples of Basic Regular Expressions
-
 1. **See All Comments in a File**
    ```bash
    grep '^#' /etc/login.defs
@@ -1040,9 +1033,7 @@ Regular expressions (regex) are powerful tools for searching and manipulating te
    ```
 
 ## Extended Regular Expressions
-
 Extended regular expressions (ERE) allow for more advanced pattern matching capabilities compared to basic regex.
-
 ### Common Extended Regex Patterns
 
 - `+`: Matches one or more occurrences.
@@ -1051,7 +1042,6 @@ Extended regular expressions (ERE) allow for more advanced pattern matching capa
 - `|`: Acts as a logical OR.
 
 ### Examples of Extended Regular Expressions
-
 1. **Using Egrep for One or More Zeros**
    ```bash
    egrep -r '0+' /etc/
