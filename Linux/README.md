@@ -1080,3 +1080,11 @@ Extended regular expressions (ERE) allow for more advanced pattern matching capa
    egrep -r 'http[^s]' /etc/
    egrep -r '/[^a-z]' /etc/
    ```
+
+Archive, Back Up, Compress, Unpack, and Uncompress Files (Optional)
+tar --create --file archive.tar file1 = tar cf arhive.tar file1
+tar --append --file archive.tar file2 = tar rf archive.tar file2
+tar --crate --file archive.tar Pictures/
+
+before archiving:
+tar --l
