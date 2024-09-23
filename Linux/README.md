@@ -1279,3 +1279,7 @@ To filter, sort, and format output from a file:
 ```bash
 grep -v '^#' /etc/login.defs | sort | column -t
 ```
+
+Work With SSL Certificates
+- ssl (secure sockets layer) # old name
+- TLS (Transport layer security) # latest name but still called ssl
