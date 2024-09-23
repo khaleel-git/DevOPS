@@ -1272,15 +1272,6 @@ sort <<EOF
 4
 EOF
 ```
-
-### Command-Line Calculator
-
-You can use the following for simple calculations:
-
-```bash
-bc <<<1+2+3+4
-```
-
 ### Sorting and Formatting Output
 
 To filter, sort, and format output from a file:
