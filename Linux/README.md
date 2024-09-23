@@ -1280,68 +1280,133 @@ To filter, sort, and format output from a file:
 grep -v '^#' /etc/login.defs | sort | column -t
 ```
 
-Work With SSL Certificates
-- ssl (secure sockets layer) # old name
-- TLS (Transport layer security) # latest name but still called ssl
-openssh # create tls certificate
-openssh help or openssl
+## Work With SSL Certificates
 
-Certificate Signing Request (CSR)
-example.com -> browser also need to trust -> CA (certificate authority) -> signed by google or let's encrypt
+### Overview
 
-genereate certificate:
+- **SSL (Secure Sockets Layer)**: An older protocol for securing communications over a network.
+- **TLS (Transport Layer Security)**: The latest version of SSL, though many still refer to it as SSL.
+
+### OpenSSL
+
+OpenSSL is a robust tool for creating and managing SSL/TLS certificates. You can access help with:
+
+```bash
+openssl help
+```
+
+### Certificate Signing Request (CSR)
+
+To create a valid SSL certificate, a Certificate Signing Request (CSR) is necessary. This request is sent to a Certificate Authority (CA), which signs it. Common CAs include Google and Let's Encrypt.
+
+### Generate a Certificate
+
+To generate a new certificate and private key, use the following commands:
+
 ```bash
 openssl req -newkey rsa:2048 -keyout priv.key -out certificate.crt
 openssl x509 -in certificate.crt -text
 ```
 
-# self signed certificate
+### Self-Signed Certificate
+
+To create a self-signed certificate, use the following command:
+
 ```bash
-openssl req -x509 -noenc -days 365 -keyout priv.key -out kodekloud.crt
+openssl req -x509 -nodes -days 365 -keyout priv.key -out kodekloud.crt
 ```
 
-Git - Basic Operations
+---
+
+## Git - Basic Operations
+
+### Configuration
+
+Set your global username and email for Git:
+
+```bash
 git config --global user.name "jeremy"
 git config --global user.email "myemail@domain.com"
-git status
-git add file1 file2
-git reset file2
-git add "*.html"
-git add "products/*.html"
-git add products/
-git reset products/
-git commit -m "message"
+```
 
-Dealing with bug
+### Basic Commands
+
+- Check the status of your repository:
+  ```bash
+  git status
+  ```
+- Add files to the staging area:
+  ```bash
+  git add file1 file2
+  git add "*.html"
+  git add "products/*.html"
+  git add products/
+  ```
+- Remove a file from the staging area:
+  ```bash
+  git reset file2
+  git reset products/
+  ```
+- Commit your changes:
+  ```bash
+  git commit -m "message"
+  ```
+
+### Dealing with Bugs
+
+To address bugs in your code:
+
 ```bash
 git add file3
 git commit -m "new bug"
-git rm file3 # remove a file from a working area
+git rm file3 # remove a file from the working area
 ```
 
-Git Branches:
-project -> multiple versions
-1.0 Branch
-1.1 Branch
+### Git Branches
 
-Brances can be merged later on
+Branches allow you to work on multiple versions of a project simultaneously:
 
-master branceh (1.0 Branch) -> 1.1 -testing (make new branch)
+- Create a new branch:
+  ```bash
+  git branch 1.1-testing
+  ```
+- List branches:
+  ```bash
+  git branch --list
+  git branch
+  ```
+- Switch to a branch:
+  ```bash
+  git checkout 1.1-testing
+  ```
 
-git branch 1.1-testing
-git branch --delete name
-git branch --list
-git branch
-git checkout 1.1-testing
+### Merging Branches
 
-git log 
-git log --raw
-git show hash
+To merge branches into the master branch:
 
-merging braching:
-git merge 1.1-testing (test to master)
-git remote -v # check remote url
-git remote add origin url
-git push origin master
-git pull origin master
-git clone url
+```bash
+git merge 1.1-testing
+```
+
+### Remote Repository Operations
+
+- Check remote URLs:
+  ```bash
+  git remote -v
+  ```
+- Add a new remote:
+  ```bash
+  git remote add origin <url>
+  ```
+- Push changes to the remote repository:
+  ```bash
+  git push origin master
+  ```
+- Pull updates from the remote repository:
+  ```bash
+  git pull origin master
+  ```
+- Clone a repository:
+  ```bash
+  git clone <url>
+  ```
