@@ -1125,3 +1125,33 @@ reverse if and of option to un-disk imaging (restore complete disk i.e restore)
 
 restore:
 sudo dd if=diskimage.raw of=/dev/vda bs=1M status=progress
+
+Use Input-Output Redirection (e.g. >, >>, |, 2>)
+
+Use Input-Output Redirection (e.g. >, >>, |, 2>)
+sort file.txt > sorted.txt
+sort filet.txt 1> sorted.txt # both are same
+
+1> # stdout
+2> # stderr
+
+2> /dev/null # errors would be dumped
+
+grep -r '^The' /etc/ 1>>output.txt 2>>errors.txt
+
+2>&1 # save both errors and output
+
+grep -r '^The' /etc/ > all_output.txt 2>&1
+grep -r '^The' /etc/ 1>all_output.txt 2>&1
+
+sor <<EOF # EOF means Here document or heredoc
+6
+4
+2
+1
+4
+>EOF
+
+bc <<<1+2+3+4 # command line calculator
+
+grep -v '^#' /etc/login.defs | sort | column -t
