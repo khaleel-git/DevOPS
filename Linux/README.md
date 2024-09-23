@@ -1283,3 +1283,18 @@ grep -v '^#' /etc/login.defs | sort | column -t
 Work With SSL Certificates
 - ssl (secure sockets layer) # old name
 - TLS (Transport layer security) # latest name but still called ssl
+openssh # create tls certificate
+openssh help or openssl
+
+Certificate Signing Request (CSR)
+example.com -> browser also need to trust -> CA (certificate authority) -> signed by google or let's encrypt
+
+genereate certificate:
+```bash
+openssl req -newkey rsa:2048 -keyout key.pem -out req.pem
+```
+
+# self signed certificate
+```bash
+openssl req -x509 -noenc -newkey rsa:4096 -days 365 -keyout myprivate.key -out mycertificate.crt
+```
