@@ -1280,7 +1280,7 @@ To filter, sort, and format output from a file:
 grep -v '^#' /etc/login.defs | sort | column -t
 ```
 
-## Work With SSL Certificates
+## Working With SSL Certificates
 
 ### Overview
 
@@ -1410,3 +1410,60 @@ git merge 1.1-testing
   ```bash
   git clone <url>
   ```
+
+Boot, Reboot, and Shutdown a System Safely
+systemctl reboot # if current user is root
+if other user, type: sudo systemctl reboot
+sudo systemctl reboot --force
+sudo systemctl poweroff --force
+sudo systemctl reboot --force --force # press power off
+
+shutdown:
+sudo shutdown 02:00
+sudo shutdown +15
+sudo shutdown -r +15
+sudo shutdown -r +1 "sheduled restart to upgrade our Linux Kernel" # wall message
+
+Boot or Change System Into Different Operating Modes
+systemctl get-default # graphical.target
+sudo systemctl set-default multi-user.target # everything will be text based
+sudo systemctl isolate graphical.target # does not change default target i.e temp
+mergency.target # few programs, root filesystem will be read only
+rescue.target # fewer than in rescue target, fix settings, take database backups
+
+Use Scripting to Automate System Maintenance Tasks
+bash # command interpreter
+script file # add mulitple commands
+touch script.sh
+```bash
+#!/bin/bash
+# comment
+date >> /tmp/script.log
+cat /proc/version >> /tmp/script.log # check kernel version
+```
+chmod +x script.sh
+./script.sh or sh script.sh
+```bash
+#!/bin/bash
+
+if test -f /tmp/archive.tar.gz; then
+  mv /tmp/archive.tar.gz /etc/apt/
+  tar acf /tmp/archive.tar.gz /etc/apt/
+else
+  tar acf /tmp/archive.tar.gz /etc/apt/
+fi
+```
+exit status = 0 # true
+exit status > 0 # false
+
+Manage Startup Process and Services (In Services Configuration)
+init system # start up apps
+Units -> service, socket, device , timer # systemd is the name of the applicationa and it has a large collection of tools needed to initilize and monitoring the system
+
+systemctl cat ssh.service
+sudo systemctl edit --full ssh.service or sudo systemclt revert ssh.service
+sudo systemctl status ssh.service
+sudo systemctl stop ssh.service
+sudo systemctl start ssh.service
+sudo systemctl restart ssh.service # restart may intereput already working users
+sudo systemctl reload ssh.service
