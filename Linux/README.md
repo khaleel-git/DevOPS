@@ -655,11 +655,7 @@ bob@ubuntu-host ~ ➜  chmod 0755 some_directory/
 ```
 
 # Compare and Manipulate File Content
-
-This `README.md` provides instructions on how to view, edit, transform, and compare text files using various Linux command-line tools like `cat`, `tail`, `head`, `sed`, `cut`, `uniq`, and more.
-
 ## Viewing File Content
-
 ### 1. Display the Entire File
 To display the entire content of a file:
 ```bash
@@ -721,7 +717,7 @@ head -n 20 /var/log/apt/term.log
 
   The `-i` option means in-place, meaning that the file will be directly modified with the changes, without needing to redirect the output to another file.
 
-## Extracting Fields from a File
+## Extracting Fields from a File (CUT)
 
 ### 1. Extract Specific Fields Using `cut`
 - Extract the first column (field) from `userinfo.txt`, assuming fields are space-separated:
@@ -781,7 +777,7 @@ Or use `sdiff` for a similar side-by-side comparison:
 sdiff file1 file2
 ```
 
-# Pagers in Linux
+# Pagers in Linux (less & more)
 
 Pagers are command-line utilities used to view the contents of text files or command output one screen at a time. The most common pagers are `less` and `more`. This document will explain the differences between them and provide usage examples.
 
@@ -875,15 +871,7 @@ Pagers are command-line utilities used to view the contents of text files or com
   - `A`: Move to the end of the line and insert.
   - `I`: Move to the beginning of the line and insert.
 
-# grep Command in Unix/Linux
-
-`grep` (Global Regular Expression Print) is a powerful command-line utility for searching plain-text data for lines that match a regular expression. It is widely used in Unix/Linux environments to filter content in files or output streams.
-
-## Basic Syntax
-
-```bash
-grep [options] pattern [file...]
-```
+# grep Command
 
 ## Common Options
 
@@ -925,7 +913,7 @@ grep -r 'password' /etc/
 To recursively search for "password" in a directory named `dir`:
 
 ```bash
-grep -ri 'password' dir
+grep -ri 'password' /dir
 ```
 
 ### 5. Searching with Elevated Permissions
@@ -1052,9 +1040,9 @@ Extended regular expressions (ERE) allow for more advanced pattern matching capa
    egrep -r '0{3,}' /etc/
    ```
 
-3. **Finding Lines with One or Two Zeros**
+3. **To find lines that contain "1" followed by one or two "0"s, you would use:**
    ```bash
-   egrep -r '10{,3}' /etc/
+   egrep -r '10{1,2}' /etc/
    ```
 
 4. **Finding Exactly Three Zeros**
