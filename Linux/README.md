@@ -1291,12 +1291,13 @@ example.com -> browser also need to trust -> CA (certificate authority) -> signe
 
 genereate certificate:
 ```bash
-openssl req -newkey rsa:2048 -keyout key.pem -out req.pem
+openssl req -newkey rsa:2048 -keyout priv.key -out certificate.crt
+openssl x509 -in certificate.crt -text
 ```
 
 # self signed certificate
 ```bash
-openssl req -x509 -noenc -newkey rsa:4096 -days 365 -keyout myprivate.key -out mycertificate.crt
+openssl req -x509 -noenc -days 365 -keyout priv.key -out kodekloud.crt
 ```
 
 Git - Basic Operations
@@ -1339,3 +1340,8 @@ git show hash
 
 merging braching:
 git merge 1.1-testing (test to master)
+git remote -v # check remote url
+git remote add origin url
+git push origin master
+git pull origin master
+git clone url
