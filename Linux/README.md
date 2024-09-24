@@ -1657,3 +1657,14 @@ fi
   ```bash
   systemctl list-units --all
   ```
+---
+## Diagnose and Manage Processes
+ps -a vs ps a (unix vs bsd) - both options are not equivalant
+```bash
+❯ ps -a | wc -l
+20
+❯ ps a | wc -l
+27
+```
+ps # simple ps, only show curent terminal process
+ps aux # ax display all processes & u is used for user oriented format -> added useful column like memory and cpu, which user each process belong to
