@@ -1410,39 +1410,99 @@ git merge 1.1-testing
   ```bash
   git clone <url>
   ```
+---
+## Boot, Reboot, and Shutdown a System Safely
 
-Boot, Reboot, and Shutdown a System Safely
-systemctl reboot # if current user is root
-if other user, type: sudo systemctl reboot
-sudo systemctl reboot --force
-sudo systemctl poweroff --force
-sudo systemctl reboot --force --force # press power off
+To reboot or shut down your system, use the following commands:
 
-shutdown:
-sudo shutdown 02:00
-sudo shutdown +15
-sudo shutdown -r +15
-sudo shutdown -r +1 "sheduled restart to upgrade our Linux Kernel" # wall message
+- **Reboot the system:**
+  - If you are the root user:
+    ```bash
+    systemctl reboot
+    ```
+  - If you are a regular user:
+    ```bash
+    sudo systemctl reboot
+    ```
+  - To force reboot:
+    ```bash
+    sudo systemctl reboot --force
+    ```
 
-Boot or Change System Into Different Operating Modes
-systemctl get-default # graphical.target
-sudo systemctl set-default multi-user.target # everything will be text based
-sudo systemctl isolate graphical.target # does not change default target i.e temp
-mergency.target # few programs, root filesystem will be read only
-rescue.target # fewer than in rescue target, fix settings, take database backups
+- **Power off the system:**
+  ```bash
+  sudo systemctl poweroff --force
+  ```
 
-Use Scripting to Automate System Maintenance Tasks
-bash # command interpreter
-script file # add mulitple commands
-touch script.sh
-```bash
-#!/bin/bash
-# comment
-date >> /tmp/script.log
-cat /proc/version >> /tmp/script.log # check kernel version
-```
-chmod +x script.sh
-./script.sh or sh script.sh
+- **Scheduled shutdowns:**
+  ```bash
+  sudo shutdown 02:00
+  sudo shutdown +15  # Shutdown in 15 minutes
+  sudo shutdown -r +15  # Reboot in 15 minutes
+  sudo shutdown -r +1 "Scheduled restart to upgrade our Linux Kernel"  # Message to wall
+  ```
+
+---
+
+## Boot or Change System Into Different Operating Modes
+
+Change system operating modes with the following commands:
+
+- **Check current default target:**
+  ```bash
+  systemctl get-default  # e.g., graphical.target
+  ```
+
+- **Set the default target to text-based:**
+  ```bash
+  sudo systemctl set-default multi-user.target
+  ```
+
+- **Isolate a target temporarily:**
+  ```bash
+  sudo systemctl isolate graphical.target  # Does not change the default target
+  ```
+
+- **Access emergency and rescue modes:**
+  - Emergency mode:
+    ```bash
+    emergency.target  # Minimal environment, read-only root filesystem
+    ```
+  - Rescue mode:
+    ```bash
+    rescue.target  # Fewer programs than emergency mode
+    ```
+
+---
+
+## Use Scripting to Automate System Maintenance Tasks
+
+You can automate system tasks using bash scripts. Here’s how to create and run a simple script:
+
+1. **Create a script file:**
+   ```bash
+   touch script.sh
+   ```
+
+2. **Add commands to the script:**
+   ```bash
+   #!/bin/bash
+   date >> /tmp/script.log
+   cat /proc/version >> /tmp/script.log  # Check kernel version
+   ```
+
+3. **Make the script executable:**
+   ```bash
+   chmod +x script.sh
+   ```
+
+4. **Run the script:**
+   ```bash
+   ./script.sh  # or sh script.sh
+   ```
+
+Here’s an example of a more complex script that handles an archive:
+
 ```bash
 #!/bin/bash
 
@@ -1453,42 +1513,147 @@ else
   tar acf /tmp/archive.tar.gz /etc/apt/
 fi
 ```
-exit status = 0 # true
-exit status > 0 # false
 
-Manage Startup Process and Services (In Services Configuration)
-init system # start up apps
-Units -> service, socket, device , timer # systemd is the name of the applicationa and it has a large collection of tools needed to initilize and monitoring the system
+- **Exit statuses:**
+  - `exit status = 0` indicates success (true).
+  - `exit status > 0` indicates failure (false).
 
-systemctl cat ssh.service
-sudo systemctl edit --full ssh.service or sudo systemclt revert ssh.service
-sudo systemctl status ssh.service
-sudo systemctl stop ssh.service
-sudo systemctl start ssh.service
-sudo systemctl restart ssh.service # restart may intereput already working users
-sudo systemctl reload ssh.service
-sudo systemctl reload-or-restart ssh.service
-sudo systemctl disable ssh.service # disable auto starting at boot time
-sudo systemctl enable ssh.service # enable auto start
+---
 
-# enable at boot time as well as start now
-sudo systemctl enable --now ssh.service
-sudo systemctl disable --now ssh.service # dont run if your on vm - terminal login
-sudo systemctl mask atd.service # brute force to prevent the service, enable or disble the service
-sudo systemctl unmask atd.service
+## Manage Startup Process and Services
 
-# list systemd services all
-sudo systemctl list-units --type service --all
+### Service Management in Linux
 
-Create systemd Services
-sudo vi /usr/local/bin/myapp.sh
-```bash
-#!/bin/bash
-echo "Myapp Started" | systemd-cat -t MyApp -p info
-sleep 5
-echo "MyApp Crashed" | systemd-cat -t MyApp -p err\
-```
-copy a template:
-ls /lib/systemd/system
-sudo cp /lib/systemd/system/ssh.service /etc/systemd/system/myapp.service
-There are 3 sections in systemd
+`systemd` is a system and service manager for Linux that controls the startup of applications and services. The main commands used are:
+
+- **View service configuration:**
+  ```bash
+  systemctl cat ssh.service
+  ```
+
+- **Edit service:**
+  ```bash
+  sudo systemctl edit --full ssh.service
+  ```
+
+- **Check service status:**
+  ```bash
+  sudo systemctl status ssh.service
+  ```
+
+- **Start, stop, or restart a service:**
+  ```bash
+  sudo systemctl stop ssh.service
+  sudo systemctl start ssh.service
+  sudo systemctl restart ssh.service  # Note: May interrupt existing connections
+  ```
+
+- **Enable or disable services:**
+  ```bash
+  sudo systemctl enable ssh.service   # Enable at boot
+  sudo systemctl disable ssh.service  # Disable auto-start
+  ```
+
+- **Mask or unmask a service:**
+  ```bash
+  sudo systemctl mask atd.service     # Prevent the service from running
+  sudo systemctl unmask atd.service   # Re-enable the service
+  ```
+
+- **List all services:**
+  ```bash
+  sudo systemctl list-units --type service --all
+  ```
+
+---
+
+## Create systemd Services
+
+### Creating a New Service
+
+1. **Create a script for your service:**
+   ```bash
+   sudo vi /usr/local/bin/myapp.sh
+   ```
+
+   Example content:
+   ```bash
+   #!/bin/bash
+   echo "MyApp Started" | systemd-cat -t MyApp -p info
+   sleep 5
+   echo "MyApp Crashed" | systemd-cat -t MyApp -p err
+   ```
+
+2. **Copy an existing service template:**
+   ```bash
+   sudo cp /lib/systemd/system/ssh.service /etc/systemd/system/myapp.service
+   ```
+
+3. **Define the service in the unit file:**
+   ```ini
+   [Unit]
+   Description=My Custom Application
+
+   [Service]
+   ExecStart=/bin/bash /usr/local/bin/myapp.sh
+
+   [Install]
+   WantedBy=multi-user.target
+   ```
+
+4. **Reload systemd and start your service:**
+   ```bash
+   sudo systemctl daemon-reload
+   sudo systemctl start myapp.service
+   ```
+
+---
+
+## Common systemctl Commands
+
+### Manage Services
+- Start, stop, restart, and reload services:
+  ```bash
+  systemctl start docker
+  systemctl stop docker
+  systemctl restart docker
+  systemctl reload docker
+  ```
+
+### Enable/Disable Services
+- Manage service autostart:
+  ```bash
+  systemctl enable docker
+  systemctl disable docker
+  ```
+
+### Check Service Status
+- View service status:
+  ```bash
+  systemctl status docker
+  ```
+
+### Reload systemd
+- After making changes:
+  ```bash
+  systemctl daemon-reload
+  ```
+
+### Edit Service Unit Files
+- Modify service configurations:
+  ```bash
+  systemctl edit project.service --full
+  ```
+
+### Manage Targets
+- Set the system run-level:
+  ```bash
+  systemctl get-default
+  systemctl set-default multi-user.target
+  ```
+
+### List All Units
+- Display available systemd units:
+  ```bash
+  systemctl list-units --all
+  ```
