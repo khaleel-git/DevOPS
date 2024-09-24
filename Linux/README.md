@@ -1467,3 +1467,28 @@ sudo systemctl stop ssh.service
 sudo systemctl start ssh.service
 sudo systemctl restart ssh.service # restart may intereput already working users
 sudo systemctl reload ssh.service
+sudo systemctl reload-or-restart ssh.service
+sudo systemctl disable ssh.service # disable auto starting at boot time
+sudo systemctl enable ssh.service # enable auto start
+
+# enable at boot time as well as start now
+sudo systemctl enable --now ssh.service
+sudo systemctl disable --now ssh.service # dont run if your on vm - terminal login
+sudo systemctl mask atd.service # brute force to prevent the service, enable or disble the service
+sudo systemctl unmask atd.service
+
+# list systemd services all
+sudo systemctl list-units --type service --all
+
+Create systemd Services
+sudo vi /usr/local/bin/myapp.sh
+```bash
+#!/bin/bash
+echo "Myapp Started" | systemd-cat -t MyApp -p info
+sleep 5
+echo "MyApp Crashed" | systemd-cat -t MyApp -p err\
+```
+copy a template:
+ls /lib/systemd/system
+sudo cp /lib/systemd/system/ssh.service /etc/systemd/system/myapp.service
+There are 3 sections in systemd
