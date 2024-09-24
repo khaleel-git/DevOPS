@@ -1658,13 +1658,253 @@ fi
   systemctl list-units --all
   ```
 ---
-## Diagnose and Manage Processes
-ps -a vs ps a (unix vs bsd) - both options are not equivalant
+# Diagnose and Manage Processes
+### Comparing `ps` Options
+
+- **`ps -a` vs `ps a`**: These options are not equivalent. The following command outputs the number of processes listed by each:
+
+    ```bash
+    ❯ ps -a | wc -l
+    20
+    ❯ ps a | wc -l
+    27
+    ```
+
+- **`ps`**: Displays processes for the current terminal session.
+  
+- **`ps aux`**: 
+  - `a`: Show processes for all users.
+  - `u`: Display in a user-oriented format, including useful columns like memory and CPU usage, along with the user each process belongs to.
+  - Kernel processes are often shown in brackets `[]`.
+
+### Real-time Process Monitoring
+
+- **`top`**: Provides real-time information about system processes, focusing on CPU-intensive processes.
+
+### Specific Process Information
+
+- **`ps <pid>`**: Displays information about a specific process by its PID. For example, `ps 123` or `ps u 123` for user-oriented details.
+  
+- **`ps -U <username>`**: Shows processes belonging to a specific user, e.g., `ps -U jeremy`.
+
+- **`pgrep -a syslog`**: Lists processes matching the name `syslog` along with their arguments.
+
+### Process Priority Management
+
+- **Nice Value**: A process's priority can be adjusted using the nice value. The command format is:
+
+    ```bash
+    nice -n [NICE VALUE] [COMMAND]
+    ```
+    
+  Example: To start a new shell with a nice value of 11:
+
+    ```bash
+    nice -n 11 bash
+    ```
+
+- **Displaying Nice Values**:
+    - **`ps l`**: Shows the nice values in the `NI` column.
+    - **`ps aux`**: Displays all processes with detailed information.
+    - **`ps faux`**: Displays a hierarchical view of processes.
+
+### Nice Value Limitations
+
+- Regular users can assign nice values between 0 and 19.
+- To assign a higher priority (lower nice value), root privileges are required:
+
+    ```bash
+    sudo nice -n -12 bash
+    ```
+
+- To change the nice value of an existing process (using PID):
+
+    ```bash
+    bash
+    ps fax   # Get the PID
+    renice 7 <pid>
+    ```
+
+### Important Notes
+
+- Regular users cannot lower the nice value; they can only increase it (make the process "nicer").
+- To lower the nice value, root privileges are necessary.
+---
+## Signals
+### Process Control Commands
+
+- **Stop and Kill Processes:**
+  - `sygstop`: Stop a process (if available; note that the correct command is usually `kill -SIGSTOP <PID>`).
+  - `syskill`: Forcefully kill a process (note that the correct command is usually `kill -9 <PID>`).
+  - `kill -L`: List all signal names.
+  
+- **Check SSH Service Status:**
+  - `systemctl status sshd.service`: Check the status of the SSH daemon.
+
+- **Send Signals to Processes:**
+  - `kill -SIGHUP <PID>`: Send a hangup signal (to restart the process).
+  - `kill -KILL <PID>`: Forcefully terminate a process.
+  - `pkill <process_name>`: Kill all processes matching the name.
+  - `pgrep -a <process_name>`: List processes matching the name with arguments.
+  - `lsof -p <PID>`: Show all open files for the specified process.
+  - `sudo lsof -p <PID>`: Show all open files for the specified process with superuser privileges.
+  
+### Background and Foreground Jobs
+
+- **Controlling Jobs:**
+  - `sleep 180`: Run a command for a specified duration (in this case, 180 seconds).
+  - `Ctrl + C`: Interrupt a running process (note: may not work for all processes).
+  - `Ctrl + Z`: Pause a process and put it in the background (note: may not work for all processes).
+  - `fg`: Bring a background process back to the foreground.
+  - `jobs`: List all background jobs.
+  - `bg <job_id>`: Resume a suspended job in the background.
+  
+- **Examples:**
+  - `sleep 300 &`: Run the sleep command in the background.
+  - `fg 1`: Bring the job with ID 1 back to the foreground.
+  - `bg 1`: Resume the job with ID 1 in the background.
+  
+### File and Directory Management
+
+- **Check Open Files:**
+  - `lsof /var/log/auth.log`: Show open files for the specified log file.
+  - `sudo lsof /var/log/auth.log`: Show open files for the specified log file with superuser privileges.
+
+### Notes
+
+- Be cautious when using commands that can terminate processes (`kill`, `pkill`, etc.), as they can lead to data loss or system instability.
+- Not all commands may work with every process due to permissions and the nature of the command.
+
+---
+## Locate and Analyze System Log Files
+### Locating Log Files
+Log files are usually stored in the `/var/log/` directory. To view the contents of this directory, use:
+
 ```bash
-❯ ps -a | wc -l
-20
-❯ ps a | wc -l
-27
+ls /var/log/
 ```
-ps # simple ps, only show curent terminal process
-ps aux # ax display all processes & u is used for user oriented format -> added useful column like memory and cpu, which user each process belong to
+
+Example output:
+```
+auth.log       syslog          kern.log        dpkg.log
+```
+
+### Analyzing Log Files
+You can examine specific log files using tools like `grep`, `less`, and `tail`. For example:
+
+1. **View SSH-related logs**:
+   ```bash
+   grep -r 'ssh' /var/log/
+   ```
+
+2. **View authentication logs**:
+   ```bash
+   less /var/log/auth.log
+   ```
+
+3. **View system logs**:
+   ```bash
+   less /var/log/syslog
+   ```
+
+4. **Follow live updates to the authentication log**:
+   ```bash
+   tail -F /var/log/auth.log
+   ```
+
+### Using Journalctl
+`journalctl` is a powerful tool for querying system logs managed by `systemd`. Here are some common usages:
+
+- **View logs for a specific service**:
+  ```bash
+  journalctl -u ssh.service
+  ```
+
+- **View all logs**:
+  ```bash
+  journalctl
+  ```
+
+- **Live view of logs**:
+  ```bash
+  journalctl -f
+  ```
+
+- **Filter logs by priority**:
+  ```bash
+  journalctl -p err
+  ```
+
+- **View logs from a specific time range**:
+  ```bash
+  journalctl -S '2024-03-03 01:00' -U '2024-03-03 02:00'
+  ```
+
+- **Group logs by boot**:
+  ```bash
+  journalctl -b 0   # Current boot
+  journalctl -b -1  # Previous boot
+  ```
+
+### Checking User Login History
+To see who has logged into the system and when, you can use:
+
+- **Last login details**:
+  ```bash
+  last
+  ```
+
+- **Last login information for each user**:
+  ```bash
+  lastlog
+  ```
+
+### Examples and Demo Output
+Here are some example commands and their expected output:
+
+1. **List log files**:
+   ```bash
+   ls /var/log/
+   ```
+   Output:
+   ```
+   auth.log       syslog          kern.log        dpkg.log
+   ```
+
+2. **View the last 10 lines of the auth log**:
+   ```bash
+   tail /var/log/auth.log
+   ```
+   Output (example):
+   ```
+   Sep 24 12:00:00 hostname sshd[1234]: Accepted password for user from 192.168.1.1 port 22
+   Sep 24 12:01:00 hostname sshd[1234]: Disconnecting: 2: Too many authentication failures
+   ```
+
+3. **Filter for errors**:
+   ```bash
+   journalctl -p err
+   ```
+   Output (example):
+   ```
+   Sep 24 12:02:00 hostname systemd[1]: Failed to start My Service.
+   ```
+
+4. **Check who is logged in**:
+   ```bash
+   last
+   ```
+   Output (example):
+   ```
+   user    pts/0        192.168.1.1      Mon Sep 24 12:00   still logged in
+   ```
+
+5. **View logs for SSH service**:
+   ```bash
+   journalctl -u ssh.service
+   ```
+   Output (example):
+   ```
+   Sep 24 12:00:00 hostname systemd[1]: Starting OpenSSH server daemon...
+   Sep 24 12:00:01 hostname sshd[1234]: Server listening on 0.0.0.0 port 22.
+   ```
