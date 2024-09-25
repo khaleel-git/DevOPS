@@ -1909,15 +1909,156 @@ Here are some example commands and their expected output:
    Sep 24 12:00:01 hostname sshd[1234]: Server listening on 0.0.0.0 port 22.
    ```
 ---  
-Schedule Tasks to Run at a Set Date and Time
-cron, acron, at
-cat /etc/crontab
-use personal user for cronjob
-special directories: 
-daily   = /etc/cron.daily/
-hourly  = /etc/cron.hourly/
-monthly = /etc/cron.monthly/
-weekly  = /etc/cron.weekly/
+# Cronjobs, Anacron, and At
 
-touch shellscript # without extension
-sudo cp shellscript /etc/cron
+## Cronjobs
+
+**Cron** is a time-based job scheduler in Unix-like operating systems. Cronjobs allow you to run commands or scripts at specific intervals.
+
+### Cron Syntax
+
+The syntax for a cronjob consists of five fields followed by the command to be executed:
+
+```
+m h dom mon dow command
+```
+
+- **m**: Minute (0 - 59)
+- **h**: Hour (0 - 23)
+- **dom**: Day of the month (1 - 31)
+- **mon**: Month (1 - 12)
+- **dow**: Day of the week (0 - 7) (Sunday = 0 or 7)
+
+### Examples
+
+- **08:10 AM on 19th February, Monday**
+    ```bash
+    10 8 19 2 1 command
+    ```
+
+- **08:10 AM on 19th February, Any Weekday**
+    ```bash
+    10 8 19 2 * command
+    ```
+
+- **08:10 AM on 19th of Every Month, Any Weekday**
+    ```bash
+    10 8 19 * * command
+    ```
+
+- **08:10 AM Every Day of Every Month, Any Weekday**
+    ```bash
+    10 8 * * * command
+    ```
+
+- **10th Minute of Every Hour, Every Day, Every Month, Any Weekday**
+    ```bash
+    10 * * * * command
+    ```
+
+- **Every Minute of Every Hour, Every Day, Every Month, Any Weekday**
+    ```bash
+    * * * * * command
+    ```
+
+- **Every 2 Minutes of Every Hour, Every Day, Every Month, Any Weekday**
+    ```bash
+    */2 * * * * command
+    ```
+
+- **Every Day at 9 PM**
+    ```bash
+    0 21 * * * command
+    ```
+
+---
+
+## Managing Cronjobs
+
+### List All Cronjobs
+To list the cronjobs for the current user:
+```bash
+crontab -l
+```
+
+### Edit Cronjobs
+To edit the cronjob file:
+```bash
+crontab -e
+```
+
+### Special Directories
+Cron can also manage jobs using special directories:
+- `daily` = `/etc/cron.daily/`
+- `hourly` = `/etc/cron.hourly/`
+- `monthly` = `/etc/cron.monthly/`
+- `weekly` = `/etc/cron.weekly/`
+
+To add a script to the hourly jobs:
+```bash
+touch shellscript
+sudo cp shellscript /etc/cron.hourly/shellscript
+sudo chmod +rx /etc/cron.hourly/shellscript
+```
+
+---
+
+## Anacron
+
+**Anacron** is similar to cron, but is used for running commands on a regular basis with the guarantee that they will be run at least once, even if the machine is not running at the scheduled time.
+
+### Managing Anacron Jobs
+
+Edit the Anacron configuration file:
+```bash
+sudo vim /etc/anacrontab
+```
+
+To run Anacron:
+```bash
+anacron -T
+```
+
+---
+
+## At
+
+**At** is a utility that allows you to schedule a command to be run once at a particular time.
+
+### Using At
+
+- **Schedule a command for a specific time:**
+    ```bash
+    at '15:00'
+    at> /usr/bin/touch file
+    Ctrl + D  # Save
+    ```
+
+- **Schedule a command for a specific date:**
+    ```bash
+    at '2:30 August 20 2024'
+    ```
+
+- **Schedule a command relative to the current time:**
+    ```bash
+    at 'now + 30 minutes'
+    at 'now + 3 hours'
+    ```
+
+### Managing At Jobs
+
+- **List scheduled jobs:**
+    ```bash
+    atq
+    ```
+
+- **View a specific job:**
+    ```bash
+    at -c job_number
+    ```
+
+- **Remove a scheduled job:**
+    ```bash
+    atrm job_number
+    ```
+---
