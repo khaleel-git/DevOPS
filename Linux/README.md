@@ -2062,3 +2062,14 @@ anacron -T
     atrm job_number
     ```
 ---
+
+
+apt: advanced package tool
+sudo apt update # update fresh
+repositories managed by canonical # severs
+sudo apt update && sudo apt upgrade # combined
+sudo apt update && sudo apt install nginx # newest version
+also install difference dependencies
+
+dpkg --listfiles nginx # list fies on the nginx package
+dpk --search /usr/sbin/ngnix
