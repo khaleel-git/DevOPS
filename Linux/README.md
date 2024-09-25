@@ -1908,3 +1908,16 @@ Here are some example commands and their expected output:
    Sep 24 12:00:00 hostname systemd[1]: Starting OpenSSH server daemon...
    Sep 24 12:00:01 hostname sshd[1234]: Server listening on 0.0.0.0 port 22.
    ```
+---  
+Schedule Tasks to Run at a Set Date and Time
+cron, acron, at
+cat /etc/crontab
+use personal user for cronjob
+special directories: 
+daily   = /etc/cron.daily/
+hourly  = /etc/cron.hourly/
+monthly = /etc/cron.monthly/
+weekly  = /etc/cron.weekly/
+
+touch shellscript # without extension
+sudo cp shellscript /etc/cron
