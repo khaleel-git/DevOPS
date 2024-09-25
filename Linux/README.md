@@ -2073,3 +2073,48 @@ also install difference dependencies
 
 dpkg --listfiles nginx # list fies on the nginx package
 dpk --search /usr/sbin/ngnix
+apt show libnginx-mod-stream
+apt search --names-only nginx
+apt search nginx module image
+sudo apt remove nginx
+sudo apt auto remove nginx # remove all dependencies
+sudo apt autoremove ngninx # same as above
+
+Configure the Repositories of Package Manager
+/etc/apt/sources.list.d/ubuntu.sources
+
+```
+Types: deb
+URIs: https://us.arhive.ubuntu.com/ubuntu
+Suites: noble noble-updates noble-backports
+components: main restricted universe multiverse
+signed-by: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+```
+3rd party Repositories: 
+download public key
+package manager can verify key
+curl "link.gpg" -o docker.key # download key, 
+gpg --dearmor docker.key # deearmor docker.key text format to binary format that our package can understand, add .gpg extension
+sudo mv docker.key.gpg /etc/apt/keyrings/
+more organize way
+sudo vi /etc/apt/sources.list.d/docker.list
+```bash
+deb [signed-by=/etc/apt/keyrings/docker.key.gpg] https://..... noble stable
+```
+sudo apt update # apt download newest packages
+
+ppa: personal package archive
+allows to create your own 3rd party repository
+sudo add-apt-repository ppa:graphics-drivers/ppa
+add-apt-repostiry --list
+sudo add-apt-reposity ppa:graphics-drivers/remove
+
+Install Software by Compiling Source Code
+download from github, compile it
+htop:
+git clone htop-url
+cd htop
+# every project has difference dependencies
+first install dependencies:
+sudo apt install libncursesw5-dev autotools-dev autoconf automake build-essential
+
