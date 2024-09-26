@@ -2117,4 +2117,11 @@ cd htop
 # every project has difference dependencies
 first install dependencies:
 sudo apt install libncursesw5-dev autotools-dev autoconf automake build-essential
+./autogen.sh
+./configure -help
+./configure # with default configuration
+make # compile and build, make targets -> make clean and start again if erroros occured
+compiled into a binary into htop
+/home/jeremy/htop/htop # always have to use
+sudo make install # moved to usr local bin directoyr
 
