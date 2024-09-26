@@ -2378,3 +2378,22 @@ ls -Z /
 permissive or enforcing 
 getenforce # permissive, observing every action
 auditlog record actions
+access vector dash acd
+sudo audit2why --all | less
+ps -eZ  | grep sshd_t
+ls -Z /usr/sbin/sshd
+system_u:object_r:sshd_exec_t:s0 /usr/sbin/sshd
+sudo audit2allow -all -M mymodule
+sudo semodelue -i mymodule.pp # install this module package in the selinux
+libsemanage.add_user: user sddm not in password file
+sudo setenforce 1
+getenforce # Enforcing
+sudo vi /etc/selinux/config # change from permissive to enforcing
+```
+mymodule.pp mymodule.te
+```
+ps -eZ | grep ssh
+ls -Z /var/log/auth.log
+system_u:object_r:var_log_t:s0 /var/log/auth.log
+
+
