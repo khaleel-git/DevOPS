@@ -2534,3 +2534,11 @@ getenforce  # Check if in Permissive or Enforcing mode
    ```bash
    ls -Z /var/www/
    ```
+
+Docker
+docker --help
+docker search nginx
+docker pull nginx
+docker pull ubuntu/ngnix
+image tag: label of the container
+docker pull ngnix:1.22.1
