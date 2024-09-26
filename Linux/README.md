@@ -2308,5 +2308,60 @@ Different file systems are used in various Linux distributions, and they require
   ```bash
   sudo fsck.ext4 -v -f -p /dev/vdb2
   ```
-
 ---
+Change Kernel Runtime Parameters, Persistent and Non-Persistent
+sysctl -a
+sudo sysctl -a
+sudo sysctl -w net.ipv6.conf.default.disable_ipv6=1 # 0 means disable and 1 means true
+sudo sysctl net.ipv6.conf.default.disable_ipv6
+
+once reboot it will not persistent
+to make persistent changes:
+/etc/sysctl.d/*.conf
+sysctl -a | grep vm
+vm.swappiness = 60 # 0 to 100, higher value swap high, lower value: avoid swapping at all cost
+
+sudo  vi /etc/sysctl.d/swap--less.conf
+sudo sysctl -p /etc/sysctl.d/swap-less.conf # live changes
+sudo vi /etc/sysctl.conf
+
+List and Identify SELinux File and Process Contexts
+rwxrwxrwx # permissions, but we need more security, too generic
+linux kernel can be extended with SELinux module, alread enabled in redhad famiy but not enabled by default in ubunut
+fine grain control, what action are allowed or not
+ls -l 
+ls -Z # 
+unconfined_u:object_r:user_home_t:s0
+user         role      type       level
+
+user: its not user with login, mapped to selinux user (normal user)
+role: predefined role, dev_r, docker_r
+type: type enforcement, protected software jail
+level: multiple level of security, nevel actively used in normal systems
+
+only certain users can enter cetain roles
+it lets authorize duser s to prcess do the job
+authorized users and pcess are allowed to take only a limited set of actions
+if apache is hijacked the hacker can't damage more
+attacker is in a virtual jail
+type_domain
+selinux contexts:
+ps axZ # 3nforcement domain
+ls -Z /usr/sbin/sshd
+only certain types of fie can enter certain domains
+anything label with unconfid can do whatever it want
+id -Z # automatically map to selinux
+sudo semanage login -l
+_default_ # initially restrict
+sudo semanage user -l
+getenforce
+enforce
+permissive # allowing anything
+
+Create and Enforce MAC Using SELinux
+in ubuntu we use aparmor by default
+first disable aparmor
+sudo systemctl stop apparmor.service
+sudo systemctl disable apparmor.service
+
+sudo apt install selinux-basics auditd
