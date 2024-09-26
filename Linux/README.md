@@ -2395,5 +2395,14 @@ mymodule.pp mymodule.te
 ps -eZ | grep ssh
 ls -Z /var/log/auth.log
 system_u:object_r:var_log_t:s0 /var/log/auth.log
-
+sudo chcon -u unconfined_u /var/log/auth.log
+sudo chcon -t user_home_t /var/log/auth.log
+seinfo -u # users
+seinfo -r # roles
+seinfo -t # types
+ls -Z /var/log
+sudo chcon --reference=/var/log/dmesg /var/log/auth.log
+sudo mkdir /var/www
+sudo touch /var/www/{1..10}
+ls -Z /var/www/
 
