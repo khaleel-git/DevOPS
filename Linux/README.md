@@ -2240,6 +2240,12 @@ You can check various system resources using these commands:
   ```
   Displays disk space usage in a human-readable format.
 
+- **Disk Usage (Directory summary)**
+  ```bash
+  du -sh
+  ```
+  Displays summary of a disk space usage in a human-readable format of a directory.
+
 - **Memory Usage**
   ```bash
   free -h
@@ -2281,6 +2287,26 @@ You can manage system services using `systemctl`:
 - **View Service Logs**
   ```bash
   journalctl -u apache2
+  ```
+
+---
+### File System Types and Maintenance
+
+Different file systems are used in various Linux distributions, and they require different maintenance commands:
+
+- **File Systems**
+  - **XFS**: Commonly used in Red Hat-based distributions.
+  - **ext4**: Commonly used in Ubuntu.
+
+#### Repairing File Systems
+- **Repair an XFS File System**
+  ```bash
+  sudo xfs_repair -v /dev/vdb1
+  ```
+
+- **Repair an ext4 File System**
+  ```bash
+  sudo fsck.ext4 -v -f -p /dev/vdb2
   ```
 
 ---
