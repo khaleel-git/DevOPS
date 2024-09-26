@@ -2422,7 +2422,7 @@ unconfined_u:object_r:user_home_t:s0
 
 ### SELinux Modes
 - **Enforcing**: SELinux policy is enforced.
-- **Permissive**: SELinux policy is not enforced, but violations are logged.
+- **Permissive**: SELinux policy is not enforced, but violations are logged. `sudo setenforce Permissive`
 - **Disabled**: SELinux is turned off.
 
 ## Enabling SELinux on Ubuntu
@@ -2497,6 +2497,10 @@ getenforce  # Check if in Permissive or Enforcing mode
 - **Add file context type**:
   ```bash
   sudo semanage fcontext -a -t var_log_t '/var/www/10'
+  ```
+- **Identify SELinux roles**
+  ```
+  sudo semanage user -l
   ```
 
 ## Useful Commands
