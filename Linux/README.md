@@ -2405,4 +2405,16 @@ sudo chcon --reference=/var/log/dmesg /var/log/auth.log
 sudo mkdir /var/www
 sudo touch /var/www/{1..10}
 ls -Z /var/www/
+selinux has a database
+sudo restorecon -R /var/www/
+ls -Z /var/www/
+sudo chcon -u staff_u /var/www/1
+sudo restorecon -R /var/www/
+ls -Z /var/www/
+sudo restorecon -F -R /var/www/
+sudo semange fcontext -add --type var_log_t /var/www/10
+libsemeange.adduser_ usesr sddm not in password file
+sudo restorecon /var/www/10
+ls -Z /var/www/
+
 
