@@ -2309,21 +2309,95 @@ Different file systems are used in various Linux distributions, and they require
   sudo fsck.ext4 -v -f -p /dev/vdb2
   ```
 ---
-Change Kernel Runtime Parameters, Persistent and Non-Persistent
+# Change Kernel Runtime Parameters: Persistent and Non-Persistent
+
+Kernel parameters can be modified at runtime to tune the behavior of the system. Changes can be made either temporarily (non-persistent) or permanently (persistent). Non-persistent changes are lost after a reboot, while persistent changes are retained across reboots.
+
+## Non-Persistent Changes
+
+To change a kernel parameter temporarily, you can use the `sysctl` command. For example, to disable IPv6, run:
+
+```bash
+sudo sysctl -w net.ipv6.conf.default.disable_ipv6=1
+```
+
+To verify the change, you can check the current value with:
+
+```bash
+sysctl net.ipv6.conf.default.disable_ipv6
+```
+
+To view all current kernel parameters, use:
+
+```bash
 sysctl -a
-sudo sysctl -a
-sudo sysctl -w net.ipv6.conf.default.disable_ipv6=1 # 0 means disable and 1 means true
-sudo sysctl net.ipv6.conf.default.disable_ipv6
+```
 
-once reboot it will not persistent
-to make persistent changes:
-/etc/sysctl.d/*.conf
-sysctl -a | grep vm
-vm.swappiness = 60 # 0 to 100, higher value swap high, lower value: avoid swapping at all cost
+## Persistent Changes
 
-sudo  vi /etc/sysctl.d/swap--less.conf
-sudo sysctl -p /etc/sysctl.d/swap-less.conf # live changes
-sudo vi /etc/sysctl.conf
+To make changes that persist across reboots, you need to modify configuration files located in `/etc/sysctl.d/` or `/etc/sysctl.conf`.
+
+1. **Create a new configuration file** (e.g., `swap-less.conf`) to store your desired kernel parameters:
+
+   ```bash
+   sudo vi /etc/sysctl.d/swap-less.conf
+   ```
+
+   Add the following line to set the `vm.swappiness` parameter:
+
+   ```plaintext
+   vm.swappiness=60
+   ```
+
+2. **Load the changes immediately**:
+
+   ```bash
+   sudo sysctl -p /etc/sysctl.d/swap-less.conf
+   ```
+
+3. **To view specific parameters, you can use**:
+
+   ```bash
+   sysctl -a | grep vm
+   ```
+
+## Example: Disabling IPv6
+
+To disable IPv6 temporarily, run:
+
+```bash
+sudo sysctl -w net.ipv6.conf.default.disable_ipv6=1
+```
+
+To make this change persistent, add the following line to a configuration file:
+
+```plaintext
+net.ipv6.conf.default.disable_ipv6=1
+```
+
+You can create or edit a configuration file as shown previously.
+
+## Example: Adjusting Swappiness
+
+Swappiness controls the tendency of the kernel to move processes out of physical memory and into swap. A higher value favors swapping, while a lower value minimizes it.
+
+1. **Set swappiness to 60** (default):
+
+   ```plaintext
+   vm.swappiness=60
+   ```
+
+2. **Create or edit a config file**:
+
+   ```bash
+   sudo vi /etc/sysctl.d/swap-less.conf
+   ```
+
+3. **Load the changes**:
+
+   ```bash
+   sudo sysctl -p /etc/sysctl.d/swap-less.conf
+   ```
 
 List and Identify SELinux File and Process Contexts
 rwxrwxrwx # permissions, but we need more security, too generic
@@ -2416,5 +2490,10 @@ sudo semange fcontext -add --type var_log_t /var/www/10
 libsemeange.adduser_ usesr sddm not in password file
 sudo restorecon /var/www/10
 ls -Z /var/www/
-
+sudo mkdir -p /nfs/sahres
+sudo restorecon -R /nfs/
+ls -Z /nfs/
+unconfined_u:object_r:nfs_t:s0
+sudo setsebool virt_use_nfs 1
+getsebool
 
