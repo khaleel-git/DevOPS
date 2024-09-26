@@ -2399,101 +2399,134 @@ Swappiness controls the tendency of the kernel to move processes out of physical
    sudo sysctl -p /etc/sysctl.d/swap-less.conf
    ```
 
-List and Identify SELinux File and Process Contexts
-rwxrwxrwx # permissions, but we need more security, too generic
-linux kernel can be extended with SELinux module, alread enabled in redhad famiy but not enabled by default in ubunut
-fine grain control, what action are allowed or not
-ls -l 
-ls -Z # 
+# SELinux File and Process Contexts
+
+## SELinux Basics
+
+### File and Process Contexts
+Each file and process in SELinux has a context defined by a triplet:
+- **User**: SELinux user mapping (not the same as the login user).
+- **Role**: Predefined roles (e.g., `dev_r`, `docker_r`).
+- **Type**: Type enforcement, which creates a protected software jail.
+- **Level**: Multiple levels of security, typically not used in normal systems.
+
+Example of a context:
+```
 unconfined_u:object_r:user_home_t:s0
-user         role      type       level
-
-user: its not user with login, mapped to selinux user (normal user)
-role: predefined role, dev_r, docker_r
-type: type enforcement, protected software jail
-level: multiple level of security, nevel actively used in normal systems
-
-only certain users can enter cetain roles
-it lets authorize duser s to prcess do the job
-authorized users and pcess are allowed to take only a limited set of actions
-if apache is hijacked the hacker can't damage more
-attacker is in a virtual jail
-type_domain
-selinux contexts:
-ps axZ # 3nforcement domain
-ls -Z /usr/sbin/sshd
-only certain types of fie can enter certain domains
-anything label with unconfid can do whatever it want
-id -Z # automatically map to selinux
-sudo semanage login -l
-_default_ # initially restrict
-sudo semanage user -l
-getenforce
-enforce
-permissive # allowing anything
-
-Create and Enforce MAC Using SELinux
-in ubuntu we use aparmor by default
-first disable aparmor
-sudo systemctl stop apparmor.service
-sudo systemctl disable apparmor.service
-
-sudo apt install selinux-basics auditd
-sestatus: # enable/disable
-bootleader need to be confiugred to tell linux kernel to load selinux
-
-ls -Z / # ? mark, selinux is disabled
-sudo selinux-activate
-cat /etc/default/grub
-sudo reboot
-relabelling
-# now its enabled
-ls -Z /
-permissive or enforcing 
-getenforce # permissive, observing every action
-auditlog record actions
-access vector dash acd
-sudo audit2why --all | less
-ps -eZ  | grep sshd_t
-ls -Z /usr/sbin/sshd
-system_u:object_r:sshd_exec_t:s0 /usr/sbin/sshd
-sudo audit2allow -all -M mymodule
-sudo semodelue -i mymodule.pp # install this module package in the selinux
-libsemanage.add_user: user sddm not in password file
-sudo setenforce 1
-getenforce # Enforcing
-sudo vi /etc/selinux/config # change from permissive to enforcing
 ```
-mymodule.pp mymodule.te
-```
-ps -eZ | grep ssh
-ls -Z /var/log/auth.log
-system_u:object_r:var_log_t:s0 /var/log/auth.log
-sudo chcon -u unconfined_u /var/log/auth.log
-sudo chcon -t user_home_t /var/log/auth.log
-seinfo -u # users
-seinfo -r # roles
-seinfo -t # types
-ls -Z /var/log
-sudo chcon --reference=/var/log/dmesg /var/log/auth.log
-sudo mkdir /var/www
-sudo touch /var/www/{1..10}
-ls -Z /var/www/
-selinux has a database
-sudo restorecon -R /var/www/
-ls -Z /var/www/
-sudo chcon -u staff_u /var/www/1
-sudo restorecon -R /var/www/
-ls -Z /var/www/
-sudo restorecon -F -R /var/www/
-sudo semange fcontext -add --type var_log_t /var/www/10
-libsemeange.adduser_ usesr sddm not in password file
-sudo restorecon /var/www/10
-ls -Z /var/www/
-sudo mkdir -p /nfs/sahres
-sudo restorecon -R /nfs/
-ls -Z /nfs/
-unconfined_u:object_r:nfs_t:s0
-sudo setsebool virt_use_nfs 1
-getsebool
 
+### Context Commands
+- **List file contexts**: `ls -Z`
+- **List process contexts**: `ps axZ`
+- **Get current SELinux status**: `getenforce` (outputs `Enforcing`, `Permissive`, or `Disabled`)
+
+### SELinux Modes
+- **Enforcing**: SELinux policy is enforced.
+- **Permissive**: SELinux policy is not enforced, but violations are logged.
+- **Disabled**: SELinux is turned off.
+
+## Enabling SELinux on Ubuntu
+
+By default, Ubuntu uses AppArmor for security. To enable SELinux, follow these steps:
+
+1. **Disable AppArmor**:
+   ```bash
+   sudo systemctl stop apparmor.service
+   sudo systemctl disable apparmor.service
+   ```
+
+2. **Install SELinux**:
+   ```bash
+   sudo apt install selinux-basics auditd
+   ```
+
+3. **Activate SELinux**:
+   ```bash
+   sudo selinux-activate
+   ```
+
+4. **Update GRUB and Reboot**:
+   Edit the GRUB configuration:
+   ```bash
+   sudo vi /etc/default/grub
+   ```
+   Add `selinux=1` to the `GRUB_CMDLINE_LINUX_DEFAULT` line, then reboot:
+   ```bash
+   sudo update-grub
+   sudo reboot
+   ```
+
+5. **Relabel Filesystem**:
+   After reboot, SELinux will be enabled, and the filesystem will be relabeled.
+
+### Check SELinux Status
+```bash
+getenforce  # Check if in Permissive or Enforcing mode
+```
+
+## Configuring SELinux
+
+### Create and Install a Policy Module
+1. Generate a policy module:
+   ```bash
+   sudo audit2allow -all -M mymodule
+   ```
+
+2. Install the policy module:
+   ```bash
+   sudo semodule -i mymodule.pp
+   ```
+
+3. Set SELinux to enforcing mode:
+   ```bash
+   sudo setenforce 1
+   ```
+
+### Context Management
+- **Change file context**:
+  ```bash
+  sudo chcon -u unconfined_u /var/log/auth.log
+  sudo chcon -t user_home_t /var/log/auth.log
+  ```
+
+- **Restore default context**:
+  ```bash
+  sudo restorecon -R /var/www/
+  ```
+
+- **Add file context type**:
+  ```bash
+  sudo semanage fcontext -a -t var_log_t '/var/www/10'
+  ```
+
+## Useful Commands
+- **List SELinux Users**:
+  ```bash
+  seinfo -u
+  ```
+
+- **List SELinux Roles**:
+  ```bash
+  seinfo -r
+  ```
+
+- **List SELinux Types**:
+  ```bash
+  seinfo -t
+  ```
+
+## Example: Managing a Web Directory
+1. **Create a web directory**:
+   ```bash
+   sudo mkdir /var/www
+   ```
+
+2. **Set context for files in the directory**:
+   ```bash
+   sudo restorecon -R /var/www/
+   ```
+
+3. **Check context**:
+   ```bash
+   ls -Z /var/www/
+   ```
