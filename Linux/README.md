@@ -2062,66 +2062,225 @@ anacron -T
     atrm job_number
     ```
 ---
+## APT: Advanced Package Tool
+### Basic APT Commands
 
+These commands are essential for managing packages:
 
-apt: advanced package tool
-sudo apt update # update fresh
-repositories managed by canonical # severs
-sudo apt update && sudo apt upgrade # combined
-sudo apt update && sudo apt install nginx # newest version
-also install difference dependencies
+- **Update Package Lists**
+  ```bash
+  sudo apt update
+  ```
+  Updates the package lists from the repositories.
 
-dpkg --listfiles nginx # list fies on the nginx package
-dpk --search /usr/sbin/ngnix
-apt show libnginx-mod-stream
-apt search --names-only nginx
-apt search nginx module image
-sudo apt remove nginx
-sudo apt auto remove nginx # remove all dependencies
-sudo apt autoremove ngninx # same as above
+- **Upgrade Installed Packages**
+  ```bash
+  sudo apt upgrade
+  ```
+  Upgrades all installed packages to their latest versions.
 
-Configure the Repositories of Package Manager
-/etc/apt/sources.list.d/ubuntu.sources
+- **Install a Package (e.g., Nginx)**
+  ```bash
+  sudo apt install nginx
+  ```
+  Installs the Nginx web server and any necessary dependencies.
 
+- **List Files in a Package**
+  ```bash
+  dpkg --listfiles nginx
+  ```
+  Displays all files installed by the Nginx package.
+
+- **Search for a File in a Package**
+  ```bash
+  dpkg --search /usr/sbin/nginx
+  ```
+  Identifies which package installed the specified file.
+
+- **Show Package Details**
+  ```bash
+  apt show libnginx-mod-stream
+  ```
+  Provides detailed information about a specific package.
+
+- **Search for Packages**
+  ```bash
+  apt search nginx
+  ```
+  Searches for packages related to Nginx.
+
+- **Remove a Package**
+  ```bash
+  sudo apt remove nginx
+  ```
+  Uninstalls the Nginx package.
+
+- **Auto-remove Unused Dependencies**
+  ```bash
+  sudo apt autoremove
+  ```
+  Removes packages that were automatically installed as dependencies but are no longer needed.
+
+---
+
+### Managing Repositories
+
+APT uses repositories to manage software. Repository configurations are typically found in `/etc/apt/sources.list` or `/etc/apt/sources.list.d/`.
+
+#### Example of Repository Configuration
+```plaintext
+deb https://us.archive.ubuntu.com/ubuntu/ focal main restricted universe multiverse
 ```
-Types: deb
-URIs: https://us.arhive.ubuntu.com/ubuntu
-Suites: noble noble-updates noble-backports
-components: main restricted universe multiverse
-signed-by: /usr/share/keyrings/ubuntu-archive-keyring.gpg
-```
-3rd party Repositories: 
-download public key
-package manager can verify key
-curl "link.gpg" -o docker.key # download key, 
-gpg --dearmor docker.key # deearmor docker.key text format to binary format that our package can understand, add .gpg extension
-sudo mv docker.key.gpg /etc/apt/keyrings/
-more organize way
-sudo vi /etc/apt/sources.list.d/docker.list
-```bash
-deb [signed-by=/etc/apt/keyrings/docker.key.gpg] https://..... noble stable
-```
-sudo apt update # apt download newest packages
+- **deb**: Indicates a binary package repository.
+- **https://us.archive.ubuntu.com/ubuntu/**: URL of the repository.
+- **focal**: The release name (e.g., for Ubuntu 20.04).
+- **main restricted universe multiverse**: Components of the repository.
 
-ppa: personal package archive
-allows to create your own 3rd party repository
-sudo add-apt-repository ppa:graphics-drivers/ppa
-add-apt-repostiry --list
-sudo add-apt-reposity ppa:graphics-drivers/remove
+---
 
-Install Software by Compiling Source Code
-download from github, compile it
-htop:
-git clone htop-url
-cd htop
-# every project has difference dependencies
-first install dependencies:
-sudo apt install libncursesw5-dev autotools-dev autoconf automake build-essential
-./autogen.sh
-./configure -help
-./configure # with default configuration
-make # compile and build, make targets -> make clean and start again if erroros occured
-compiled into a binary into htop
-/home/jeremy/htop/htop # always have to use
-sudo make install # moved to usr local bin directoyr
+### Adding 3rd Party Repositories
 
+To add a third-party repository, follow these steps:
+
+1. **Download the Public Key**
+   ```bash
+   curl -fsSL https://example.com/repo-key.gpg -o repo-key.gpg
+   ```
+
+2. **Add the Key to Your Keyring**
+   ```bash
+   gpg --dearmor repo-key.gpg
+   sudo mv repo-key.gpg /etc/apt/trusted.gpg.d/
+   ```
+
+3. **Add the Repository**
+   ```bash
+   echo "deb [signed-by=/etc/apt/trusted.gpg.d/repo-key.gpg] https://example.com/ubuntu focal main" | sudo tee /etc/apt/sources.list.d/example.list
+   ```
+
+4. **Update APT**
+   ```bash
+   sudo apt update
+   ```
+
+---
+
+### Using Personal Package Archives (PPA)
+
+PPAs are a convenient way to install software from third-party developers.
+
+- **Add a PPA**
+  ```bash
+  sudo add-apt-repository ppa:graphics-drivers/ppa
+  ```
+
+- **List Added PPAs**
+  ```bash
+  ls /etc/apt/sources.list.d/
+  ```
+
+- **Remove a PPA**
+  ```bash
+  sudo add-apt-repository --remove ppa:graphics-drivers/ppa
+  ```
+
+---
+
+### Installing Software from Source
+
+To install software not available in the repositories, you can compile it from source:
+
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/hishamhm/htop.git
+   cd htop
+   ```
+
+2. **Install Dependencies**
+   ```bash
+   sudo apt install libncursesw5-dev autotools-dev autoconf automake build-essential
+   ```
+
+3. **Compile the Software**
+   ```bash
+   ./autogen.sh
+   ./configure
+   make
+   ```
+
+4. **Install the Compiled Software**
+   ```bash
+   sudo make install
+   ```
+
+---
+
+### Understanding Package Management
+
+Linux distributions utilize different package formats and managers to handle software installations and updates. Here’s a brief overview:
+
+#### Package Formats
+- **DEB**: Used by Debian-based distributions like Ubuntu.
+- **RPM**: Used by Red Hat-based distributions like Fedora.
+
+#### Types of Package Managers
+- **DPKG**: Low-level package manager for DEB packages.
+- **APT**: High-level package manager that works with DPKG.
+- **YUM**: High-level package manager for RPM packages.
+
+---
+
+### Verifying System Resources
+
+You can check various system resources using these commands:
+
+- **Disk Usage**
+  ```bash
+  df -h
+  ```
+  Displays disk space usage in a human-readable format.
+
+- **Memory Usage**
+  ```bash
+  free -h
+  ```
+  Shows memory usage, including free and used RAM.
+
+- **System Uptime**
+  ```bash
+  uptime
+  ```
+  Displays how long the system has been running.
+
+---
+
+### Managing Services
+
+You can manage system services using `systemctl`:
+
+- **List Service Dependencies**
+  ```bash
+  systemctl list-dependencies
+  ```
+
+- **Check Service Status**
+  ```bash
+  systemctl status apache2
+  ```
+
+- **Start a Service**
+  ```bash
+  sudo systemctl start apache2
+  ```
+
+- **Stop a Service**
+  ```bash
+  sudo systemctl stop apache2
+  ```
+
+- **View Service Logs**
+  ```bash
+  journalctl -u apache2
+  ```
+
+---
