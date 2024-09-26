@@ -2365,3 +2365,16 @@ sudo systemctl stop apparmor.service
 sudo systemctl disable apparmor.service
 
 sudo apt install selinux-basics auditd
+sestatus: # enable/disable
+bootleader need to be confiugred to tell linux kernel to load selinux
+
+ls -Z / # ? mark, selinux is disabled
+sudo selinux-activate
+cat /etc/default/grub
+sudo reboot
+relabelling
+# now its enabled
+ls -Z /
+permissive or enforcing 
+getenforce # permissive, observing every action
+auditlog record actions
