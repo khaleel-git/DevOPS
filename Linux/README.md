@@ -2534,11 +2534,175 @@ getenforce  # Check if in Permissive or Enforcing mode
    ```bash
    ls -Z /var/www/
    ```
+---
+# Docker
+## Basic Docker Commands
+- View Docker options: 
+  ```bash
+  docker --help
+  ```
+- Search for an image: 
+  ```bash
+  docker search nginx
+  ```
+- Pull a Docker image: 
+  ```bash
+  docker pull nginx
+  docker pull ubuntu/nginx
+  ```
+- Pull a specific image tag (version): 
+  ```bash
+  docker pull nginx:1.22.1
+  ```
+- List Docker images: 
+  ```bash
+  docker images
+  ```
+- Remove a Docker image: 
+  ```bash
+  docker rmi ubuntu/nginx
+  docker rmi nginx:1.22.1  # Delete a specific version
+  ```
 
-Docker
-docker --help
-docker search nginx
-docker pull nginx
-docker pull ubuntu/ngnix
-image tag: label of the container
-docker pull ngnix:1.22.1
+## Creating and Running Containers
+- Run a container: 
+  ```bash
+  docker run nginx
+  ```
+- Run a container with detached mode, publish port, and custom name: 
+  ```bash
+  docker run --detach --publish 8080:80 --name mywebserver nginx
+  ```
+  This makes the container accessible to the outside world via port 8080.
+  
+- List running containers: 
+  ```bash
+  docker ps
+  ```
+- List all containers (including stopped ones): 
+  ```bash
+  docker ps -a
+  ```
+- Start and stop containers:
+  ```bash
+  docker start container_id
+  docker stop container_name
+  ```
+
+### Netcat Example
+To verify network connectivity:
+```bash
+GET /
+nc localhost 8080
+ctrl + D  # exit netcat session
+```
+
+- Difference between `docker run` and `docker start`:  
+  `docker run` builds and starts a container, while `docker start` only starts an existing container.
+
+- Remove a container: 
+  ```bash
+  docker rm container_name
+  ```
+
+- Removing an image after stopping and removing the container: 
+  ```bash
+  docker stop mywebserver
+  docker rm mywebserver
+  docker rmi nginx
+  ```
+
+- Auto-restart a container on failure:
+  ```bash
+  docker run --detach --publish 8080:80 --name mywebserver nginx --restart always
+  ```
+
+## Dockerfile Example
+Create a custom Docker image:
+```Dockerfile
+FROM nginx
+COPY index.html /usr/share/nginx/html/index.html
+```
+Build the image:
+```bash
+docker build --tag mycustomnginx:1.0 myimage
+```
+
+---
+
+# Manage and Configure Virtual Machines
+
+## Basic Virtual Machine Management with `virsh`
+
+- Install required software:
+  ```bash
+  sudo apt install virt-manager
+  ```
+
+- Define a virtual machine using XML:
+  ```bash
+  virsh define testmachine.xml
+  ```
+  Example XML configuration (`testmachine.xml`):
+  ```xml
+  <domain type="qemu">
+      <name>TestMachine</name>
+      <memory unit="GiB">1</memory>
+      <vcpu>1</vcpu>
+      <os>    
+          <type arch="x86_64">hvm</type>
+      </os>
+  </domain>
+  ```
+
+- Manage VMs:
+  ```bash
+  virsh help
+  virsh list         # List running VMs
+  virsh list --all   # List all VMs
+  virsh start TestMachine
+  virsh shutdown TestMachine
+  virsh destroy TestMachine  # Force shutdown
+  virsh undefine TestMachine --remove-all-storage
+  ```
+
+- Configure VM settings:
+  ```bash
+  virsh setvcpus TestMachine 2 --config
+  virsh setmaxmem TestMachine 2048 --config
+  ```
+
+## Creating and Booting Virtual Machines
+
+- Download a minimal cloud image (ISO) and verify its checksum:
+  ```bash
+  sha256sum -c SHA256SUMS 2>&1 | grep OK
+  ```
+
+- Resize a virtual disk image:
+  ```bash
+  qemu-img resize ubuntu-24.img 10G
+  ```
+
+- Copy disk image to storage pool:
+  ```bash
+  sudo cp ubuntu.img /var/lib/libvirt/images/
+  ```
+
+- Install and start a VM:
+  ```bash
+  virt-install --osinfo ubuntu24 --name ubuntu1 --memory 1024 --vcpus 1 --import --disk /var/lib/libvirt/images/ubuntu.img --graphics none
+  ```
+
+### Auto-generate root password on cloud-init:
+```bash
+virt-install --osinfo ubuntu24 --name ubuntu1 --memory 1024 --vcpus 1 --import --disk /var/lib/libvirt/images/ubuntu.img --graphics none --cloud-init root-password-generate=on
+```
+
+Copy the root password from the output.
+
+### Installing an OS from ISO:
+```bash
+virt-install --osinfo debian12 --name debian1 --memory 1024 --vcpus 1 --disk size=10 \
+--location /var/lib/libvirt/boot/debian12-netinst.iso --graphics none --extra-args "console=ttyS0"
+```
