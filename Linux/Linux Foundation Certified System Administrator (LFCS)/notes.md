@@ -248,3 +248,37 @@ trinity ALL= (ALL) NOPASSWD: ALL
 sudo -u trinity ls /home/trinity
 
 
+Manage Access to Root Account
+sudo ls /root/
+sudo --login or sudo -i # password for current user
+logout
+su - or su -l or su --login # password for root user only
+when the root is locked, we can still use sudo --login but cannto use sudo -
+
+if root does not have a passowrd, we can set the password for root
+sudo passwd root
+sudo passwd --unlock root or sudo passwd -u root, then run su - and type the root password for login
+
+case 2:
+sudo password --lock root or sudo passwd -l root # still be able to login via ssh
+
+
+# Configure the System to Use LDAP User and Group Accounts
+cat /etc/passwd
+jereym:x:1000:1000:jeremy Morgan:/home/jeremy:/bin/bash
+
+light weight directory access protocol (LDAP)
+id john # no such user
+id jane # no such user
+
+now run LDAP server, setup client to use LDAP
+lxd # docker for entire os
+lxd init # at least 5GB
+lxc import ldap-server.tar.xz
+
+lxc list
+lxc start ldap-server
+
+install this package:
+sudo apt update && sudo apt install libnss-ldapd # ends with d is extended version
+dc=kodekloud,dc=com
