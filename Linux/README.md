@@ -3210,8 +3210,6 @@ sudo -u trinity ls /home/trinity
 ---
 To manage root privileges in Linux, there are two main ways to switch to the root user: using `sudo` or `su`. Both have different use cases, access methods, and alternatives. Let's break down the creative ways to handle root login efficiently.
 
----
-
 # Root Account Management (sudo)
 
 `sudo` is the most common way to perform root actions on a system without logging in directly as the root user. It temporarily grants superuser privileges to the current user.
@@ -3281,84 +3279,6 @@ To manage root privileges in Linux, there are two main ways to switch to the roo
 | **Environment**          | `sudo -i`: root's env<br>`sudo -s`: user's env | `su -`: root's env<br>`su`: user's env |
 | **Security**             | More secure (no need for root password) | Less secure (root password required) |
 | **Best for**             | Quick tasks with elevated privileges | Full root session with root’s environment |
-
----
-
-## 4. **Creative Usage**
-
-- **Temporary root tasks without leaving your shell**: 
-  - Use `sudo -s` when you need to run a series of root commands, but want to keep your user's environment and quickly revert to your user shell without affecting it.
-    ```bash
-    sudo -s
-    # Run commands as root while retaining user environment.
-    ```
-
-- **Run a single root command**:
-  - You don’t need to switch to a root shell for one-off commands. You can simply prepend `sudo` to the command.
-    ```bash
-    sudo apt update
-    sudo systemctl restart apache2
-    ```
-
-- **Quick command switching**:
-  - If you need to switch between root and user tasks frequently, `sudo -i` is faster than `su -` as it doesn't require entering the root password every time.
-    ```bash
-    sudo -i
-    # Switch to root, perform tasks, then exit.
-    exit
-    ```
-
-- **Access root from locked accounts**:
-  - When the root account is locked (`passwd -l root`), `su` will fail. However, `sudo --login` will still allow you to access root as long as the current user has sudo privileges.
-    ```bash
-    sudo passwd -l root
-    sudo --login
-    # Root access even with a locked root account.
-    ```
-
-- **For root with minimal commands**:
-  - You can log in as root using `sudo -u` to run a single command without a shell session.
-    ```bash
-    sudo -u root command
-    # Executes command as root without switching to root shell.
-    ```
-
-- **Login as specific users**:
-  - `sudo -u <user>` lets you switch to any other user (not just root) to run commands as that user.
-    ```bash
-    sudo -u trinity ls /home/trinity
-    # Runs 'ls' as the user 'trinity' without logging in as her.
-    ```
-
----
-
-## 5. **Examples of Scenarios**
-
-### 1. **Use `sudo` for administrative tasks without revealing the root password**:
-```bash
-sudo -i
-# Root login using your own user password.
-# Ideal when you are a sysadmin with sudo privileges, but you do not know the root password.
-```
-
-### 2. **Direct root access with `su -`**:
-```bash
-su -
-# Switch to root and access root’s full environment.
-# Requires the root password, typically used for more extensive system changes.
-```
-
-### 3. **Temporarily modify user’s environment as root**:
-```bash
-sudo -s
-# Stay in the user's shell but gain root privileges.
-```
-
-### 4. **Locked root access**:
-```bash
-sudo passwd -l root   # Lock root account
-sudo --login          # Gain root access via sudo even when root is locked
-```
 
 ## final thougths
 
