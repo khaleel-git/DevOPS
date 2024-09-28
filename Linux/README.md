@@ -3053,8 +3053,10 @@ The `.bashrc` file is a configuration script that runs whenever a new shell sess
   ```bash
   sudo vi /etc/skel/.bashrc
   ```
+
 This will ensure that every new user gets a predefined `.bashrc` file in their home directory upon account creation.
 ---
+
 # User Resource Limits and Privileges Management
 ## Configure User Resource Limits
 
