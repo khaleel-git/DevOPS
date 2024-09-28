@@ -185,4 +185,64 @@ Please don't run CPU-intensive processes between 8AM and 10PM.
 sudo adduser trinity
 sudo ls -a /home/trinity
 
-sudo vi /etc/skel/.bashrc # place .bashrc file under every newly user's home directory
+sudo vi /etc/skel/.bashrc # place .bashrc file under every newly user's home directory\
+
+Configure User Resource Limits
+sudo vi /etc/security/limits.conf
+# <domain> <type> <item> <value>
+trinity hard nproc 10
+@developers soft nproc 10
+* soft cpu 5 # every user but user trinity will overrite
+
+trinity hard nproc 30
+trinity hard nproc 20
+trinity soft nproc 10
+
+trinity - nproc 20 # hard limit fixed
+
+item: nproc # max proc a user can open 
+fsize: 1024
+cpu: 1
+
+man limits.conf
+
+```bash
+sudo vi /etc/security/limits.conf
+triny - nproc 3
+```
+
+sudo -iu trinity
+ps | less
+ ls -a | grep bash | less
+ process failed # more than 3 process
+
+ logout
+
+ulimit -a # see limit of a current session
+ulimit -u 5000 # limit 
+
+Manage User Privileges
+groups
+aaron family sudo # part of the group named sudo
+
+add a user into a sudo group
+sudo gpasswd -a trinity sudo # user group
+
+sudo gpasswd -d trinity sudo # remove her from sudo 
+who can use sudo:
+sudo visudo # checks edits and helps us avoid mistakes
+```bash
+%sudo   ALL=(ALL:ALL) ALL
+%group  host=(runas user field:run as group field) command list
+user/group
+host=(run_as_user:run_as_group) command_list
+
+trinity ALL=(ALL) ALL # (ALL) for user,group both
+%developers ALL=(ALL)
+
+trinity ALL=(aaron,john) ALL
+trinity ALL=ALL
+trinity ALL=(ALL) /bin/ls, /bin/stat
+trinity ALL= (ALL) NOPASSWD: ALL
+```
+sudo -u trinity ls /home/trinity
