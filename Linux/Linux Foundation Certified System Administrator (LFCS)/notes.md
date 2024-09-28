@@ -116,3 +116,54 @@ virt-install --osinfo debian12 --name debian1 --memory 1024 --vcpus 1 --disk siz
 --location /var/lib/libvirt/boot/debian12-netinst.iso --graphics none --extra-args "console=ttyS0"
 
 # we can download iso file direct from the internet, virt manager automatically manages this
+
+Create, Delete, and Modify Local User Accounts
+sudo adduser john # /home/john , /bin/bash
+sudo passwd john
+sudo deluser john
+sudo deluser --remove-home john
+sudo adduser --shell /bin/zsh --home /home/otherdirectory/ john
+cat /etc/passwd # all stores in this directory
+sudo adduser --uid 1100 smith
+ls -l /home/
+ls -ln /home/ # id
+id
+whoami
+
+System account:
+sudo adduser --system --no-create-home sysacc # indended for programs, daemon-uses this 
+sudo deluser --remove-home john
+
+sudo adduser john
+sudo user-mod --home /home/ohter --move-home john # move home idr
+
+sudo usermod -d /home/otherdir -m john # renamed
+sudo usermod --login jane john = sudo ausermod -l jane john
+sudo usermod --shell /bin/othershell jane
+sudo usermod --lock jane # disable account, dont delte, login via ssh key only
+sudo usermod --unlock jane
+sudo usermod --expiredate date jane # expire
+sudo usermod
+
+password expiration fores user to change
+sudo change --lastday 0 jane # let user change its password mandatory
+sudo chage --lastday -1 jane
+sudo chage --maxdays 30 jane
+sudo change --maxdays -1 jane
+
+Create, Delete, and Modify Local Groups and Group Memberships
+sudo adduser john
+sudo groupadd develpers
+sudo gpasswd --add john develpers
+sudo gpasswed --a john developers
+groups john
+sudo gpassword --delete john developers
+sudo usermod -g developers john # primary
+sudo usermod --gid developers john
+groups john
+gpasswd --help
+sudo gorupmod --new-name programers dev
+sudo grup -n prog dev
+sudo groupdel programmers
+sudo usermod --gid john john
+sudo gourpdel programmers
