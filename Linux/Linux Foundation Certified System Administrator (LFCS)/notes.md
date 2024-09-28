@@ -166,3 +166,23 @@ sudo grup -n prog dev
 sudo groupdel programmers
 sudo usermod --gid john john
 sudo gourpdel programmers
+
+Manage System-Wide Environment Profiles
+printenv or env
+HISTSIZE=222 # change size of histsize
+history # shows commands in history
+use .bashrc file for 
+sudo vi /etc/environment
+logout
+
+sudo vi /etc/profile.d/lastlogin.sh # run command after login
+
+Manage Template User Environment
+sudo vi /etc/skel/README # custom file place under new users
+```README
+Please don't run CPU-intensive processes between 8AM and 10PM.
+```
+sudo adduser trinity
+sudo ls -a /home/trinity
+
+sudo vi /etc/skel/.bashrc # place .bashrc file under every newly user's home directory

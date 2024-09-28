@@ -2940,4 +2940,120 @@ Linux has similar commands for creating groups, like `adduser`/`useradd`.
 - **User modification**: `usermod` is used for altering user details like login names, home directories, shells, and locking/unlocking accounts.
 - **Password management**: `passwd` and `chage` control password settings and expiration policies.
 - **Group management**: `addgroup`, `groupadd`, `gpasswd`, and `groupmod` manage group memberships and details.
+---
 
+# Manage System-Wide Environment Profiles
+
+This guide will help you manage system-wide environment profiles in Linux, including modifying environment variables, setting up login scripts, and customizing the template environment for new users.
+
+## Environment Variables
+
+You can view the current environment variables using the following commands:
+
+- **View environment variables**:
+  ```bash
+  printenv
+  ```
+  or
+  ```bash
+  env
+  ```
+
+### Modify Environment Variables
+
+You can adjust environment variables like `HISTSIZE`, which determines the number of commands stored in the shell's history.
+
+- **Change `HISTSIZE`**:
+  ```bash
+  HISTSIZE=222  # Sets the size of the history to 222 commands
+  ```
+
+- **View command history**:
+  ```bash
+  history
+  ```
+
+### Persistent Environment Changes
+
+To make environment variable changes persistent, add them to the relevant configuration files such as `.bashrc` or `/etc/environment`.
+
+- **Modify `/etc/environment`**:
+  This file sets system-wide environment variables.
+  ```bash
+  sudo vi /etc/environment
+  ```
+
+After making changes, logout or restart the system for them to take effect.
+
+- **Logout to apply changes**:
+  ```bash
+  logout
+  ```
+
+---
+
+## Manage System-Wide Login Commands
+
+You can run specific commands automatically upon user login by placing scripts in the `/etc/profile.d/` directory.
+
+- **Create a login script**:
+  Add a script that runs after a user logs in, such as showing the last login information.
+  ```bash
+  sudo vi /etc/profile.d/lastlogin.sh
+  ```
+
+- **Example content**:
+  ```bash
+  #!/bin/bash
+  echo "Welcome! Last login information:"
+  lastlog
+  ```
+
+This script will execute automatically when users log in, displaying the last login information.
+
+---
+
+## Manage Template User Environment
+
+The `/etc/skel/` directory contains template files that are copied into the home directory of newly created users. You can customize this directory to set up default configuration files for new users.
+
+- **Create a custom README file**:
+  Place a file in `/etc/skel/` to inform new users about system policies.
+  ```bash
+  sudo vi /etc/skel/README
+  ```
+
+- **Example `README` content**:
+  ```text
+  Please don't run CPU-intensive processes between 8AM and 10PM.
+  ```
+
+When a new user is created, this file will automatically be placed in their home directory.
+
+### Create a New User and Verify
+
+- **Create a new user**:
+  ```bash
+  sudo adduser trinity
+  ```
+
+- **Verify the new user's home directory**:
+  Check that the custom `README` and other template files are copied to the new user's home directory.
+  ```bash
+  sudo ls -a /home/trinity
+  ```
+
+---
+
+## Customize `.bashrc` for New Users
+
+The `.bashrc` file is a configuration script that runs whenever a new shell session is started. To provide all new users with a default `.bashrc` file, you can place a customized version in the `/etc/skel/` directory.
+
+- **Modify the template `.bashrc` file**:
+  ```bash
+  sudo vi /etc/skel/.bashrc
+  ```
+
+This will ensure that every new user gets a predefined `.bashrc` file in their home directory upon account creation.
+
+---
