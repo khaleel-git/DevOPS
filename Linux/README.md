@@ -3280,7 +3280,7 @@ To manage root privileges in Linux, there are two main ways to switch to the roo
 | **Security**             | More secure (no need for root password) | Less secure (root password required) |
 | **Best for**             | Quick tasks with elevated privileges | Full root session with root’s environment |
 
-## final thougths
+## Final thougths
 
 The choice between `sudo` and `su` depends on the situation. `sudo` is better for quick and secure privilege escalation, especially when multiple administrators need access without revealing the root password. On the other hand, `su` is preferred for full-root sessions where the environment and password are controlled centrally. Both provide flexibility, but combining them creatively helps manage privileges more efficiently.
 
