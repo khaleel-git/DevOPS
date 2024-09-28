@@ -142,14 +142,13 @@ sudo usermod --login jane john = sudo ausermod -l jane john
 sudo usermod --shell /bin/othershell jane
 sudo usermod --lock jane # disable account, dont delte, login via ssh key only
 sudo usermod --unlock jane
-sudo usermod --expiredate date jane # expire
-sudo usermod
+sudo usermod -e 2030-03-01 jane # expire user
 
 password expiration fores user to change
 sudo change --lastday 0 jane # let user change its password mandatory
 sudo chage --lastday -1 jane
 sudo chage --maxdays 30 jane
-sudo change --maxdays -1 jane
+sudo chage --maxdays -1 jane # no expiry for password
 
 Create, Delete, and Modify Local Groups and Group Memberships
 sudo adduser john
