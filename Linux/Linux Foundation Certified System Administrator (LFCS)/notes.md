@@ -282,3 +282,21 @@ lxc start ldap-server
 install this package:
 sudo apt update && sudo apt install libnss-ldapd # ends with d is extended version
 dc=kodekloud,dc=com
+/etc/nsswitch.conf # files system ldap (passwd: files systemd ldap)
+sudo cat /etc/nslcd.conf
+
+now system knows our additional accounts:
+id john # exits now, group is ldapusers
+id jane # exits now, group is ldapusers
+
+users on ladap server
+getent passwd # get all ldapp users and local users
+getend passwd --service ldap
+getent group --service ldap
+ls /home # this location does not exist
+we have to manually create home locations
+
+every time a user login, this module would trigger
+sudo pam-auth-update # create home dir on login
+sudo login jane # now we have home directoyr
+if we have 100 linux servers configured the same way, dealing with users and groups accounts will be easy, they will be available, one central location is used to deploy delte crud these users
