@@ -3053,7 +3053,157 @@ The `.bashrc` file is a configuration script that runs whenever a new shell sess
   ```bash
   sudo vi /etc/skel/.bashrc
   ```
-
 This will ensure that every new user gets a predefined `.bashrc` file in their home directory upon account creation.
+---
+# User Resource Limits and Privileges Management
+## Configure User Resource Limits
+
+User resource limits control the amount of system resources (CPU, processes, file sizes, etc.) that a user or group can consume. These limits can be configured in `/etc/security/limits.conf`.
+
+### Edit Limits Configuration File
+
+To configure resource limits, you need to modify the `/etc/security/limits.conf` file.
+
+- **Format**:
+  ```
+  <domain> <type> <item> <value>
+  ```
+
+- **Example Entries**:
+  ```bash
+  sudo vi /etc/security/limits.conf
+  ```
+
+  ```bash
+  trinity hard nproc 10       # Trinity can run a maximum of 10 processes (hard limit)
+  @developers soft nproc 10   # All users in the 'developers' group have a soft limit of 10 processes
+  * soft cpu 5                # All users have a CPU time limit of 5 except where overridden
+  ```
+
+  Additional examples for user `trinity`:
+  ```bash
+  trinity hard nproc 30       # Hard limit of 30 processes
+  trinity soft nproc 10       # Soft limit of 10 processes
+  ```
+
+- **Alternative Format**:
+  The format without a type can also be used:
+  ```bash
+  trinity - nproc 20          # Hard limit on the number of processes for trinity
+  ```
+
+### Items in Limits Configuration
+
+- **`nproc`**: Maximum number of processes a user can run.
+- **`fsize`**: Maximum size of files a user can create.
+- **`cpu`**: Maximum CPU time (in minutes) that a user can use.
+
+#### Example:
+```bash
+trinity hard nproc 20  # Hard limit of 20 processes
+trinity soft nproc 10  # Soft limit of 10 processes
+* soft cpu 1           # Every user has 1 minute of CPU time
+```
+
+### Testing the Configuration
+
+To test the limits for a specific user, log in as the user and check the limits:
+
+```bash
+sudo -iu trinity
+```
+
+- Check running processes:
+  ```bash
+  ps | less
+  ```
+
+- Attempt to exceed the process limit:
+  ```bash
+  # Try running more processes than allowed, it should fail after the limit is reached
+  ```
+
+### Check Current Session Limits
+
+To view the current resource limits for your session, use the `ulimit` command:
+
+- **View all current session limits**:
+  ```bash
+  ulimit -a
+  ```
+
+- **Set the maximum number of user processes**:
+  ```bash
+  ulimit -u 5000
+  ```
+
+---
+
+## Manage User Privileges
+
+User privileges are controlled by group membership and the `sudo` system. Users can be assigned specific permissions by being added to privileged groups like `sudo`.
+
+### View User Groups
+
+You can check the groups a user belongs to with the following command:
+
+```bash
+groups
+```
+
+Example:
+```bash
+aaron family sudo  # User 'aaron' is part of the 'family' and 'sudo' groups
+```
+
+### Add a User to the `sudo` Group
+
+To grant a user administrative privileges, add them to the `sudo` group:
+
+```bash
+sudo gpasswd -a trinity sudo
+```
+
+### Remove a User from the `sudo` Group
+
+To revoke a user's administrative privileges, remove them from the `sudo` group:
+
+```bash
+sudo gpasswd -d trinity sudo
+```
+
+### Manage sudo Privileges with `visudo`
+
+The `visudo` command is used to safely edit the `/etc/sudoers` file, which controls who can use `sudo` and how.
+
+- **Open sudoers file**:
+  ```bash
+  sudo visudo
+  ```
+
+- **Example Entries**:
+  ```bash
+  %sudo   ALL=(ALL:ALL) ALL     # All users in the 'sudo' group can run any command as any user or group
+  trinity ALL=(ALL) ALL         # The user 'trinity' can run any command as any user or group
+  %developers ALL=(ALL)         # All users in the 'developers' group can run any command as any user or group
+  ```
+
+- **Allow specific users to execute commands**:
+  ```bash
+  trinity ALL=(aaron,john) ALL  # Trinity can run commands as 'aaron' or 'john'
+  ```
+
+- **Allow specific commands without a password**:
+  ```bash
+  trinity ALL=(ALL) NOPASSWD: ALL  # Trinity can run all commands without being prompted for a password
+  ```
+
+### Test sudo Privileges
+
+You can test a user's `sudo` privileges by running a command as the user with `sudo`:
+
+```bash
+sudo -u trinity ls /home/trinity
+```
 
 ---
