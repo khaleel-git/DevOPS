@@ -246,3 +246,5 @@ trinity ALL=(ALL) /bin/ls, /bin/stat
 trinity ALL= (ALL) NOPASSWD: ALL
 ```
 sudo -u trinity ls /home/trinity
+
+
