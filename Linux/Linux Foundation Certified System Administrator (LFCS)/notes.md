@@ -410,3 +410,27 @@ sudo vi /etc/hosts # set hostname 127.0.123.123 dbserver
 ping dbserver # auto translate to ip
 
 ls /usr/share/doc/netplan/examples # docs about tools
+
+# Start, Stop, and Check Status of Network Services
+sshd, mariadbd, nginx
+ss 
+netstat
+sudo ss -ltunp # l: listen, t: list tcp connections, u: udp connections, n: numeric values port number, p: processes
+sudo ss -tunlp
+
+local address:port  # 0.0.0.0:22 == [::]:22
+Process: users: (("mariadbd)), sshd, sshd
+systemctl status mriadb.service
+systemctl status ssh.service # ssh on ubuntu, and sshd on redhat
+
+sudo systemctl stop mariadb.service
+sudo ss -ltunp
+sudo systemctl disable mariadb.service # disable at auto start
+sudo systemctl enable mariadb.service  # enable at auto start
+
+sudo ss -ltunp # also shows pid of command
+ps pid
+sudo lsof -p pid # which file is opened by this command
+
+sudo netstat -ltunp # uses same option as ss command
+netstat might no available at all systems by default
