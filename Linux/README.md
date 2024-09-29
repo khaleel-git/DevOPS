@@ -3434,8 +3434,8 @@ By using LDAP, managing user accounts across multiple Linux servers becomes easi
   ```
 - Apply the configuration:
   ```bash
-  sudo netplan apply
   sudo netplan try
+  sudo netplan apply
   ```
 - Configure routes and DNS in `netplan`:
   ```yaml
@@ -3471,6 +3471,10 @@ By using LDAP, managing user accounts across multiple Linux servers becomes easi
   nmcli connection edit ens33
   ```
 - Set static IP address:
+  ```bash
+  sudo nmcli connection modify ens33 ipv4.method manual ipv4.addresses "192.168.80.12/24" ipv4.gateway "192.168.80.2" ipv4.dns "8.8.8.8 8.8.4.4" autoconnect yes 
+  ```
+  **Breakdown**
   ```bash
   nmcli connection modify ens33 ipv4.addresses 10.0.0.9/24
   nmcli connection modify ens33 ipv4.gateway 10.0.0.1
