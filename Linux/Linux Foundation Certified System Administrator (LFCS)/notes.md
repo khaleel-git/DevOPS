@@ -300,3 +300,62 @@ every time a user login, this module would trigger
 sudo pam-auth-update # create home dir on login
 sudo login jane # now we have home directoyr
 if we have 100 linux servers configured the same way, dealing with users and groups accounts will be easy, they will be available, one central location is used to deploy delte crud these users
+
+# Configure IPv4 and IPv6 Networking and Hostname Resolution - Theory
+ipv4 -> 8 bits -> 0 to 255 -> 11111111 = 255
+192.168.1.101 -> 11000000.10101000.00000001.01100101
+192.168.1.101/24. CIDR notation: classless inter-domain routing
+first 24 bits of this address are the prefix of this network (192.168.1 is constant) 
+255.255.255.     0 (represented by subnet)
+{first 24 bits} {last 8 bits}
+192.168.1 -> network prefix
+.101      -> Device on the network
+192.168.1.0 -> 192.168.1.255 is part of the same network
+192.168.2.255 is part of the different network (does not have the same first 24 bits)
+
+192.168.1.101/16 { 16 bits = network prefix }  { 16 bits = network }
+255.255.0.0 (represented by subnet masking)
+192.168.0.0 -> 192.168.255.255 is part of the same network
+
+## ipv6 -> 128 bits
+8 grops of numbers in hex format
+0 - 9 - A=10,B,C,D,E and F=15
+each number is separated by colon (:)
+2001:0db8:0000:0000:0000:ff00:0042:8329 -> 2001:db8::ff00:42:8329
+0000:0000:0000 -> ::
+2001:0db8:0000:0000:0000:ff00:0042:8329/64 also supports CIDR notation
+64 bits = 8 groups, there are total 16 groups i.e 128 bits
+2001:db8::ff00:42:8329/24 (becomes)
+CIDR calculator or subnet calculator
+
+# Configure IPv4 and IPv6 Networking and Hostname Resolution - Demo
+ip link # networking interfaces, loopback up: connect to itself (running on the same system)
+enp03: real device
+ip address
+ip addr
+ip a
+ip -c address # colored
+sudo ip link set dev enp0s8 up
+sudo ip addr add 10.0.0.40/24 dev enp0s8 # assign ipv4 to newly interface
+ip command is tempory, it resets after reboot
+sudo ip link set dev enp0s8 down
+
+# using netplan, permament settings
+sudo netplan get # 
+ls /etc/netplan
+sudo cat /etc/netplan # same as netplan get
+sudo vi /etc/netplan/99-mysettings.yaml
+```yaml
+network:
+    ethernets:
+        enp0s3:
+            dhcp4: false
+            dhcp6: false
+            addresses:
+                - 10.0.0.9/24
+                - fe80::921b:eff:fe3d:abcd/64
+    version: 2
+```
+sudo netplan try # changes wil revert in 108 seconds
+sudo netplan try --timeout 30 # revert in 30 seconds
+sudo chmod 00 /etc/netplan/99-mysettings.yaml
