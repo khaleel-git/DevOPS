@@ -3378,3 +3378,162 @@ A home directory is created for them at `/home/jane`.
 
 ## Step 8: Manage LDAP User Accounts Centrally
 By using LDAP, managing user accounts across multiple Linux servers becomes easier. You can CRUD (create, read, update, delete) users from a single central location, and the changes will reflect across all configured servers.
+
+---
+# Networking Configuration and Hostname Resolution
+## IPv4 and IPv6 Networking
+### IPv4 BasicS
+- **IPv4** addresses are 32-bit numbers split into four 8-bit octets.
+- Each octet can range from `0 to 255`.
+- Example: `192.168.1.101 -> 11000000.10101000.00000001.01100101`
+- CIDR (Classless Inter-Domain Routing) notation is used to define network prefixes.
+  - Example: `192.168.1.101/24`
+    - `/24` means the first 24 bits (192.168.1) represent the network.
+    - Devices are identified by the remaining bits, e.g., `.101`.
+
+### IPv6 Basics
+- **IPv6** addresses are 128-bit numbers, represented as 8 groups of hexadecimal digits.
+- Example: `2001:0db8:0000:0000:0000:ff00:0042:8329`
+  - Abbreviated as: `2001:db8::ff00:42:8329`.
+- CIDR notation is also supported in IPv6.
+  - Example: `2001:db8::ff00:42:8329/64`.
+
+## Configuring Networking Interfaces
+
+### Using `ip` Command (Temporary Settings)
+- View all interfaces: 
+  ```bash
+  ip link
+  ip address
+  ip -c address  # With colors
+  ```
+- Assign an IP address:
+  ```bash
+  sudo ip addr add 10.0.0.40/24 dev enp0s8
+  ```
+- Activate or deactivate an interface:
+  ```bash
+  sudo ip link set dev enp0s8 up
+  sudo ip link set dev enp0s8 down
+  ```
+- **Note**: These changes are temporary and will be reset after reboot.
+
+### Using `netplan` (Persistent Settings)
+- Edit `/etc/netplan/99-mysettings.yaml` to make permanent network configurations.
+  ```yaml
+  network:
+    ethernets:
+      enp0s3:
+        dhcp4: false
+        addresses:
+          - 10.0.0.9/24
+          - fe80::921b:eff:fe3d:abcd/64
+    version: 2
+  ```
+- Apply the configuration:
+  ```bash
+  sudo netplan apply
+  sudo netplan try
+  ```
+- Configure routes and DNS in `netplan`:
+  ```yaml
+  network:
+    ethernets:
+      enp0s3:
+        dhcp4: false
+        addresses:
+          - 10.0.0.9/24
+          - fe80::921b:eff:fe3d:abcd/64
+        nameservers:
+          addresses:
+            - 8.8.8.8
+            - 8.8.4.4
+        routes:
+          - to: default
+            via: 10.0.0.1  # Gateway
+  ```
+
+## DNS Server Configuration
+
+### `/etc/hosts` File
+You can use the `/etc/hosts` file to add local DNS entries for name resolution:
+```bash
+192.168.0.1 db-server
+192.168.0.2 web-server
+```
+
+### `/etc/resolv.conf` File
+To configure DNS servers globally, edit the `/etc/resolv.conf` file:
+```bash
+nameserver 192.168.1.100
+nameserver 8.8.8.8  # Google's public DNS
+search mycompany.com prod.mycompany.com
+```
+
+### `nsswitch.conf` File
+You can modify the DNS lookup order in the `/etc/nsswitch.conf` file:
+```bash
+hosts: files dns
+```
+
+### DNS Record Types
+- **A Record**: Maps a domain to an IPv4 address.
+- **AAAA Record**: Maps a domain to an IPv6 address.
+- **CNAME**: Maps one domain to another domain.
+
+## Network Testing Tools
+
+### DNS Resolution
+- `nslookup`: Basic DNS query tool.
+- `dig`: Advanced DNS query tool.
+
+### Network Interfaces
+- Check network interfaces:
+  ```bash
+  ip link
+  ```
+- Assign IP addresses:
+  ```bash
+  ip addr add 192.168.1.10/24 dev eth0
+  ```
+
+### Routing
+- View routing table:
+  ```bash
+  ip route
+  ```
+- Add a default gateway:
+  ```bash
+  sudo ip r add default via 172.16.238.1
+  ```
+
+### Network Services and Ports
+- View active services and ports:
+  ```bash
+  sudo ss -ltunp  # Lists TCP and UDP connections with processes
+  ```
+- Check open ports:
+  ```bash
+  netstat -an | grep 80 | grep -i LISTEN
+  sudo netstat -natulp | grep postgres | grep LISTEN
+  ```
+
+## Troubleshooting Network Issues
+
+- **Check network connectivity**:
+  ```bash
+  traceroute domain.com
+  ```
+- **Check DNS resolution**:
+  ```bash
+  nslookup domain.com
+  ```
+- **Check interface status**:
+  ```bash
+  ip link
+  ```
+- **Check network routes**:
+  ```bash
+  ip route
+  ```
+```
