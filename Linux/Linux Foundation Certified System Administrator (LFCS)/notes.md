@@ -391,6 +391,22 @@ network:
                     - 8.8.8.8
             routes:
                 - to: 192.168.0.0./24
-                  via: 
+                  via: 10.0.0.100 #  server acts as a middle man
+                - to: default 
+                  via: 10.0.0.1 #gateway, door to the external world
     version: 2
 ```
+sudo netplan try
+ip route # route is reapplied
+resovectl status # check dns server here, only apply to one interfae
+
+Global:
+sudo vi /etc/systemd/resolved.conf # set dns server
+sudo systemctl restart systemd-resolved.service
+resovectl dns #show dns server globally
+
+hostname:
+sudo vi /etc/hosts # set hostname 127.0.123.123 dbserver
+ping dbserver # auto translate to ip
+
+ls /usr/share/doc/netplan/examples # docs about tools
