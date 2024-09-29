@@ -359,3 +359,38 @@ network:
 sudo netplan try # changes wil revert in 108 seconds
 sudo netplan try --timeout 30 # revert in 30 seconds
 sudo chmod 00 /etc/netplan/99-mysettings.yaml
+# settings will be re-applied automaticall after reboot
+sudo netplan get
+```yaml
+network:
+    version: 2
+    ethernets:
+        enp0s3:
+            dhcp4: true
+        enp0s8:
+            addresses:
+            - "10.0.0.9/24"
+            - "fe80::921b:eff:fe3d:abcd/64"
+            dhcp4: false
+            dhcp6: false
+```
+
+sudo  vi /etc/netplan/99-mysettngs.yaml
+```yaml
+network:
+    ethernets:
+        enp0s3:
+            dhcp4: false
+            dhcp6: false
+            addresses:
+                - 10.0.0.9/24
+                - fe80::921b:eff:fe3d:abcd/64
+            nameservers:
+                addresses:
+                    - 8.8.4.4
+                    - 8.8.8.8
+            routes:
+                - to: 192.168.0.0./24
+                  via: 
+    version: 2
+```
