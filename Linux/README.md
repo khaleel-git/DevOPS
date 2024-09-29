@@ -3487,26 +3487,6 @@ hosts: files dns
 - `nslookup`: Basic DNS query tool.
 - `dig`: Advanced DNS query tool.
 
-### Network Interfaces
-- Check network interfaces:
-  ```bash
-  ip link
-  ```
-- Assign IP addresses:
-  ```bash
-  ip addr add 192.168.1.10/24 dev eth0
-  ```
-
-### Routing
-- View routing table:
-  ```bash
-  ip route
-  ```
-- Add a default gateway:
-  ```bash
-  sudo ip r add default via 172.16.238.1
-  ```
-
 ### Network Services and Ports
 - View active services and ports:
   ```bash
