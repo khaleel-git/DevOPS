@@ -3539,6 +3539,7 @@ search mycompany.com prod.mycompany.com
 ```
 
 ## `/etc/systemd/resolved.conf` File
+On systems using systemd-resolved, this file may be automatically generated, and manual changes may not persist.
 To configure DNS settings when using `systemd-resolved`, edit the `/etc/systemd/resolved.conf` file:
 ```bash
 [Resolve]
