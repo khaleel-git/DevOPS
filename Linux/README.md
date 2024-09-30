@@ -3407,7 +3407,8 @@ By using LDAP, managing user accounts across multiple Linux servers becomes easi
   ```bash
   ip link
   ip address
-  ip -c address  # With colors
+  ip -c address     # With colors
+  ip addr show eth0 # show specific interface
   ```
 - Assign an IP address:
   ```bash
@@ -3519,23 +3520,72 @@ By using LDAP, managing user accounts across multiple Linux servers becomes easi
 - Ensure that the IP addresses assigned do not conflict with existing devices on the network.
 - Use `ip route` to verify routing configurations.
 - For persistent changes, remember to apply configurations appropriately.
-```
+---
 
-## DNS Server Configuration
-
-### `/etc/hosts` File
-You can use the `/etc/hosts` file to add local DNS entries for name resolution:
+# DNS Server Configuration
+## `/etc/hosts` File
+You can use the `/etc/hosts` file to add local DNS entries for quick name resolution:
 ```bash
 192.168.0.1 db-server
 192.168.0.2 web-server
 ```
 
-### `/etc/resolv.conf` File
+## `/etc/resolv.conf` File
 To configure DNS servers globally, edit the `/etc/resolv.conf` file:
 ```bash
 nameserver 192.168.1.100
 nameserver 8.8.8.8  # Google's public DNS
 search mycompany.com prod.mycompany.com
+```
+
+## `/etc/systemd/resolved.conf` File
+To configure DNS settings when using `systemd-resolved`, edit the `/etc/systemd/resolved.conf` file:
+```bash
+[Resolve]
+DNS=8.8.8.8 8.8.4.4  # Google's public DNS
+FallbackDNS=1.1.1.1   # Cloudflare DNS
+Domains=example.com    # Optional: define search domains
+```
+After editing, restart the `systemd-resolved` service:
+```bash
+sudo systemctl restart systemd-resolved
+```
+
+## Differences Between `/etc/resolv.conf` and `/etc/systemd/resolved.conf`
+
+### `/etc/resolv.conf`
+- **Purpose**: Traditional DNS resolution configuration.
+- **Format**:
+  ```bash
+  nameserver <IP_ADDRESS>
+  search <DOMAIN>
+  ```
+
+### `/etc/systemd/resolved.conf`
+- **Purpose**: Configuration for the `systemd-resolved` service.
+- **Format**:
+  ```bash
+  [Resolve]
+  DNS=<DNS_SERVER_1> <DNS_SERVER_2>
+  FallbackDNS=<FALLBACK_DNS>
+  Domains=<SEARCH_DOMAIN>
+  ```
+
+### Example Comparison
+
+**1. `/etc/resolv.conf` Example**
+```bash
+nameserver 192.168.1.100
+nameserver 8.8.8.8
+search mycompany.com
+```
+
+**2. `/etc/systemd/resolved.conf` Example**
+```bash
+[Resolve]
+DNS=8.8.8.8 8.8.4.4
+FallbackDNS=1.1.1.1
+Domains=mycompany.com
 ```
 
 ### `nsswitch.conf` File
@@ -3559,6 +3609,7 @@ hosts: files dns
 - View active services and ports:
   ```bash
   sudo ss -ltunp  # Lists TCP and UDP connections with processes
+  sudo ss -tunlp  # can be written as well
   ```
 - Check open ports:
   ```bash
