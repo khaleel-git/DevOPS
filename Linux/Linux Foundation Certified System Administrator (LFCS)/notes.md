@@ -434,3 +434,14 @@ sudo lsof -p pid # which file is opened by this command
 
 sudo netstat -ltunp # uses same option as ss command
 netstat might no available at all systems by default
+
+# Configure Bridge and Bonding Devices - Theory
+Bridge/Controlller
+Bond: take two or more network devices and bond them
+Benefits of Bonding:
+if one network is down, other can still provide internet
+high throughput, addition of networks
+connections more reliable, increase stability
+a program can use one or other but at a time once
+
+
