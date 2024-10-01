@@ -3636,4 +3636,23 @@ hosts: files dns
   ```bash
   ip route
   ```
-```
+---
+# Configure Bridge and Bonding Devices - Theory
+Bridge/Controlller
+Bond: take two or more network devices and bond them
+Benefits of Bonding:
+if one network is down, other can still provide internet
+high throughput, addition of networks
+connections more reliable, increase stability
+a program can use one or other but at a time once but with bonding, bonding can make all network as a single unity (logical combined) and if one network fails other provides stability and data transfer won't be interrupted
+
+Bonding modes:
+7 bonding modes, mode 0 to mode 6
+
+Mode 0: "round-robin"      -> order, 1st, 2nd
+Mode 1: "active-backup"    -> single interface
+Mode 2: "XOR"              -> 
+Mode 3: "broadcast"
+Mode 4: "IEEE 802.3ad"
+Mode 5: "adaptive transit load balancing"
+Mode 6: "adabpitve load balancing"
