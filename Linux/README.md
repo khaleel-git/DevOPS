@@ -3651,7 +3651,7 @@ Bonding modes:
 
 Mode 0: "round-robin"      -> order, 1st, 2nd
 Mode 1: "active-backup"    -> single interface
-Mode 2: "XOR"              -> 
+Mode 2: "XOR"              -> xor like operations
 Mode 3: "broadcast"
 Mode 4: "IEEE 802.3ad"
 Mode 5: "adaptive transit load balancing"
