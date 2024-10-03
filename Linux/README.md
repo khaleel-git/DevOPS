@@ -3637,14 +3637,55 @@ hosts: files dns
   ip route
   ```
 ---
-# Configure Bridge and Bonding Devices - Theory
-Bridge/Controlller
-Bond: take two or more network devices and bond them
-Benefits of Bonding:
-if one network is down, other can still provide internet
-high throughput, addition of networks
-connections more reliable, increase stability
-a program can use one or other but at a time once but with bonding, bonding can make all network as a single unity (logical combined) and if one network fails other provides stability and data transfer won't be interrupted
+Here’s a textual representation of the figure that compares **Network Bonding** and **Network Bridging**:
+
+```
+               +-------------------------------------------+      +-------------------------------------------+
+               |                                           |      |                                           |
+               |               NETWORK BONDING             |      |              NETWORK BRIDGING             |
+               |                                           |      |                                           |
+               +-------------------------------------------+      +-------------------------------------------+
+                            |                                                 |
+                            |                                                 |
+        +-----------------------------------+                      +-----------------------------------+
+        |   Interface 1 (eth0)              |                      |   Segment A                      |
+        +-----------------------------------+                      +-----------------------------------+
+                            |                                                 |
+                            |                                                 |
+        +-----------------------------------+                      +-----------------------------------+
+        |   Interface 2 (eth1)              |                      |   Segment B                      |
+        +-----------------------------------+                      +-----------------------------------+
+                            |                                                 |
+                            |                                                 |
+                            |                                                 |
+                   +-----------------+                                +-----------------+
+                   |   Bonded Link    |                                |   Bridge Device |
+                   +-----------------+                                +-----------------+
+                            |                                                 |
+                            |                                                 |
+                   +-----------------+                                +-----------------+
+                   |      Switch      |                                |      Switch      |
+                   +-----------------+                                +-----------------+
+                            |                                                 |
+                            |                                                 |
+                +--------------------+                              +--------------------+
+                | Network or Internet|                              | Network or Internet|
+                +--------------------+                              +--------------------+
+
+```
+
+### Explanation of the Figure:
+
+1. **Network Bonding**:
+   - Two or more network interfaces (e.g., eth0 and eth1) are bonded into a **single logical interface**. This bonded link increases throughput and provides redundancy.
+   - The bonded link connects to a switch and then to the wider network or internet.
+
+2. **Network Bridging**:
+   - Multiple network segments (e.g., Segment A and Segment B) are connected via a **bridge device**.
+   - The bridge manages traffic between the segments and connects them as if they were a single network.
+   - The bridge connects to a switch and then to the wider network or internet.
+
+In this textual diagram, each concept is represented in a straightforward, linear way. It showcases the relationships between interfaces, segments, and the overall network architecture for **bonding** and **bridging**.
 
 Bonding modes:
 7 bonding modes, mode 0 to mode 6
