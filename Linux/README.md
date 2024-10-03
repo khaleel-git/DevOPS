@@ -3637,6 +3637,57 @@ hosts: files dns
   ip route
   ```
 ---
+
+# Network Bonding vs Bridging
+
+## 1. **Network Bonding**
+
+### Definition
+Network bonding is the process of combining two or more network interfaces into a single, logical interface. This allows for redundancy (failover) and increased throughput by spreading network traffic across multiple physical devices.
+
+### Benefits
+- **Redundancy**: If one interface fails, the other takes over without service interruption.
+- **Increased Bandwidth**: Combines the bandwidth of multiple network connections.
+- **Load Balancing**: Distributes traffic evenly across all interfaces in the bond.
+
+### Use Case
+- High-availability networks where network failure protection is critical.
+- Environments needing increased data throughput (e.g., data centers).
+
+---
+
+## 2. **Network Bridging**
+
+### Definition
+Network bridging is the process of connecting multiple networks or network segments at the data link layer (Layer 2) so that they act as a single network. A bridge allows communication between separate network segments by forwarding traffic from one to another.
+
+### Benefits
+- **Interconnectivity**: Connects different segments of a network.
+- **Traffic Management**: Reduces collision domains by isolating network segments.
+- **Transparency**: Devices on different segments communicate as if they are on the same network.
+
+### Use Case
+- Virtualization environments where virtual machines (VMs) need to communicate over different physical networks.
+- Home or office environments where multiple LAN segments need to be interconnected.
+
+---
+
+## 3. **Comparison: Bonding vs Bridging**
+
+| **Aspect**           | **Bonding**                                                 | **Bridging**                                                 |
+|----------------------|-------------------------------------------------------------|--------------------------------------------------------------|
+| **Primary Function**  | Combines multiple interfaces into one logical interface     | Connects multiple network segments into one network           |
+| **Failover**          | Provides redundancy by switching to another interface       | No redundancy—used for interconnecting networks               |
+| **Performance**       | Increases throughput by aggregating interfaces              | Does not increase throughput—manages traffic between segments |
+| **Typical Use Case**  | High-availability, increased bandwidth needs                | Virtual machine networking, connecting LAN segments           |
+
+---
+
+## Summary:
+- **Bonding** is ideal for improving reliability and performance by combining multiple network interfaces into one. It’s often used in high-performance and high-availability scenarios like data centers or critical infrastructure.
+  
+- **Bridging** is used to interconnect different network segments or virtual networks, allowing them to communicate as if they were part of the same network. It's commonly used in virtualization or scenarios requiring segmented but interconnected networks.
+
 Here’s a textual representation of the figure that compares **Network Bonding** and **Network Bridging**:
 
 ```
