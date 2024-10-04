@@ -454,3 +454,85 @@ Mode 3: "broadcast"
 Mode 4: "IEEE 802.3ad"
 Mode 5: "adaptive transit load balancing"
 Mode 6: "adabpitve load balancing"
+
+cat /usr/share/doc/netplan/examples/bridge.yaml
+```yaml
+network:
+    version: 2
+    renderer: networkd
+    ethernets:
+        enp3s0:
+            dhcp4: no
+    bridges:
+        br0:
+            dhcp4: yes
+            interfaces:
+                - enp3s0
+```
+sudo cp /usr/share/doc/netplan/examples/bridge.yaml /etc/netplan/99-bridge.yaml
+sudo chmod 600 /etc/netplan/99-bridge.yaml
+ip -c link
+have three interfaces one is up: enp0s3 is up
+enp0s8 and enp0s9 are down
+
+change yaml file:
+vi /etc/netplan/99-bridge.yaml
+```yaml
+network:
+    version: 2
+    renderer: networkd
+    ethernets:
+        enp3s8: # wont get an ip
+            dhcp4: no
+        enp0s9: # wont get an ip
+            dhcp4: no
+    bridges:
+        br0: 
+            dhcp4: yes
+            interfaces:
+                - enp0s8
+                - enp0s9
+```
+netplan try
+netplan apply
+ip -c link
+br0: extra interface
+
+ip -c addr
+ip route
+
+Network Bond
+remove network definition for bridge
+sudo ip link delete br0
+
+sudo cp /usr/share/doc/netplan/examples/bonding.yaml etc/netplan/99-bond.yaml
+
+sudo chmod 600 /etc/netplan/99-bond.yaml
+
+vi etc/netplan/99-bond.yaml
+```yaml
+network:
+    version: 2
+    renderer: networkd
+    ethernets:
+        enp0s8:
+            dhcp4: no
+        enp0s9:
+            dhcp4: no
+    bonds:
+        bond0:
+            dhcp: yes
+        interfaces:
+            - enp0s8
+            - enp0s9
+        parameters:
+            mode: active-backup
+            primary: enp0s8
+            mui-monitor-interval: 100
+
+```
+netplan try
+netplan apply
+
+man netplan
+search bonding
