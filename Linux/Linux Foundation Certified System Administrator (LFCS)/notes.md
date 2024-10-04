@@ -531,8 +531,13 @@ network:
             mui-monitor-interval: 100
 
 ```
-netplan try
+netplan try # netplan can try, becuase it can't undo
 netplan apply
 
 man netplan
 search bonding
+
+ip -c addr
+ip -c link
+sudo ip link set dev bond0 down
+sudo ip addr add dev 
