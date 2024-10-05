@@ -541,3 +541,52 @@ ip -c addr
 ip -c link
 sudo ip link set dev bond0 down
 sudo ip addr add dev 
+
+Configure Packet Filtering (firewall)
+sudo ufw status
+
+sudo ufw allow 22 # rules updated for tcp and udp
+sudo ufw allow 22/tcp # only tcp
+sudo ufw enable
+sudo ufw status verbose
+
+NAT # Network Address Translation
+ss -tn
+sudo ufw allow from 10.0.0.192 to any port 22 # any is receiver
+
+sudo ufw allow from src_ip to dest_ip port 22
+sudo ufw status numbered # genric rule
+
+remove any rule using index number
+sudo ufw delete 1 # del first rule
+sudo ufw delete allow 22
+
+# allow range
+sudo ufw allow from 10.0.0.0/24 to any port 22
+sudo ufw allow from 10.0.0.0/24 # all ports
+
+sudo ufw deny from 10.0.0.37
+
+sudo ufw status numbered
+sudo ufw delete 1
+sudo ufw delete 1
+
+sudo ufw status numbered # top to bottom rule processing
+
+
+# reorder rule
+sudo ufw delete 2
+ufw --help
+insert command # can insert at specified number
+sudo ufw insert 1 deny from 10.0.0.37
+
+sudo ufw status numbered
+
+ip link
+
+ping -c 4 8.8.8.8 # ping google 4 times
+
+# block outgoing traffic
+sudo ufw deny out on enp0s3 to 8.8.8.8
+
+ping -c 4 8.8.8.8 # blocked
