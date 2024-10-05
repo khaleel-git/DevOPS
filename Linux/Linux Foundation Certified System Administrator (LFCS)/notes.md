@@ -590,3 +590,10 @@ ping -c 4 8.8.8.8 # ping google 4 times
 sudo ufw deny out on enp0s3 to 8.8.8.8
 
 ping -c 4 8.8.8.8 # blocked
+
+
+ip a # check ip of this machine
+sudo ufw allow in on enp0s3 from 10.0.0.192 to 10.0.0.100 proto tcp
+sudo ufw allow out on enp0s3 from 10.0.0.100 to 10.0.0.192 proto tcp
+
+sudo ufw status numbered
