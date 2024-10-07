@@ -3488,34 +3488,6 @@ By using LDAP, managing user accounts across multiple Linux servers becomes easi
   nmcli connection up ens33
   ```
 
-## 3. Fedora (RedHat Family)
-
-### Using `nmcli` (NetworkManager Command Line Interface)
-- View device status:
-  ```bash
-  nmcli device status
-  ```
-- Show active connections:
-  ```bash
-  nmcli connection show
-  ```
-- Edit a connection:
-  ```bash
-  nmcli connection edit ens160
-  ```
-- Set static IP address:
-  ```bash
-  nmcli connection modify ens160 ipv4.addresses 10.0.0.20/24
-  nmcli connection modify ens160 ipv4.gateway 10.0.0.1
-  nmcli connection modify ens160 ipv4.dns "8.8.8.8,8.8.4.4"
-  nmcli connection modify ens160 ipv4.method manual
-  ```
-- Bring the connection down and back up:
-  ```bash
-  nmcli connection down ens160
-  nmcli connection up ens160
-  ```
-
 ## Additional Notes
 - Ensure that the IP addresses assigned do not conflict with existing devices on the network.
 - Use `ip route` to verify routing configurations.
