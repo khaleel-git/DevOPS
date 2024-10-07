@@ -3852,9 +3852,153 @@ Test and apply the bond configuration:
 netplan try  # test the configuration
 netplan apply  # apply the configuration
 ```
+# Network Configuration with Netplan and Firewall Setup
 
+This README covers the configuration of network interfaces using Netplan, including setting up a bridge and a bond, as well as configuring firewall rules with UFW (Uncomplicated Firewall) and IPTables.
+
+## Netplan Overview
+
+Netplan is a network configuration tool for Linux that uses YAML files to define the network settings. The configuration files are typically located in `/etc/netplan/`.
+
+## Setting Up a Bridge
+
+### Step 1: Initial Configuration
+
+You can create a bridge by copying an example configuration file:
+
+```bash
+sudo cp /usr/share/doc/netplan/examples/bridge.yaml /etc/netplan/99-bridge.yaml
+sudo chmod 600 /etc/netplan/99-bridge.yaml
+```
+
+Here’s a sample configuration for the bridge:
+
+```yaml
+network:
+    version: 2
+    renderer: networkd
+    ethernets:
+        enp3s0:
+            dhcp4: no
+    bridges:
+        br0:
+            dhcp4: yes
+            interfaces:
+                - enp3s0
+```
+
+### Step 2: Modifying the YAML File
+
+Next, modify the file to include more interfaces:
+
+```bash
+vi /etc/netplan/99-bridge.yaml
+```
+
+Updated configuration:
+
+```yaml
+network:
+    version: 2
+    renderer: networkd
+    ethernets:
+        enp0s8: # won't get an IP
+            dhcp4: no
+        enp0s9: # won't get an IP
+            dhcp4: no
+    bridges:
+        br0: 
+            dhcp4: yes
+            interfaces:
+                - enp0s8
+                - enp0s9
+```
+
+### Step 3: Applying the Configuration
+
+Run the following commands to test and apply the configuration:
+
+```bash
+netplan try  # test the configuration
+netplan apply  # apply the configuration
+```
+
+Check the link status:
+
+```bash
+ip -c link
+```
+
+## Setting Up a Bond
+
+### Step 1: Removing the Bridge
+
+If you need to set up a bond instead, first remove the bridge:
+
+```bash
+sudo ip link delete br0
+```
+
+### Step 2: Bond Configuration
+
+Copy the bond configuration example:
+
+```bash
+sudo cp /usr/share/doc/netplan/examples/bonding.yaml /etc/netplan/99-bond.yaml
+sudo chmod 600 /etc/netplan/99-bond.yaml
+```
+
+Edit the bond configuration:
+
+```bash
+vi /etc/netplan/99-bond.yaml
+```
+
+Example bond configuration:
+
+```yaml
+network:
+    version: 2
+    renderer: networkd
+    ethernets:
+        enp0s8:
+            dhcp4: no
+        enp0s9:
+            dhcp4: no
+    bonds:
+        bond0:
+            dhcp: yes
+            interfaces:
+                - enp0s8
+                - enp0s9
+            parameters:
+                mode: active-backup
+                primary: enp0s8
+                mtu-monitor-interval: 100
+```
+
+### Bonding Modes
+
+There are seven bonding modes available, each suited for different scenarios:
+
+- **Mode 0: "round-robin"** - Transmits packets in a sequential order from the first available interface to the last.
+- **Mode 1: "active-backup"** - Only one interface is active at a time; if it fails, another takes over.
+- **Mode 2: "XOR"** - Selects the interface based on the XOR operation of the source and destination MAC addresses.
+- **Mode 3: "broadcast"** - Transmits packets on all slave interfaces.
+- **Mode 4: "IEEE 802.3ad"** - Creates a bond that supports link aggregation, increasing bandwidth.
+- **Mode 5: "adaptive transmit load balancing"** - Distributes outbound traffic based on the current load on each interface.
+- **Mode 6: "adaptive load balancing"** - Combines adaptive transmit load balancing and receive load balancing.
+
+### Step 3: Applying the Bond Configuration
+
+Test and apply the bond configuration:
+
+```bash
+netplan try  # test the configuration
+netplan apply  # apply the configuration
+```
+---
 ## Configuring Packet Filtering with UFW
-
 ### Step 1: Basic UFW Commands
 
 Check the status of UFW:
@@ -3937,3 +4081,159 @@ Check UFW status after changes:
 sudo ufw status numbered
 ```
 
+## Network Security with IPTables and Firewalld
+
+This guide covers the essentials of network security using **IPTables** and **Firewalld** on Linux. These tools allow you to define rules to control incoming and outgoing traffic, helping secure your system against unauthorized access and attacks.
+
+---
+
+## Introduction to IPTables
+
+**IPTables** is a command-line firewall utility that uses policy chains to control the incoming and outgoing packets. Each packet that traverses the system is checked against a chain of rules to determine whether it should be allowed or denied.
+
+- **Chain of Rules**: The firewall processes rules from top to bottom. As soon as a rule matches the packet, the action specified in the rule is executed, and the packet stops moving through the chain.
+- **Common Chains**: 
+  - `INPUT`: Controls incoming packets.
+  - `OUTPUT`: Controls outgoing packets.
+  - `FORWARD`: Controls packets being routed through your system.
+
+---
+
+## Basic IPTables Syntax
+
+Each rule follows a similar pattern:
+```bash
+iptables [CHAIN] [OPTIONS] -p [PROTOCOL] -s [SOURCE_IP] -d [DEST_IP] --dport [PORT] -j [ACTION]
+```
+- `-A`: Adds a rule to the chain.
+- `-p`: Protocol (e.g., TCP, UDP, ICMP).
+- `-s`: Source IP address.
+- `-d`: Destination IP address.
+- `--dport`: Destination port.
+- `-j`: Action to take (e.g., ACCEPT, DROP, REJECT).
+
+### Example: Allowing SSH Traffic
+
+```bash
+iptables -A INPUT -p tcp -s 192.168.1.100 --dport 22 -j ACCEPT
+```
+- This rule allows incoming **SSH** connections from the IP `192.168.1.100` to port `22` on the local machine.
+
+### Example: Dropping SSH Traffic from All Other IPs
+
+```bash
+iptables -A INPUT -p tcp --dport 22 -j DROP
+```
+- After allowing specific IPs for SSH, this rule will drop any other connection attempts to port 22.
+
+### Processing Order: Top to Bottom
+
+IPTables evaluates rules from top to bottom. The first matching rule determines the action taken on the packet. Be mindful of rule order to avoid unexpected behavior.
+
+---
+
+## Outgoing Traffic Control
+
+You can also control **outgoing** traffic with the `OUTPUT` chain.
+
+### Example: Allowing Specific Outbound Connections
+
+```bash
+iptables -A OUTPUT -p tcp -d 203.0.113.1 --dport 5432 -j ACCEPT  # Allow PostgreSQL to a specific IP
+iptables -A OUTPUT -p tcp -d 203.0.113.2 --dport 80 -j ACCEPT    # Allow HTTP to a specific IP
+```
+
+### Example: Blocking All Other Outbound HTTP and HTTPS
+
+```bash
+iptables -A OUTPUT -p tcp --dport 80 -j DROP   # Block all HTTP traffic
+iptables -A OUTPUT -p tcp --dport 443 -j DROP  # Block all HTTPS traffic
+
+
+```
+
+### Inserting Rules with `-I`
+
+Use the `-I` option to insert a rule at a specific position within the chain, rather than appending it to the end.
+
+```bash
+iptables -I OUTPUT 1 -p tcp -d 203.0.113.3 --dport 443 -j ACCEPT  # Insert a rule at position 1
+```
+
+### Deleting a Rule
+
+If you need to delete a rule, you can do so by specifying its position in the chain.
+
+```bash
+iptables -D OUTPUT 5  # Delete the 5th rule in the OUTPUT chain
+```
+
+---
+
+## Example: Database Access Control
+
+Here’s how you can secure your database by only allowing access from specific IP addresses and blocking all other traffic:
+
+```bash
+iptables -A INPUT -p tcp -s 203.0.113.4 --dport 5432 -j ACCEPT  # Allow PostgreSQL from a specific IP
+iptables -A INPUT -p tcp --dport 5432 -j DROP                   # Block all other PostgreSQL traffic
+```
+
+### Verifying Rules
+
+To check the status of your rules, you can use:
+
+```bash
+iptables -L
+```
+
+To inspect the listening ports and connections:
+
+```bash
+netstat -an | grep 5432  # Check PostgreSQL port status
+```
+
+---
+
+## Ephemeral Port Range
+
+The Linux kernel uses ephemeral ports (dynamic ports) for client-side connections. By default, the range is between **32768 and 60999**. These ports are temporarily assigned for short-lived connections.
+
+```bash
+cat /proc/sys/net/ipv4/ip_local_port_range
+```
+
+---
+
+## Firewalld
+
+**Firewalld** is a more modern and user-friendly alternative to IPTables. It supports dynamic rules, which means you don’t need to reload the entire rule set when making changes.
+
+### Basic Firewalld Commands
+
+To start or stop `firewalld`:
+
+```bash
+sudo systemctl start firewalld
+sudo systemctl stop firewalld
+```
+
+### Open a Port in Firewalld
+
+```bash
+sudo firewall-cmd --permanent --add-port=5432/tcp  # Open PostgreSQL port
+sudo firewall-cmd --reload                         # Reload the firewall
+```
+
+### Blocking a Port
+
+```bash
+sudo firewall-cmd --permanent --remove-port=5432/tcp  # Block PostgreSQL port
+sudo firewall-cmd --reload                            # Reload the firewall
+```
+
+### Listing Active Rules
+
+```bash
+sudo firewall-cmd --list-all
+```
