@@ -3738,13 +3738,230 @@ Here’s a textual representation of the figure that compares **Network Bonding*
 
 In this textual diagram, each concept is represented in a straightforward, linear way. It showcases the relationships between interfaces, segments, and the overall network architecture for **bonding** and **bridging**.
 
-Bonding modes:
-7 bonding modes, mode 0 to mode 6
+# Network Configuration with Netplan and Firewall Setup
+## Netplan Overview
 
-Mode 0: "round-robin"      -> order, 1st, 2nd
-Mode 1: "active-backup"    -> single interface
-Mode 2: "XOR"              -> xor like operations
-Mode 3: "broadcast"
-Mode 4: "IEEE 802.3ad"
-Mode 5: "adaptive transit load balancing"
-Mode 6: "adabpitve load balancing"
+Netplan is a network configuration tool for Linux that uses YAML files to define the network settings. The configuration files are typically located in `/etc/netplan/`.
+
+## Setting Up a Bridge
+
+### Step 1: Initial Configuration
+
+You can create a bridge by copying an example configuration file:
+
+```bash
+sudo cp /usr/share/doc/netplan/examples/bridge.yaml /etc/netplan/99-bridge.yaml
+sudo chmod 600 /etc/netplan/99-bridge.yaml
+```
+
+Here’s a sample configuration for the bridge:
+
+```yaml
+network:
+    version: 2
+    renderer: networkd
+    ethernets:
+        enp3s0:
+            dhcp4: no
+    bridges:
+        br0:
+            dhcp4: yes
+            interfaces:
+                - enp3s0
+```
+
+### Step 2: Modifying the YAML File
+
+Next, modify the file to include more interfaces:
+
+```bash
+vi /etc/netplan/99-bridge.yaml
+```
+
+Updated configuration:
+
+```yaml
+network:
+    version: 2
+    renderer: networkd
+    ethernets:
+        enp0s8: # won't get an IP
+            dhcp4: no
+        enp0s9: # won't get an IP
+            dhcp4: no
+    bridges:
+        br0: 
+            dhcp4: yes
+            interfaces:
+                - enp0s8
+                - enp0s9
+```
+
+### Step 3: Applying the Configuration
+
+Run the following commands to test and apply the configuration:
+
+```bash
+netplan try  # test the configuration
+netplan apply  # apply the configuration
+```
+
+Check the link status:
+
+```bash
+ip -c link
+```
+
+## Setting Up a Bond
+
+### Step 1: Removing the Bridge
+
+If you need to set up a bond instead, first remove the bridge:
+
+```bash
+sudo ip link delete br0
+```
+
+### Step 2: Bond Configuration
+
+Copy the bond configuration example:
+
+```bash
+sudo cp /usr/share/doc/netplan/examples/bonding.yaml /etc/netplan/99-bond.yaml
+sudo chmod 600 /etc/netplan/99-bond.yaml
+```
+
+Edit the bond configuration:
+
+```bash
+vi /etc/netplan/99-bond.yaml
+```
+
+Example bond configuration:
+
+```yaml
+network:
+    version: 2
+    renderer: networkd
+    ethernets:
+        enp0s8:
+            dhcp4: no
+        enp0s9:
+            dhcp4: no
+    bonds:
+        bond0:
+            dhcp: yes
+            interfaces:
+                - enp0s8
+                - enp0s9
+            parameters:
+                mode: active-backup
+                primary: enp0s8
+                mtu-monitor-interval: 100
+```
+
+### Bonding Modes
+
+There are seven bonding modes available, each suited for different scenarios:
+
+- **Mode 0: "round-robin"** - Transmits packets in a sequential order from the first available interface to the last.
+- **Mode 1: "active-backup"** - Only one interface is active at a time; if it fails, another takes over.
+- **Mode 2: "XOR"** - Selects the interface based on the XOR operation of the source and destination MAC addresses.
+- **Mode 3: "broadcast"** - Transmits packets on all slave interfaces.
+- **Mode 4: "IEEE 802.3ad"** - Creates a bond that supports link aggregation, increasing bandwidth.
+- **Mode 5: "adaptive transmit load balancing"** - Distributes outbound traffic based on the current load on each interface.
+- **Mode 6: "adaptive load balancing"** - Combines adaptive transmit load balancing and receive load balancing.
+
+### Step 3: Applying the Bond Configuration
+
+Test and apply the bond configuration:
+
+```bash
+netplan try  # test the configuration
+netplan apply  # apply the configuration
+```
+
+## Configuring Packet Filtering with UFW
+
+### Step 1: Basic UFW Commands
+
+Check the status of UFW:
+
+```bash
+sudo ufw status
+```
+
+Allow SSH traffic:
+
+```bash
+sudo ufw allow 22  # allow SSH for both TCP and UDP
+sudo ufw allow 22/tcp  # allow only TCP
+sudo ufw enable  # enable UFW
+sudo ufw status verbose  # check status in detail
+```
+
+### Step 2: Allowing and Denying Traffic
+
+Add specific rules for incoming and outgoing traffic:
+
+```bash
+sudo ufw allow from 10.0.0.192 to any port 22  # allow specific IP
+sudo ufw allow from 10.0.0.0/24 to any port 22  # allow a subnet
+sudo ufw deny from 10.0.0.37  # deny a specific IP
+```
+
+Check numbered rules:
+
+```bash
+sudo ufw status numbered
+```
+
+Remove rules by index:
+
+```bash
+sudo ufw delete 1  # delete the first rule
+```
+
+### Step 3: Advanced UFW Configuration
+
+To reorder rules, delete a rule and insert a new one:
+
+```bash
+sudo ufw delete 2  # delete the second rule
+sudo ufw insert 1 deny from 10.0.0.37  # insert a deny rule at the top
+```
+
+## Testing Network Configuration
+
+Check the current IP addresses and links:
+
+```bash
+ip a
+ip -c link
+```
+
+Ping an external IP to test connectivity:
+
+```bash
+ping -c 4 8.8.8.8  # ping Google DNS
+```
+
+To block outgoing traffic to a specific address:
+
+```bash
+sudo ufw deny out on enp0s3 to 8.8.8.8  # deny outgoing traffic to Google DNS
+```
+
+To allow traffic between specific IPs:
+
+```bash
+sudo ufw allow in on enp0s3 from 10.0.0.192 to 10.0.0.100 proto tcp
+sudo ufw allow out on enp0s3 from 10.0.0.100 to 10.0.0.192 proto tcp
+```
+
+Check UFW status after changes:
+
+```bash
+sudo ufw status numbered
+```
+
