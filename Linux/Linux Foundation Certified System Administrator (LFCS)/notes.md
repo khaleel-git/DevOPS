@@ -597,11 +597,11 @@ sudo ufw allow out on enp0s3 from 10.0.0.100 to 10.0.0.192 proto tcp
 
 sudo ufw status numbered
 
-Port Redirection and Network Address Translation (NAT)
+# Port Redirection and Network Address Translation (NAT)
 internet -> publicly accessible server -> internal network
 internet -> port/80 -> internet network
 
-Network Address Translation (NAT)
+# Network Address Translation (NAT)
 network packet: source IP address -> data -> destination IP address (sender -> receiver)
 203.0.113.1 --- S: 203.0.113.1 / D:1.2.3.4 (Network Packet) -> Port 80 (1.2.3.4) -> Internal Network (Server 1, Server 2, Server 3)
 when a public server gets a network packet it re-routes it (port forwarding) to some server of internal network

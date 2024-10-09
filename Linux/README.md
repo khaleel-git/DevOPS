@@ -4239,6 +4239,9 @@ sudo firewall-cmd --reload                            # Reload the firewall
 sudo firewall-cmd --list-all
 ```
 # Port Redirection and Network Address Translation (NAT)
+## Overview
+This document provides an overview of Port Redirection and Network Address Translation (NAT), including configurations and implementation steps using various tools.
+
 ## Architecture
 ```
 Internet -> Publicly Accessible Server -> Internal Network
@@ -4479,3 +4482,454 @@ Or remove all fingerprints:
 ```bash
 rm ~/.ssh/known_hosts
 ```
+
+# Port Redirection and Network Address Translation (NAT)
+
+## Overview
+
+Port redirection and NAT allow you to manage traffic between the internet and an internal network, enabling seamless communication and service access.
+
+### Key Points
+
+1. **Understanding NAT**:
+   - Translates private IP addresses to a public one and vice versa.
+   - Allows multiple devices on a local network to share a single public IP.
+
+2. **Packet Structure**:
+   - **Source IP Address**
+   - **Data**
+   - **Destination IP Address**
+   - Example: A packet from `203.0.113.1` to `1.2.3.4` is rerouted to an internal server.
+
+3. **Enabling Packet Forwarding**:
+   - Modify sysctl configuration to allow packet forwarding:
+     ```bash
+     sudo vim /etc/sysctl.d/99-sysctl.conf
+     net.ipv4.ip_forward=1
+     sudo sysctl -p
+     ```
+
+4. **Configuring IP Tables**:
+   - Set up NAT rules using `iptables`:
+     ```bash
+     sudo iptables -t nat -A PREROUTING -i enp1s0 -s 10.0.0.0/24 -p tcp --dport 8080 -j DNAT --to-destination 192.168.0.5:80
+     sudo iptables -t nat -A POSTROUTING -s 10.0.0.0/24 -o enp6s0 -j MASQUERADE
+     ```
+
+5. **Persistence of Rules**:
+   - Install `iptables-persistent` to ensure rules remain after reboots:
+     ```bash
+     sudo apt install iptables-persistent
+     sudo netfilter-persistent save
+     ```
+
+6. **Firewall Configuration**:
+   - Use UFW to manage firewall rules and allow necessary traffic:
+     ```bash
+     sudo ufw allow 22
+     sudo ufw enable
+     sudo ufw route allow from 10.0.0.0/24 to 192.168.0.5
+     ```
+
+7. **Flushing Rules**:
+   - Reset iptables if errors occur:
+     ```bash
+     sudo iptables --flush --table nat
+     ```
+
+### Why Choose `iptables` Over `nftables`?
+
+While `nftables` is the newer framework designed to replace `iptables`, there are compelling reasons to stick with `iptables` for certain scenarios:
+
+1. **Maturity and Stability**:
+   - `iptables` has been around for a long time, proving its reliability in various environments. It’s well-documented and widely used, making it easier to find support and resources.
+
+2. **Simplicity**:
+   - Many users find `iptables` commands straightforward and easier to remember, especially for common tasks. The syntax is often simpler for basic configurations.
+
+3. **Existing Infrastructure**:
+   - Many systems and scripts rely on `iptables`. Transitioning to `nftables` may require significant changes, which can be disruptive in established environments.
+
+4. **Community Knowledge**:
+   - The vast community and extensive documentation around `iptables` mean more resources for troubleshooting and configuration tips.
+
+5. **Specific Use Cases**:
+   - In certain scenarios, especially for legacy systems or specific applications, `iptables` may be the more appropriate choice due to its established presence and support.
+
+### Conclusion
+
+While `nftables` offers modern features and improvements, `iptables` remains a solid choice for many users due to its simplicity, maturity, and extensive community support. When configuring NAT and port forwarding, weigh your options carefully based on your specific environment and needs.
+
+For further details on command usage and configurations, refer to:
+```bash
+man iptables
+man ufw
+``` 
+
+By following these guidelines, you can effectively manage network traffic while leveraging the strengths of `iptables`.
+
+# Implement Reverse Proxies and Load Balancers
+
+When transitioning from a slow original web server to a new server, using a reverse proxy allows for seamless migration without the need for DNS propagation, which can take more than 24 hours. A reverse proxy can filter web traffic, cache content, and improve response times.
+
+### Benefits of Load Balancers
+- Distributes traffic across multiple web servers
+- Dynamically selects servers based on load
+- Ensures fair traffic distribution to enhance performance and reliability
+
+## Prerequisites
+
+- A server running a compatible Linux distribution
+- NGINX installed (`sudo apt install nginx`)
+- Basic knowledge of NGINX configuration
+
+## Setting Up a Reverse Proxy
+
+1. **Create a configuration file for the reverse proxy:**
+
+   ```bash
+   sudo vim /etc/nginx/sites-available/proxy.conf
+   ```
+
+   **Example Configuration:**
+
+   ```conf
+   server {
+       listen 80;
+       location /images { # example.com/images/ will be proxied
+           proxy_pass http://1.1.1.1;
+           include proxy_params;
+       }
+   }
+   ```
+
+2. **Set up proxy parameters:**
+
+   ```bash
+   cat /etc/nginx/proxy_params
+   ```
+
+   **Example Proxy Parameters:**
+
+   ```conf
+   proxy_set_header Host $http_host;
+   proxy_set_header X-Real-IP $remote_addr;
+   proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+   proxy_set_header X-Forwarded-Proto $scheme;
+   ```
+
+3. **Enable the reverse proxy site:**
+
+   ```bash
+   sudo ln -s /etc/nginx/sites-available/proxy.conf /etc/nginx/sites-enabled/proxy.conf
+   ```
+
+4. **Disable the default site:**
+
+   ```bash
+   sudo rm /etc/nginx/sites-enabled/default
+   ```
+
+## Configuring NGINX for Load Balancing
+
+1. **Remove the existing proxy configuration:**
+
+   ```bash
+   sudo rm /etc/nginx/sites-enabled/proxy.conf
+   ```
+
+2. **Create a new configuration file for load balancing:**
+
+   ```bash
+   sudo vim /etc/nginx/sites-available/lb.conf
+   ```
+
+   **Example Load Balancer Configuration:**
+
+   ```conf
+   upstream mywebserver {
+       least_conn;
+       server 1.2.3.4 weight=3; # can bear more load
+       server 5.6.7.8:8081; # custom port
+       server 9.10.11.12 down; # temporarily down
+       server 10.20.30.40 backup; # backup server
+   }
+
+   server {
+       listen 80;
+       location / {
+           proxy_pass http://mywebserver;
+       }
+   }
+   ```
+
+3. **Enable the load balancer site:**
+
+   ```bash
+   sudo ln -s /etc/nginx/sites-available/lb.conf /etc/nginx/sites-enabled/lb.conf
+   ```
+
+## Testing and Reloading NGINX
+
+1. **Test the configuration for errors:**
+
+   ```bash
+   sudo nginx -t
+   ```
+
+2. **If the configuration is successful, reload NGINX to apply changes:**
+
+   ```bash
+   sudo systemctl reload nginx.service
+   ```
+Setting up a reverse proxy and load balancer with NGINX improves web server efficiency and provides seamless traffic management. By following this guide, you can effectively transition between servers and optimize resource allocation.
+
+# Set and Synchronize System Time Using Time Servers
+
+This guide outlines the steps to set and synchronize your system time using NTP (Network Time Protocol) servers on Ubuntu. Ensuring accurate time is crucial for many applications and services, and system time may drift over time.
+
+## Prerequisites
+
+- Ubuntu system
+- sudo privileges
+
+## Overview of Time Management on Ubuntu
+
+- **NTP (Network Time Protocol)**: A protocol designed to synchronize the clocks of computers over a network.
+- **systemd-timesyncd**: The service responsible for time management on Ubuntu.
+
+## Setting Up Your Time Zone
+
+Before synchronizing your time, ensure that your system is set to the correct time zone. You can list available time zones and set the desired one using the `timedatectl` utility.
+
+### List Available Time Zones
+
+```bash
+timedatectl list-timezones
+```
+
+### Set the Time Zone
+
+Replace `America/Los_Angeles` with your desired time zone:
+
+```bash
+sudo timedatectl set-timezone America/Los_Angeles
+```
+
+### Verify Time and Time Zone
+
+```bash
+timedatectl
+```
+
+## Installing systemd-timesyncd
+
+Make sure the `systemd-timesyncd` service is installed and enabled:
+
+```bash
+sudo apt install systemd-timesyncd
+```
+
+## Enable NTP Synchronization
+
+To enable NTP synchronization:
+
+```bash
+sudo timedatectl set-ntp true
+```
+
+### Check Service Status
+
+You can check the status of the time synchronization service:
+
+```bash
+systemctl status systemd-timesyncd.service
+```
+
+## Configuring NTP Servers
+
+To configure which NTP servers to use, edit the `timesyncd.conf` file:
+
+```bash
+sudo vim /etc/systemd/timesyncd.conf
+```
+
+Add or modify the NTP lines:
+
+```conf
+NTP=0.us.pool.ntp.org 1.us.pool.ntp.org 2.us.pool.ntp.org 3.us.pool.ntp.org
+```
+
+### Restart the Service
+
+After making changes, restart the service for the new settings to take effect:
+
+```bash
+sudo systemctl restart systemd-timesyncd
+```
+
+## Additional Commands
+
+- To see available commands for `timedatectl`:
+
+  ```bash
+  timedatectl tab
+  ```
+
+- To view the current time synchronization status:
+
+  ```bash
+  timedatectl show-timesync
+  ```
+
+- To get detailed time synchronization status:
+
+  ```bash
+  timedatectl timesync-status
+  ```
+
+# SSH Configuration Guide
+## Configure SSH Servers
+### Server Configuration
+
+1. **Open the SSH server configuration file:**
+   ```bash
+   sudo vim /etc/ssh/sshd_config
+   ```
+
+2. **Basic Configuration:**
+   Update the configuration file with the following settings:
+   ```conf
+   # default port is 22
+   # Port 123 # can change port
+   AddressFamily any # inet: ipv4 and inet6: ipv6
+   ListenAddress 192.145.23.2 # only accept from this IP
+   PermitRootLogin no # root is not allowed
+   PasswordAuthentication no # only SSH authentication
+   KbdInteractiveAuthentication no # don't show password
+   X11Forwarding yes # allow X11 forwarding
+
+   Match User anoncvs
+       PasswordAuthentication yes # only this user can use password for login 
+   ```
+
+3. **Reload SSH Service:**
+   After making changes, reload the SSH service:
+   ```bash
+   sudo systemctl reload ssh.service
+   ```
+
+4. **Check Additional Configurations:**
+   You may have additional configurations in:
+   ```bash
+   sudo cat /etc/ssh/sshd_config.d/50-cloud-init.conf # check for clashes
+   ```
+
+---
+
+## User-Specific SSH Settings
+
+1. **Open User SSH Configuration:**
+   Navigate to your home directory and open the SSH config file:
+   ```bash
+   cd ~
+   vim .ssh/config
+   ```
+
+2. **Add Host Configuration:**
+   Add the following configuration for a specific host:
+   ```conf
+   Host ubuntu-vm
+       HostName 10.0.0.186
+       Port 22
+       User jeremy
+   ```
+
+3. **Set Permissions:**
+   Ensure the SSH config file has the correct permissions:
+   ```bash
+   chmod 600 ~/.ssh/config
+   ```
+
+4. **Connect to the Host:**
+   You can now SSH into the configured host:
+   ```bash
+   ssh ubuntu-vm
+   ```
+
+---
+
+## Global SSH Settings
+
+1. **Open Global SSH Configuration:**
+   Edit the global SSH configuration file:
+   ```bash
+   sudo vim /etc/ssh/ssh_config
+   ```
+
+2. **Global Configuration Example:**
+   Add the following lines for global settings:
+   ```conf
+   Host *
+       Port 229 # apply to all hosts
+   ```
+
+3. **Additional Configuration Files:**
+   You can create additional config files under:
+   ```bash
+   sudo vim /etc/ssh/ssh_config.d/99-our-settings.conf
+   ```
+
+   Add global settings here:
+   ```conf
+   Port 229
+   ```
+
+---
+
+## SSH Key Authentication
+
+1. **Generate SSH Keys:**
+   Use the following command to generate SSH keys:
+   ```bash
+   ssh-keygen
+   ```
+
+   This will create files in `/home/jeremy/.ssh/`:
+   - `id_ed25519` (private key)
+   - `id_ed25519.pub` (public key)
+
+2. **Copy Public Key to Remote Host:**
+   Use `ssh-copy-id` to copy your public key to the remote host:
+   ```bash
+   ssh-copy-id jeremy@10.0.0.173
+   ```
+
+3. **Connect to Remote Host:**
+   SSH into the remote host using the command:
+   ```bash
+   ssh jeremy@10.0.0.173
+   ```
+
+4. **View Authorized Keys:**
+   To verify your key was added, check the authorized keys:
+   ```bash
+   cat ~/.ssh/authorized_keys
+   ```
+
+---
+
+## Managing Known Hosts
+
+1. **Remove Old Fingerprints:**
+   If you need to remove a specific old fingerprint, use:
+   ```bash
+   ssh-keygen -R 10.0.0.251
+   ```
+
+2. **Remove All Fingerprints:**
+   To clear all fingerprints, you can remove the known hosts file:
+   ```bash
+   rm ~/.ssh/known_hosts
+   ```
+---
