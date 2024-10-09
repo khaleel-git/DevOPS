@@ -916,3 +916,16 @@ man fstab
 
  sudo blkid /dev/vdb1
  ls -l /dev/disk/by-uuid/
+
+ # Filesystem and Mount Options
+findmnt
+findmnt -t xfs,ext4
+rw: read write
+ro: read only
+sudo mount -o ro /dev/vdb2 /mnt
+find -t xfs,ext4
+
+sodo mount -o ro,noexec,nosuid /dev/vdb2 /mnt
+sudo mount -o remount, rw, noexec, nosuid /dev/vdb2 /mnt
+sudo umount /dev/vdb1
+sudo mount -o allocsize=32k /dev/vdb1 /mybackups

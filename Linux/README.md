@@ -4939,3 +4939,61 @@ Then use the UUID in your `/etc/fstab` file:
 ```
 UUID=your-uuid-here /your/mountpoint ext4 defaults 0 0
 ```
+# Filesystem and Mount Options
+## Commands
+### Finding Mounted Filesystems
+
+- **List all mounted filesystems**:
+  ```bash
+  findmnt
+  ```
+
+- **List mounted filesystems of specific types (e.g., xfs, ext4)**:
+  ```bash
+  findmnt -t xfs,ext4
+  ```
+
+### Mount Options
+
+- **Mount a filesystem as read-only**:
+  ```bash
+  sudo mount -o ro /dev/vdb2 /mnt
+  ```
+
+- **Find files of specific types**:
+  ```bash
+  find -t xfs,ext4
+  ```
+
+- **Mount a filesystem as read-only with additional options**:
+  ```bash
+  sudo mount -o ro,noexec,nosuid /dev/vdb2 /mnt
+  ```
+
+- **Remount a filesystem with different options**:
+  ```bash
+  sudo mount -o remount,rw,noexec,nosuid /dev/vdb2 /mnt
+  ```
+
+- **Unmount a filesystem**:
+  ```bash
+  sudo umount /dev/vdb1
+  ```
+
+- **Mount with a specific allocation size**:
+  ```bash
+  sudo mount -o allocsize=32k /dev/vdb1 /mybackups
+  ```
+
+## Mount Options Explained
+
+- `rw`: Mounts the filesystem with read and write permissions.
+- `ro`: Mounts the filesystem with read-only permissions.
+- `noexec`: Prevents execution of any binaries on the mounted filesystem.
+- `nosuid`: Ignores the set-user-identifier (SUID) and set-group-identifier (SGID) bits on executable files.
+- `allocsize=32k`: Specifies the allocation size for the filesystem.
+
+## Notes
+
+- Always ensure that you have the necessary permissions to mount and unmount filesystems.
+- Use caution when remounting or changing options on active filesystems, as it may affect system stability.
