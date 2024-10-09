@@ -929,3 +929,57 @@ sodo mount -o ro,noexec,nosuid /dev/vdb2 /mnt
 sudo mount -o remount, rw, noexec, nosuid /dev/vdb2 /mnt
 sudo umount /dev/vdb1
 sudo mount -o allocsize=32k /dev/vdb1 /mybackups
+
+
+# Use Remote Filesystems: NFS
+Network Filesystem Protocol (NFS)
+
+sudo apt install nfs-kernel-server
+sudo vi /ertc/export
+# NFS Server - Exporting Directories to Share
+```conf
+# /srv/homes  hostname1(rw,sync,no_subtree_check)  hostname2(ro,sync,no_subtree_check)
+/src/homes: /nfs/disk1/backups
+hostname: example or server1.server1.example.com or 10.0.0.9 or 10.0.16.0/24
+```
+man exports
+
+Share a computer
+sudo vi /etc/exports
+```conf
+/etc/ 127.0.0.0(ro)
+```
+
+sudo exports -r # r: re-export, doing a refresh based on the /etc/exports file
+sudo exports -v
+/etc   127.0.0.1(sync,wdelay,hide,no_subtree_check,sec=sys,ro,secure,root_squash,no_all_squash)
+
+/etc *.example.com (ro,sync,no_subtree_check)
+example: to share this directory with all comptuers that have a hostname ending in ".example.com"
+*: wildcard sign that matches anything that may come before .example.com
+
+
+/etc *(ro,sync,no_subtree_check) # share with any client
+
+sudo apt intall nfs-common
+The general syntax to mount a remote NFS share is:
+sudo mount Ip_or_hostname_of_server:/path/to/remote/directory /path/to/local/directory
+
+For our specific use-case, we want three things here:
+
+1. Ip address: 127.0.0.1
+2. /etc (filesystem or directory)
+3. /mnt (Local Directory)
+
+our command should be:
+sudo mount 127.0.0.1:/etc /mnt
+sudo mount server1:/etc /mnt
+
+Rest of the command are simple:
+sudo umount /mnt
+
+# automounted at boot time:
+sudo vi /etc/fstab
+```fs
+127.0.0.1:/etc/mnt nfs defaults 0 0
+```

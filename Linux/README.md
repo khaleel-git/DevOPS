@@ -4997,3 +4997,109 @@ UUID=your-uuid-here /your/mountpoint ext4 defaults 0 0
 
 - Always ensure that you have the necessary permissions to mount and unmount filesystems.
 - Use caution when remounting or changing options on active filesystems, as it may affect system stability.
+
+---
+# Use Remote Filesystems: NFS
+## Network Filesystem Protocol (NFS)
+NFS allows you to share directories and files with others over a network. This guide outlines the steps to set up and use NFS on a Linux system.
+### Installation
+First, install the NFS kernel server:
+
+```bash
+sudo apt install nfs-kernel-server
+```
+
+### Configure NFS Server
+
+Edit the exports file to specify which directories to share:
+
+```bash
+sudo vi /etc/exports
+```
+
+#### Example Configuration
+
+```conf
+# NFS Server - Exporting Directories to Share
+/srv/homes  hostname1(rw,sync,no_subtree_check)  hostname2(ro,sync,no_subtree_check)
+/src/homes: /nfs/disk1/backups
+# Example host specifications:
+# hostname: example or server1.server1.example.com or 10.0.0.9 or 10.0.16.0/24
+```
+
+To learn more about export options, use:
+
+```bash
+man exports
+```
+
+#### Share a Specific Directory
+
+To share the `/etc` directory with read-only access:
+
+```conf
+/etc/ 127.0.0.0(ro)
+```
+
+### Apply Changes
+
+After editing `/etc/exports`, run the following commands:
+
+```bash
+sudo exportfs -r  # Re-export all directories
+sudo exportfs -v  # View the current exports
+```
+
+### Example Export Configurations
+
+```conf
+/etc   127.0.0.1(sync,wdelay,hide,no_subtree_check,sec=sys,ro,secure,root_squash,no_all_squash)
+/etc *.example.com (ro,sync,no_subtree_check)  # Share with all .example.com hosts
+/etc *(ro,sync,no_subtree_check)  # Share with any client
+```
+
+### Client Setup
+
+On the client machine, install the NFS common package:
+
+```bash
+sudo apt install nfs-common
+```
+
+#### Mounting a Remote NFS Share
+
+The general syntax for mounting a remote NFS share is:
+
+```bash
+sudo mount Ip_or_hostname_of_server:/path/to/remote/directory /path/to/local/directory
+```
+
+For example, to mount the `/etc` directory from the server with IP address `127.0.0.1` to your local `/mnt` directory, use:
+
+```bash
+sudo mount 127.0.0.1:/etc /mnt
+# or
+sudo mount server1:/etc /mnt
+```
+
+### Unmounting
+
+To unmount the directory, use:
+
+```bash
+sudo umount /mnt
+```
+
+### Automount at Boot Time
+
+To ensure that the NFS share is mounted automatically at boot time, edit the `/etc/fstab` file:
+
+```bash
+sudo vi /etc/fstab
+```
+
+Add the following line:
+
+```fs
+127.0.0.1:/etc /mnt nfs defaults 0 0
+```
