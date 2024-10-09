@@ -4687,8 +4687,7 @@ sudo systemctl restart systemd-timesyncd
    ```
 ---
 
-## List Partitions
-
+# List, Create, Delete, and Modify Physical Storage Partitions
 To list partitions, you can use the following commands:
 
 ```bash
@@ -4775,4 +4774,168 @@ sudo chmod 600 /swap  # Read/write only for owner
 sudo mkswap /swap
 sudo swapon --verbose /swap
 swapon --show
+```
+---
+
+# Create and Configure File Systems
+## Supported File Systems
+
+- **Red Hat:** XFS
+- **Ubuntu:** ext4
+
+### Creating File Systems
+
+#### XFS on Red Hat
+
+To create an XFS file system on a device (e.g., `/dev/sdb1`), use the following command:
+
+```bash
+sudo mkfs.xfs /dev/sdb1
+```
+
+For more detailed information about the XFS file system creation command, refer to the manual:
+
+```bash
+man mkfs.xfs
+```
+
+##### Advanced XFS Options
+
+- To label the file system:
+  ```bash
+  sudo mkfs.xfs -L "BackupVolume" /dev/sdb1
+  ```
+
+- To specify the inode size:
+  ```bash
+  sudo mkfs.xfs -i size=512 /dev/sdb1
+  ```
+
+- To force the creation of the file system:
+  ```bash
+  sudo mkfs.xfs -f -i size=512 /dev/sdb1
+  ```
+
+- To label the file system while forcing creation:
+  ```bash
+  sudo mkfs.xfs -f -i size=512 -L "BackupVolume" /dev/sdb1
+  ```
+
+- To change the label of an existing XFS file system:
+  ```bash
+  sudo xfs_admin -l /dev/sdb1
+  sudo xfs_admin -L "FirstFS" /dev/sdb1
+  ```
+
+#### ext4 on Ubuntu
+
+To create an ext4 file system on a device (e.g., `/dev/sdb2`), use:
+
+```bash
+sudo mkfs.ext4 /dev/sdb2
+```
+
+For more information about the ext4 file system creation command, check the manual:
+
+```bash
+man mkfs.ext4
+```
+
+##### Advanced ext4 Options
+
+- To create a file system with a specified number of inodes:
+  ```bash
+  sudo mkfs.ext4 -N 500000 /dev/sdb2
+  ```
+
+- To list file system parameters:
+  ```bash
+  sudo tune2fs -l /dev/sdb2
+  ```
+
+- To change the label of an ext4 file system:
+  ```bash
+  sudo tune2fs -L "SecondFS" /dev/sdb2
+  ```
+
+### Mounting File Systems
+
+To mount a file system, you can use the following commands:
+
+1. **Manual Mounting:**
+
+   ```bash
+   sudo mount /dev/vdb1 /mnt/
+   ```
+
+2. **Verify the Mount:**
+
+   ```bash
+   ls -l /mnt/
+   lsblk
+   ```
+
+3. **Unmount the File System:**
+
+   ```bash
+   sudo umount /mnt/
+   ```
+
+### Persistent Mounting with fstab
+
+To ensure your file system mounts automatically during boot, you'll need to edit the `/etc/fstab` file.
+
+1. **Open the fstab file:**
+
+   ```bash
+   sudo vim /etc/fstab
+   ```
+
+2. **Add your mount configuration:**
+   ```
+   /dev/vda2   /boot   ext4   defaults   0  1
+   ```
+
+   The last two numbers control the order of file system checks at boot:
+   - `0`: never scan the filesystem
+   - `1`: scan the filesystem first
+   - `2`: scan the filesystem later
+
+3. **Reload systemd to apply changes:**
+
+   ```bash
+   sudo systemctl daemon-reload
+   ```
+
+4. **Verify the mount directory:**
+
+   ```bash
+   ls /mybackups/
+   ```
+
+5. **Reboot to test the fstab configuration:**
+
+   ```bash
+   sudo systemctl reboot
+   ```
+
+6. **Check your backups directory after reboot:**
+
+   ```bash
+   ls -l /mybackups/
+   lsblk
+   ```
+
+### Working with UUIDs
+
+You can also use UUIDs to mount file systems. To find the UUID of a device:
+
+```bash
+sudo blkid /dev/vdb1
+```
+
+Then use the UUID in your `/etc/fstab` file:
+
+```
+UUID=your-uuid-here /your/mountpoint ext4 defaults 0 0
 ```

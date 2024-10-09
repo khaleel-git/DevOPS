@@ -862,3 +862,57 @@ sudo chmod 600 /swap # read write only for owner
 sudo mkswap /swap 
 sudo swapon --verbose /swap
 swapon --show
+
+# Create and Configure File Systems
+redhat: xfs
+ubuntu: ext4
+sudo mkfs.xfs /dev/sdb1
+sudo mkfs.ext4 /dev/sdb1
+man mkfs.xfs
+
+sudo mkfs.xfs -L "BackupVolume" /dev/sdb1
+sudo mkfs.xfs -i size=512 /dev/sdb1
+sudo mkfs.xfs -f -i size=512 /dev/sdb1
+sudo mkfs.xfs -f -i size=512 -L "BackupVolume" /dev/sdb1
+sudo xfs_admin -l /dev/sdb1
+sudo xfs_admin -L "FirstFS" /dev/sdb1
+
+man mkfs.ext4
+
+sudo mkfs.ext4 /dev/sdb2
+sudo mkfs.ext4 -N 500000 /dev/sdb2
+sudo tune2fs -l /dev/sdb2
+sudo tune2fs -L "SecondFS" /dev/sdb2 # change labels
+
+# Configure Systems to Mount Filesystems at or During Boot
+ls /mnt/
+sudo mount /dev/vdb1 /mnt/
+sudo toch /mngt/tesfile
+ls -l /mnt/
+lsblk
+sudo umount /mnt/
+lsblk 
+ls /mnt/
+
+sduo mkdir /mybackups
+sudo vim /etc/fstab # mount on system boot up
+# /dev/vda2   /boot   ext4   defaults   0  1
+0: never scan filesystem
+1: scan filsystem
+2: ....
+
+sudo systemctl daemon-reload # pickup changes automatically
+ls /myubackups/
+
+lsblk
+sudo systemctl reboot
+ls -l /mybackups/
+lsblk
+
+man fstab
+ sudo vi /etc / fstab
+ /dev/ vdb3 non3 swap defaults 0 0 # make a swap permament
+ uuid is used
+
+ sudo blkid /dev/vdb1
+ ls -l /dev/disk/by-uuid/
