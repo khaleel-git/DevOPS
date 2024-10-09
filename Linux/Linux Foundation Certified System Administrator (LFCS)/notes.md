@@ -596,3 +596,240 @@ sudo ufw allow in on enp0s3 from 10.0.0.192 to 10.0.0.100 proto tcp
 sudo ufw allow out on enp0s3 from 10.0.0.100 to 10.0.0.192 proto tcp
 
 sudo ufw status numbered
+
+Port Redirection and Network Address Translation (NAT)
+internet -> publicly accessible server -> internal network
+internet -> port/80 -> internet network
+
+Network Address Translation (NAT)
+network packet: source IP address -> data -> destination IP address (sender -> receiver)
+203.0.113.1 --- S: 203.0.113.1 / D:1.2.3.4 (Network Packet) -> Port 80 (1.2.3.4) -> Internal Network (Server 1, Server 2, Server 3)
+when a public server gets a network packet it re-routes it (port forwarding) to some server of internal network
+private server attempt to send packet back to internet it does not know, so public server returns the packet to original server. (Masquerading)
+router -> Smartphone (as as router does at home)
+
+/etc/sysctl.d/99-sysctl.conf or /etc/sysctl.conf (risky, feature update might modify this file)
+
+sudo vim /etc/sysctl.d/99-sysctl.conf
+```ini
+# Uncomment the next line to enable packet forwarding for IPv4
+# Enabling this option disables Stateless Address
+net.ipv4.ip_forward=1
+Autoconfiguration
+# based on Router Advertisements for this host
+```
+sudo sysctl-system
+sudo sysctl -a | grep forward
+
+Netfliter Framework: nft # quite hard to remeber
+use iptables
+10.0.0.0/24 -> port 8080 -> internal network (port 80, server 1)
+check ip r or ip route
+
+iptable chain: a packet travel through chain
+network interface: raw, connection tracking, mangle, nat -> mangle -> filter -> local process
+nat -> mangle -> filter -> mangle -> nat -> network interface
+
+sudo iptables -t nat -A PREROUTING -i enp1s0 -s 10.0.0.0/24 -p tcp --dport 8080 -j DNAT --to-destination 192.168.0.5:80
+
+Masquerading: pretending you're someone else
+sudo iptables -t nat -A POSTROUTING -s 10.0.0.0/24 -o enp6s0 -j MASQUERADE
+
+sudo nft list ruleset
+table ip nat {
+    chain PREROUTING {
+        type nat hook prerouting priority dstnat; plicy accept;
+        iifname "enp1s0" meta l4proto tcp ip saddr 10.0.0.0/24 tcp dport 8080 counter
+        packets 0 bytes 0 dnat to 192.168.0.5:80
+        }
+
+    chain POSTROUTING {
+        type nat hook postrouting priority scrnat; policy accept;
+        oifname "enp6s0" ip saddr 10.0.0.0/24 counter packets 0 bytes 0 masquerade
+    }
+}
+sudo apt install iptables-persistent
+sudo netfilter-persestent save
+
+```bash
+sudo ufw allow 22
+sudo ufw enable
+sudo ufw route allow from 10.0.0.0/24 to 192.168.0.5
+```
+
+man ufw-framework
+sudo iptables -list-rules --table nat
+
+output:
+-P PREROUTING ACCEPT
+-P INPUT ACCEPT
+-P POSTROUTING ACCEPT
+-A PREROUTING -s 10.0.0.0/24 -i enp1s0 -p tcp -m tcp --dport 8080 -j DNAT --to-destination 192.168.0.5:80
+-A POSTROUTING -s 10.0.0.0/24 -o enp6s0 -j MASQUERADE
+
+sudo iptables --flush --table nat # if any mistake happens, we can flush iptables
+
+# Implement Reverse Proxies and Load Balancers
+control original web servers, old one is slow, then we can setup a new server so we can transition
+use reverse proxy due to no use of dns propation (it can take more than 24 hrs)
+filtering web traffic, caching
+Load Balancer:
+redirect traffic from multiple web servers
+can pick daynamicall to pick which server to chose
+each server get a fair share 
+distribute traffic to different servers
+
+Creating a Reverse Proxy with NGINX
+can also work as web serve
+sudo apt install nginx
+sudo vim /etc/nginx/sites-available/proxy.conf
+```conf
+server {
+    listen 80;
+    location /images { # example.com/images/ only image part will be proxy
+        proxy_pass http://1.1.1.1;
+        include proxy_params;
+    }
+}
+```
+
+cat /etc/nginx/proxy_params
+
+```proxy_params
+proxy_set_header Host $http_host;
+proxy_set_heade X-Real-IP $remote_addr;
+proxy_set_heade X-Forwarded-For $proxy_add_x_forwarded_for;
+proxy_set_header X-Forwarded-Proto $scheme;
+```
+enable a site:
+sudo ln -s /etc/nginx/site-available/proxy.conf /etc/nginx/sites-enabled/proxy.conf
+
+disable:
+sudo rm /etc/nginx/sites-enabled/default
+
+sudo nginx -t # test configuration file
+ngnix: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+
+sudo systemctl reload nginx.service # apply changes
+
+Re-configure it as a load balancer:
+sudo rm /etc/nginx/sites-aenabled/proxy.conf  # remove link
+sudo vim /etc/nginx/sites-available/lb.conf
+```conf
+upstream mywebserver {
+    least_conn;
+
+    server 1.2.3.4; weight=3 ; # can bear load more than other
+    server 5.6.7.8:8081; # custom port
+    server 9.10.11.12; down # server is down, dont' redirect to this server right now
+    server 10.20.30.40 backup; # not handling traffic, if all other servers fail then this server can handle traffic
+}
+    server {
+        listen 80;
+        location /{
+            proxy_pass: http:mywebservers;
+        }
+    }
+```
+sudo ln -s /etc/nginx/sites-available/lg.conf /etc/nginx/sites-enabled/lb.conf
+sudo nginx -t
+sudo systemctl reload nginx.service
+
+# Set and Synchronize System Time Using Time Servers
+server time may be drifted
+time servers: NTP (network time protocol)
+systemd-timesyncd # ubuntu service responsible for time management
+
+if servers are around the glob, we should set up timezone
+
+timedatectl utility:
+timedatectl list-timezones
+sudo timedatectl set-timezone America/Los_Angeles
+
+timedatectl # check time and zone
+
+sudo apt install systemd-timesyncd
+
+sudo timedatectl set-ntp true # set ntp,  turn on synchroniztion with ntp server
+systemctl status systemd-timesyncd.service
+
+chose setting:
+sudo vim /etc/systemd/timesyncd.conf
+```conf
+NTP=0.us.pool.ntp.org 1.us.pool.ntp.org 2.us.pool.ntp.org 3.us.pool.ntp.org
+```
+sudo systemctl restart systemd-timesyncd # restart to take place changings
+
+timedatectl  tab # shows available command
+timedatectl show-timesync
+
+timedatectl timesync-status
+
+# Configure SSH Servers and Clients
+man sshd_config
+sudo vim /etc/ssh/sshd_config # sudo vim /etc/ssh/ssh/sshd_config (client part)
+```conf
+# default port is 22
+# Port 123 # can change port
+AddressFamily any # inet: ipv4 and inet6: ipv6
+Lis/tenAddress 192.145.23.2 # only accept from this ip
+PermitRootLogin no # root is not allowed
+PasswordAuthentication no # only ssh authentication
+KbdInteractiveAutheniction no # dont show pasword
+X11Forwarding yes # 
+
+
+Match User anoncvs
+    PasswordAuthentication yes # only this user can use password for login 
+```
+
+sudo systemct reload ssh.service
+sudo cat /etc/ssh/sshd_config.d/50-cloud-init.conf # additional config file with a clash
+
+-- specific user ssh settion --
+man ssh_config # no ad in ssh
+ip -c a
+cd ~
+vim .ssh/config
+```conf
+Host ubuntu-vm
+    HostName 10.0.0.186
+    Port 22
+    User jeremy
+```
+
+chmod 600 ~/.ssh/config
+ssh ubuntu-vm
+logged in
+
+-- it was a specific user settion --
+
+-- global Setting --
+
+vi /etc/ssh/ssh_config
+```conf
+Host *
+Port 229 # for all
+# its not recommended to update file
+```
+
+We can add our own config file under /etc/ssh/ssh_config.d
+sudo vim /etc/ssh/ssh_config.d/99-our-settings.conf
+```conf
+Port 229
+```
+
+SSH using keys
+ssh-keygen
+/home/jeremy/.ssh/id_ed25519
+ls ~./ssh
+id_ed25519 and id_ed25519.pub
+ssh-copy-id jeremy@10.0.0.173 # stored in .ssh/authorized_keys
+
+ssh jeremy@10.0.0.173
+logged in
+cat ~/.ssh/authorized_keys
+
+remove old fingerprint with this command: ssh-keygen -R 10.0.0.251
+rm ~/.ssh/known_hosts # remove all fingerprints
