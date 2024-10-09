@@ -4240,9 +4240,6 @@ sudo firewall-cmd --list-all
 ```
 
 # Port Redirection and Network Address Translation (NAT)
-
-## Overview
-
 Port redirection and NAT allow you to manage traffic between the internet and an internal network, enabling seamless communication and service access.
 
 ### Key Points
@@ -4689,3 +4686,93 @@ sudo systemctl restart systemd-timesyncd
    rm ~/.ssh/known_hosts
    ```
 ---
+
+## List Partitions
+
+To list partitions, you can use the following commands:
+
+```bash
+lsblk
+ls /dev/sda1
+ls /dev/sda  # Points to the entire device
+sudo fdisk --list /dev/sda
+```
+
+### Viewing Partitions with cfdisk
+
+To view and modify partitions interactively, use:
+
+```bash
+sudo cfdisk /dev/sdb
+```
+
+- **GPT**: Great Partition Table
+- **DOS**: Equivalent to MBR in cfdisk
+
+After making changes in cfdisk, remember to select the **Write** button to save the configuration.
+
+## Create and Modify Partitions
+
+1. Open `cfdisk` or `fdisk` for the desired disk.
+2. Create or modify partitions as needed.
+3. Always remember to write the changes.
+
+## Delete Partitions
+
+To delete a partition, follow these steps in `cfdisk` or similar tools:
+
+1. Select the partition to delete.
+2. Choose the delete option.
+3. Write the changes to the disk.
+
+## Configure and Manage Swap Space
+
+### Check Current Swap Space
+
+To view currently active swap space:
+
+```bash
+swapon --show
+lsblk
+```
+
+### Create Swap Space
+
+1. Create a new swap partition:
+
+   ```bash
+   sudo mkswap /dev/vdb3
+   ```
+
+2. Activate the new swap space:
+
+   ```bash
+   sudo swapon --verbose /dev/vdb3
+   ```
+
+3. Verify the new swap space:
+
+   ```bash
+   swapon --show
+   ```
+
+### Temporarily Disable Swap Space
+
+To disable the swap space temporarily:
+
+```bash
+sudo swapoff /dev/vdb3
+```
+
+### Create a Swap File
+
+To create a swap file instead of a swap partition:
+
+```bash
+sudo dd if=/dev/zero of=/swap bs=1M count=128  # 128 MB
+sudo dd if=/dev/zero of=/swap bs=1M count=2048 status=progress  # 2 GB
+sudo chmod 600 /swap  # Read/write only for owner
+sudo mkswap /swap
+sudo swapon --verbose /swap
+swapon --show
+```

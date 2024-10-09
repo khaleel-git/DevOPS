@@ -833,3 +833,32 @@ cat ~/.ssh/authorized_keys
 
 remove old fingerprint with this command: ssh-keygen -R 10.0.0.251
 rm ~/.ssh/known_hosts # remove all fingerprints
+
+# List, Create, Delete, and Modify Physical Storage Partitions
+windows: nfts
+ubuntu: ext4
+
+lsblk
+ls /dev/sda1
+ls /dev/sda # points to entire device
+sudo fdisk --list /dev/sda
+sudo cfdisk /dev/sdb
+gpt # great partition table
+dos is equivalant to MBR in cfdisk
+# after cfdisk configuration select write button
+
+# Configure and Manage Swap Space
+swapon --show
+lsblk
+sudo mkswap /dev/vdb3
+
+sudo swapon --verbose /dev/vdb3
+swapon --show
+# change is temporarily
+sudo swapoff /dev/vdb3
+sudo dd if=/dev/zero of=/swap bs=1M count=128 # 1M is the block size x 128 times
+sudo dd if=/dev/zero of=/swap bs=1M count=2048 status=progress
+sudo chmod 600 /swap # read write only for owner
+sudo mkswap /swap 
+sudo swapon --verbose /swap
+swapon --show
