@@ -5320,98 +5320,199 @@ To check information on device mapper:
 ```bash
 sudo dmsetup info /dev/dm-0
 ```
+---
 
-## Filesystem Permissions Management
+# Filesystem Permissions Management
+This guide explores how to manage filesystem permissions effectively using standard commands, ACL (Access Control Lists), and `chattr` (file attributes). These tools are crucial when managing shared files between multiple users in a system.
 
-### Basic Commands
+## Scenario: Managing File Permissions for Multiple Users
 
-Check permissions with:
+In a shared environment, user `jeremy` needs write access to a file owned by another user `alex`. While traditional Linux permissions do not allow easy sharing without altering ownership, ACLs can provide fine-grained access control. Additionally, `chattr` can be used to further protect files from unauthorized modifications.
+---
+## Basic Commands
+
+To begin, check the existing file permissions using:
 
 ```bash
 ls -l
 ```
 
-### Working with ACLs
+Example:
 
-1. **Install ACL:**
+```bash
+$ ls -l
+-rw-rw-r-- 1 alex staff 25 May 23 06:18 file3
+```
 
-   ```bash
-   sudo apt install acl
-   ```
+In this example, `alex` owns `file3` and has read/write access, while other users can only read the file.
 
-2. **Set ACL for a User:**
+## Working with ACLs
 
-   ```bash
-   sudo setfacl --modify user:jeremy:rw file3
-   ```
+To solve the problem of granting Jeremy write permissions without disrupting Alex's rights, ACLs are used.
 
-3. **View ACLs:**
+### Step 1: Install ACL
 
-   ```bash
-   getfacl file3
-   ```
+First, make sure ACLs are installed on your system:
 
-4. **Modify and Remove ACLs:**
+```bash
+sudo apt install acl
+```
 
-   ```bash
-   sudo setfacl --modify mask:r file3
-   sudo setfacl --modify group:sudo:rw file3
-   sudo setfacl --remove user:jeremy file3
-   sudo setfacl --remove group:sudo file3
-   sudo setfacl --remove-all file3 # Remove all ACL entries
-   ```
+### Step 2: Set ACL for a User
 
-### Recursive ACL Management
+Grant user `jeremy` write access to `file3`:
 
-To manage permissions recursively:
+```bash
+sudo setfacl --modify user:jeremy:rw file3
+```
+
+Now, `jeremy` has the same read/write permissions as the file owner without altering the file's original ownership. Jeremy can now edit the file:
+
+```bash
+$ echo "This is the NEW file content" > file3
+$ cat file3
+This is the NEW file content
+```
+
+### Step 3: View ACLs
+
+To view ACLs set on the file:
+
+```bash
+getfacl file3
+```
+
+This will show the current ACLs, confirming that `jeremy` has been granted the necessary permissions.
+
+---
+
+## Modify and Remove ACLs
+
+In certain cases, you may need to modify or remove ACLs.
+
+### Modify Mask or Group Permissions:
+
+```bash
+sudo setfacl --modify mask:r file3
+sudo setfacl --modify group:sudo:rw file3
+```
+
+### Remove User/Group ACLs:
+
+To remove permissions for `jeremy`:
+
+```bash
+sudo setfacl --remove user:jeremy file3
+```
+
+To remove all ACL entries from the file:
+
+```bash
+sudo setfacl --remove-all file3
+```
+
+---
+
+## Recursive ACL Management
+
+Sometimes, you need to apply ACLs to entire directories. For example, to grant `jeremy` full access to a directory (`dir1`) and all its contents:
 
 ```bash
 mkdir dir1
 setfacl --recursive -m user:jeremy:rwx dir1/
-setfacl --recursive --remove user:jeremy dir1/
-setfacl --recursive --remove group:sudo dir1/
 ```
 
-## File Attributes
-
-### Append Only
-
-To set a file as append-only:
+To remove `jeremy`'s access recursively:
 
 ```bash
-echo "new file" > newfile
-sudo chattr +a newfile
+setfacl --recursive --remove user:jeremy dir1/
 ```
 
-**Note:** You can only append; overwriting won't work.
+---
+
+## File Attributes with `chattr`
+
+`chattr` offers additional control over files, such as making them append-only or immutable.
+
+### Scenario: Protecting Critical Files with `chattr`
+
+In certain cases, you may want to protect a file from being overwritten or modified altogether. For example, `alex` wants to protect `file3` by making it append-only, so that new content can be added but existing content cannot be overwritten.
+
+### Append-Only Files
+
+To set `file3` as append-only:
+
+```bash
+echo "This is the file content" > file3
+sudo chattr +a file3
+```
+
+Now, attempts to overwrite the file will fail:
+
+```bash
+$ echo "Overwrite content" > file3
+-bash: file3: Operation not permitted
+```
+
+Appending content will still work:
+
+```bash
+$ echo "Append new content" >> file3
+$ cat file3
+This is the file content
+Append new content
+```
+
+### Remove Append-Only Attribute
+
+To remove the append-only protection:
+
+```bash
+sudo chattr -a file3
+```
 
 ### Making a File Immutable
 
-To prevent any changes to a file:
+To prevent all modifications, set a file as immutable:
 
 ```bash
-sudo chattr +i newfile # Make it immutable
+sudo chattr +i file3
 ```
 
-To remove the immutable attribute:
+Once immutable, no one (not even the file owner) can modify or delete the file:
 
 ```bash
-sudo chattr -i newfile
+$ echo "Try to modify" > file3
+-bash: file3: Operation not permitted
 ```
 
-### List Attributes
+### Remove Immutable Attribute
 
-To list all attributes of files:
+To remove immutability:
+
+```bash
+sudo chattr -i file3
+```
+
+---
+
+## List File Attributes
+
+To see the attributes of files (such as immutability or append-only):
 
 ```bash
 lsattr
 ```
 
-### Manual Pages
+---
 
-For more detailed information, you can check the manual pages:
+## Manual Pages
+
+For more detailed information, consult the manual pages for ACL and attributes:
 
 ```bash
 man acl
 man attr
+```
+Using ACLs and `chattr`, system administrators can manage file access and protect critical files more effectively. ACLs allow for fine-grained permission control, while `chattr` can enforce stricter protections, such as preventing modifications to important system files. Together, these tools offer a powerful way to manage multi-user environments.
 ```
