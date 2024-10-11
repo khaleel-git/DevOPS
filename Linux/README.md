@@ -5328,7 +5328,7 @@ This guide explores how to manage filesystem permissions effectively using stand
 ## Scenario: Managing File Permissions for Multiple Users
 
 In a shared environment, user `jeremy` needs write access to a file owned by another user `alex`. While traditional Linux permissions do not allow easy sharing without altering ownership, ACLs can provide fine-grained access control. Additionally, `chattr` can be used to further protect files from unauthorized modifications.
----
+
 ## Basic Commands
 
 To begin, check the existing file permissions using:
