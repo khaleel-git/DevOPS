@@ -5103,3 +5103,159 @@ Add the following line:
 ```fs
 127.0.0.1:/etc /mnt nfs defaults 0 0
 ```
+---
+# Network Block Device (NBD) Setup and LVM Management
+Network Block Devices (NBD) allow a client machine to use storage on a remote server as if it were a local block device. This is useful for managing storage across different servers and for leveraging LVM features.
+
+### Block Devices Overview
+
+- `/dev/sda` or `/dev/vda`: Block device
+- `/dev/sda1` or `/dev/vda1`: First partition
+- `/dev/nbd0`: Network Block Device (located on the server)
+
+## NBD Server Configuration
+
+1. **Install NBD Server:**
+   ```bash
+   sudo apt install nbd-server
+   ```
+
+2. **Edit the NBD Server Configuration:**
+   ```bash
+   sudo vim /etc/nbd-server/config
+   ```
+   Add the following configuration:
+   ```ini
+   includedir = /etc/nbd-server/conf.d
+   allowlist = true
+   [partition2]
+       exportname=/dev/sda1
+   ```
+
+3. **Restart NBD Server:**
+   ```bash
+   sudo systemctl restart nbd-server.service
+   ```
+
+4. **Consult the Manual:**
+   ```bash
+   man 5 nbd-server
+   ```
+
+## NBD Client Configuration
+
+1. **Install NBD Client:**
+   ```bash
+   sudo apt install nbd-client
+   ```
+
+2. **Load the NBD Kernel Module:**
+   ```bash
+   sudo modprobe nbd
+   ```
+
+3. **Autoload the NBD Module on Boot:**
+   ```bash
+   sudo vi /etc/modules-load.d/modules.conf
+   ```
+   Add:
+   ```ini
+   nbd
+   ```
+
+4. **Connect to the NBD Server:**
+   ```bash
+   sudo nbd-client 127.0.0.1 -N partition2 # Connects /dev/nbd0
+   ```
+
+5. **Mount the NBD Device:**
+   ```bash
+   sudo mount /dev/nbd0 /mnt
+   ```
+
+6. **Verify Mount:**
+   ```bash
+   ls /mnt
+   ```
+
+7. **Unmount the Device:**
+   ```bash
+   sudo umount /mnt
+   ```
+
+8. **List Block Devices:**
+   ```bash
+   lsblk
+   ```
+
+9. **Disconnect from NBD:**
+   ```bash
+   sudo nbd-client -d /dev/nbd0 # Disconnect
+   ```
+
+10. **List NBD Server Exports:**
+    ```bash
+    sudo nbd-client -l 127.0.0.1
+    ```
+
+## LVM Management
+
+1. **Install LVM2:**
+   ```bash
+   sudo apt install lvm2
+   ```
+
+2. **Create Physical Volumes (PVs):**
+   ```bash
+   sudo pvcreate /dev/sdc /dev/sdd
+   ```
+
+3. **Display Physical Volumes:**
+   ```bash
+   sudo pvs
+   ```
+
+4. **Create a Volume Group (VG):**
+   ```bash
+   sudo vgcreate my_volume /dev/sdc /dev/sdd
+   ```
+
+5. **Extend the Volume Group:**
+   ```bash
+   sudo pvcreate /dev/sde
+   sudo vgextend my_volume /dev/sde
+   ```
+
+6. **Reduce the Volume Group:**
+   ```bash
+   sudo vgreduce my_volume /dev/sde
+   sudo pvremove /dev/sde
+   ```
+
+7. **Create Logical Volumes (LV):**
+   ```bash
+   sudo lvcreate --size 2G --name partition1 my_volume
+   sudo lvcreate --size 6G --name partition2 my_volume
+   ```
+
+8. **Display Volume Groups and Logical Volumes:**
+   ```bash
+   sudo vgs
+   sudo lvs
+   ```
+
+9. **Resize Logical Volumes:**
+   ```bash
+   sudo lvresize --extents 100%VG my_volume/partition1
+   sudo lvresize --size 2G my_volume/partition1 # Shrink volume
+   ```
+
+10. **Format the Logical Volume:**
+    ```bash
+    sudo mkfs.ext4 /dev/my_volume/partition1
+    ```
+
+11. **Resize the Filesystem:**
+    ```bash
+    sudo lvresize --resizefs --size 3G my_volume/partition1
+    ```

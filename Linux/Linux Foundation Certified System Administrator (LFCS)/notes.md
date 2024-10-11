@@ -983,3 +983,78 @@ sudo vi /etc/fstab
 ```fs
 127.0.0.1:/etc/mnt nfs defaults 0 0
 ```
+
+Use Network Block Devices: NBD
+/dev/sda or /dev/vda is block device and /dev/sda1 and /dev/vda1 is the first partition.
+
+/dev/nbd0 is the network block device (located in server 2)
+NBD Server and NBD Client
+
+sudo apt install nbd-server
+sudo vim /etc/nbd-server/config
+
+sudo vi /etc/nbd-server/config
+```ini
+includedir = /etc/nbd-server/conf.d
+allowlist = true
+[partition2]
+    exportname=/dev/sda1
+```
+
+sudo systemctl restart nbd-server.service
+man 5 nbd-server
+
+
+## configuring the client machine
+sudo apt install nbd-client
+sudo modprobe nbd # load kernel module, load kernal boot only
+
+sudo vi /etc/modules-load.d/modules.conf # autoload modprobe nbd
+```ini
+nbd
+```
+sudo nbd-client 127.0.0.1 -N partition2 # /dev/nbd0
+sudo mount /dev/nbd0 /mnt
+ls /mnt
+sudo umount /mnt
+lsblk
+suod mbd-client -d /dev/nbd0 # 0 byte size, disconnected
+sudo nbd-client localhost -N partition2
+
+sudo nbd-client -l 127.0.0.1 # list nbd server exports
+
+# Manage and Configure LVM Storage
+dynamic allocation of partition from anywhere from the disk
+sudo apt install lvm2
+
+PV: physical volume (entire disk) # two or more partitiona added together to make pv
+sudo lvmdiskscan
+sudo pvcreate /dev/sdc /dev/sdd
+sudo pvs
+
+VG: Volume Group
+sudo vgcreate [NAME_OF_GROUP] [NAME_OF_PVS_TO_USE]
+sudo vgcreate my_volume /dev/sdc /dev/sdd # added two disk to lvm, single continuous disk
+sudo pvcreate /dev/sde
+sudo vgextend my_volume /dev/sde # its using three pvs
+sudo vgreduce my_colume /dev/sde
+sudo pvremove /dev/sde
+
+LV
+sudo lvcreate --size 2G --name parition1 my_volume
+sudo vgs
+sudo lvcreate --size 6G --name partition2 my_volume
+sudo lvs
+sudo vgs
+
+
+PE: physical extents
+sudo lvresize --extents 100%VG my_volume/partition1
+sudo lvs
+suod lvresize --size 2G my_volume/partition1 # shrink volume
+sudo lvdiskplay
+sudo mkfs.ext4 /dev/my_volume/partition1
+sudo lvreseize --seize 3G my_volume/partition1 # dont' use this command becuase our ext4 has 2G
+sudo lvresieze --resizefs --size 3G my_volume/partition1
+
+vg tab twice
