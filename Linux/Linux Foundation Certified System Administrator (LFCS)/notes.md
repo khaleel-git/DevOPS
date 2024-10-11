@@ -1058,3 +1058,61 @@ sudo lvreseize --seize 3G my_volume/partition1 # dont' use this command becuase 
 sudo lvresieze --resizefs --size 3G my_volume/partition1
 
 vg tab twice
+
+# Monitor Storage Performance
+top, htop
+sudo apt install sysstat
+
+iostat i/o statistics
+read/write operations
+process id statistics
+iostat/pidstat
+
+
+dd if=/dev/zero of=DELETEME bs=1 count=10000000 oflag=dsync & # kill -9 pid (force quit), gracefully terminate: kill pid
+sudo dmsetup info /dev/dm-0
+
+iostat 
+iostat 1 # seconds 1 
+iostat -d # only show disk stats i.e no cpu
+iostat -h # humand readable
+pidstat -d --human # dont use -h
+
+iostat -p ALL # all individual partitions
+iostat -p sda
+
+# Create, Manage, and Diagnose Advanced Filesystem Permissions
+ls -l
+man acl
+sudo sh -c 'echo "this is the file content" > file3' # file3 permissions: -rw-rw-r-- owner is alex
+echo "this is the file content" > file3 # permission error because jeremy user is logged in, lets solve this problem
+# exception to jeremy user only
+sudo apt install acl
+sudo setfaclt --modify user:jeremy:rw file3 # this way old user, i.e owner of file3 i.e alex wont lose any rights and jeremy also got the same permission
+file3 # now have a plus sign in permission
+getfactl file3
+sudo setfactl --modify mask:r file3
+sudo setfactl --modify group:sudo:rw file3 # modify group sudo
+sudo setfactl --remove user:jeremy:--- file3
+sudo setfactl --remove group:sudo file3
+sudo setfactl --remove-all file3 # remove all acl entries
+
+# recursive acl
+mkdir dir1
+setfact --recursive -m user:jeremy:rwx dir1/
+setfacl --recursive --remove user:jeremy dir1/
+setfacl --recursive --remove group:sudo dir1/
+
+# apend only: a
+echo "new file" > newfile
+sudo chattr +a newfile # we can only append, we cannot overrite
+cat newfile: new file
+echo "new content" > newfile # wont' work
+echo "new content: >> newfile
+sudo chattr -a newfile # remove appent
+
+sudo chattr +i newfile # make it immutable
+lsattr #| i is imuatable attribute
+sudo chattr -i newfile # remove i attr
+man attr
+

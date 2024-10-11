@@ -5246,7 +5246,7 @@ Network Block Devices (NBD) allow a client machine to use storage on a remote se
 
 9. **Resize Logical Volumes:**
    ```bash
-   sudo lvresize --extents 100%VG my_volume/partition1
+   sudo lvresize --size size_in_GB vg_name/lv_name
    sudo lvresize --size 2G my_volume/partition1 # Shrink volume
    ```
 
@@ -5259,3 +5259,159 @@ Network Block Devices (NBD) allow a client machine to use storage on a remote se
     ```bash
     sudo lvresize --resizefs --size 3G my_volume/partition1
     ```
+
+12. **Remove Logical Volume:**
+  ```bash
+    sudo lvremove my_volume/partition1
+  ```
+
+# Monitor Storage Performance
+## Prerequisites
+
+Ensure you have the following tools installed:
+
+```bash
+sudo apt install sysstat
+```
+
+### Key Tools
+
+- **top, htop**: For monitoring system performance.
+- **iostat**: To display I/O statistics.
+- **pidstat**: To monitor individual process statistics.
+
+## I/O Statistics
+
+You can use `iostat` to gather various statistics about read/write operations and process IDs. Here are some commands to get you started:
+
+```bash
+iostat # Basic I/O statistics
+iostat 1 # Update every second
+iostat -d # Display only disk stats (no CPU)
+iostat -h # Human-readable format
+```
+
+### Monitoring Specific Devices
+
+To monitor specific devices or partitions:
+
+```bash
+iostat -p ALL # Display statistics for all individual partitions
+iostat -p sda # Display stats for a specific partition
+```
+
+### Example Command
+
+Run a simple I/O test using `dd`:
+
+```bash
+dd if=/dev/zero of=DELETEME bs=1 count=10000000 oflag=dsync &
+```
+
+To terminate the process:
+
+- Graceful: `kill <pid>`
+- Forceful: `kill -9 <pid>`
+
+### Device Mapper Info
+
+To check information on device mapper:
+
+```bash
+sudo dmsetup info /dev/dm-0
+```
+
+## Filesystem Permissions Management
+
+### Basic Commands
+
+Check permissions with:
+
+```bash
+ls -l
+```
+
+### Working with ACLs
+
+1. **Install ACL:**
+
+   ```bash
+   sudo apt install acl
+   ```
+
+2. **Set ACL for a User:**
+
+   ```bash
+   sudo setfacl --modify user:jeremy:rw file3
+   ```
+
+3. **View ACLs:**
+
+   ```bash
+   getfacl file3
+   ```
+
+4. **Modify and Remove ACLs:**
+
+   ```bash
+   sudo setfacl --modify mask:r file3
+   sudo setfacl --modify group:sudo:rw file3
+   sudo setfacl --remove user:jeremy file3
+   sudo setfacl --remove group:sudo file3
+   sudo setfacl --remove-all file3 # Remove all ACL entries
+   ```
+
+### Recursive ACL Management
+
+To manage permissions recursively:
+
+```bash
+mkdir dir1
+setfacl --recursive -m user:jeremy:rwx dir1/
+setfacl --recursive --remove user:jeremy dir1/
+setfacl --recursive --remove group:sudo dir1/
+```
+
+## File Attributes
+
+### Append Only
+
+To set a file as append-only:
+
+```bash
+echo "new file" > newfile
+sudo chattr +a newfile
+```
+
+**Note:** You can only append; overwriting won't work.
+
+### Making a File Immutable
+
+To prevent any changes to a file:
+
+```bash
+sudo chattr +i newfile # Make it immutable
+```
+
+To remove the immutable attribute:
+
+```bash
+sudo chattr -i newfile
+```
+
+### List Attributes
+
+To list all attributes of files:
+
+```bash
+lsattr
+```
+
+### Manual Pages
+
+For more detailed information, you can check the manual pages:
+
+```bash
+man acl
+man attr
+```
