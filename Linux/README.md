@@ -5264,7 +5264,46 @@ Network Block Devices (NBD) allow a client machine to use storage on a remote se
   ```bash
     sudo lvremove my_volume/partition1
   ```
+---
+This section provides instructions for creating a Level 1 RAID array using `mdadm`. A RAID 1 array mirrors data across two devices, providing redundancy and improved data reliability.
 
+## Prerequisites
+- Ensure you have two block devices available (e.g., `/dev/vdb` and `/dev/vdc`).
+- `mdadm` must be installed on your system.
+
+## Check Current RAID Status
+To view the current status of RAID arrays on your system, run:
+```bash
+sudo cat /proc/mdstat
+```
+
+## Creating a RAID 1 Array
+To create a Level 1 RAID array at `/dev/md0` with two devices, use the following command:
+
+```bash
+mdadm --create /dev/md0 --level=1 --raid-devices=2 /dev/vdb /dev/vdc
+```
+
+### Important Notes:
+- You may receive a warning stating: 
+  ```
+  Note: this array has metadata at the start and may not be suitable as a boot device. If you plan to store '/boot' on this device please ensure that your boot-loader understands md/v1.x metadata, or use --metadata=0.90
+  ```
+- Confirm the creation of the array by responding `yes` when prompted.
+
+### Example Output
+You might see output similar to the following:
+```
+mdadm: Defaulting to version 1.2 metadata
+mdadm: array /dev/md0 started.
+```
+
+## Verifying the RAID Array
+After creation, verify that the RAID array is functioning correctly:
+```bash
+sudo cat /proc/mdstat
+```
+---
 # Monitor Storage Performance
 ## Prerequisites
 
