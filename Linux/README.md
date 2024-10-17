@@ -375,7 +375,10 @@ SUID allows users to execute a file with the permissions of the file owner. It's
 
 ### Finding SGID Files:
 To find all SGID files in a directory:
-`find . -perm /4000`
+
+```bash
+find . -perm /4000
+```
 
 ## SGID (Set Group ID)
 SGID allows users to execute a file or access a directory with the group permissions of the file's group. It is mostly used on directories, ensuring that files created within inherit the group of the directory.
