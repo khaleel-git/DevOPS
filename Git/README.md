@@ -56,3 +56,10 @@ request other team members to approve my pr requests
 
 # git reset/undo last commit
 max (master)$ git reset --soft HEAD~1
+
+# Fetching and merging
+git fetch origin master # update origin master
+git merge origin/master
+
+# direclty merging from remote to local
+git pull origin master

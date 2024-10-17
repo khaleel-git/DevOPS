@@ -373,6 +373,10 @@ SUID allows users to execute a file with the permissions of the file owner. It's
    # -rwsrw-r-- 1 user user 0 May 8 01:22 suidfile  # 's' indicates SUID with execute permission
    ```
 
+### Finding SGID Files:
+To find all SGID files in a directory:
+`find . -perm /4000`
+
 ## SGID (Set Group ID)
 SGID allows users to execute a file or access a directory with the group permissions of the file's group. It is mostly used on directories, ensuring that files created within inherit the group of the directory.
 
