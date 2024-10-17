@@ -339,7 +339,7 @@ chown [owner]:[group] filename
 
 ---
 
-# SUID, SGID, and Sticky Bit in Linux
+# SUID (Set User ID), SGID, and Sticky Bit in Linux
 
 This guide explains the concepts and usage of **SUID**, **SGID**, and **Sticky Bit** in Linux file permissions with practical examples.
 
@@ -373,8 +373,8 @@ SUID allows users to execute a file with the permissions of the file owner. It's
    # -rwsrw-r-- 1 user user 0 May 8 01:22 suidfile  # 's' indicates SUID with execute permission
    ```
 
-### Finding SGID Files:
-To find all SGID files in a directory:
+### Finding SUID Files:
+To find all SUID (Set User ID) files in a directory:
 
 ```bash
 find . -perm /4000
