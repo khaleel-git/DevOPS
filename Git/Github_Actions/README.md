@@ -22,3 +22,27 @@ CI to CD (non prod/staging)
 
 Continous Deployment/Delivery (CD):
 ![Continous Deployment/Delivery (CD)](continous-deployment-CD.png)
+
+# Actions
+steps:
+    - uses: actions/checkout@main # @main brance, @v3.6.0 tag, @a324897907 sha
+
+# Multi-Line commands and Executing Third Party Libraries
+```yaml
+name: My First Workflow
+
+on: [push,fork]
+
+jobs:
+    first_job: 
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout Repo
+              uses: actions/checkout@v4
+
+            - name: List and Read Dockerfile
+              run: |
+                    echo "My first Github Actions Job"
+                    ls -ltra
+                    cat Dockerfile
+```
