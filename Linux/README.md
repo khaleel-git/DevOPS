@@ -2347,7 +2347,7 @@ To make changes that persist across reboots, you need to modify configuration fi
 1. **Create a new configuration file** (e.g., `swap-less.conf`) to store your desired kernel parameters:
 
    ```bash
-   sudo vi /etc/sysctl.d/swap-less.conf
+   sudo vi /etc/sysctl.conf
    ```
 
    Add the following line to set the `vm.swappiness` parameter:
@@ -2359,13 +2359,14 @@ To make changes that persist across reboots, you need to modify configuration fi
 2. **Load the changes immediately**:
 
    ```bash
-   sudo sysctl -p /etc/sysctl.d/swap-less.conf
+   sudo sysctl -w vm.swappiness=10
    ```
 
 3. **To view specific parameters, you can use**:
 
    ```bash
-   sysctl -a | grep vm
+   sysctl -a | grep vm.swappiness
+   sudo sysctl -p # apply changes on boot
    ```
 
 ## Example: Disabling IPv6
@@ -2383,28 +2384,6 @@ net.ipv6.conf.default.disable_ipv6=1
 ```
 
 You can create or edit a configuration file as shown previously.
-
-## Example: Adjusting Swappiness
-
-Swappiness controls the tendency of the kernel to move processes out of physical memory and into swap. A higher value favors swapping, while a lower value minimizes it.
-
-1. **Set swappiness to 60** (default):
-
-   ```plaintext
-   vm.swappiness=60
-   ```
-
-2. **Create or edit a config file**:
-
-   ```bash
-   sudo vi /etc/sysctl.d/swap-less.conf
-   ```
-
-3. **Load the changes**:
-
-   ```bash
-   sudo sysctl -p /etc/sysctl.d/swap-less.conf
-   ```
 
 # SELinux File and Process Contexts
 
@@ -2822,6 +2801,10 @@ Managing users and groups is an essential part of Linux system administration. T
   sudo usermod -e 2030-03-01 john
   ```
 
+- **Add user to sudo group**
+  ```bash
+  sudo usermod -aG sudo mary
+  ```
 ---
 
 ## 3. **Password Management**
@@ -3086,6 +3069,7 @@ To configure resource limits, you need to modify the `/etc/security/limits.conf`
   ```bash
   trinity hard nproc 10       # Trinity can run a maximum of 10 processes (hard limit)
   @developers soft nproc 10   # All users in the 'developers' group have a soft limit of 10 processes
+  jane  soft  fsize  1024     # For the user called jane make sure she can create files not larger than 1024 kilobytes. Make this a soft limit.
   * soft cpu 5                # All users have a CPU time limit of 5 except where overridden
   ```
 
@@ -4699,6 +4683,7 @@ To list partitions, you can use the following commands:
 
 ```bash
 lsblk
+lsblk -f # check disk with filesystem
 ls /dev/sda1
 ls /dev/sda  # Points to the entire device
 sudo fdisk --list /dev/sda
@@ -4808,7 +4793,7 @@ man mkfs.xfs
 
 ##### Advanced XFS Options
 
-- To label the file system:
+- Format the filesystem with a Label:
   ```bash
   sudo mkfs.xfs -L "BackupVolume" /dev/sdb1
   ```

@@ -63,3 +63,71 @@ git merge origin/master
 
 # direclty merging from remote to local
 git pull origin master
+
+# rebasing
+git rebase master
+
+# interactive rebasing
+git rebase -i HEAD~4
+
+# Cherry Picking
+git chery-pick hash-of-the-commit
+
+# Resetting and Reverting
+git revert 8ad5d
+
+# reset
+git reset --soft HEAD~1
+git reset --hard HEAD~1 # save no changes
+git reset
+
+# Stashing
+git stash
+git stash pop
+git stash list
+git stash show stash@{1}
+git stash pop stash@{2}
+
+# Reflog
+git reflog
+
+Porcelain commands (easy to remember)
+git add
+git status
+git commit
+git stash
+
+Plumbing commands (internals of git)
+git hash-object
+git ls-files
+git rev-parse
+git ls-remote
+
+
+git hash-object first_story.txt
+bea8d7fee8e7b11c2235ca623935e6ccccd8bac3
+key: be, value: a8d7fee8e7b11c2235ca623935e6ccccd8bac3
+
+git add first.txt
+git commit -m "first story"
+ls ./.git/objects
+26  be  a0  info    pack # be is a folder
+ls ./.git/objects/be
+a8d7fe..... # is the value and # be is the key
+
+git cat-file -p bea8d7 # content 
+git cat-file -p 4cdf4 # commit
+tree 2ea7de...
+parent f4e8304...
+author: Lydia Hallie <e@mail.com> 159...
+commiter Lydia Hallie ....
+
+# Git Object Contents
+commit
+tree
+blob
+
+# First commit
+blob
+
+every commit points to the parent commit
