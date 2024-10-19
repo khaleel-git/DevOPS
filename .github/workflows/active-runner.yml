@@ -11,4 +11,6 @@ jobs:
             run: ls -ltra
             
           - name: Executing Shell Script
-            run: ./ascii-script.sh
+            run: |
+              sudo chmod +x ascii-script.sh
+              ./ascii-script.sh
