@@ -1,7 +1,5 @@
 name: Generate ASCII Artworks
-
 on: push
-
 jobs:
     ascii_jobs: 
       runs-on: ubuntu-latest
