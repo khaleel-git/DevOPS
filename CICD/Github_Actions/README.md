@@ -48,3 +48,6 @@ jobs:
 ```
 Execute multiple jobs in Sequence using needs
 use needs syntax
+
+Storing workflow data as artifacts
+upload & download artifat
