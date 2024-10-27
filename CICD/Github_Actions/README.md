@@ -46,3 +46,5 @@ jobs:
                     ls -ltra
                     cat Dockerfile
 ```
+Execute multiple jobs in Sequence using needs
+use needs syntax
