@@ -1,47 +1,31 @@
-name: Generate ASCII Artworks
-on: push
+name: Exploring Variables and Secrets
+
+on:
+  push
+
+env:
+    CONTAINER_REGISTERY: docker.io
+    DOCKER_USERNAME: khaleel.org
+    IMAGE_NAME: github-actions-nginx
+
 jobs:
-    build_job1:
-      runs-on: ubuntu-latest
-      steps:
-          - name: Checkout Repo
-            uses: actions/checkout@v4
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Docker Build
+        run: docker build -t $CONTAINER_REGISTERY/$DOCKER_USERNAME/$IMAGE_NAME:latest
 
-          - name: Install Cowsay Program
-            run: sudo apt install cowsay -y
+      - name: Docker Login
+        env:
+          DOCKER_PASSWORD: s3cUrePaSsw0rd
+        run: docker login --username=$DOCKER_USERNAME --password=$DOCKER_PASSWORD
 
-          - name: Genereate ASCII Artwork
-            run: cowsay -f dragon "Run for cover, I am a DRAGON....RAWR" >> dragon.txt
-          
-          - name: Upload Dragon text file
-            uses: actions/upload-artifact/@v3
-            with:
-              name: dragon-text-file
-              path: dragon.txt
-    
-    test_job2:
-      needs: build_job1
-      runs-on: ubuntu-latest
-      steps:                     
-        - name: Download Dragon text file
-          uses: actions/download-artifact/@v3
-          with:
-            name: dragon-text-file
-        
-        - name: Test File Exists
-          run: grep -i "dragon" dragon.txt
+      - name: Docker Publish
+        run: docker push $CONTAINER_REGISTERY/$DOCKER_USERNAME/$IMAGE_NAME:latest
 
-    deploy_job3:
-      needs: test_job2
-      runs-on: ubuntu-latest
-      steps:
-        - name: Download Dragon text file
-          uses: actions/download-artifact/@v3
-          with:
-            name: dragon-text-file
-        
-        - name: Read File
-          run: cat dragon.txt
-          
-        - name: Checkout Repo Files
-          run: ls
+  deploy:
+    needs: docker
+    runs-on: ubuntu-latest
+    steps:
+      - name: Docker Run
+        run: docker run -d -p 8080:80 $CONTAINER_REGISTERY/$DOCKER_USERNAME/$IMAGE_NAME:latest
