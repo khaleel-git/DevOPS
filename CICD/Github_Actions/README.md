@@ -51,3 +51,7 @@ use needs syntax
 
 Storing workflow data as artifacts
 upload & download artifat
+
+## Variables
+env variables at job level, step level
+env variables at a workflow level
