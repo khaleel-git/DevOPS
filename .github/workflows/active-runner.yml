@@ -5,8 +5,8 @@ on:
 
 env:
     CONTAINER_REGISTERY: docker.io
-    DOCKER_USERNAME: khaleel.org
-    IMAGE_NAME: github-actions-nginx
+    DOCKER_USERNAME: khaleelorg
+    IMAGE_NAME: nginx
 
 jobs:
   docker:
@@ -17,7 +17,7 @@ jobs:
 
       - name: Docker Login
         env:
-          DOCKER_PASSWORD: s3cUrePaSsw0rd
+          DOCKER_PASSWORD: Id35202@ms
         run: docker login --username=$DOCKER_USERNAME --password=$DOCKER_PASSWORD
 
       - name: Docker Publish
