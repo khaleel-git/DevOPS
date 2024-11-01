@@ -15,8 +15,11 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
 
-      - name: Docker Build
-        run: docker build -t $CONTAINER_REGISTERY/$DOCKER_USERNAME/$IMAGE_NAME:latest .
+      - name: Pull NGINX Image
+        run: docker pull nginx:latest
+
+      - name: Tag Image for Push
+        run: docker tag nginx:latest $CONTAINER_REGISTERY/$DOCKER_USERNAME/$IMAGE_NAME:latest
 
       - name: Docker Login
         env:

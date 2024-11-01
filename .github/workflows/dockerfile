@@ -1,0 +1,15 @@
+# Use the official NGINX image as the base image
+FROM nginx:latest
+
+# Copy your custom configuration file, if you have one
+# COPY nginx.conf /etc/nginx/nginx.conf
+
+# Copy any static website files into the default NGINX web directory
+# Replace "html" with the name of your static files directory if different
+COPY ./html /usr/share/nginx/html
+
+# Expose port 80 to allow external access
+EXPOSE 80
+
+# Start NGINX server
+CMD ["nginx", "-g", "daemon off;"]
