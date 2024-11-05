@@ -15,19 +15,19 @@ jobs:
         run: docker pull nginx:latest
 
       - name: Tag Image for Push
-        run: docker tag nginx:latest $CONTAINER_REGISTERY/$DOCKER_USERNAME/$IMAGE_NAME:latest
+        run: docker tag nginx:latest $CONTAINER_REGISTERY/${{ vars.DOCKER_USERNAME }}/$IMAGE_NAME:latest
 
       - name: Docker Login
         env:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-        run: docker login --username=$DOCKER_USERNAME --password=$DOCKER_PASSWORD
+        run: docker login --username=${{ vars.DOCKER_USERNAME }} --password=$DOCKER_PASSWORD
 
       - name: Docker Publish
-        run: docker push $CONTAINER_REGISTERY/$DOCKER_USERNAME/$IMAGE_NAME:latest
+        run: docker push $CONTAINER_REGISTERY/${{ vars.DOCKER_USERNAME }}/$IMAGE_NAME:latest
 
   deploy:
     needs: docker
     runs-on: ubuntu-latest
     steps:
       - name: Docker Run
-        run: docker run -d -p 8080:80 $CONTAINER_REGISTERY/$DOCKER_USERNAME/$IMAGE_NAME:latest
+        run: docker run -d -p 8080:80 $CONTAINER_REGISTERY/${{ vars.DOCKER_USERNAME }}/$IMAGE_NAME:latest
