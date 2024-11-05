@@ -5,7 +5,6 @@ on:
 
 env:
     CONTAINER_REGISTERY: docker.io
-    DOCKER_USERNAME: khaleelorg
     IMAGE_NAME: nginx
 
 jobs:
@@ -19,9 +18,7 @@ jobs:
         run: docker tag nginx:latest $CONTAINER_REGISTERY/$DOCKER_USERNAME/$IMAGE_NAME:latest
 
       - name: Docker Login
-        env:
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-        run: docker login --username=$DOCKER_USERNAME --password=$DOCKER_PASSWORD
+        run: docker login --username=$DOCKER_USERNAME --password=${{ secrets.DOCKER_PASSWORD }}
 
       - name: Docker Publish
         run: docker push $CONTAINER_REGISTERY/$DOCKER_USERNAME/$IMAGE_NAME:latest
