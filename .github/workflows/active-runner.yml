@@ -1,11 +1,10 @@
 name: Exploring Variables and Secrets
 
 on:
-  workflow_dispatch:
+  workflow_dispatch:  
   # schedule:
   #   - cron: "*/1 * * * *"
   # push
-  # above is a dispatch workflow
 
 
 env:
@@ -33,4 +32,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Docker Run
-        run: docker run -d -p 8080:80 $CONTAINER_REGISTERY/${{ vars.DOCKER_USERNAME }}/$IMAGE_NAME:latest
+        run: |
+          docker run -d -p 8080:80 $CONTAINER_REGISTERY/${{ vars.DOCKER_USERNAME }}/$IMAGE_NAME:latest
+          sleep 600s

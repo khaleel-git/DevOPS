@@ -55,3 +55,9 @@ upload & download artifat
 ## Variables
 env variables at job level, step level
 env variables at a workflow level
+
+## workflow_dispatch event
+This workflow has a workflow_dispatch event trigger.
+
+
+## Using Job concurrency
