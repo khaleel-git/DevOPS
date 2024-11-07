@@ -65,4 +65,5 @@ two deployments happening at the same time
 concorrency, job level, wokflow level
     concurrency: 
       group:  production-deployment
-      cancel-in-progress: true
+      cancel-in-progress: true # first workflow will be canceled
+      cancel-in-progress: false # canceled second workflow
