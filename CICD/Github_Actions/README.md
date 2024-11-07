@@ -72,4 +72,9 @@ long time workflow -> higher cost
 
 # Timeout for Jobs and Steps:
 # Using a matrix for your jobs
+multiple jobs for each operating system, each differenct versions for programming languages -> drawbcks, so instead we use matrix
+strategy:
+      matrix: 
+        os: [ubuntu-latest, ubuntu-20.04, windows-latest]
+        images: [hello-world, alpine]
 
