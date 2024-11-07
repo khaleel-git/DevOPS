@@ -6,7 +6,6 @@ on:
   #   - cron: "*/1 * * * *"
   # push
 
-
 env:
     CONTAINER_REGISTERY: docker.io
     IMAGE_NAME: nginx
@@ -29,6 +28,9 @@ jobs:
 
   deploy:
     needs: docker
+    concurrency: 
+      group:  production-deployment
+      cancel-in-progress: true
     runs-on: ubuntu-latest
     steps:
       - name: Docker Run

@@ -61,3 +61,8 @@ This workflow has a workflow_dispatch event trigger.
 
 
 ## Using Job concurrency
+two deployments happening at the same time
+concorrency, job level, wokflow level
+    concurrency: 
+      group:  production-deployment
+      cancel-in-progress: true
