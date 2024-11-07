@@ -1,10 +1,10 @@
 name: Exploring Variables and Secrets
 
 on:
-  workflow_dispatch:  
+  # workflow_dispatch:  
   # schedule:
   #   - cron: "*/1 * * * *"
-  # push
+  push
   # above is a dispatch workflow
 
 
