@@ -66,4 +66,8 @@ concorrency, job level, wokflow level
     concurrency: 
       group:  production-deployment
       cancel-in-progress: true # first workflow will be canceled
-      cancel-in-progress: false # canceled second workflow
+      cancel-in-progress: false # wait till the previous job is running
+
+long time workflow -> higher cost
+
+# Timeout for Jobs and Steps:
