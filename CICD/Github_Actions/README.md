@@ -94,3 +94,5 @@ include:
 
 # Context
 contain information about: secrets, env, variables, 
+
+# Cancelling and Skipping Workflows
