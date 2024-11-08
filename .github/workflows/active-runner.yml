@@ -1,27 +1,37 @@
-name: Context testing
+name: If expression
 
-on: push
+on:
+  push
+
+env:
+    CONTAINER_REGISTERY: docker.io
+    IMAGE_NAME: nginx
 
 jobs:
-  dump_contexts_to_log:
+  docker:
     runs-on: ubuntu-latest
     steps:
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
+      - name: Pull NGINX Image
+        run: docker pull nginx:latest
 
-      - name: Dump steps context
-        env:
-          STEPS_CONTEXT: ${{ toJson(steps) }}
-        run: echo "$STEPS_CONTEXT"
+      - name: Tag Image for Push
+        run: docker tag nginx:latest $CONTAINER_REGISTERY/${{ vars.DOCKER_USERNAME }}/$IMAGE_NAME:latest
 
-      - name: Dump runner context
-        env:
-          RUNNER_CONTEXT: ${{ toJson(runner) }}
-        run: echo "$RUNNER_CONTEXT"
+      - name: Docker Login
+        run: docker login --username=${{ vars.DOCKER_USERNAME }} --password=${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Dump sec context
-        env:
-          SECRET_CONTEXT: ${{ toJson(secrets) }}
-        run: echo "$SECRET_CONTEXT"
+      - name: Docker Publish
+        run: docker push $CONTAINER_REGISTERY/${{ vars.DOCKER_USERNAME }}/$IMAGE_NAME:latest
+
+  deploy:
+    if: github.ref == "refs/heads/master"
+    needs: docker
+    concurrency: 
+      group:  production-deployment
+      cancel-in-progress: false
+    runs-on: ubuntu-latest
+    steps:
+      - name: Docker Run
+        timeout-minutes: 1
+        run: |
+          docker run -d -p 8080:80 $CONTAINER_REGISTERY/${{ vars.DOCKER_USERNAME }}/$IMAGE_NAME:latest
