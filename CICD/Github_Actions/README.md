@@ -80,3 +80,17 @@ strategy:
 
 if one job is failed, any in progress jobs would fail # default behaviour
 
+strategy:
+      fail-fast: false # by default it is true
+      max-parallel: 2  # run two jobs at a parralel
+
+exclude:
+  - images: alpine
+    os: windows-latest
+include: 
+  - images: amd64/alpine
+    os: ubuntu-20.04
+
+
+# Context
+contain information about: secrets, env, variables, 
