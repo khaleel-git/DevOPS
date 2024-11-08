@@ -78,3 +78,5 @@ strategy:
         os: [ubuntu-latest, ubuntu-20.04, windows-latest]
         images: [hello-world, alpine]
 
+if one job is failed, any in progress jobs would fail # default behaviour
+
