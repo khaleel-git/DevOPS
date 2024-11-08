@@ -1,37 +1,27 @@
-name: If expression
+name: Workflow Filters and Activities
 
-on:
-  push
+on: 
+  push:
+    branches:
+      - master 
+      - '!feature/*'
+    # branches-ignore:
+    #   - feature/* # feature/* will be ignored
+    #   - test/**   # ignore multiple branches
 
-env:
-    CONTAINER_REGISTERY: docker.io
-    IMAGE_NAME: nginx
+  pull_request:
+    types:
+      - opened
+      - closed
+
+    paths-ignore: # only incorporate other than readme.md
+      - README.md
+
+    branches:
+      - master
 
 jobs:
-  docker:
+  hello:
     runs-on: ubuntu-latest
     steps:
-      - name: Pull NGINX Image
-        run: docker pull nginx:latest
-
-      - name: Tag Image for Push
-        run: docker tag nginx:latest $CONTAINER_REGISTERY/${{ vars.DOCKER_USERNAME }}/$IMAGE_NAME:latest
-
-      - name: Docker Login
-        run: docker login --username=${{ vars.DOCKER_USERNAME }} --password=${{ secrets.DOCKER_PASSWORD }}
-
-      - name: Docker Publish
-        run: docker push $CONTAINER_REGISTERY/${{ vars.DOCKER_USERNAME }}/$IMAGE_NAME:latest
-
-  deploy:
-    if: github.ref == 'refs/heads/master'
-    needs: docker
-    concurrency: 
-      group:  production-deployment
-      cancel-in-progress: false
-    runs-on: ubuntu-latest
-    steps:
-      - name: Docker Run
-        timeout-minutes: 1
-        run: |
-          docker run -d -p 8080:80 $CONTAINER_REGISTERY/${{ vars.DOCKER_USERNAME }}/$IMAGE_NAME:latest
+      - run: echo this Workflow/job/step is executed for event type - ${{ github.event_name }}
