@@ -1,14 +1,14 @@
 name: Matrix Configuration
 
 on:
-  push:
-  # workflow_dispatch: 
+  # push:
+  workflow_dispatch: 
     
 jobs:
   deploy:
     strategy:
-    fail-fast: false # by default it is true
-    max-parallel: 2  # run two jobs at a parralel
+      fail-fast: false # by default it is true
+      max-parallel: 2  # run two jobs at a parralel
       matrix: 
         os: [ubuntu-latest, ubuntu-20.04, windows-latest]
         images: [hello-world, alpine]
