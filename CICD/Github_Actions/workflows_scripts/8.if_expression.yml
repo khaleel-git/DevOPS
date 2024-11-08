@@ -24,7 +24,7 @@ jobs:
         run: docker push $CONTAINER_REGISTERY/${{ vars.DOCKER_USERNAME }}/$IMAGE_NAME:latest
 
   deploy:
-    if: github.ref == 'refs/heads/master'
+    if: github.ref == "refs/heads/master"
     needs: docker
     concurrency: 
       group:  production-deployment
@@ -35,3 +35,4 @@ jobs:
         timeout-minutes: 1
         run: |
           docker run -d -p 8080:80 $CONTAINER_REGISTERY/${{ vars.DOCKER_USERNAME }}/$IMAGE_NAME:latest
+          sleep 600s
