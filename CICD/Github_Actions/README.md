@@ -96,3 +96,31 @@ include:
 contain information about: secrets, env, variables, 
 
 # Cancelling and Skipping Workflows
+
+
+# node js project
+gitlab.com/solar-system kodekloud project
+node install
+npm test
+echo $? # 0 value, passed
+
+npm run coverage # all the test cases are passed, coverage is 88%, but threshold is 90%
+echo  $? # 1, failed
+
+npm start # start the server
+localhost:3000
+
+# Using continue on error expression
+continue-on-error: true
+
+Using if expressions with Step contexts
+id
+if: failure() || success()
+if: always()
+
+Cache Node Dependencies
+Invalidate Cache # changed dependencies
+Workflow - Docker Login
+Workflow - Docker Build and Test
+Workflow - Docker Push
+
