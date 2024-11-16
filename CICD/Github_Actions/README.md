@@ -124,3 +124,6 @@ Workflow - Docker Login
 Workflow - Docker Build and Test
 Workflow - Docker Push
 
+What are Job Containers 
+
+What are Service Containers
