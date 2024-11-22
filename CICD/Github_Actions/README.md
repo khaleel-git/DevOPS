@@ -124,3 +124,20 @@ Workflow - Docker Login
 Workflow - Docker Build and Test
 Workflow - Docker Push
 
+```yml
+steps:
+    - name: Dockerhub login
+      uses: docker/login-action@v3
+      with:
+        username: ${{ vars.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_PASSWORD }} 
+
+    - name: Gihub ghcr login
+      uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: ${{ github.repository_owner }}
+        password: ${{ secrets.GITHUB_TOKEN }} 
+```
+What are Job Containers
+What are Service Containers
