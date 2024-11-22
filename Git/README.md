@@ -131,3 +131,9 @@ blob
 blob
 
 every commit points to the parent commit
+
+## Resolving conflicts:
+The content between <<<<<<< HEAD and ======= represents your local changes, 
+while the content between ======= and >>>>>>> origin/master represents the changes from the remote branch.
+
+update the file and commit it. It will resolve the conflicts.
