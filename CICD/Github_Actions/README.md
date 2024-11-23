@@ -140,3 +140,6 @@ steps:
 ```
 What are Job Containers 
 What are Service Containers
+
+Understanding Deployment Pipeline:
+![Deployment Pipeline](understanding-cd-pipeline.jpg)
