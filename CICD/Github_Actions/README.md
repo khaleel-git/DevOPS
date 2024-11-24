@@ -143,3 +143,30 @@ What are Service Containers
 
 Understanding Deployment Pipeline:
 ![Deployment Pipeline](understanding-cd-pipeline.jpg)
+
+Workflow - Replace Placeholders Tokens
+```yml
+        - name: Save Nngix Ingress Controller IP as a Github env var
+          run: | 
+              echo "INGRESS_IP=$(kubectl -n ingress-nginx get services ingress-nginx-controller -o jsonpath="{.status.loadBalancer.ingress[0].ip}")" >> $GITHUB_ENV
+        - name: Replace Tokens in Manifest files
+          uses: cschleiden/replace-tokens@v1
+          with: 
+            tokenPrefix: '_{_'
+            tokenSuffix: '_}_'
+            files: '["kubernetes/development/*.yaml"]'
+          env:
+            NAMESPACE: ${{ vars.NAMESPACE }}
+            REPLICAS: ${{ vars.REPLICAS }}
+            IMAGE: ${{ vars.DOCKERHUB_USERNAME }}/solar-system:${{ github.sha }}
+            INGRESS_IP: ${{ env.INGRESS_IP }}
+```
+Workflow - Create Secret and Deploy to Kubernetes Dev Environment
+Setting Output for Integration testing
+Understand Github Environments
+Create Dev Environment | Secrets | Environment Rules (protection rules)
+
+environment will take higher precidence to the repository level 
+Modify Dev Deployment Job to use Environment tags
+Create Prod Environment | Secrets | Environment Rules
+
