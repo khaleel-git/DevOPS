@@ -127,11 +127,14 @@ This guide covers essential Linux commands and concepts for the LFCS exam. Each 
 ---
 
  ## users and groups
+ ```shell
  chgrp group_name file/directory
- groups
+ groups # list all grops
  chown (owner) only root user can change the owner of a file - `sudo chown jane file.txt`
+ ```
 
  ## File and Directory Permission
+ ```shell
  d (Directory)
  - (Regular File)
  c (character device)
@@ -139,6 +142,7 @@ This guide covers essential Linux commands and concepts for the LFCS exam. Each 
  p pipe
  s (socket file)
  b (block device)
+ ```
 
 # List, Set, and Change Standard File Permissions
 

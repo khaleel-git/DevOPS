@@ -169,4 +169,57 @@ Create Dev Environment | Secrets | Environment Rules (protection rules)
 environment will take higher precidence to the repository level 
 Modify Dev Deployment Job to use Environment tags
 Create Prod Environment | Secrets | Environment Rules
+Workflow - Deploy to Kubernetes Prod Environment
+What is the key difference between using GITHUB_ENV and GITHUB_OUTPUT to store data in GitHub Actions?
+Which of the following expression is used at the job level to run the job only on a main branch?
 
+Understanding Reusable Workflows
+reusable-workflow.yml - new file
+caller workflow -> calls reusable-workflow (called workflow)
+
+using secrets in Reusable workflow:
+```yml
+name: Deployment - Reusable Workflow 
+
+on:
+    workflow_call:
+      secrets:
+        k8s-kubeconfig:
+          required: true
+        mongodb-password:
+          required: true
+```
+
+continue-on-error: true
+
+upload reports to s3
+Slack Notify - GitHub Action
+Slack Webhook secrets
+What are Custom Actions?
+  i. Composite Actions (run at any linux, macos or windows)
+  ii. Docker Actions 
+  iii. JavaScript Actions (JavaScript, nodeJS), any linux, macos, windows -> lightweight, ideal for tasks that are quick and simple
+
+# composite action:
+it requires adding shell: bash into end of the line
+```yml
+name: 'NPM Custom Action'
+description: 'Installing and Caching NPM packages'
+inputs: 
+  path-of-folder: # id of input
+    description: 'the path to cache'
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Cache NPM dependencies
+      uses: actions/cache@v3
+      with:
+        path: ${{ inputs.path-of-folder }}
+        key: ${{ runner.os }}-node-modules-${{ hashFiles('package-lock.json') }}
+
+      - name: Install Dependencies
+        run: npm install
+        shell: bash
+```
+Create a Docker Action
