@@ -1,0 +1,24 @@
+services:
+  vote:
+    build: 
+      context: ./vote
+    ports:
+      - "5000:80"
+
+  result:
+    build: ./result
+    ports:
+      - "5001:80"
+
+  worker:
+    build:
+      context: ./worker
+
+  redis:
+    image: redis:alpine
+
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
