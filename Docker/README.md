@@ -229,7 +229,7 @@ worker:
         - db
         - redis
 ```
-docker-compose up
+docker-compose up --build
 
 Networks property (old, will obsolete)
 ```yml
