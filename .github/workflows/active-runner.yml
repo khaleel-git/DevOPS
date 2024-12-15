@@ -1,24 +1,25 @@
 name: Workflow Filters and Activities
 
 on: 
-  push:
-    branches:
-      - master 
-      - '!feature/*'
+  workflow_dispatch:
+  # push:
+  #   branches:
+  #     - master 
+  #     - '!feature/*'
     # branches-ignore:
     #   - feature/* # feature/* will be ignored
     #   - test/**   # ignore multiple branches
 
-  pull_request:
-    types:
-      - opened
-      - closed
+  # pull_request:
+  #   types:
+  #     - opened
+  #     - closed
 
-    paths-ignore: # only incorporate other than readme.md
-      - README.md
+    # paths-ignore: # only incorporate other than readme.md
+    #   - README.md
 
-    branches:
-      - master
+    # branches:
+    #   - master
 
 jobs:
   hello:
