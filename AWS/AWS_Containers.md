@@ -173,4 +173,76 @@ awsElasticBlockStore - EBS disk (permanent disk)
 GlusterFS
 CephFS
 
+### Kubernetes Concepts - Scaling and Service Discovery
+
+
+corp-eks-cluster.yml
+```yml
+apiVersion: eksctl.io/vlalpha5
+kind: ClusterConfig
+
+metadata:
+    name: corp-app-eks-cluster
+    region: us-east-1
+    version: "1.21"
+
+managedNodeGroups:
+    - name: nodegroup
+      desiredCapacity: 3
+      instanceType: t3.small
+
+cloudWatch:
+    clusterloggin:
+        enableTypes:
+            - "controllerManager"
+
+iam:
+    withOIDC: true
+    serviceAccounts:
+        - metadata:
+            name: dynamodb-read-only
+          attachPolicyARNs:
+            - arn:aws:iam::340790186419:policy/eks-directory-service
+```
+
+#### Namespace
+kubectl get all -all-namespaces
+kubectl get pods --all-namespaces
+
+1. Amazon EKS
+2. Upgrading your Amazon EKS cluster
+3. EKS Best Practices Guide
+4. Kubernetes objects
+5. Pod networking
+6. Logging
+7. EKS Workshop (link: https://www.eksworkshop.com/)
+
+### Debuggin with Amazon EKS
+1. kubectl logs: View the logs of a container in a Pod.
+2. kubectl port-forward: Connect ports on your local host to ports on a container.
+3. kubectl exec: Run commands inside a container.
+
+```shell
+kubectl logs service/directory-frontend # port mapping issue
+kubectl port-forward service/directory-service 5000:80 -> curl -v localhost:5000:80
+kubectl exec -it service/directory-service -- /bin/bash
+
+aws logs tail --follow /aws/eks/corp-eks-cluster/cluser
+kubectl apply -f dir/service.yml
+```
+## Amazon CloudWatch Container Insights
+cpu, memory, network, Service Count, Container Instance, Task Count
+ecs -> account setting -> cloudwatch container insights
+cloudwatch dashboard
+
+## Amazon Managed Service for Prometheus 
+## Grafana for visualization
+## AWS Lambda container image
+
+## Exercise 4 lambda
+
+## AWS App Mesh
+envoy proxy
+aws app mesh control plane -> data plane (pod - > envoy proxy)
+application obsrevability, logging, tracing, metrics
 

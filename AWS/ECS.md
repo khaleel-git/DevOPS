@@ -6,6 +6,9 @@ Ensure the AWS CLI is installed and configured.
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 unzip awscliv2.zip
 sudo ./aws/install
+
+wget https://aws-tc-largeobjects.s3.us-west-2.amazonaws.com/DEV-AWS-MO-ContainersRedux/downloads/containers-src.zip
+unzip containers-src.zip -d aws_containerized_coursera
 ```
 
 #### Configure AWS CLI
