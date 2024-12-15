@@ -26,7 +26,13 @@ SECRET_KEY = "django-insecure-+1(3=7560e%t_i2mw#@f@vnuevdpl1$^$sjclt@ba#@e^n4yr_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '.us-east-1.awsapprunner.com',  # Allows all subdomains of awsapprunner.com in the us-east-1 region
+    '.labs.kodekloud.com',
+    'localhost',
+    '127.0.0.1',
+    # other allowed domains
+]
 
 
 # Application definition
