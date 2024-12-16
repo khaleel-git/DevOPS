@@ -1,6 +1,6 @@
 # CKA Certification Course - Certified Kubernetes Administrator
-CKA prepration: https://learn.kodekloud.com/user/courses/cka-certification-course-certified-kubernetes-administrator
-CKA Certification link: https://www.cncf.io/certification/cka/
+ - CKA prepration: https://learn.kodekloud.com/user/courses/cka-certification-course-certified-kubernetes-administrator
+ - CKA Certification link: https://www.cncf.io/certification/cka/
 
 ## Core Concepts Section Introduction
 ## Cluster Architecture
