@@ -21,7 +21,7 @@ ETCD is a distributed reliable key-value store that is simple, secure & fast
     - Relational databases vs NoSQL: key-value is NoSQL
     - key-value documents
     - Json or Yaml
-#### install ETCD
+#### Install ETCD
     - Download Binaries
     - Extract
     - Run ETCD Service
@@ -30,9 +30,39 @@ ETCD is a distributed reliable key-value store that is simple, secure & fast
     - ./etcdctl set key1 value1
     - ./etcdctl get key1
     - Port: 2379
+    - ./etcdctl --version -> utitlity version & API version
+#### ETCD in kubernetes
+    - Everything below is changed in etcd server
+    - Nodes, Pods, Configs, Secrets, Accounts, Roles, Bindings, Others
+    - Setup: `wget -q --https-only "download_link.tar.gz"
+    - Setup - Kubeadm: `kubectl get pods -n kube-system && kubectl exec etcd-master -n kube-system etcdctl get / --prefix -keys-only` (Run insid the etcd-master POD)
+    - ETCD in HA (High Availability) Environment, there are multiple etcd servers
+#### ETCD Commands
+    ```shell
+    # version 2
+    etcdctl backup
+    etcdctl cluster-health
+    etcdctl mk
+    etcdctl mkdir
+    etcdctl set
 
+    # version 3
+    etcdctl snapshot save
+    etcdctl endpoint health
+    etcdctl get
+    etcdctl put
 
+    # export etcdctl api of version 3
+    export ETCDCTL_API=3
 
+    # etcd certificates
+    --cacert /etc/kubernetes/pki/etcd/ca.crt
+    --cert /etc/kubernetes/pki/etcd/server.crt
+    --key /etc/kubernetes/pki/etcd/server.key
+
+    # final command
+    kubectl exec etcd-controlplane -n kube-system -- sh -c "ETCDCTL_API=3 etcdctl get / --prefix --keys-only --limit=10 --cacert /etc/kubernetes/pki/etcd/ca.crt --cert /etc/kubernetes/pki/etcd/server.crt --key /etc/kubernetes/pki/etcd/server.key"
+    ```
 ### kube-scheduler
 
 ### Controller-Manager:
