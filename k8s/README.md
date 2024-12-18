@@ -70,8 +70,20 @@ ETCD is a distributed reliable key-value store that is simple, secure & fast
 #### Replication - Controller
 
 ### Kube-apiserver
-orchestrating all operations within the server
-primary component
+primary management component in k8s
+```shell
+# Creating of pod via post request
+curl -X POST /api/v1/namespaces/default/pods ...[other]
+
+# Creating of pod with kubectl command
+kubectl create pod name
+```
+#### Kube-Api Server does the following:
+    1. Auth user
+    2. Validate request
+    3. Retrieve data
+    4. Update ETCD
+    5. Scheduler
 
 ## Worker Node
 ### kubelet (captain of the ship)
@@ -153,3 +165,5 @@ docker is still the most popular container solution
 it is ok to use docker as an example
 
 **--> Replace: docker - nerdctl
+
+
