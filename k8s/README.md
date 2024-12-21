@@ -64,7 +64,50 @@ ETCD is a distributed reliable key-value store that is simple, secure & fast
     kubectl exec etcd-controlplane -n kube-system -- sh -c "ETCDCTL_API=3 etcdctl get / --prefix --keys-only --limit=10 --cacert /etc/kubernetes/pki/etcd/ca.crt --cert /etc/kubernetes/pki/etcd/server.crt --key /etc/kubernetes/pki/etcd/server.key"
     ```
 ### kube-scheduler
+The kube-scheduler determines which pod goes to which node in the Kubernetes cluster.
 
+#### Key Responsibilities:
+    - Evaluates resource requirements of pods.
+    - Identifies suitable nodes for pod placement.
+    - Ensures balanced resource utilization across the cluster.
+    - Adheres to scheduling policies and constraints.
+
+#### Commands and Operations:
+```shell
+# View the status of the kube-scheduler
+kubectl get pods -n kube-system | grep kube-scheduler
+
+# Check logs of the kube-scheduler
+kubectl logs -n kube-system kube-scheduler-<pod-name>
+
+# View kube-scheduler configuration
+kubectl describe pod kube-scheduler-<pod-name> -n kube-system
+```
+
+#### Configuration:
+The kube-scheduler can be configured using a policy file or through the Kubernetes API. Common configurations include setting resource priorities, defining custom scheduling policies, and configuring affinity/anti-affinity rules.
+
+```yaml
+# Example of a kube-scheduler policy configuration
+apiVersion: kubescheduler.config.k8s.io/v1
+kind: KubeSchedulerConfiguration
+profiles:
+    - schedulerName: default-scheduler
+        plugins:
+            queueSort:
+                enabled:
+                    - name: PrioritySort
+            preFilter:
+                enabled:
+                    - name: NodeResourcesFit
+            filter:
+                enabled:
+                    - name: NodeUnschedulable
+                    - name: NodeName
+            score:
+                enabled:
+                    - name: NodeResourcesBalancedAllocation
+```
 ### Controller-Manager:
 #### node-controller
 #### Replication - Controller
@@ -84,14 +127,32 @@ kubectl create pod name
     3. Retrieve data
     4. Update ETCD
     5. Scheduler
+    ```
+    # installing kube-api server
+    wget https://storage.googleapis.com/kubernetes-release/release/v1.21.0/bin/linux/amd64/kube-apiserver
+    kube-apiserver.service
+
+    # view api-server - Kubeadm
+    kubectl get pods -n kube-system
+    cat /etc/kubernetes/manifests/kube-apiserver.yml
+    ps -aux | grep kube-apiserver
+    ```
 
 ## Worker Node
 ### kubelet (captain of the ship)
 listens for instructions from kube-apiserver
-manages containers
+#### Kubelet working
+    1. Register Node
+    2. Create Pods
+    3. Monitor Node & Pods
 
 ### kube-proxy
 communication, traffic rules
+Pod network
+ip of the pod <--> Connectivity
+service: db (ip10.96.0.12)
+service cannot join the pod network (not an actual thing, only lives in kubernetes memory)
+kube-proxy: process, look for new service, create appropirate rules for each node, iptable rules
 
 ## Docker-vs-ContainerD
 Docker: dominant due to user-experience
@@ -164,6 +225,72 @@ docker is still the most popular container solution
 **--> k8s no longer require docker as the runtime**
 it is ok to use docker as an example
 
-**--> Replace: docker - nerdctl
+**--> Replace: docker - nerdctl**
+## Pods
 
+Pods are the smallest, most basic deployable objects in Kubernetes. A Pod represents a single instance of a running process in your cluster.
 
+### Pod Diagram
+
+#### Single Container Pod
+```mermaid
+graph TD;
+    A[Pod] --> B[Container]
+    B --> C[Storage]
+    B --> D[Network]
+```
+
+#### Multi-Container Pod
+```mermaid
+graph TD;
+    A[Pod] --> B[Container 1]
+    A[Pod] --> C[Container 2]
+    A[Pod] --> D[Container N]
+    B --> E[Shared Storage]
+    C --> E[Shared Storage]
+    D --> E[Shared Storage]
+    B --> F[Network]
+    C --> F[Network]
+    D --> F[Network]
+```
+
+### Key Characteristics of Pods:
+- **Multiple Containers**: A Pod can encapsulate one or more containers.
+- **Shared Storage**: Containers in a Pod share storage volumes.
+- **Shared Network**: Containers in a Pod share an IP address and port space.
+
+### Pod Lifecycle:
+1. **Pending**: The Pod has been accepted by the Kubernetes system, but one or more of the container images have not been created.
+2. **Running**: The Pod has been bound to a node, and all of the containers have been created.
+3. **Succeeded**: All containers in the Pod have terminated successfully.
+4. **Failed**: All containers in the Pod have terminated, and at least one container has terminated in failure.
+5. **Unknown**: The state of the Pod could not be obtained.
+
+### Commands and Operations:
+```shell
+# Create a Pod
+kubectl run mypod --image=nginx
+
+# List all Pods
+kubectl get pods
+
+# Describe a Pod
+kubectl describe pod mypod
+
+# Delete a Pod
+kubectl delete pod mypod
+```
+
+### Example Pod Configuration:
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mypod
+spec:
+  containers:
+  - name: mycontainer
+    image: nginx
+    ports:
+    - containerPort: 80
+```
