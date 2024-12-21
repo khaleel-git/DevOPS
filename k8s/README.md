@@ -142,7 +142,7 @@ profiles:
 The Controller-Manager runs controllers that regulate the state of the cluster.
 
 #### Node Controller
-Monitors the health of nodes and manages node lifecycle events.
+Monitors the health of nodes and manages node lifecycle events. It ensures high availability by adding or removing nodes based on resource requirements.
 
 ```shell
 # Check node status
@@ -152,8 +152,8 @@ kubectl get nodes
 kubectl logs -n kube-system kube-controller-manager-<pod-name>
 ```
 
-#### Replication Controller
-Ensures that a specified number of pod replicas are running at any given time.
+#### Replication Controller vs ReplicaSet
+Replication Controller ensures that a specified number of pod replicas are running at any given time. However, it is considered older technology and has been mostly replaced by ReplicaSet, which provides more advanced features.
 
 ```yaml
 # Example Replication Controller configuration
@@ -175,12 +175,58 @@ spec:
                 image: nginx
 ```
 
+```yaml
+# Example ReplicaSet configuration
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+    name: my-replicaset
+spec:
+    replicas: 3
+    selector:
+        matchLabels:
+            app: myapp
+    template:
+        metadata:
+            labels:
+                app: myapp
+        spec:
+            containers:
+            - name: mycontainer
+                image: nginx
+```
+
 ```shell
 # Create a Replication Controller
 kubectl create -f replication-controller.yml
 
-# Scale the Replication Controller
-kubectl scale rc my-replication-controller --replicas=5
+# Create a ReplicaSet
+kubectl create -f replicaset-definition.yml
+
+# View and delete ReplicaSet
+kubectl get replicaset
+kubectl delete replicaset my-replicaset
+
+# Scale the ReplicaSet
+kubectl scale replicaset my-replicaset --replicas=5
+
+# Replace/update and scale
+kubectl get replicaset
+kubectl replace -f replicaset-definition.yml
+kubectl scale --replicas=6 -f replicaset-definition.yml
+kubectl scale --replicas=6 replicaset my-replicaset
+```
+
+### High Availability, Load Balancing, and Scaling
+Kubernetes ensures high availability and load balancing by distributing workloads across multiple nodes. When resources are exhausted, additional nodes can be added to the cluster.
+
+#### Labels vs Selectors
+Labels are key-value pairs attached to objects, such as pods, to identify attributes. Selectors are used to filter and select objects based on their labels.
+
+```mermaid
+graph TD;
+    A[Pod] -->|label: app=myapp| B[ReplicaSet]
+    B -->|selector: app=myapp| C[Deployment]
 ```
 
 
