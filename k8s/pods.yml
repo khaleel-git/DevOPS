@@ -1,0 +1,12 @@
+# This YAML file is compatible with Minikube v1.34.0
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+  labels:
+    app: app-nginx
+    tier: frontend
+spec:
+  containers:
+  - name: nginx-container
+    image: nginx:latest
