@@ -1,11 +1,13 @@
 # CKA Certification Course - Certified Kubernetes Administrator
-- CKA preparation: https://learn.kodekloud.com/user/courses/cka-certification-course-certified-kubernetes-administrator
+- [CKA preparation](https://learn.kodekloud.com/user/courses/cka-certification-course-certified-kubernetes-administrator)
+- [CKA preparation](https://learn.kodekloud.com/user/courses/cka-certification-course-certified-kubernetes-administrator)
 - CKA Certification link: https://www.cncf.io/certification/cka/
 
 ## Core Concepts Section Introduction
 ## Cluster Architecture
 
 ## Table of contents
+
 - [CKA Certification Course - Certified Kubernetes Administrator](#cka-certification-course---certified-kubernetes-administrator)
     - [Core Concepts Section Introduction](#core-concepts-section-introduction)
     - [Cluster Architecture](#cluster-architecture)
@@ -29,7 +31,9 @@
         - [Commands and Operations](#commands-and-operations)
         - [Example Pod Configuration](#example-pod-configuration)
 
+---
 ### Kubernetes Architecture Diagram
+
  ```mermaid
         graph TD;
             A[Master Node] -->|API Requests| B[Kube-apiserver]
@@ -43,17 +47,24 @@
             I --> J[Container]
 ```
 
+---
+
 ## Master Node
 1. etcd cluster
 2. kube-scheduler
 3. Controller-Manager (node-controller, Replication-Controller)
 4. kube-apiserver
 
+---
+
 ## Worker Node
 1. kubelet
 2. kube-proxy
 
+---
+
 ### ETCD cluster
+
 ETCD is a distributed reliable key-value store that is simple, secure & fast.
 
 #### Key-value store:
@@ -107,7 +118,10 @@ export ETCDCTL_API=3
 kubectl exec etcd-controlplane -n kube-system -- sh -c "ETCDCTL_API=3 etcdctl get / --prefix --keys-only --limit=10 --cacert /etc/kubernetes/pki/etcd/ca.crt --cert /etc/kubernetes/pki/etcd/server.crt --key /etc/kubernetes/pki/etcd/server.key"
 ```
 
+---
 ### kube-scheduler
+
+The kube-scheduler determines which pod goes to which node in the Kubernetes cluster.
 The kube-scheduler determines which pod goes to which node in the Kubernetes cluster.
 
 #### Key Responsibilities:
@@ -152,6 +166,9 @@ profiles:
                 enabled:
                     - name: NodeResourcesBalancedAllocation
 ```
+
+---
+
 ### Controller-Manager
 The Controller-Manager runs controllers that regulate the state of the cluster.
 
@@ -230,6 +247,9 @@ kubectl replace -f replicaset-definition.yml
 kubectl scale --replicas=6 -f replicaset-definition.yml
 kubectl scale --replicas=6 replicaset my-replicaset
 ```
+kubectl scale --replicas=6 replicaset my-replicaset
+
+---
 
 ### High Availability, Load Balancing, and Scaling
 Kubernetes ensures high availability and load balancing by distributing workloads across multiple nodes. When resources are exhausted, additional nodes can be added to the cluster.
@@ -243,6 +263,7 @@ graph TD;
     B -->|selector: app=myapp| C[Deployment]
 ```
 
+---
 
 ### Kube-apiserver
 Primary management component in Kubernetes.
@@ -273,6 +294,8 @@ cat /etc/kubernetes/manifests/kube-apiserver.yml
 ps -aux | grep kube-apiserver
 ```
 
+---
+
 ## Worker Node
 ### kubelet (captain of the ship)
 Listens for instructions from kube-apiserver.
@@ -282,12 +305,16 @@ Listens for instructions from kube-apiserver.
 2. Create Pods
 3. Monitor Node & Pods
 
+---
+
 ### kube-proxy
 Communication, traffic rules, Pod network, IP of the pod <--> Connectivity.
 
 Service: db (ip10.96.0.12)
 Service cannot join the pod network (not an actual thing, only lives in Kubernetes memory).
 kube-proxy: process, look for new service, create appropriate rules for each node, iptable rules.
+
+---
 
 ## Docker-vs-ContainerD
 Docker: dominant due to user-experience.
@@ -355,6 +382,8 @@ crictl logs 3e03423425f1
 crictl pods
 ```
 
+---
+
 ## A Note on Docker Deprecation
 Why are we still talking about Docker if Docker is deprecated?
 - CLI, API, build, volumes, auth, security.
@@ -364,6 +393,8 @@ ContainerD was removed from Docker, but Docker is still the most popular contain
 It is okay to use Docker as an example.
 
 **--> Replace Docker with nerdctl where applicable.**
+
+---
 
 ## Pods
 
@@ -396,10 +427,14 @@ graph TD;
         G --> F[Network]
 ```
 
+---
+
 ### Key Characteristics of Pods:
 - **Multiple Containers**: A Pod can encapsulate one or more containers.
 - **Shared Storage**: Containers in a Pod share storage volumes.
 - **Shared Network**: Containers in a Pod share an IP address and port space.
+
+---
 
 ### Pod Lifecycle:
 1. **Pending**: The Pod has been accepted by the Kubernetes system, but one or more of the container images have not been created.
@@ -407,6 +442,8 @@ graph TD;
 3. **Succeeded**: All containers in the Pod have terminated successfully.
 4. **Failed**: All containers in the Pod have terminated, and at least one container has terminated in failure.
 5. **Unknown**: The state of the Pod could not be obtained.
+
+---
 
 ### Commands and Operations:
 ```shell
@@ -422,6 +459,8 @@ kubectl describe pod mypod
 # Delete a Pod
 kubectl delete pod mypod
 ```
+
+---
 
 ### Example Pod Configuration:
 ```yaml
@@ -445,4 +484,5 @@ kubectl get pods
 kubectl describe pod myapp-pod
 
 kubectl run nginx-new-pod --image=nginx:latest
-kubectl run nginx --image=nginx:latest --dry-run=client -o yaml > pods_dry.yml```
+kubectl run nginx --image=nginx:latest --dry-run=client -o yaml > pods_dry.yml
+```
