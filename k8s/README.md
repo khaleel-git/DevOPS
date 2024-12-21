@@ -29,6 +29,20 @@
         - [Commands and Operations](#commands-and-operations)
         - [Example Pod Configuration](#example-pod-configuration)
 
+### Kubernetes Architecture Diagram
+ ```mermaid
+        graph TD;
+            A[Master Node] -->|API Requests| B[Kube-apiserver]
+            B --> C[ETCD]
+            B --> D[Kube-scheduler]
+            B --> E[Controller-Manager]
+            A --> F[Worker Node]
+            F --> G[kubelet]
+            F --> H[kube-proxy]
+            F --> I[Pod]
+            I --> J[Container]
+```
+
 ## Master Node
 1. etcd cluster
 2. kube-scheduler
