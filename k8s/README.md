@@ -121,7 +121,6 @@ kubectl exec etcd-controlplane -n kube-system -- sh -c "ETCDCTL_API=3 etcdctl ge
 ### kube-scheduler
 
 The kube-scheduler determines which pod goes to which node in the Kubernetes cluster.
-The kube-scheduler determines which pod goes to which node in the Kubernetes cluster.
 
 #### Key Responsibilities:
 - Evaluates resource requirements of pods.
@@ -210,7 +209,48 @@ spec:
 apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
-    name: my-replicaset
+    name: myapp-replicaset
+    labels:
+        app: myapp
+        type: front-end
+spec:
+    template:
+        metadata:
+            name: myapp-pod
+            labels:
+                app: myapp
+                type: front-end
+        spec:
+            containers:
+            - name: nginx-container
+              image: nginx
+    
+    replicas: 3
+    selector:
+        matchLabels:
+            type: front-end
+```
+### Labels and Selectors
+
+Labels and selectors are fundamental concepts in Kubernetes that help manage and organize resources.
+
+#### Labels:
+Labels are key-value pairs attached to objects, such as pods, to identify attributes. They are used to organize and select subsets of objects.
+
+#### Selectors:
+Selectors are used to filter and select objects based on their labels. This is crucial for managing resources like ReplicaSets.
+
+#### Example:
+When a pod fails, the ReplicaSet uses labels and selectors to identify and create a new pod based on the template.
+
+```yaml
+# Example ReplicaSet configuration
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+    name: myapp-replicaset
+    labels:
+        app: myapp
 spec:
     replicas: 3
     selector:
@@ -222,10 +262,23 @@ spec:
                 app: myapp
         spec:
             containers:
-            - name: mycontainer
-                image: nginx
+            - name: nginx-container
+              image: nginx
 ```
 
+#### Scaling:
+To scale the number of replicas from 3 to 6, you can use the following commands:
+
+```shell
+# Replace/update the ReplicaSet definition
+kubectl replace -f replicaset-definition.yml
+
+# Scale the ReplicaSet using kubectl scale
+kubectl scale --replicas=6 -f replicaset-definition.yml
+kubectl scale --replicas=6 replicaset myapp-replicaset
+```
+
+#### Commands and Operations:
 ```shell
 # Create a Replication Controller
 kubectl create -f replication-controller.yml
@@ -235,20 +288,19 @@ kubectl create -f replicaset-definition.yml
 
 # View and delete ReplicaSet
 kubectl get replicaset
-kubectl delete replicaset my-replicaset
+kubectl delete replicaset myapp-replicaset # also deletes all underlying pods
+
+# Edit the replicaset
+kubectl edit replicaset new-replica-set
 
 # Scale the ReplicaSet
-kubectl scale replicaset my-replicaset --replicas=5
+kubectl scale replicaset myapp-replicaset --replicas=5
 
 # Replace/update and scale
-kubectl get replicaset
 kubectl replace -f replicaset-definition.yml
 kubectl scale --replicas=6 -f replicaset-definition.yml
-kubectl scale --replicas=6 replicaset my-replicaset
+kubectl scale --replicas=6 replicaset myapp-replicaset
 ```
-kubectl scale --replicas=6 replicaset my-replicaset
-
----
 
 ### High Availability, Load Balancing, and Scaling
 Kubernetes ensures high availability and load balancing by distributing workloads across multiple nodes. When resources are exhausted, additional nodes can be added to the cluster.
@@ -484,4 +536,36 @@ kubectl describe pod myapp-pod
 
 kubectl run nginx-new-pod --image=nginx:latest
 kubectl run nginx --image=nginx:latest --dry-run=client -o yaml > pods_dry.yml
+```
+
+## Deployments
+```markdown
+### Create an NGINX Pod
+
+```shell
+# Create an NGINX Pod
+kubectl run nginx --image=nginx
+
+# Generate POD Manifest YAML file (-o yaml). Don’t create it (–dry-run)
+kubectl run nginx --image=nginx --dry-run=client -o yaml
+```
+
+### Create a Deployment
+
+```shell
+# Create a deployment
+kubectl create deployment nginx --image=nginx
+
+# Generate Deployment YAML file (-o yaml). Don’t create it (–dry-run)
+kubectl create deployment nginx --image=nginx --dry-run=client -o yaml
+
+# Generate Deployment YAML file (-o yaml). Don’t create it (–dry-run) and save it to a file
+kubectl create deployment nginx --image=nginx --dry-run=client -o yaml > nginx-deployment.yaml
+
+# Make necessary changes to the file (for example, adding more replicas) and then create the deployment
+kubectl create -f nginx-deployment.yaml
+
+# OR in k8s version 1.19+, we can specify the --replicas option to create a deployment with 4 replicas
+kubectl create deployment nginx --image=nginx --replicas=4 --dry-run=client -o yaml > nginx-deployment.yaml
+```
 ```
