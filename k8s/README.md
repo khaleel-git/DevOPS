@@ -553,6 +553,9 @@ kubectl run nginx --image=nginx --dry-run=client -o yaml
 ### Create a Deployment
 
 ```shell
+# Check a deployment
+kubectl get deployment
+
 # Create a deployment
 kubectl create deployment nginx --image=nginx
 
@@ -568,4 +571,23 @@ kubectl create -f nginx-deployment.yaml
 # OR in k8s version 1.19+, we can specify the --replicas option to create a deployment with 4 replicas
 kubectl create deployment nginx --image=nginx --replicas=4 --dry-run=client -o yaml > nginx-deployment.yaml
 ```
+## Services
+1. NodePort
+service-definition.yml
+```yml
+apiVerson: V1
+kind: Service
+metadata:
+    name: myapp-service
+spec:
+    type: NodePort
+    ports:
+        - targetport: 80
+          port: 80
+          nodePort: 30008
+    selector:
+        app: my-app
+        label: front-end
 ```
+algorith: random
+sessionAffinity: yes
