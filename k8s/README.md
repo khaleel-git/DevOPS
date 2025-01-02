@@ -1,7 +1,7 @@
 # CKA Certification Course - Certified Kubernetes Administrator
-- [CKA preparation](https://learn.kodekloud.com/user/courses/cka-certification-course-certified-kubernetes-administrator)
-- CKA Certification link: https://www.cncf.io/certification/cka/
+## Imperative vs Declarative
 
+### Imperative Commands
 ## Core Concepts Section Introduction
 ## Cluster Architecture
 
@@ -572,22 +572,232 @@ kubectl create -f nginx-deployment.yaml
 kubectl create deployment nginx --image=nginx --replicas=4 --dry-run=client -o yaml > nginx-deployment.yaml
 ```
 ## Services
-1. NodePort
-service-definition.yml
-```yml
-apiVerson: V1
+
+### 1. NodePort
+`service-definition.yml`
+```yaml
+apiVersion: v1
 kind: Service
 metadata:
-    name: myapp-service
+  name: myapp-service
 spec:
-    type: NodePort
+  type: NodePort
+  ports:
+    - targetPort: 80
+      port: 80
+      nodePort: 30008
+  selector:
+    app: my-app
+    label: front-end
+```
+
+### 2. Cluster IP
+`service-definition.yml`
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+spec:
+  type: ClusterIP # default service
+  ports:
+    - targetPort: 80
+      port: 80
+  selector:
+    app: my-app
+    label: back-end
+```
+
+```shell
+kubectl create -f service-definition.yml
+kubectl get service
+```
+
+### 3. LoadBalancer
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+    name: myapp-loadbalancer
+spec:
+    type: LoadBalancer
     ports:
-        - targetport: 80
-          port: 80
-          nodePort: 30008
+        - port: 80
+            targetPort: 80
     selector:
         app: my-app
-        label: front-end
 ```
-algorith: random
-sessionAffinity: yes
+
+```shell
+kubectl create -f loadbalancer-service-definition.yml
+kubectl get service
+```
+## Namespaces
+
+Namespaces in Kubernetes are used to divide cluster resources between multiple users. They provide a way to create multiple virtual clusters within the same physical cluster.
+
+### Fully Qualified Domain Name (FQDN) for Services
+
+In Kubernetes, services can be accessed using their Fully Qualified Domain Name (FQDN). The FQDN for a service includes the service name, namespace, and cluster domain.
+
+For example:
+- Service name: `db-service`
+- Namespace: `dev`
+- Cluster domain: `svc.cluster.local`
+
+The FQDN for the `db-service` in the `dev` namespace would be:
+```
+db-service.dev.svc.cluster.local
+```
+
+### Creating a Namespace
+
+To create a namespace, you can use the following command:
+```shell
+kubectl create namespace dev
+```
+
+### Using a Namespace
+
+To create resources within a specific namespace, specify the namespace in the resource definition or use the `--namespace` flag with `kubectl` commands.
+
+#### Example Pod Definition in a Namespace:
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+    name: mypod
+    namespace: dev
+spec:
+    containers:
+    - name: mycontainer
+        image: nginx
+```
+
+#### Using `kubectl` with a Namespace:
+```shell
+# List all namespaces
+kubectl get ns
+
+kubectl get pods -n=finance
+kubectl get pods --all-namespaces
+kubectl get pods -A | grep blue
+
+# Create a Pod in the 'dev' namespace
+kubectl create -f pod-definition.yml --namespace=dev
+
+kubectl create deployment redis-deploy --image=reids --replicas=2 --namespace=dev-ns
+
+# Run a Redis Pod in the 'finance' namespace
+kubectl run redis --image=redis --namespace=finance
+
+# Get Pods in the 'dev' namespace
+kubectl get pods --namespace=dev
+```
+
+### Setting the Context for a Namespace
+
+To avoid specifying the namespace in every command, set the default namespace for your `kubectl` context:
+```shell
+kubectl config set-context --current --namespace=dev
+```
+
+### Compute Resource Quotas
+
+Resource quotas limit resource consumption per namespace. Example resource quota definition:
+```yaml
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+    name: compute-quota
+    namespace: dev
+spec:
+    hard:
+        requests.cpu: "1"
+        requests.memory: 1Gi
+        limits.cpu: "2"
+        limits.memory: 2Gi
+```
+
+To create and view the resource quota:
+```shell
+kubectl create -f compute-quota.yml
+kubectl get resourcequota --namespace=dev
+```
+## Imperative vs Declarative
+
+### Imperative Commands
+
+Imperative commands are used to perform specific actions step by step. They are useful for quick tasks and one-off changes.
+
+```shell
+# Create a Pod imperatively
+kubectl run nginx --image=nginx
+
+# Expose a Pod as a service
+kubectl expose pod nginx --port=80 --target-port=80
+
+# Scale a deployment
+kubectl scale deployment nginx --replicas=3
+
+# Delete a Pod
+kubectl delete pod nginx
+```
+
+### Declarative Configuration
+
+Declarative configuration involves defining the desired state of the system using configuration files. Kubernetes will ensure that the actual state matches the desired state.
+
+```yaml
+# pod-definition.yml
+apiVersion: v1
+kind: Pod
+metadata:
+    name: nginx
+spec:
+    containers:
+    - name: nginx
+        image: nginx
+```
+
+```shell
+# Apply the configuration file
+kubectl apply -f pod-definition.yml
+
+# View the current state
+kubectl get pods
+
+# Update the configuration file and reapply
+kubectl apply -f pod-definition.yml
+
+# Delete the resource using the configuration file
+kubectl delete -f pod-definition.yml
+```
+
+## Certification Tips - Imperative Commands with Kubectl
+```yml
+kubectl run nginx --image=nginx # Create an NGINX Pod
+kubectl run custom-nginx --image=nginx --port=8080 # create a pod with port
+kubectl run ngiinx --image=nginx --dry-run=client -o yaml # Generate POD Manifest YAML file (-o yaml). Don’t create it(–dry-run)
+
+kubectl create deployment --image=nginx nginx # create a deployment
+kubectl create deployment --image=nginx nginx --dry-run=client -o yaml # just genrate yml
+
+kubectl create deployment nginx --image=nginx --replicas=4 # with 4 replicas
+kubectl scale deployment nginx--replicas=4 # also scale via command
+kubectl create deployment nginx --image=nginx --dry-run=client -o yaml > nginx-deployment.yaml # modify scaling
+
+kubectl expose pod redis --port=6379 --name redis-service --dry-run=client -o yaml # service, cluster ip
+kubectl expose pod nginx --type=NodePort --port=80 --name=nginx-service --dry-run=client -o yaml # nodeport
+
+kubectl create service nodeport nginx --tcp=80:80 --node-port=30080 --dry-run=client -o yaml
+# Both the above commands have their own challenges. While one of them cannot accept a selector, the other cannot accept a node port. I would recommend going with the
+kubectl expose
+
+kubectl run redis --image=redis:alpine --dry-run=client -oyaml > redis-pod.yaml # modify and add label
+kubectl run redis -l tier=db --image=redis:alpine
+References:
+https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands
+https://kubernetes.io/docs/reference/kubectl/conventions/
+```
+## Kubectl Apply Command
