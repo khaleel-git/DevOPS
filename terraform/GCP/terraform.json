@@ -1,0 +1,17 @@
+{
+  "external_ip": {
+    "sensitive": false,
+    "type": "string",
+    "value": "34.55.61.203"
+  },
+  "password": {
+    "sensitive": false,
+    "type": "string",
+    "value": "Run 'gcloud compute reset-windows-password' manually for security reasons"
+  },
+  "username": {
+    "sensitive": false,
+    "type": "string",
+    "value": "you know your username"
+  }
+}
