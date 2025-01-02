@@ -508,6 +508,13 @@ kubectl get pods
 # List & Watch
 kubectl get pods --watch
 
+# List pods with selector
+kubectl get pods --selector env=dev
+
+kubectl get pods --selector bu=finance | wc -l
+
+kubectl get pods --selector env=prod,bu=finance,tier=frontend
+
 # Describe a Pod
 kubectl describe pod mypod
 
