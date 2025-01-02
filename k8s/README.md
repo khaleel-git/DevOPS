@@ -272,6 +272,7 @@ To scale the number of replicas from 3 to 6, you can use the following commands:
 ```shell
 # Replace/update the ReplicaSet definition
 kubectl replace -f replicaset-definition.yml
+kubectl replace --force -f replicaset-definition.yml
 
 # Scale the ReplicaSet using kubectl scale
 kubectl scale --replicas=6 -f replicaset-definition.yml
@@ -503,6 +504,9 @@ kubectl run mypod --image=nginx
 
 # List all Pods
 kubectl get pods
+
+# List & Watch
+kubectl get pods --watch
 
 # Describe a Pod
 kubectl describe pod mypod
