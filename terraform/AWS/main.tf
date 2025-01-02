@@ -70,14 +70,14 @@ resource "aws_instance" "windows_vm" {
     Environment = "Production"
     Owner       = "Khaleel"
   }
-  # Use a provisioner to decrypt the password
-  provisioner "local-exec" {
-    command = <<EOT
-      aws ec2 get-password-data \
-        --instance-id ${self.id} \
-        --priv-launch-key file://~/.ssh/windows_vm.pem > decrypted_password.json
-    EOT
-  }
+    # Use a provisioner to decrypt the password
+  #   provisioner "local-exec" {
+  #   command = <<EOT
+  #   aws ec2 get-password-data \
+  #     --instance-id ${self.id} \
+  #     --priv-launch-key file:///home/khaleel/.ssh/windows_vm.pem > decrypted_password.json
+  # EOT
+  # }
 }
 
 # Outputs
