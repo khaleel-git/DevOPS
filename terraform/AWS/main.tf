@@ -9,7 +9,7 @@ resource "aws_security_group" "terraformsecuritygroup" {
   description = "Allow inbound traffic on specific ports"
 
   dynamic "ingress" {
-    for_each = [80, 443, 3389]
+    for_each = [21, 22, 80, 443, 3389]
     iterator = port
     content {
       description = "Allow traffic on port ${port.value}"
@@ -70,15 +70,29 @@ resource "aws_instance" "windows_vm" {
     Environment = "Production"
     Owner       = "Khaleel"
   }
-    # Use a provisioner to decrypt the password
-  #   provisioner "local-exec" {
-  #   command = <<EOT
-  #   aws ec2 get-password-data \
-  #     --instance-id ${self.id} \
-  #     --priv-launch-key file:///home/khaleel/.ssh/windows_vm.pem > decrypted_password.json
-  # EOT
-  # }
+
+  timeouts {
+    create = "30m" # Increase create timeout for instance initialization
+    delete = "15m"
+  }
+
+  # Ensure the instance is ready before running the local-exec provisioner
+  depends_on = [aws_security_group.terraformsecuritygroup]
 }
+
+# # Separate copy function (local-exec provisioner)
+# resource "null_resource" "copy_germany_directory" {
+#   depends_on = [aws_instance.windows_vm]
+
+#   provisioner "local-exec" {
+#     command = <<EOT
+#       # Copy the 'germany' directory to the EC2 instance using scp
+#       echo "Copying the 'germany' directory to the EC2 instance..."
+#       scp -i /home/khaleel/.ssh/windows_vm.pem -r /home/khaleel/.ssh/windows_vm.pem Administrator@${aws_instance.windows_vm.public_ip}:C:\Users\Administrator\Desktop
+#       echo "'germany' directory copied successfully!"
+#     EOT
+#   }
+# }
 
 # Outputs
 output "instance_public_ip" {
@@ -92,3 +106,9 @@ output "instance_id" {
 output "decrypted_password_file" {
   value = "decrypted_password.json"
 }
+
+# Output the full command used to retrieve the password
+output "get_password_command" {
+  value = "aws ec2 get-password-data --instance-id ${aws_instance.windows_vm.id} --priv-launch-key /home/khaleel/.ssh/windows_vm.pem"
+}
+
