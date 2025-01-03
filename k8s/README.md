@@ -817,4 +817,7 @@ kubectl taint nodes node-name key=value:taint-effect
 noSchedule, prefernoscheule, notexecute
 kubectl taint nodes node...
 kubectl taint nodes model app= blue: NOschedule
-value needs to 
+value needs to encoded in double quotes "" in a yml file, pod-definition.yml
+kubectl describe node kubemaster | grep Taint
+
+### Node Affinity
