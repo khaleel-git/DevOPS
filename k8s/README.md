@@ -820,4 +820,6 @@ kubectl taint nodes model app= blue: NOschedule
 value needs to encoded in double quotes "" in a yml file, pod-definition.yml
 kubectl describe node kubemaster | grep Taint
 
+$ kubectl taint nodes <node-name> key=value:taint-effect
+
 ### Node Affinity
