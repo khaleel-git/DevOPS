@@ -824,4 +824,21 @@ kubectl taint nodes <node-name> key=value:taint-effect
 
 # untaint:
 kubectl taint nodes controlplane node-role.kubernetes.io/control-plane:NoSchedule-
+
+## labeling nodes
+kubectl label nodes <node-name> <label-key>=<label-value>
+kubectl label nodes node-1 size=Large
+## Node Selectors
+```yml
+apiVersion: v1
+kind: Pod
+metadata:
+ name: myapp-pod
+spec:
+ containers:
+ - name: data-processor
+   image: data-processor
+ nodeSelector:
+  size: Large
+```
 ### Node Affinity
