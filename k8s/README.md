@@ -812,3 +812,9 @@ https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands
 https://kubernetes.io/docs/reference/kubectl/conventions/
 ```
 ## Kubectl Apply Command
+## Taints and Tolerations
+kubectl taint nodes node-name key=value:taint-effect
+noSchedule, prefernoscheule, notexecute
+kubectl taint nodes node...
+kubectl taint nodes model app= blue: NOschedule
+value needs to 
