@@ -842,3 +842,84 @@ spec:
   size: Large
 ```
 ### Node Affinity
+```yml
+# Please edit the object below. Lines beginning with a '#' will be ignored,
+# and an empty file will abort the edit. If an error occurs while saving this file will be
+# reopened with the relevant failures.
+#
+# deployments.apps "blue" was not valid:
+# * patch: Invalid value: "map[spec:map[template:map[spec:map[affinity:map[nodeAffinity:map[requiredDuringSchedulingIgnoreDuringExecution:map[nodeSelectorTerms:[map[matchExpressions:[map[key:color operator:In values:[blue]]]]]]]]]]]]": strict decoding error: unknown field "spec.template.spec.affinity.nodeAffinity.requiredDuringSchedulingIgnoreDuringExecution"
+#
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+  creationTimestamp: "2025-01-04T17:07:21Z"
+  generation: 1
+  labels:
+    app: blue
+  name: blue
+  namespace: default
+  resourceVersion: "1606"
+  uid: dbbbf20b-e1f4-443d-a525-72de5b423973
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 3
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: blue
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: blue
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: color
+                  operator: In
+                  values:
+                    - blue
+      containers:
+      - image: nginx
+        imagePullPolicy: Always
+        name: nginx
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status:
+  availableReplicas: 3
+  conditions:
+  - lastTransitionTime: "2025-01-04T17:07:28Z"
+    lastUpdateTime: "2025-01-04T17:07:28Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  - lastTransitionTime: "2025-01-04T17:07:21Z"
+    lastUpdateTime: "2025-01-04T17:07:28Z"
+    message: ReplicaSet "blue-6dc9b889f5" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  observedGeneration: 1
+  readyReplicas: 3
+  replicas: 3
+  updatedReplicas: 3
+
+```
