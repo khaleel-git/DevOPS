@@ -43,9 +43,9 @@ resource "aws_instance" "windows_vm" {
   vpc_security_group_ids      = [aws_security_group.terraformsecuritygroup.id]
 
   root_block_device {
-    volume_type           = "io2"
+    volume_type           = "gp3"
     volume_size           = 30
-    iops                  = 30000
+    iops                  = 3000 
     delete_on_termination = true
   }
 
