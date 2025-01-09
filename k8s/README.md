@@ -947,3 +947,24 @@ spec:
       cpu: "1"
 ```
 OOM (out of memory) error
+
+### Limit Ranges
+```yml
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: cpu-resource-constraint
+spec:
+  limits:
+  - default:
+      cpu: 500m
+    defaultRequest:
+      cpu: 500m
+    max:
+      cpu: "1"
+    min: 
+      cpu: 100m
+    type: Container
+```
+### Resource Quotas
+at namespace level
