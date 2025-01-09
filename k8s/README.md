@@ -923,3 +923,27 @@ status:
   updatedReplicas: 3
 
 ```
+## Resource Limits
+CPU: 1
+Mem: 1Gi
+
+0.1cpu = 100m (mili)
+```yml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: simple-webapp-color
+  labels:
+    name: simple-webapp-color
+spec:
+ containers:
+ - name: simple-webapp-color
+   image: simple-webapp-color
+   ports:
+    - containerPort:  8080
+   resources:
+     requests:
+      memory: "1Gi"
+      cpu: "1"
+```
+OOM (out of memory) error
