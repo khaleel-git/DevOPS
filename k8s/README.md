@@ -968,3 +968,21 @@ spec:
 ```
 ### Resource Quotas
 at namespace level
+
+## DaemonSets
+daemonsets are like replicaset
+whenever a new nod is added, one copy of the pod is always present in all nodes
+replica of pod in all the nodes of the cluster
+kubeproxy can be deployed as a daemonset in the cluster
+networking solution: weave-net
+`kubectl get daemonsets`
+
+how does it work:
+nodeName: node01, nodeName: node02 -> old k8s version
+new version: use node affinity
+
+### Create daemonset
+to create daemonset, first generate deployment yml file by running: 
+` kubectl create deployment elasticsearch --image=registry.k8s.io/fluentd-elasticsearch:1.20 -n kube-system --dry-run=client -o yaml > fluentd.yaml`
+then add kind: DeamonSet and remove replica and spec.strategy filed from yml file and apply
+`kubectl apply -f daemonset.yml
