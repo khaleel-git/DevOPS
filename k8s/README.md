@@ -986,3 +986,4 @@ to create daemonset, first generate deployment yml file by running:
 ` kubectl create deployment elasticsearch --image=registry.k8s.io/fluentd-elasticsearch:1.20 -n kube-system --dry-run=client -o yaml > fluentd.yaml`
 then add kind: DeamonSet and remove replica and spec.strategy filed from yml file and apply
 `kubectl apply -f daemonset.yml
+
