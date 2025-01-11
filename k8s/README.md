@@ -987,3 +987,5 @@ to create daemonset, first generate deployment yml file by running:
 then add kind: DeamonSet and remove replica and spec.strategy filed from yml file and apply
 `kubectl apply -f daemonset.yml
 
+## Static Pods
+Master: controller-manager.yml, apiserver.yml, etcd.yml (/etc/kubernetes/manifests)
