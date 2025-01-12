@@ -996,3 +996,4 @@ cat /var/lib/kubelet/config.yaml -> configuration file located here
 check for: staticPodPath: /etc/just-to-mess-with-you
 
 ## Multiple Schedulers
+kubectl get serviceaccount -n kube-system
