@@ -989,3 +989,4 @@ then add kind: DeamonSet and remove replica and spec.strategy filed from yml fil
 
 ## Static Pods
 Master: controller-manager.yml, apiserver.yml, etcd.yml (/etc/kubernetes/manifests)
+Static Pods vs DaemonSets
