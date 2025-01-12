@@ -993,3 +993,6 @@ Static Pods vs DaemonSets
 default path: /etc/kubernetes/manifests/
 
 cat /var/lib/kubelet/config.yaml -> configuration file located here
+check for: staticPodPath: /etc/just-to-mess-with-you
+
+## Multiple Schedulers
