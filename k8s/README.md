@@ -997,3 +997,18 @@ check for: staticPodPath: /etc/just-to-mess-with-you
 
 ## Multiple Schedulers
 kubectl get serviceaccount -n kube-system
+
+
+Mock Exam 1:
+## Autocomplete
+Search: kubectl cheat sheet
+kubectl autocomplete command:
+```shell
+source <(kubectl completion bash)
+echo "Source <(kubectl completetion bash)" >> ~/.bashrc
+```
+copy the command from kubernetes.io
+
+## Enable alias
+alias k=kubectl
+complete -F __start_kubectl k
