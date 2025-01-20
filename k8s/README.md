@@ -1063,7 +1063,7 @@ kubectl edit svc hr-web-app-service
 Q11: Use JSON PATH query to retrieve the osImages of all the nodes and store it in a file /opt/outputs/nodes_os_x43kj56.txt.
 The osImage are under the nodeInfo section under status of each node.
 kubectl get nodes
-kubectl get nodes -o json
+kubectl get nodes -o jsonpath='{.items[*].status.nodeInfo.osImage}' > /opt/outputs/nodes_os_x43kj56.txt
 
 
 Q12: Create a Persistent Volume with the given specification: -
@@ -1071,4 +1071,18 @@ Volume name: pv-analytics
 Storage: 100Mi
 Access mode: ReadWriteMany
 Host path: /pv/data-analytics
+
+search: persistent volume in kubernetes.io section
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-analytics
+spec:
+  capacity:
+    storage: 100Mi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+      path: /pv/data-analytics
 ```
