@@ -1012,3 +1012,12 @@ copy the command from kubernetes.io
 ## Enable alias
 alias k=kubectl
 complete -F __start_kubectl k
+
+solution:
+```shell
+Q05:
+kubectl expose --help
+kubectl expose pod valid-pod --port=444 --name=frontend
+kubectl get svc
+k get pods -0 wide
+```
