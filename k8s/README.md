@@ -1015,9 +1015,60 @@ complete -F __start_kubectl k
 
 solution:
 ```shell
-Q05:
+Q01: Deploy a pod named nginx-pod using the nginx:alpine image.
+k run nginx-pod --image=nginx:alpine
+
+Q02: Deploy a messaging pod using the redis:alpine image with the labels set to tier=msg.
+k run messaging --image=redis:alpine --labels="tier=msg"
+
+Q03: Create a namespace named apx-x9984574.
+kubectl create namespace apx-x9984574
+
+Q4: Get the list of nodes in JSON format and store it in a file at /opt/outputs/nodes-z3444kd9.json
+kubectl get nodes -o json > /opt/outputs/nodes-z3444kd9.json
+
+Q05: Create a service messaging-service to expose the messaging application within the cluster on port 6379.
 kubectl expose --help
-kubectl expose pod valid-pod --port=444 --name=frontend
+kubectl expose pod messaging --port=6379 --name=messaging-service
 kubectl get svc
 k get pods -0 wide
+
+Q06: Create a deployment named hr-web-app using the image kodekloud/webapp-color with 2 replicas.
+K create deployment hr-web-app --image=kodekloud/webapp-color --replicas=2
+k get deploy
+
+Q07: Create a static pod named static-busybox on the controlplane node that uses the busybox image and the command sleep 1000.
+kubectl run static-busybox --image=busybox --command -- sleep 1000 # not a normal pod, so use below
+kubectl run static-busybox --image=busybox --dry-run=client -o yaml --command -- sleep 1000 > static-busybox.yml
+mv static-busybox.yml /etc/kubernetes/manifests/
+
+Q08: Create a POD in the finance namespace named temp-bus with the image redis:alpine.
+kubectl run temp-bus --image=redis:alpine --namespace=finance
+kubectl get pod -n finance
+kubectl describe pod temp-bus
+
+Q09: A new application orange is deployed. There is something wrong with it. Identify and fix the issue.
+kubectl get pods
+kubectl describe pod orange # the issue is with the init container, pod initiazling
+kubect logs orange init-myservice # sleep not found, sleeep is typed wronged
+
+Fixing issue:
+kubectl edit pod orange # corrct sleep command
+kubectl replace --force -f /tmp/kubectl-edit-722937905.yaml
+
+Q10: Expose the hr-web-app created in the previous task as a service named hr-web-app-service, accessible on port 30082 on the nodes of the cluster. The web application listens on port 8080.
+kubectl expose deploy hr-web-app --name=hr-web-app-service --type=NodePort --port=8080 # edit later\
+kubectl edit svc hr-web-app-service
+
+Q11: Use JSON PATH query to retrieve the osImages of all the nodes and store it in a file /opt/outputs/nodes_os_x43kj56.txt.
+The osImage are under the nodeInfo section under status of each node.
+kubectl get nodes
+kubectl get nodes -o json
+
+
+Q12: Create a Persistent Volume with the given specification: -
+Volume name: pv-analytics
+Storage: 100Mi
+Access mode: ReadWriteMany
+Host path: /pv/data-analytics
 ```
