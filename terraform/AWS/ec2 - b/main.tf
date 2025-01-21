@@ -4,8 +4,8 @@ provider "aws" {
 }
 
 # Create the security group
-resource "aws_security_group" "terraformsecuritygroup" {
-  name        = "mysecuritygrouptf"
+resource "aws_security_group" "terraformsecuritygroup_2" {
+  name        = "mysecuritygrouptf_2"
   description = "Allow inbound traffic on specific ports"
 
   dynamic "ingress" {
@@ -29,18 +29,18 @@ resource "aws_security_group" "terraformsecuritygroup" {
   }
 
   tags = {
-    Name = "mysecuritygrouptf"
+    Name = "mysecuritygrouptf_2"
   }
 }
 
 # Define the EC2 instance
-resource "aws_instance" "windows_vm" {
+resource "aws_instance" "windows_vm_2" {
   ami           = "ami-01f52dc9cb63c603a"
   instance_type = "t3.xlarge"
   key_name      = "windows_vm"
 
   associate_public_ip_address = true
-  vpc_security_group_ids      = [aws_security_group.terraformsecuritygroup.id]
+  vpc_security_group_ids      = [aws_security_group.terraformsecuritygroup_2.id]
 
   root_block_device {
     volume_type           = "gp3"
@@ -66,7 +66,7 @@ resource "aws_instance" "windows_vm" {
   }
 
   tags = {
-    Name        = "windowsvm"
+    Name        = "windowsvm_2"
     Environment = "Production"
     Owner       = "Khaleel"
   }
@@ -77,18 +77,18 @@ resource "aws_instance" "windows_vm" {
   }
 
   # Ensure the instance is ready before running the local-exec provisioner
-  depends_on = [aws_security_group.terraformsecuritygroup]
+  depends_on = [aws_security_group.terraformsecuritygroup_2]
 }
 
 # # Separate copy function (local-exec provisioner)
 # resource "null_resource" "copy_germany_directory" {
-#   depends_on = [aws_instance.windows_vm]
+#   depends_on = [aws_instance.windows_vm_2]
 
 #   provisioner "local-exec" {
 #     command = <<EOT
 #       # Copy the 'germany' directory to the EC2 instance using scp
 #       echo "Copying the 'germany' directory to the EC2 instance..."
-#       scp -i /home/khaleel/.ssh/windows_vm.pem -r /home/khaleel/.ssh/windows_vm.pem Administrator@${aws_instance.windows_vm.public_ip}:C:\Users\Administrator\Desktop
+#       scp -i /home/khaleel/.ssh/windows_vm.pem -r /home/khaleel/.ssh/windows_vm.pem Administrator@${aws_instance.windows_vm_2.public_ip}:C:\Users\Administrator\Desktop
 #       echo "'germany' directory copied successfully!"
 #     EOT
 #   }
@@ -96,11 +96,11 @@ resource "aws_instance" "windows_vm" {
 
 # Outputs
 output "instance_public_ip" {
-  value = aws_instance.windows_vm.public_ip
+  value = aws_instance.windows_vm_2.public_ip
 }
 
 output "instance_id" {
-  value = aws_instance.windows_vm.id
+  value = aws_instance.windows_vm_2.id
 }
 
 output "decrypted_password_file" {
@@ -109,6 +109,6 @@ output "decrypted_password_file" {
 
 # Output the full command used to retrieve the password
 output "get_password_command" {
-  value = "aws ec2 get-password-data --instance-id ${aws_instance.windows_vm.id} --priv-launch-key /home/khaleel/.ssh/windows_vm.pem"
+  value = "aws ec2 get-password-data --instance-id ${aws_instance.windows_vm_2.id} --priv-launch-key /home/khaleel/.ssh/windows_vm.pem"
 }
 

@@ -4,8 +4,8 @@ provider "aws" {
 }
 
 # Create the security group
-resource "aws_security_group" "terraformsecuritygroup" {
-  name        = "mysecuritygrouptf"
+resource "aws_security_group" "terraformsecuritygroup_4" {
+  name        = "mysecuritygrouptf_4"
   description = "Allow inbound traffic on specific ports"
 
   dynamic "ingress" {
@@ -29,18 +29,18 @@ resource "aws_security_group" "terraformsecuritygroup" {
   }
 
   tags = {
-    Name = "mysecuritygrouptf"
+    Name = "mysecuritygrouptf_4"
   }
 }
 
 # Define the EC2 instance
-resource "aws_instance" "windows_vm" {
+resource "aws_instance" "windows_vm_4" {
   ami           = "ami-01f52dc9cb63c603a"
   instance_type = "t3.xlarge"
   key_name      = "windows_vm"
 
   associate_public_ip_address = true
-  vpc_security_group_ids      = [aws_security_group.terraformsecuritygroup.id]
+  vpc_security_group_ids      = [aws_security_group.terraformsecuritygroup_4.id]
 
   root_block_device {
     volume_type           = "gp3"
@@ -77,12 +77,12 @@ resource "aws_instance" "windows_vm" {
   }
 
   # Ensure the instance is ready before running the local-exec provisioner
-  depends_on = [aws_security_group.terraformsecuritygroup]
+  depends_on = [aws_security_group.terraformsecuritygroup_4]
 }
 
 # # Separate copy function (local-exec provisioner)
 # resource "null_resource" "copy_germany_directory" {
-#   depends_on = [aws_instance.windows_vm]
+#   depends_on = [aws_instance.windows_vm_4]
 
 #   provisioner "local-exec" {
 #     command = <<EOT
@@ -96,11 +96,11 @@ resource "aws_instance" "windows_vm" {
 
 # Outputs
 output "instance_public_ip" {
-  value = aws_instance.windows_vm.public_ip
+  value = aws_instance.windows_vm_4.public_ip
 }
 
 output "instance_id" {
-  value = aws_instance.windows_vm.id
+  value = aws_instance.windows_vm_4.id
 }
 
 output "decrypted_password_file" {
@@ -109,6 +109,6 @@ output "decrypted_password_file" {
 
 # Output the full command used to retrieve the password
 output "get_password_command" {
-  value = "aws ec2 get-password-data --instance-id ${aws_instance.windows_vm.id} --priv-launch-key /home/khaleel/.ssh/windows_vm.pem"
+  value = "aws ec2 get-password-data --instance-id ${aws_instance.windows_vm_4.id} --priv-launch-key /home/khaleel/.ssh/windows_vm.pem"
 }
 
