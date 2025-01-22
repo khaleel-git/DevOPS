@@ -1226,6 +1226,7 @@ Go back to master node
 kubectl get pods 
 ```
 
+# Mock Exam 3
 Q1: Create a new service account with the name pvviewer. Grant this Service account access to list all PersistentVolumes in the cluster by creating an appropriate cluster role called pvviewer-role and ClusterRoleBinding called pvviewer-role-binding.
 Next, create a pod called pvviewer with the image: redis and serviceAccount: pvviewer in the default namespace.
 
