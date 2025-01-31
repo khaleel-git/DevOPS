@@ -997,7 +997,19 @@ check for: staticPodPath: /etc/just-to-mess-with-you
 
 ## Multiple Schedulers
 kubectl get serviceaccount -n kube-system
-
+pod-definition.yaml
+```yml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ngnix
+spec:
+  containers:
+  - image: nginx
+    name: ngnix
+  
+  schedulerName: my-custom-scheduler
+```
 
 # Mock Exam 1:
 ## Autocomplete
