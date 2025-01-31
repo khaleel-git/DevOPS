@@ -1010,6 +1010,12 @@ spec:
   
   schedulerName: my-custom-scheduler
 ```
+kubectl create -f pod-definition.yaml
+
+## Which scheduler is picked up:
+kubectl get events -o wide
+kubectl logs my-custom-scheduler --name-space=kube-system
+
 
 # Mock Exam 1:
 ## Autocomplete
