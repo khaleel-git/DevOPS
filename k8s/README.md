@@ -1055,7 +1055,17 @@ spec:
 kubectl create -f ngninx-pod.yaml
 
 ### 29. Configuring Scheudler Profiles
-
+#### Priority class:
+```yml
+apiVersion: scheduling.k8s.io/v1
+kind: Priorityclass
+metadata:
+  name: high-priority
+value: 1000000
+globalDefault: false 
+description: "This priority class should be used for XYZ service pods only."
+```
+highest priority pods placed at the beginning of the queue in (Scheding Queue)
 
 # Mock Exam 1:
 ## Autocomplete
