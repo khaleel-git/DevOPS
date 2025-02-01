@@ -1012,6 +1012,9 @@ spec:
 ```
 kubectl create -f pod-definition.yaml
 
+28. Solution Multiple Scheduler:
+
+
 ## Which scheduler is picked up:
 kubectl get events -o wide
 kubectl logs my-custom-scheduler --name-space=kube-system
