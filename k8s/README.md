@@ -1075,6 +1075,10 @@ plugins:
 Extension Points
 ### Scheduler profiles
 Add multiple schedulars as a profiles in sheduler configuration file
+
+### 29-A Extra 2025: Admission controllers
+kube-apiserver -h | grep enable-admission-plugins
+
 # Mock Exam 1:
 ## Autocomplete
 Search: kubectl cheat sheet
