@@ -997,6 +997,11 @@ check for: staticPodPath: /etc/just-to-mess-with-you
 
 ## Multiple Schedulers
 kubectl get serviceaccount -n kube-system
+
+## Which scheduler is picked up:
+kubectl get events -o wide
+kubectl logs my-custom-scheduler --name-space=kube-system
+
 pod-definition.yaml
 ```yml
 apiVersion: v1
@@ -1012,12 +1017,44 @@ spec:
 ```
 kubectl create -f pod-definition.yaml
 
-28. Solution Multiple Scheduler:
+## 28. Solution Multiple Scheduler:
+kubectl get sa my-scheduler -n kube-system
 
+#### Q4: config map
+cat /root/my-scheduler-config.yaml
+```yml
+apiVersion: kubescheduler.config.k8s.io/v1beta2
+kind: KubeSchedulerConfiguration
+profiles:
+  - schedulerName: my-scheduler
+leaderElection:
+  leaderElect: false 
+```
+kubectl create configmap my-scheduler-config --from=/root/my-scheduler-config.yaml -n kube-system
+kubectl get configmap my-schedule-config -n kube-system
 
-## Which scheduler is picked up:
-kubectl get events -o wide
-kubectl logs my-custom-scheduler --name-space=kube-system
+### Q5:
+kubectl get pods -A 
+kubectl describe pod kube-scheduler-controlplane # get an image, put it in the provided sheduler.yaml file
+kubectl create -f my-scheduler.yaml
+kubectl get pods -n kube-system
+
+### Q6: create a pod with a new custom scheduler
+```yml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ngnix
+spec:
+  containers:
+  - image: nginx
+    name: ngnix
+  
+  schedulerName: my-custom-scheduler
+```
+kubectl create -f ngninx-pod.yaml
+
+### 29. Configuring Scheudler Profiles
 
 
 # Mock Exam 1:
