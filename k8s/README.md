@@ -1085,7 +1085,11 @@ Mutating admission controllers VS validating admission controls (NamespaceAutoPr
 MutatingAdmission Webhook VS ValidatingAdmission Webhook
 
 Admission Webhook Server:
-
+```shell
+kubectl -n webhook-demo create secret tls webhook-server-tls \
+    --cert "/root/keys/webhook-server-tls.crt" \
+    --key "/root/keys/webhook-server-tls.key"
+```
 # Mock Exam 1:
 ## Autocomplete
 Search: kubectl cheat sheet
