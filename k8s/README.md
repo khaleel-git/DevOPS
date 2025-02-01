@@ -1066,7 +1066,15 @@ globalDefault: false
 description: "This priority class should be used for XYZ service pods only."
 ```
 highest priority pods placed at the beginning of the queue in (Scheding Queue)
+plugins:
+  - Schedulaing Queue
+  - Filtering
+  - Scoring 
+  - Binding
 
+Extension Points
+### Scheduler profiles
+Add multiple schedulars as a profiles in sheduler configuration file
 # Mock Exam 1:
 ## Autocomplete
 Search: kubectl cheat sheet
