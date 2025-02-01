@@ -1079,6 +1079,13 @@ Add multiple schedulars as a profiles in sheduler configuration file
 ### 29-A Extra 2025: Admission controllers
 kube-apiserver -h | grep enable-admission-plugins
 
+### 29-B Extra 2025: Admission Controllers validating
+Mutating admission controllers VS validating admission controls (NamespaceAutoProvision)
+
+MutatingAdmission Webhook VS ValidatingAdmission Webhook
+
+Admission Webhook Server:
+
 # Mock Exam 1:
 ## Autocomplete
 Search: kubectl cheat sheet
