@@ -1090,6 +1090,35 @@ kubectl -n webhook-demo create secret tls webhook-server-tls \
     --cert "/root/keys/webhook-server-tls.crt" \
     --key "/root/keys/webhook-server-tls.key"
 ```
+## Application Lifecycle management
+2. Rollout and Versioning
+kubectl rollout history deployment/myapp-deployment # shows revision history
+
+### Deployment Strategies
+1. recreate (down time expected)
+2. RollingUpdate (default)
+
+### Rollback:
+kubectl get replicasets
+kubectl rollout undo deployment/myapp-deployment # destroy new and live old
+
+#### create:
+kubectl create -f deployment.yml
+
+#### Get:
+kubectl get deployments
+
+#### Update:
+kubectl apply -f deployment.yml
+kubectl set image deployment/myapp-deployment ngnix=nginx:1.9.1
+
+#### Status:
+kubectl rollout history deployment/myapp-deployment
+
+#### Rollback:
+kubectl rollout undo deployment/myapp-deployment
+
+
 # Mock Exam 1:
 ## Autocomplete
 Search: kubectl cheat sheet
