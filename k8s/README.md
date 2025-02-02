@@ -5,6 +5,8 @@
 ## Core Concepts Section Introduction
 ## Cluster Architecture
 
+[Notion Notes CKA](https://arkalim.notion.site/Kubernetes-c64b2976b0364cc69864490edef33717)
+
 ## Table of contents
 
 - [CKA Certification Course - Certified Kubernetes Administrator](#cka-certification-course---certified-kubernetes-administrator)
@@ -1146,6 +1148,8 @@ spec:
     args: ["10"] # CMD
 ```
 kubectl create -f pod-definition.yaml
+
+## configmap
 
 
 # Mock Exam 1:
