@@ -1118,6 +1118,35 @@ kubectl rollout history deployment/myapp-deployment
 #### Rollback:
 kubectl rollout undo deployment/myapp-deployment
 
+#### Set a new image
+kubectl set help
+kubectl set image deploy frontend simple-wbapp=kodekloud/webapp-color:v3
+
+## Applicaiton Commands
+### Command and Arguments in a docker
+Containers are not meant to host OS (Operating Systems)
+docker run ubuntu 
+docker run ubuntu sleep 5 # hard coded 
+docker run ubuntu-sleeper 10 -> ENTRYPOINT ["sleep"]
+docker run ubuntu-sleeper -> gave error
+docker run ubuntu-sleeper -> ENTRYPOINT ["sleep"] CMD ["5"]
+docker run --entrypoint sleep2.0 ubuntu-sleeper 10 # overrite
+d
+### Command and Arguments in a Kubernetes Cluster
+```yml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ubuntu-sleeper-pod
+spec:
+  containers:
+  - name: ubuntu-sleeper
+    image: ubuntu-sleeper
+    command: ["sleep2.0"] # ENTRYPOINT
+    args: ["10"] # CMD
+```
+kubectl create -f pod-definition.yaml
+
 
 # Mock Exam 1:
 ## Autocomplete
