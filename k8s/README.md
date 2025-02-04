@@ -1150,6 +1150,9 @@ spec:
 kubectl create -f pod-definition.yaml
 
 ## configmap
+secrets, hashed secrets
+
+## Mutli Container Pod
 
 
 # Mock Exam 1:
