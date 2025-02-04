@@ -1154,6 +1154,28 @@ secrets, hashed secrets
 
 ## Mutli Container Pod
 
+### sidecar container 
+In Kubernetes, a sidecar container is a container that starts before the main application container and continues to run.
+### Init Container
+An initContainer is configured in a pod like all other containers, except that it is specified inside a initContainers section,  like this:
+```yml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp-pod
+  labels:
+    app: myapp
+spec:
+  containers:
+  - name: myapp-container
+    image: busybox:1.28
+    command: ['sh', '-c', 'echo The app is running! && sleep 3600']
+  initContainers:
+  - name: init-myservice
+    image: busybox
+    command: ['sh', '-c', 'git clone <some-repository-that-will-be-used-by-application> ; done;']
+```
+If any of the initContainers fail to complete, Kubernetes restarts the Pod repeatedly until the Init Container succeeds.
 
 # Mock Exam 1:
 ## Autocomplete
