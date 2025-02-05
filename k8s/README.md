@@ -1177,6 +1177,22 @@ spec:
 ```
 If any of the initContainers fail to complete, Kubernetes restarts the Pod repeatedly until the Init Container succeeds.
 
+## Backup and Restore - ETCD Cluster
+kubectl get all --all-namespaces -o yaml > all_deployed_services.yml
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Mock Exam 1:
 ## Autocomplete
 Search: kubectl cheat sheet
