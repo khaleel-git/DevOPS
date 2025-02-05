@@ -1183,7 +1183,11 @@ kubectl get all --all-namespaces -o yaml > all_deployed_services.yml
 
 
 
-
+ETCDCTL_API=3 etcdctl snapshot restore /opt/snapshot-pre-boot.db \
+--data-dir /var/lib/etcd-backup \
+--cacert /etc/kubernetes/pki/etcd/ca.crt \
+--cert /etc/kubernetes/pki/etcd/server.crt \
+--key /etc/kubernetes/pki/etcd/server.key
 
 
 
