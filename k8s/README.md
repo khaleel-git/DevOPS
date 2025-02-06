@@ -1182,12 +1182,13 @@ kubectl get all --all-namespaces -o yaml > all_deployed_services.yml
 
 
 
+ETCDCTL_API=3 etcdctl  --data-dir /var/lib/etcd-from-backup \
+snapshot restore /opt/snapshot-pre-boot.db
 
-ETCDCTL_API=3 etcdctl snapshot restore /opt/snapshot-pre-boot.db \
---data-dir /var/lib/etcd-backup \
---cacert /etc/kubernetes/pki/etcd/ca.crt \
---cert /etc/kubernetes/pki/etcd/server.crt \
---key /etc/kubernetes/pki/etcd/server.key
+
+2022-03-25 09:19:27.175043 I | mvcc: restore compact to 2552
+2022-03-25 09:19:27.266709 I | etcdserver/membership: added member 8e9e05c52164694d [http://localhost:2380] to cluster cdf818194e3a8c32
+root@controlplane:~#
 
 
 
