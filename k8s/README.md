@@ -1185,6 +1185,20 @@ kubectl get all --all-namespaces -o yaml > all_deployed_services.yml
 ETCDCTL_API=3 etcdctl  --data-dir /var/lib/etcd-from-backup \
 snapshot restore /opt/snapshot-pre-boot.db
 
+## multi node clusters
+```yml
+    1  kubectl get nodes
+    2  kubectl config get-configs
+    3  kubectl config -h
+    4  kubectl config get-clusters
+    5  kubectl config view
+    6  kubectl config get-contexts
+    7  kubectl config use-context cluster1
+    8  kubectl get nodes
+    9  kubectl config use-context cluster2
+   10  kubectl get nodes
+```
+
 
 2022-03-25 09:19:27.175043 I | mvcc: restore compact to 2552
 2022-03-25 09:19:27.266709 I | etcdserver/membership: added member 8e9e05c52164694d [http://localhost:2380] to cluster cdf818194e3a8c32
