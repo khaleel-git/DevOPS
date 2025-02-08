@@ -1198,7 +1198,11 @@ snapshot restore /opt/snapshot-pre-boot.db
     9  kubectl config use-context cluster2
    10  kubectl get nodes
 ```
-
+ETCDCTL_API=3 etcdctl --endpoints 192.168.57.6:2379   \
+--cert=/etc/kubernetes/pki/etcd/server.crt  \
+--key=/etc/kubernetes/pki/etcd/server.key   \ 
+--cacert=/etc/kubernetes/pki/etcd/ca.crt    \
+snapshot save /opt/cluster1.db
 
 2022-03-25 09:19:27.175043 I | mvcc: restore compact to 2552
 2022-03-25 09:19:27.266709 I | etcdserver/membership: added member 8e9e05c52164694d [http://localhost:2380] to cluster cdf818194e3a8c32
