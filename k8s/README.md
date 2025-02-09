@@ -1208,6 +1208,11 @@ snapshot save /opt/cluster1.db
 2022-03-25 09:19:27.266709 I | etcdserver/membership: added member 8e9e05c52164694d [http://localhost:2380] to cluster cdf818194e3a8c32
 root@controlplane:~#
 
+## Security 
+stattic user auth file, auth token file, and service accounts for bots
+
+### TLS certificates
+
 
 
 
