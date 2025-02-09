@@ -1261,6 +1261,8 @@ openssl genrsa -out admin.key 2048 # Generate keys
 openssl req -new -key admin.key -subj "/CN=kube-admin/O=system:masters" -out admin.csr # Certification signing Request csr
 openssl x509 -req -in admin.csr -CA ca.crt -CAkey ca.key -out admin.crt # signing certificate
 
+### View Certificate OR Decode it
+openssl x509 -in /etc/kubernetes/pki/apiserver.crt -text -noout
 # Mock Exam 1:
 ## Autocomplete
 Search: kubectl cheat sheet
