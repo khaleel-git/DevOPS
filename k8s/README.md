@@ -1210,12 +1210,30 @@ root@controlplane:~#
 
 ## Security 
 stattic user auth file, auth token file, and service accounts for bots
+### TLS certificates 
+Private key and public key (lock)
+Symmetric and Asymetric authentication 
+user, pass (symmetric)
+ssh key (Asymetric)
 
-### TLS certificates
 
+Self signed certificate vs Signed by CA
+### (PKI) public key infrastructure
+### Certificate (Public Key) - *.crt *.pem
+server.crt
+server.pem 
+client.crt 
+client.pem
+### Private Key - *.key *.key.pem
+server.key
+server-key.pem
+client.key
+client-key.pem
 
-
-
+### TLS in kubernetes
+Root certificates (CA)
+Server Certificates
+Client Certificates
 
 
 
