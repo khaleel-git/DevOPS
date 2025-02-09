@@ -1263,6 +1263,9 @@ openssl x509 -req -in admin.csr -CA ca.crt -CAkey ca.key -out admin.crt # signin
 
 ### View Certificate OR Decode it
 openssl x509 -in /etc/kubernetes/pki/apiserver.crt -text -noout
+
+### Certificates API
+
 # Mock Exam 1:
 ## Autocomplete
 Search: kubectl cheat sheet
