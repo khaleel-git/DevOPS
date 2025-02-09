@@ -1235,9 +1235,31 @@ Root certificates (CA)
 Server Certificates
 Client Certificates
 
+#### Client Certificates:
+admin.crt                                 admin.key
+scheuler.crt                              scheduler.key
+controller-manager.crt                    controller-manager.key
+kube-proxy.crt                            kube-proxy.key
+apiserver-kubelet-client.crt              api-server-kubelet-client.key
+apiserver-etcd-client.crt                 apiserver-etcd-client.key
+kubelet-client.crt                        kubelet-client.key
 
+#### Server Certificates:
+etcdserver.crt                            etcdserver.key
+apiserver.crt                             apiserver.key
+kubelet.crt                               kubelet.key
 
+## TLS certificates generation
+OPENSSL tool
 
+OPENSSL GENRSA -OUT CA.KEY 2048
+openssl req -new -key ca.key -subj "/CN=KUBERNETES-CA" -out ca.csr 
+openssl x509 -req -in ca.csr -signkey ca.key -out ca.crt
+
+### Admin user
+openssl genrsa -out admin.key 2048 # Generate keys
+openssl req -new -key admin.key -subj "/CN=kube-admin/O=system:masters" -out admin.csr # Certification signing Request csr
+openssl x509 -req -in admin.csr -CA ca.crt -CAkey ca.key -out admin.crt # signing certificate
 
 # Mock Exam 1:
 ## Autocomplete
