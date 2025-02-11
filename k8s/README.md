@@ -1272,6 +1272,14 @@ openssl x509 -in /etc/kubernetes/pki/apiserver.crt -text -noout
 /apis
 /logs
 
+kube proxy =! kubectl proxy
+
+### Authoriztion
+Node
+ABAC
+RBAC
+Webhook
+
 # Mock Exam 1:
 ## Autocomplete
 Search: kubectl cheat sheet
