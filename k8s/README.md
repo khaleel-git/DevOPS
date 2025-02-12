@@ -1280,6 +1280,7 @@ ABAC
 RBAC
 Webhook
 
+## Cluster Roles
 # Mock Exam 1:
 ## Autocomplete
 Search: kubectl cheat sheet
