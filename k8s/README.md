@@ -1281,6 +1281,13 @@ RBAC
 Webhook
 
 ## Cluster Roles
+other than namespaces
+
+## Service Accounts
+kubectl create serviceaccount dashbaord-sa
+kubectl describe pod my-kubernetes-dashbaord # mounts: /var/run/secrets/kubernetes.io/serviceaccount from default-token-j4hkv (ro)
+kubectl exec -it my-kubernetes-dashboard -- ls /var/run/secrets/kubernetes.io/serviceaccount
+kubectl exec -it my-kubernetes-dashbaord -- ls /var/run/secrets/kubernetes.io/serviceaccount/token
 # Mock Exam 1:
 ## Autocomplete
 Search: kubectl cheat sheet
