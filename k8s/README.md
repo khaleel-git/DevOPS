@@ -1300,7 +1300,14 @@ securityContext:
 
 ## Network policies
 Traffic:
+ingress 80
+Egress 5000
 
+Solutoins that Support Network Policies:
+- kube-router
+- Calico
+- Romana
+- Weave-net
 
 # Mock Exam 1:
 ## Autocomplete
