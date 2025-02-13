@@ -1294,6 +1294,14 @@ Private repository
 docker login private-Registery.io
 docker run private-registry.io/apps/internal-app
 
+## Security Context
+securityContext:
+  runAsUser: 1234
+
+## Network policies
+Traffic:
+
+
 # Mock Exam 1:
 ## Autocomplete
 Search: kubectl cheat sheet
