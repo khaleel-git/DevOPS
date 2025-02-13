@@ -1341,6 +1341,8 @@ ReadWriteMany
 kubectl exec webapp -- cat /log/app.log
 ```
 
+### Dynamic Provisioning
+
 # Mock Exam 1:
 ## Autocomplete
 Search: kubectl cheat sheet
