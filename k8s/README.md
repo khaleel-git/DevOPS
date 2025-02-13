@@ -1314,14 +1314,32 @@ docker storage:
 1. storage drivers
 2. volume drivers
 
-/var/lib/docker
+### Layered architecture:
+/var/lib/docker (storage drivers)
   - aufs
   - containers
   - image
   - volumes
 
-### Layered architecture:
+docker volume create data_volume
+/var/lib/docker
+  - volumes
+    - data_volume
 
+docker run -v data_volume:/var/lib/mysql mysql
+
+## Volumes
+separate plugins for volume drivers, its not handled by storage drivers
+CSI = Container Storage Interface
+
+### PersistentVolume
+ReadOnlyMany
+ReadWriteOnce
+ReadWriteMany
+
+```yml
+kubectl exec webapp -- cat /log/app.log
+```
 
 # Mock Exam 1:
 ## Autocomplete
