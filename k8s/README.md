@@ -1309,6 +1309,20 @@ Solutoins that Support Network Policies:
 - Romana
 - Weave-net
 
+## Storage
+docker storage:
+1. storage drivers
+2. volume drivers
+
+/var/lib/docker
+  - aufs
+  - containers
+  - image
+  - volumes
+
+### Layered architecture:
+
+
 # Mock Exam 1:
 ## Autocomplete
 Search: kubectl cheat sheet
