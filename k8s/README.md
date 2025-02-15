@@ -1343,6 +1343,8 @@ kubectl exec webapp -- cat /log/app.log
 
 ### Dynamic Provisioning
 
+## networking in kubernetes
+
 # Mock Exam 1:
 ## Autocomplete
 Search: kubectl cheat sheet
