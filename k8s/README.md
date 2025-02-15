@@ -1344,6 +1344,13 @@ kubectl exec webapp -- cat /log/app.log
 ### Dynamic Provisioning
 
 ## networking in kubernetes
+ip link 
+ip addr 
+iip addr add 192.168.1.10/24 dev eth0
+ip route
+ip route add 192.168.1.0/24 via 192.168.2.1
+
+cat /proc/sys/net/ipv4/ip_forward # set 0 to 1
 
 # Mock Exam 1:
 ## Autocomplete
