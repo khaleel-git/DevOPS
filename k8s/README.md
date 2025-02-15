@@ -1354,6 +1354,25 @@ cat /proc/sys/net/ipv4/ip_forward # set 0 to 1
 
 nslookup doesnt consider entry host file
 dig www.google.com # also considers local host file as well as internet
+
+### network namespaces
+ip netns add red
+ip netns add blue
+ip netns
+ip -n red link 
+ip netns exec red ip link
+
+arp 
+ip netns exec red arp
+
+ip link add veth-red type veth peer name veth-blue
+ip link set veth-red netns red
+ip link set veth-blue netns blue
+ip -n red addr add 192.168.15.1 dev veth-red
+ip -n blue addr add 192.168.15.2 dev veth-blue
+
+Linux Bridge
+
 # Mock Exam 1:
 ## Autocomplete
 Search: kubectl cheat sheet
