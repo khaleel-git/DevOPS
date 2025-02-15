@@ -1352,6 +1352,8 @@ ip route add 192.168.1.0/24 via 192.168.2.1
 
 cat /proc/sys/net/ipv4/ip_forward # set 0 to 1
 
+nslookup doesnt consider entry host file
+dig www.google.com # also considers local host file as well as internet
 # Mock Exam 1:
 ## Autocomplete
 Search: kubectl cheat sheet
