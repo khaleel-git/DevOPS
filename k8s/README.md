@@ -1372,6 +1372,27 @@ ip -n red addr add 192.168.15.1 dev veth-red
 ip -n blue addr add 192.168.15.2 dev veth-blue
 
 Linux Bridge
+.... 
+....
+..
+
+## CNI (Container Network Interface)
+Bridge
+Vlan
+IPvlan
+Macvlan
+Windows
+
+DHCP
+host-local
+
+flannel
+cilium
+vmware NSX-T
+
+CNM (container network model)
+docker does not use CNI
+it has its own cnm standard
 
 # Mock Exam 1:
 ## Autocomplete
