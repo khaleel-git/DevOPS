@@ -3,12 +3,7 @@ kafka server
 docker copy vs 
 how nginx process request
 
-Devbunch private limited:
-linux apache
-linux centos,ubuntu
-docker application
-ci cd pipelinie
 
-This is my full inventory hostname {{inventory_hostname}} #Fill variable for full inventory hostname
-This is my short inventory hostname {{inventory_hostname_short}} #Fill variable for short inventory hostname
-This is my inventory file {{inventory_file}} #Fill variable for inventory file
+Site to Site VPN - IPSec
+Redis Cache https://www.youtube.com/watch?v=1pfvz24BAUs&ab_channel=CodingwithRaphaelDeLio 
+DynamoDB
