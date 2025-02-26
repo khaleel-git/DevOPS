@@ -1394,6 +1394,9 @@ CNM (container network model)
 docker does not use CNI
 it has its own cnm standard
 
+
+### Pod Networking
+
 # Mock Exam 1:
 ## Autocomplete
 Search: kubectl cheat sheet
