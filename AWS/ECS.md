@@ -1,4 +1,4 @@
-### 1. **Set Up AWS CLI**
+### 1. Set Up AWS CLI
 Ensure the AWS CLI is installed and configured.
 
 #### Install AWS CLI (if not already installed)
