@@ -84,5 +84,6 @@ sudo swapoff -a
 sudo sed -i '/ swap / s/^/#/' /etc/fstab  # Prevent swap from enabling on reboot
 
 # finally join worker node to master node
-sudo kubeadm join 192.168.80.10:6443 --token 4fqvwv.0rjlt8i39g91ls1o --discovery-token-ca-cert-hash sha256:9b443e9bd44c031183434903ef32c2e0790f645e826858bb9bd0f5c962d5daed
+kubeadm join 192.168.80.10:6443 --token utac4e.b4ew3s2mmxvucblc \
+        --discovery-token-ca-cert-hash sha256:7c5ccdca8e84d7a5397c0b536006a3f1f4e41b6f491d1b316f7dbc900328d07d
 ```
