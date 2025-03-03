@@ -113,6 +113,12 @@ sudo sysctl -w net.ipv4.ip_forward=1
 
 sudo sysctl --system # restart it
 
+# reset kubeadm if already joined
+sudo kubeadm reset -f
+sudo rm -rf /var/lib/kubelet /etc/kubernetes
+sudo systemctl restart kubelet
+sudo systemctl status kubelet
+
 # finally join worker node to master node
 sudo kubeadm join 192.168.80.10:6443 --token utac4e.b4ew3s2mmxvucblc \
         --discovery-token-ca-cert-hash sha256:7c5ccdca8e84d7a5397c0b536006a3f1f4e41b6f491d1b316f7dbc900328d07d
