@@ -116,6 +116,12 @@ sudo sysctl --system # restart it
 # reset kubeadm if already joined
 sudo kubeadm reset -f
 sudo rm -rf /var/lib/kubelet /etc/kubernetes
+
+# Just make the modification on the file /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+Environment="KUBELET_SYSTEM_PODS_ARGS=--pod-manifest-path=/etc/kubernetes/manifests --allow-privileged=true --fail-swap-on=false"
+
+# then execute commands:
+systemctl daemon-reload
 sudo systemctl restart kubelet
 sudo systemctl status kubelet
 
