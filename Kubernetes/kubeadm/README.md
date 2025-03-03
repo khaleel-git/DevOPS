@@ -64,6 +64,9 @@ sudo sysctl --system # restart it
 
 # finally apply flannel config - only for master
 kubectl apply -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
+
+# disable
+sudo ufw disable
 ```
 
 #### Worker nodes joining
@@ -84,6 +87,6 @@ sudo swapoff -a
 sudo sed -i '/ swap / s/^/#/' /etc/fstab  # Prevent swap from enabling on reboot
 
 # finally join worker node to master node
-kubeadm join 192.168.80.10:6443 --token utac4e.b4ew3s2mmxvucblc \
+sudo kubeadm join 192.168.80.10:6443 --token utac4e.b4ew3s2mmxvucblc \
         --discovery-token-ca-cert-hash sha256:7c5ccdca8e84d7a5397c0b536006a3f1f4e41b6f491d1b316f7dbc900328d07d
 ```
