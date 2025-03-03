@@ -67,10 +67,40 @@ kubectl apply -f https://github.com/flannel-io/flannel/releases/latest/download/
 
 # disable
 sudo ufw disable
+sudo systemctl disable ufw
+sudo systemctl stop ufw
+
+# remove all rules
+sudo ufw reset
+
+# Flush all iptables rules
+sudo iptables -F
+sudo iptables -X
+sudo iptables -t nat -F
+sudo iptables -t nat -X
+sudo iptables -t mangle -F
+sudo iptables -t mangle -X
+sudo iptables -P INPUT ACCEPT
+sudo iptables -P FORWARD ACCEPT
+sudo iptables -P OUTPUT ACCEPT
+
+# Step 4: Save iptables Rules
+# To make sure the flush persists after a reboot, save the empty rules:
+sudo iptables-save | sudo tee /etc/iptables/rules.v4
+sudo ip6tables-save | sudo tee /etc/iptables/rules.v6
+
+# restart kubelet
+sudo systemctl restart kubelet
+sudo systemctl status kubelet
+
 ```
 
 #### Worker nodes joining
 ```shell
+# disable swap first
+sudo swapoff -a # temp disable
+sudo sed -i '/swap/d' /etc/fstab # completely remove at start
+
 vi /etc/sysctl.conf # add below 3 lines in this file for all nodes
 net.bridge.bridge-nf-call-iptables = 1
 net.bridge.bridge-nf-call-ip6tables = 1
@@ -82,9 +112,6 @@ sudo sysctl -w net.bridge.bridge-nf-call-ip6tables=1
 sudo sysctl -w net.ipv4.ip_forward=1
 
 sudo sysctl --system # restart it
-
-sudo swapoff -a
-sudo sed -i '/ swap / s/^/#/' /etc/fstab  # Prevent swap from enabling on reboot
 
 # finally join worker node to master node
 sudo kubeadm join 192.168.80.10:6443 --token utac4e.b4ew3s2mmxvucblc \
