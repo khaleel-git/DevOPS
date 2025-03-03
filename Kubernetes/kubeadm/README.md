@@ -129,3 +129,8 @@ sudo systemctl status kubelet
 sudo kubeadm join 192.168.80.10:6443 --token utac4e.b4ew3s2mmxvucblc \
         --discovery-token-ca-cert-hash sha256:7c5ccdca8e84d7a5397c0b536006a3f1f4e41b6f491d1b316f7dbc900328d07d
 ```
+
+
+germany appointment:
+https://service2.diplo.de/rktermin/extern/choose_categoryList.do?locationCode=isla&realmId=1330&request_locale=en
+
