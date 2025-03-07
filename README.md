@@ -6,7 +6,14 @@ Stay Connected! khaleel.org@gmail.com
 ## DevOPS Roadmap
 [DevOps 2025 Roadmap by Abhishek](https://www.youtube.com/watch?v=lVLcM-GTDUU)
 
-### DATE (Devops, AWS or Azure, Terraform, Python)
+`[Must have skills]`
+## DATE (Must have skills)
+    - Devops
+    - AWS or Azure
+    - Terraform
+    - Python
+
+### DevOPS
     1. What, Why?
     2. SDLC 
     3. Linux          (Use) -> OSI, TCP
@@ -56,3 +63,8 @@ Stay Connected! khaleel.org@gmail.com
 
 ### Projects
 30 to 40 projects are included for practice.
+
+`[Good to have skills]`
+## Good to have skills
+    - Oberserveablity (SRE) - metrics (Prometheus), monitoring (Prometheus/Grafana), logging (ELK), tracing (Open tracing)
+    - AIOPS (Artificial Operations) - Run models (locally), Llama, Pod logs, Reduce docker image size, Instance management
