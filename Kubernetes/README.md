@@ -96,6 +96,7 @@ ETCD is a distributed reliable key-value store that is simple, secure & fast.
 - Read is performed smoothly since the data is available on all the nodes
 - Write operation is performed by "Leader node only"
   - The leader node is selected internally and write request is forwarded to leader node by each node
+  - Leader Election (RAFT) - Random timer
 
 #### ETCD Commands
 ```shell
