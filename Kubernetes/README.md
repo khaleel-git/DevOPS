@@ -92,6 +92,11 @@ ETCD is a distributed reliable key-value store that is simple, secure & fast.
 - Setup - Kubeadm: `kubectl get pods -n kube-system && kubectl exec etcd-master -n kube-system etcdctl get / --prefix -keys-only` (Run inside the etcd-master POD)
 - ETCD in HA (High Availability) Environment, there are multiple etcd servers
 
+#### READ/WRITE in ETCD
+- Read is performed smoothly since the data is available on all the nodes
+- Write operation is performed by "Leader node only"
+  - The leader node is selected internally and write request is forwarded to leader node by each node
+
 #### ETCD Commands
 ```shell
 # version 2
