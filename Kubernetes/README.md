@@ -97,7 +97,8 @@ ETCD is a distributed reliable key-value store that is simple, secure & fast.
 - Write operation is performed by "Leader node only"
   - The leader node is selected internally and write request is forwarded to leader node by each node
   - Leader Election (RAFT) - Random timer
-  - Quorum: minimum nodes available for a function to work properly
+  - Quorum: minimum nodes available for a function to work properly (fault tolerance)
+  - Even number of Quroum - there's a possiblity of etcd cluster failure, odd number can save it.
 
 #### ETCD Commands
 ```shell
