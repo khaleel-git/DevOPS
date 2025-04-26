@@ -1,5 +1,6 @@
 # CKA Certification Course - Certified Kubernetes Administrator
 ## Imperative vs Declarative
+In Kubernetes, imperative management uses kubectl commands directly to create, update, and delete resources, while declarative management uses configuration files (manifests) and kubectl apply to define the desired state of resources. 
 
 ### Imperative Commands
 ## Core Concepts Section Introduction
