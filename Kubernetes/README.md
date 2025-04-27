@@ -722,6 +722,7 @@ kubectl get pods --namespace=dev
 To avoid specifying the namespace in every command, set the default namespace for your `kubectl` context:
 ```shell
 kubectl config set-context --current --namespace=dev
+kubectl config set-context --current --namespace=alpha
 kubectl config set-context --current --namespace=beta
 ```
 
