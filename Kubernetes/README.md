@@ -763,6 +763,7 @@ kubectl expose pod nginx --port=80 --target-port=80
 
 # Scale a deployment
 kubectl scale deployment nginx --replicas=3
+kubectl scale deploy     app   --replicas=2
 
 # Delete a Pod
 kubectl delete pod nginx
