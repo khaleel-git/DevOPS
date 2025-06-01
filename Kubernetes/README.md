@@ -1405,6 +1405,9 @@ vmware NSX-T
 CNM (container network model)
 docker does not use CNI
 it has its own cnm standard
+
+## Kubectl Advanced Commands
+
  
 
 ### Pod Networking
