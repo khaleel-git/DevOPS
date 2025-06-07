@@ -1524,8 +1524,9 @@ k8s/
 └── db-service.yaml
 ```
 ## Helm VS Kustomize
-#### Note! Helm templates are not compatible with yaml format bcz it uses go templating
-#### Helm is simpler than Kustomize.
+#### Note! 
+##### Helm templates are not compatible with yaml format bcz it uses go templating
+##### Helm is simpler than Kustomize.
 ---
 
 ## Kubectl Advanced Commands
