@@ -1446,12 +1446,8 @@ Overlay allows us to Kustomize the behaviour of the three environemnts (Dev, Sta
 2. overlays/stg
 3. overlays/prod
 
----
-
-```markdown
 # Kubernetes Kustomize Directory Structure
 ```
-
 k8s/
 ├── base/
 │   ├── kustomization.yaml
@@ -1470,8 +1466,7 @@ k8s/
 │   │
 │   └── prod/
 │       └── kustomization.yaml
-
-````
+```
 
 ## 📁 Folders Description
 
