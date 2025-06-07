@@ -1425,8 +1425,26 @@ helm repo add bitnami https://charts.bitnami.com/bitnami
 # search local repo
 helm search repo wordpress
 
+# list local repos
+helm repo list
+
 # serach global package
 helm search hub bitnami/wordpress
+
+# install a package from helm repos, in my case, i am installing bitnami/apache
+helm install amaze-surf bitnami/apache
+
+# Helm Cluster Upgrade
+helm install nginx-release bitname/nginx --version 7.1.0
+
+# upgrade ngnix cluster
+helm upgrade nginx-release bitnami/nginx
+
+# check release history
+helm history nginx-release
+
+# helm rollback to previous release
+helm rollback nginx-release 1 # it clones the revision 1 to new-revision 3. Dont' actually go to revision 1
 ```
 ## Kubectl Advanced Commands
 ```yml
