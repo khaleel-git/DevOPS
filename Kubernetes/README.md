@@ -1456,7 +1456,7 @@ The basic flow is:
      | Base |  +  | Overlay| --> | Final Manifests  |
      +------+     +--------+     +------------------+
 ```
-### Kubernetes Kustomize Directory Structure
+### 📁 Directory Structure
 ```
 k8s/
 ├── base/
@@ -1478,7 +1478,7 @@ k8s/
 │       └── kustomization.yaml
 ```
 
-### 📁 Folders Description
+### Description
 
 - **`base/`**  
   Contains the base Kubernetes manifests shared across all environments.
@@ -1495,7 +1495,7 @@ k8s/
   - `prod/`  
     Production overrides, usually minimal and secure.
 
-## 🛠️ How to Apply
+### How to Apply
 
 To apply the dev overlay:
 ```bash
