@@ -32,6 +32,21 @@ In Kubernetes, imperative management uses kubectl commands directly to create, u
         - [Pod Lifecycle](#pod-lifecycle)
         - [Commands and Operations](#commands-and-operations)
         - [Example Pod Configuration](#example-pod-configuration)
+    - [Taints and Tolerations](#taints-and-tolerations)
+    - [Labeling Nodes](#labeling-nodes)
+    - [Node Affinity](#node-affinity)
+    - [Security](#security)
+    - [Storage](#storage)
+    - [Volume](#volume)
+    - [CNI](#cni)
+    - [Networking in](#networking-in-kubernetes)
+    - [Helm](#helm)
+    - [Kustomize](#Kustomize)
+    - [CKA Certification Tips](#CKA-Certification-Tips)
+    - [Mock Exams](#Mock-Exams)
+      - [Mock Exam 1](#mock-exam-1)
+      - [Mock Exam 2](#mock-exam-2)
+      - [Mock Exam 3](#mock-exam-3)
 
 ---
 ### Kubernetes Architecture Diagram
@@ -798,34 +813,6 @@ kubectl apply -f pod-definition.yml
 # Delete the resource using the configuration file
 kubectl delete -f pod-definition.yml
 ```
-
-## Certification Tips - Imperative Commands with Kubectl
-```yml
-kubectl run nginx --image=nginx # Create an NGINX Pod
-kubectl run custom-nginx --image=nginx --port=8080 # create a pod with port
-kubectl run ngiinx --image=nginx --dry-run=client -o yaml # Generate POD Manifest YAML file (-o yaml). Don’t create it(–dry-run)
-
-kubectl create deployment --image=nginx nginx # create a deployment
-kubectl create deployment --image=nginx nginx --dry-run=client -o yaml # just genrate yml
-
-kubectl create deployment nginx --image=nginx --replicas=4 # with 4 replicas
-kubectl scale deployment nginx--replicas=4 # also scale via command
-kubectl create deployment nginx --image=nginx --dry-run=client -o yaml > nginx-deployment.yaml # modify scaling
-
-kubectl expose pod redis --port=6379 --name redis-service --dry-run=client -o yaml # service, cluster ip
-kubectl expose pod nginx --type=NodePort --port=80 --name=nginx-service --dry-run=client -o yaml # nodeport
-
-kubectl create service nodeport nginx --tcp=80:80 --node-port=30080 --dry-run=client -o yaml
-# Both the above commands have their own challenges. While one of them cannot accept a selector, the other cannot accept a node port. I would recommend going with the
-kubectl expose
-
-kubectl run redis --image=redis:alpine --dry-run=client -oyaml > redis-pod.yaml # modify and add label
-kubectl run redis -l tier=db --image=redis:alpine
-References:
-https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands
-https://kubernetes.io/docs/reference/kubectl/conventions/
-```
-## Kubectl Apply Command
 ## Taints and Tolerations
 kubectl taint nodes node-name key=value:taint-effect
 noSchedule, prefernoscheule, notexecute
@@ -836,10 +823,10 @@ kubectl describe node kubemaster | grep Taint
 
 kubectl taint nodes <node-name> key=value:taint-effect
 
-# untaint:
+### untaint:
 kubectl taint nodes controlplane node-role.kubernetes.io/control-plane:NoSchedule-
 
-## labeling nodes
+## Labeling Nodes
 kubectl label nodes <node-name> <label-key>=<label-value>
 kubectl label nodes node-1 size=Large
 ## Node Selectors
@@ -855,7 +842,7 @@ spec:
  nodeSelector:
   size: Large
 ```
-### Node Affinity
+## Node Affinity
 ```yml
 # Please edit the object below. Lines beginning with a '#' will be ignored,
 # and an empty file will abort the edit. If an error occurs while saving this file will be
@@ -1191,9 +1178,6 @@ If any of the initContainers fail to complete, Kubernetes restarts the Pod repea
 
 ## Backup and Restore - ETCD Cluster
 kubectl get all --all-namespaces -o yaml > all_deployed_services.yml
-
-
-
 ETCDCTL_API=3 etcdctl  --data-dir /var/lib/etcd-from-backup \
 snapshot restore /opt/snapshot-pre-boot.db
 
@@ -1388,7 +1372,8 @@ Linux Bridge
 ....
 ..
 
-## CNI (Container Network Interface)
+## CNI
+### CNI = (Container Network Interface)
 Bridge
 Vlan
 IPvlan
@@ -1452,6 +1437,8 @@ helm rollback nginx-release 1 # it clones the revision 1 to new-revision 3. Dont
 ### rollback
 1. The rollback feature is not same as backup/restore feature bcz it does not backup/restore the persistent volumes, rather it attaches the same pvs.
 2. You have to take snapshots of DBs separately
+
+## Kustomize
 ## Kubectl Advanced Commands
 ```yml
 kubectl get nodes -o json
@@ -1478,10 +1465,37 @@ kubectl get nodes --sort-by=..status.capacity.cpu
 ```
  
 
-### Pod Networking
- 
-# Mock Exam 1:
-## Autocomplete
+## CKA Certification Tips 
+### Imperative Commands with Kubectl
+```yml
+kubectl run nginx --image=nginx # Create an NGINX Pod
+kubectl run custom-nginx --image=nginx --port=8080 # create a pod with port
+kubectl run ngiinx --image=nginx --dry-run=client -o yaml # Generate POD Manifest YAML file (-o yaml). Don’t create it(–dry-run)
+
+kubectl create deployment --image=nginx nginx # create a deployment
+kubectl create deployment --image=nginx nginx --dry-run=client -o yaml # just genrate yml
+
+kubectl create deployment nginx --image=nginx --replicas=4 # with 4 replicas
+kubectl scale deployment nginx--replicas=4 # also scale via command
+kubectl create deployment nginx --image=nginx --dry-run=client -o yaml > nginx-deployment.yaml # modify scaling
+
+kubectl expose pod redis --port=6379 --name redis-service --dry-run=client -o yaml # service, cluster ip
+kubectl expose pod nginx --type=NodePort --port=80 --name=nginx-service --dry-run=client -o yaml # nodeport
+
+kubectl create service nodeport nginx --tcp=80:80 --node-port=30080 --dry-run=client -o yaml
+# Both the above commands have their own challenges. While one of them cannot accept a selector, the other cannot accept a node port. I would recommend going with the
+kubectl expose
+
+kubectl run redis --image=redis:alpine --dry-run=client -oyaml > redis-pod.yaml # modify and add label
+kubectl run redis -l tier=db --image=redis:alpine
+References:
+https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands
+https://kubernetes.io/docs/reference/kubectl/conventions/
+```
+
+## Mock Exams
+### Mock Exam 1:
+### Autocomplete
 Search: kubectl cheat sheet
 kubectl autocomplete command:
 ```shell
@@ -1568,7 +1582,7 @@ spec:
       path: /pv/data-analytics
 ```
 
-# Mock Exam 2
+### Mock Exam 2
 Q1: Take a backup of the etcd cluster and save it to /opt/etcd-backup.db.
 ```shell
 ETCDCTL_API=3 etcdctl snapshot save --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key --endpoints=127.0.0.1:2379 /opt/etcd-backup.db
@@ -1707,7 +1721,7 @@ Go back to master node
 kubectl get pods 
 ```
 
-# Mock Exam 3
+### Mock Exam 3
 Q1: Create a new service account with the name pvviewer. Grant this Service account access to list all PersistentVolumes in the cluster by creating an appropriate cluster role called pvviewer-role and ClusterRoleBinding called pvviewer-role-binding.
 Next, create a pod called pvviewer with the image: redis and serviceAccount: pvviewer in the default namespace.
 
