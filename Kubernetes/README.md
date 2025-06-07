@@ -1440,12 +1440,18 @@ helm install nginx-release bitname/nginx --version 7.1.0
 # upgrade ngnix cluster
 helm upgrade nginx-release bitnami/nginx
 
+# upgrde ngnix cluster release-name=dassling-web to 18.3.6 cluster
+helm upgrade dazzling-web bitnami/nginx --version 18.3.6
+
 # check release history
 helm history nginx-release
 
 # helm rollback to previous release
 helm rollback nginx-release 1 # it clones the revision 1 to new-revision 3. Dont' actually go to revision 1
 ```
+### rollback
+1. The rollback feature is not same as backup/restore feature bcz it does not backup/restore the persistent volumes, rather it attaches the same pvs.
+2. You have to take snapshots of DBs separately
 ## Kubectl Advanced Commands
 ```yml
 kubectl get nodes -o json
