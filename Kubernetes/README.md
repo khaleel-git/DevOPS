@@ -1427,12 +1427,13 @@ helm upgrade dazzling-web bitnami/nginx --version 18.3.6
 # check release history
 helm history nginx-release
 
+# rollback notes
+# 1. The rollback feature is not same as backup/restore feature bcz it does not backup/restore the persistent volumes, rather it attaches the same pvs.
+# 2. You have to take snapshots of DBs separately
+
 # helm rollback to previous release
 helm rollback nginx-release 1 # it clones the revision 1 to new-revision 3. Dont' actually go to revision 1
 ```
-### rollback
-1. The rollback feature is not same as backup/restore feature bcz it does not backup/restore the persistent volumes, rather it attaches the same pvs.
-2. You have to take snapshots of DBs separately
 
 ## Kustomize
 ## Kubectl Advanced Commands
