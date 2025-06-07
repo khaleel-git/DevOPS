@@ -1446,6 +1446,16 @@ Overlay allows us to Kustomize the behaviour of the three environemnts (Dev, Sta
 2. overlays/stg
 3. overlays/prod
 
+### 📦 Kustomize Workflow
+
+Kustomize allows you to customize raw, template-free YAML files for multiple purposes.
+
+The basic flow is:
+```
+     +------+     +--------+     +------------------+
+     | Base |  +  | Overlay| --> | Final Manifests  |
+     +------+     +--------+     +------------------+
+```
 ### Kubernetes Kustomize Directory Structure
 ```
 k8s/
