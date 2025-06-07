@@ -1436,6 +1436,70 @@ helm rollback nginx-release 1 # it clones the revision 1 to new-revision 3. Dont
 ```
 
 ## Kustomize
+Dev, Std, Prod
+Base config 
+Overlay
+
+### Overlay 
+Overlay allows us to Kustomize the behaviour of the three environemnts (Dev, Stagging, Production)
+1. overlays/dev
+2. overlays/stg
+3. overlays/prod
+
+### Kubernetes Kustomize Directory Structure
+---
+k8s/
+├── base/
+│   ├── kustomization.yaml
+│   ├── nginx-depl.yaml
+│   ├── service.yaml
+│   └── redis-depl.yaml
+│
+├── overlays/
+│   ├── dev/
+│   │   ├── kustomization.yaml
+│   │   └── config-map.yaml
+│   │
+│   ├── stg/
+│   │   ├── kustomization.yaml
+│   │   └── config-map.yaml
+│   │
+│   └── prod/
+│       └── kustomization.yaml
+
+````
+## 📁 Folders Description
+
+- **`base/`**  
+  Contains the base Kubernetes manifests shared across all environments.
+
+- **`overlays/`**  
+  Environment-specific configurations that override or extend the base manifests.
+
+  - `dev/`  
+    Development-specific overrides (e.g., ConfigMap with dev environment variables).
+
+  - `stg/`  
+    Staging-specific configuration.
+
+  - `prod/`  
+    Production overrides, usually minimal and secure.
+
+## 🛠️ How to Apply
+
+To apply the dev overlay:
+```bash
+kubectl apply -k overlays/dev
+````
+
+To apply production:
+
+```bash
+kubectl apply -k overlays/prod
+```
+
+---
+
 ## Kubectl Advanced Commands
 ```yml
 kubectl get nodes -o json
