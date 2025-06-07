@@ -1510,11 +1510,14 @@ kubectl apply -k overlays/prod
 ### deployment.yaml structure
 ```
 k8s/
+|
 ├── environments/
 │   ├── values.dev.yaml
 │   ├── values.stg.yaml
 │   └── values.prod.yaml
+|
 └── templates/
+|
 ├── nginx-deployment.yaml
 ├── nginx-service.yaml
 ├── db-deployment.yaml
