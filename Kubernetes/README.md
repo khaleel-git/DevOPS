@@ -1406,6 +1406,28 @@ CNM (container network model)
 docker does not use CNI
 it has its own cnm standard
 
+
+## Helm
+```yml
+# pull bitnami wordpress
+helm pull bitnami/wordpress
+helm pull --untar bitnami/wordpress
+
+# check chart files, configure values.yaml file
+ls wordpress
+
+# now install wordpress
+helm install my-release ./wordpress
+
+# add bitnami repo
+helm repo add bitnami https://charts.bitnami.com/bitnami
+
+# search local repo
+helm search repo wordpress
+
+# serach global package
+helm search hub bitnami/wordpress
+```
 ## Kubectl Advanced Commands
 ```yml
 kubectl get nodes -o json
