@@ -1525,8 +1525,8 @@ k8s/
 ```
 ## Helm VS Kustomize
 #### Note! 
-- Helm is more than a tool, it provides extra features like contionals, loops, funtions and hooks
-- Helm templates are not compatible with yaml format bcz it uses go templating
+- Helm is more than a tool, it provides extra features like contionals, loops, funtions and hooks.
+- Helm templates are not compatible with yaml format bcz it uses go templating.
 - Kustomize is simpler than Helm.
 ---
 
