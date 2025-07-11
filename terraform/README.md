@@ -238,7 +238,7 @@ terraform {
 4. Destory only specific resources: terraform destroy target ....
 5. Reserve key
 6. Modules (types of modules)
-7. Why Terraform doesn't recommend tint command? and why replace command?
+7. Why Terraform doesn't recommend terraform taint command? and why replace command? link: [terraform taint vs replace](https://rhegisanjebas.medium.com/terraform-taint-vs-replace-why-replace-is-the-better-option-for-your-infrastructure-e59c1193e6db)
 
 ### 8. aws user_data and problems with Configuration Management
 #### Below code wont be run becuase of indentation in Shebang
