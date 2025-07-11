@@ -236,7 +236,7 @@ terraform {
 2. Why Terraform?
 3. Features of Terraform/HCL
 4. Destory only specific resources: terraform destroy target ....
-5. Reserve key
+5. Reserve tag key
 6. Modules (types of modules)
 7. Why Terraform doesn't recommend terraform taint command? and why replace command? link: [terraform taint vs replace](https://rhegisanjebas.medium.com/terraform-taint-vs-replace-why-replace-is-the-better-option-for-your-infrastructure-e59c1193e6db)
 
