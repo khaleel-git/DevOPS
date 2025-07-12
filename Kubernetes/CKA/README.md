@@ -1,6 +1,3 @@
-Okay, I've received the new question and the associated images. Here's how I'll update your `README.md` file, incorporating Q-01 with its question, context, solution steps, and verification:
-
-````markdown
 ## 📚 CKA 2025 Practice Questions & Solutions 
 
 Click here for all [Questions](https://docs.google.com/document/d/16CwiwhEtuisL5TaIL3rR0AJQY1BOI70yVVwuOO55tJM/edit?usp=sharing)
