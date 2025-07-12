@@ -381,6 +381,88 @@ A PersistentVolume (PV) named `mariadb-pv` already exists and is retained for re
 
 -----
 
+### Q-15: Prepare Linux System for Kubernetes (cri-dockerd & sysctl)
+
+**📝 Question:**
+Prepare a Linux system for Kubernetes. Docker is already installed, but you need to configure it for `kubeadm`.
+
+**Task:**
+Complete these tasks to prepare the system for Kubernetes:
+* **Set up cri-dockerd:**
+    * Install the Debian package `~/cri-dockerd_0.3.9.3-0.ubuntu-jammy_amd64.deb`
+    * Debian packages are installed using `dpkg`.
+    * Enable and start the `cri-dockerd` service
+* **Configure these system parameters (sysctl):**
+    * `Set net.bridge.bridge-nf-call-iptables to 1`
+    * `Set net.ipv6.conf.all.forwarding to 1`
+    * `Set net.ipv4.ip_forward to 1`
+    * `Set net.netfilter.nf_conntrack_max to 131072`
+
+---
+#### Prereqs
+
+* A Linux system (e.g., Ubuntu Jammy) with Docker already installed.
+* The `cri-dockerd` Debian package (`cri-dockerd_0.3.9.3-0.ubuntu-jammy_amd64.deb`) located in the home directory (`~`).
+* Root/sudo access on the system.
+
+#### Solution Steps
+
+1.  **Install `cri-dockerd` Debian package:**
+    Navigate to your home directory (if not already there) and install the Debian package using `dpkg`.
+    ```bash
+    cd ~
+    sudo dpkg -i cri-dockerd_0.3.9.3-0.ubuntu-jammy_amd64.deb
+    ```
+
+2.  **Enable and Start `cri-dockerd` service:**
+    After installation, ensure the `cri-dockerd` service is enabled to start on boot and is currently running.
+    ```bash
+    sudo systemctl enable cri-docker.service
+    sudo systemctl enable --now cri-docker.socket # Enable and start the socket
+    sudo systemctl start cri-docker.service
+    ```
+
+3.  **Configure `sysctl` parameters:**
+    These parameters are crucial for Kubernetes networking (e.g., Pod-to-Pod communication and Service routing) and need to persist across reboots.
+
+    Create a configuration file (e.g., `k8s.conf`) in `/etc/sysctl.d/` and add the specified parameters.
+    ```bash
+    cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
+    net.bridge.bridge-nf-call-iptables = 1
+    net.ipv6.conf.all.forwarding = 1
+    net.ipv4.ip_forward = 1
+    net.netfilter.nf_conntrack_max = 131072
+    EOF
+    ```
+
+4.  **Apply `sysctl` parameters:**
+    Apply the changes immediately without requiring a system reboot.
+    ```bash
+    sudo sysctl --system
+    ```
+
+#### Verification Steps
+
+1.  **Verify `cri-dockerd` service status:**
+    Check if `cri-dockerd` service is active and running.
+    ```bash
+    sudo systemctl status cri-docker.service
+    sudo systemctl status cri-docker.socket
+    ```
+    Both should show `active (running)`.
+
+2.  **Verify `sysctl` parameters:**
+    Confirm that each parameter has been set correctly.
+    ```bash
+    sysctl net.bridge.bridge-nf-call-iptables
+    sysctl net.ipv6.conf.all.forwarding
+    sysctl net.ipv4.ip_forward
+    sysctl net.netfilter.nf_conntrack_max
+    ```
+    Expected output for each should be `... = 1` or `... = 131072`.
+
+-----
+
 ### Q-16: Fix Broken Kubeadm Cluster Migration
 
 **📝 Question:**  
