@@ -1,3 +1,8 @@
+Okay, I have the details for Q-16. This is a more complex troubleshooting question. I will add it to your `README.md` file, following the established structure.
+
+Here's the updated `README.md` content:
+
+````markdown
 ## 📚 CKA 2025 Practice Questions & Solutions 
 
 Click here for all [Questions](https://docs.google.com/document/d/16CwiwhEtuisL5TaIL3rR0AJQY1BOI70yVVwuOO55tJM/edit?usp=sharing)
@@ -187,6 +192,118 @@ curl -k [https://gateway.web.k8s.local](https://gateway.web.k8s.local):<NodePort
 ```bash
 kubectl delete ingress web -n alpha
 ```
+
+-----
+
+### Q-16: Fix Broken Kubeadm Cluster Migration
+
+**📝 Question:**  
+A `kubeadm` provisioned cluster was migrated to a new machine. Requires configuration changes to run successfully.
+
+**Task:**
+We need to fix a **single-node cluster** that got broken during machine migration.
+Identify the broken cluster **components** and investigate what caused to break those components.
+The decommissioned cluster used an **external etcd server**.
+Next, fix the configuration of all **broken cluster components**.
+Ensure to **restart** all necessary services and components for changes to take effect.
+Finally, ensure the cluster, single node and all pods are Ready.
+
+-----
+
+#### Clues / Initial State
+
+  * `kubectl get po` shows "The connection to the server 172.30.1.2:6443 was refused - did you specify the right host or port?"
+  * `ls /etc/kubernetes/manifests/` shows `etcd.yaml kube-apiserver.yaml kube-controller-manager.yaml kube-scheduler.yaml`
+  * `kube-apiserver.yaml` has `--advertise-address=172.30.1.2`
+  * `kube-apiserver.yaml` has `--etcd-servers=https://128.0.0.1:2379` (Note the highlighted IP address `128.0.0.1` in the image, suggesting this might be incorrect).
+
+-----
+
+#### Common Kubernetes Component Ports
+
+  * **kube-apiserver:** 6443 (default secure port)
+  * **kubelet:** 10250 (default HTTPS port for API), 10255 (read-only HTTP port, deprecated in newer versions), 10248 (healthz endpoint)
+  * **kube-scheduler:** 10259 (HTTPS port, for metrics/health)
+  * **kube-controller-manager:** 10257 (HTTPS port, for metrics/health)
+  * **etcd:** 2379 (client port), 2380 (peer port)
+
+-----
+
+#### Solution Steps
+
+1.  **Identify the Problem:**
+    The error "connection refused" to the API server indicates the `kube-apiserver` is not running or not accessible at the specified address/port. Since the cluster uses an external etcd, a common issue during migration is that the API server's etcd endpoint is still pointing to the old (or incorrect) etcd server IP. The `kube-apiserver.yaml` showing `etcd-servers=https://128.0.0.1:2379` while the API server's advertise address is `172.30.1.2` strongly suggests an etcd connectivity issue. The `128.0.0.1` IP is likely the broken part of the configuration.
+
+2.  **Edit `kube-apiserver.yaml`:**
+    Modify the `kube-apiserver.yaml` manifest to correct the `--etcd-servers` address. This needs to point to the correct IP address of the *new* external etcd server.
+
+    ```bash
+    vi /etc/kubernetes/manifests/kube-apiserver.yaml
+    ```
+
+    Change the line:
+
+    ```
+    - --etcd-servers=[https://128.0.0.1:2379](https://128.0.0.1:2379)
+    ```
+
+    To the correct IP of your external etcd server. For example, if the new etcd server IP is `172.30.1.2` (matching the advertise address of the API server itself, assuming it's on the same host or a reachable IP):
+
+    ```
+    - --etcd-servers=[https://172.30.1.2:2379](https://172.30.1.2:2379)
+    ```
+
+    *(Note: Replace `172.30.1.2` with the actual IP address of the external etcd server in the new environment if it's different).*
+
+3.  **Restart Kubelet:**
+    Since the Kubernetes control plane components (like kube-apiserver) are often run as static pods managed by Kubelet, restarting the `kubelet` service will force it to re-read the static pod manifests and restart the API server with the updated configuration.
+
+    ```bash
+    sudo systemctl restart kubelet
+    ```
+
+-----
+
+#### Verification Steps
+
+1.  **Check Kubelet Status:**
+
+    ```bash
+    sudo systemctl status kubelet
+    ```
+
+    Ensure it's running without errors.
+
+2.  **Check Control Plane Pods:**
+    Wait a few moments for the static pods to restart. Then, verify that the control plane pods (especially `kube-apiserver`) are running.
+
+    ```bash
+    kubectl get po -n kube-system
+    ```
+
+    You should see `kube-apiserver-*`, `kube-controller-manager-*`, and `kube-scheduler-*` pods in a `Running` state.
+
+3.  **Check Node Status:**
+    Verify that the node itself is `Ready`.
+
+    ```bash
+    kubectl get nodes
+    ```
+
+4.  **Check Cluster Health:**
+    Ensure all components are healthy.
+
+    ```bash
+    kubectl cluster-info
+    kubectl get --raw='/readyz?verbose'
+    ```
+
+5.  **List All Pods:**
+    Finally, ensure all pods across the cluster are in a Ready state.
+
+    ```bash
+    kubectl get pods --all-namespaces
+    ```
 
 -----
 
