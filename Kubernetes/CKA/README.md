@@ -10,6 +10,7 @@ Click here for all [Questions](https://docs.google.com/document/d/16CwiwhEtuisL5
 * [Q-02: Ingress to Gateway API Migration](#q-02-ingress-to-gateway-api-migration)
 * [Q-14: Re-establish MariaDB Deployment with Persistent Storage](#q-14-re-establish-mariadb-deployment-with-persistent-storage)
 * [Q-16: Fix Broken Kubeadm Cluster Migration](#q-16-fix-broken-kubeadm-cluster-migration)
+* [Q-17: NetworkPolicy for Frontend-Backend Communication](#q-17-networkpolicy-for-frontend-backend-communication)
 
 ---
 
@@ -485,6 +486,88 @@ Finally, ensure the cluster, single node and all pods are Ready.
     ```bash
     kubectl get pods --all-namespaces
     ```
+
+-----
+
+### Q-17: NetworkPolicy for Frontend-Backend Communication
+
+**📝 Question:**  
+We have `frontend` and `backend` Deployments in separate NS (`frontend` and `backend`). They need to communicate.
+
+**Task:**
+Analyze: Inspect the frontend and backend Deployments to understand their communication requirements.
+Apply: From the NetworkPolicy YAML files in the `~/netpol` folder, choose one to apply. It must:
+
+  * Allow communication between `frontend` and `backend`.
+  * Be as restrictive as possible (least permissive).
+  * Do not delete or change the existing "deny-all" netpol's.
+  * Failure to follow these rules may result in a score reduction or zero.
+
+-----
+
+#### Prereqs
+
+  * Namespaces: `frontend` and `backend` (assume they exist)
+  * Deployments: `frontend` pods in `frontend` NS, `backend` pods in `backend` NS (assume they exist and have `app: frontend` and `app: backend` labels respectively).
+  * NetworkPolicy files located in `~/netpol/`: `netpol-1.yaml`, `netpol-2.yaml`, `netpol-3.yaml`
+
+-----
+
+#### Analysis of NetworkPolicies:
+
+  * **`netpol-1.yaml` (N1 - `allow-all-from-frontend-to-backend`)**:
+
+      * Targets `app: backend` pods in `backend` namespace.
+      * Allows ingress from *any* pod in the `frontend` namespace (selected by `kubernetes.io/metadata.name: frontend`).
+      * Allows traffic on TCP port 80.
+      * *Permissive:* Allows any pod from `frontend` NS to connect.
+
+  * **`netpol-2.yaml` (N2 - `allow-frontend-to-backend`)**:
+
+      * Targets `app: backend` pods in `backend` namespace.
+      * Allows ingress from pods in the `frontend` namespace *AND specifically* with the label `app: frontend` (selected by `namespaceSelector` and `podSelector`).
+      * Allows traffic on TCP port 80.
+      * *Most Restrictive (Least Permissive):* Narrows down the source pods to only those with `app: frontend` label within the `frontend` namespace. This is more restrictive than `netpol-1.yaml`.
+
+  * **`netpol-3.yaml` (N3 - `allow-nothing`)**:
+
+      * Targets `app: backend` pods in `backend` namespace.
+      * Has `ingress: []` (empty ingress rules), effectively denying all ingress traffic to the targeted pods.
+      * *Too Restrictive:* This would prevent communication.
+
+**Conclusion:** `netpol-2.yaml` is the correct policy to apply as it allows communication while being the most restrictive among the given options by specifying both namespace and pod labels for the source.
+
+-----
+
+#### Solution Steps
+
+1.  **Apply the correct NetworkPolicy:**
+    Based on the analysis, `netpol-2.yaml` is the most restrictive policy that allows communication.
+    ```bash
+    kubectl apply -f ~/netpol/netpol-2.yaml
+    ```
+
+-----
+
+#### Verification Steps
+
+1.  **Check NetworkPolicy Status:**
+    Verify the NetworkPolicy has been created.
+
+    ```bash
+    kubectl get netpol -n backend
+    kubectl describe netpol allow-frontend-to-backend -n backend
+    ```
+
+2.  **Test Communication:**
+    From a pod in the `frontend` namespace (specifically one with `app: frontend` label if applicable), attempt to `curl` the `backend` service (assuming a service exposes the backend deployment).
+
+    ```bash
+    # Assuming you have a frontend pod named 'frontend-pod-xxx' and a backend service 'backend-service'
+    kubectl exec -it <frontend-pod-name> -n frontend -- curl -s -m 5 backend-service.backend.svc.cluster.local:80
+    ```
+
+    The command should successfully return a response from the backend, indicating communication is allowed. If it times out or gets a "connection refused" error, the policy might not be correctly applied or there are other underlying issues.
 
 -----
 
