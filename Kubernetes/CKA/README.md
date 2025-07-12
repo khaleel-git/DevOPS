@@ -1,15 +1,29 @@
-Here is your cleaned-up and focused `README.md` containing **only the Gateway API migration question**, while preserving the header and the doc link:
+## 📚 CKA 2025 Practice Questions & Solutions 
 
-````markdown
-## 📚 CKA 2025 Practice Questions & Solutions
-
-[Questions](https://docs.google.com/document/d/16CwiwhEtuisL5TaIL3rR0AJQY1BOI70yVVwuOO55tJM/edit?usp=sharing)
+Click here for all [Questions](https://docs.google.com/document/d/16CwiwhEtuisL5TaIL3rR0AJQY1BOI70yVVwuOO55tJM/edit?usp=sharing)
 
 ---
 
 ### Q-02: Ingress to Gateway API Migration
 
-**Goal:** Migrate from Ingress to Gateway API
+**📝 Question (from image):**  
+Migrate an existing web application from Ingress to Gateway API.  
+We must maintain **HTTPS access**.
+
+A `GatewayClass` named `nginx` is installed in the cluster.
+
+1. First, create a **Gateway** named `web-gateway` with hostname `gateway.web.k8s.local` that maintains the existing **TLS** and listener configuration from the existing Ingress resource named `web`.
+
+2. Next, create an **HTTPRoute** named `web-route` with hostname `gateway.web.k8s.local` that maintains the existing routing rules from the current Ingress resource named `web`.
+
+3. You can test your Gateway API configuration with the following command:
+   ```bash
+   curl https://gateway.web.k8s.local
+````
+
+4. Finally, delete the existing Ingress resource named `web`.
+
+---
 
 #### Prereqs
 
@@ -17,7 +31,9 @@ Here is your cleaned-up and focused `README.md` containing **only the Gateway AP
 * Backend Service: `nginx-service:80`
 * GatewayClass: `nginx-class`
 
-#### Gateway YAML (web-gateway.yaml)
+---
+
+#### Gateway YAML (`web-gateway.yaml`)
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1beta1
@@ -37,9 +53,11 @@ spec:
         certificateRefs:
           - kind: Secret
             name: web-tls
-````
+```
 
-#### HTTPRoute YAML (web-route.yaml)
+---
+
+#### HTTPRoute YAML (`web-route.yaml`)
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1beta1
@@ -62,25 +80,41 @@ spec:
           port: 80
 ```
 
-#### Verification
+---
+
+#### Verification Steps
 
 ```bash
 kubectl get gateway web-gateway -n alpha
+kubectl describe gateway web-gateway -n alpha
+
+kubectl get httproute web-route -n alpha
 kubectl describe httproute web-route -n alpha
 ```
 
-#### DNS Resolution
+---
+
+#### DNS Resolution (Local Host Setup)
 
 ```bash
-# Map in /etc/hosts:
+# Edit /etc/hosts
 <NODE_IP> gateway.web.k8s.local
+```
 
-# Test:
+---
+
+#### Final Test (Curl to Gateway)
+
+```bash
 curl -k https://gateway.web.k8s.local:<NodePort>
 ```
 
+---
+
+#### Cleanup (ONLY if test is successful)
+
 ```bash
-kubectl delete ingress web -n alpha  # ONLY if above test passes
+kubectl delete ingress web -n alpha
 ```
 
 ---
