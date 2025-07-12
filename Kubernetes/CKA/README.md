@@ -1,5 +1,7 @@
 ## 📚 CKA 2025 Practice Questions & Solutions
 
+
+
 ### Q-01: Update ConfigMap with FQDN Values
 
 **Goal:** Update a ConfigMap with internal FQDNs.
