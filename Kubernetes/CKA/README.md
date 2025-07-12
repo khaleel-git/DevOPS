@@ -1,8 +1,3 @@
-Okay, I have the details for Q-16. This is a more complex troubleshooting question. I will add it to your `README.md` file, following the established structure.
-
-Here's the updated `README.md` content:
-
-````markdown
 ## 📚 CKA 2025 Practice Questions & Solutions 
 
 Click here for all [Questions](https://docs.google.com/document/d/16CwiwhEtuisL5TaIL3rR0AJQY1BOI70yVVwuOO55tJM/edit?usp=sharing)
