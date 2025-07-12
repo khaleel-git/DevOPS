@@ -8,6 +8,7 @@ Click here for all [Questions](https://docs.google.com/document/d/16CwiwhEtuisL5
 
 * [Q-01: NGINX TLSv1.3 Only Configuration](#q-01-nginx-tlsv13-only-configuration)
 * [Q-02: Ingress to Gateway API Migration](#q-02-ingress-to-gateway-api-migration)
+* [Q-14: Re-establish MariaDB Deployment with Persistent Storage](#q-14-re-establish-mariadb-deployment-with-persistent-storage)
 * [Q-16: Fix Broken Kubeadm Cluster Migration](#q-16-fix-broken-kubeadm-cluster-migration)
 
 ---
@@ -186,6 +187,200 @@ curl -k [https://gateway.web.k8s.local](https://gateway.web.k8s.local):<NodePort
 ```bash
 kubectl delete ingress web -n alpha
 ```
+
+-----
+
+### Q-14: Re-establish MariaDB Deployment with Persistent Storage
+
+**📝 Question:**  
+A user accidentally deleted the MariaDB Deployment in the `mariadb` namespace, which was configured with persistent storage. Your responsibility is to re-establish the Deployment while ensuring data is preserved by reusing the available PersistentVolume.
+
+**Task:**
+A PersistentVolume (PV) named `mariadb-pv` already exists and is retained for reuse. Only one PV exists.
+
+1.  Create a **PersistentVolumeClaim (PVC)** named `mariadb` in the `mariadb` NS with the spec: `Accessmode: ReadWriteOnce` and `Storage: 250Mi`.
+
+2.  Edit the MariaDB Deployment file located at `~/mariadb-deploy.yaml` to use the PVC created in the previous step.
+
+3.  Apply the updated Deployment file to the cluster.
+
+4.  Ensure the MariaDB Deployment is running and Stable.
+
+-----
+
+#### Prereqs
+
+  * Existing PersistentVolume: `mariadb-pv` (ensure it exists and its `reclaimPolicy` allows reuse, typically `Retain` for this scenario, as shown in the image).
+      * **`mariadb-pv` YAML for reference:**
+        ```yaml
+        apiVersion: v1
+        kind: PersistentVolume
+        metadata:
+          name: mariadb-pv
+        spec:
+          storageClassName: local-path
+          capacity:
+            storage: 250Mi
+          accessModes:
+            - ReadWriteOnce
+          persistentVolumeReclaimPolicy: Retain # Important for data preservation
+          hostPath:
+            path: "/mnt/data/mariadb" # Example host path
+        ```
+  * MariaDB Deployment file: `~/mariadb-deploy.yaml` (needs to be created or modified)
+  * Namespace: `mariadb` (create if it doesn't exist)
+
+-----
+
+#### Solution Steps
+
+1.  **Create the `mariadb` Namespace (if it doesn't exist):**
+
+    ```bash
+    kubectl create ns mariadb
+    ```
+
+2.  **Create the PersistentVolumeClaim (PVC):**
+    Create a file named `mariadb-pvc.yaml` (or similar) with the following content:
+
+    ```yaml
+    # mariadb-pvc.yaml
+    apiVersion: v1
+    kind: PersistentVolumeClaim
+    metadata:
+      name: mariadb
+      namespace: mariadb
+    spec:
+      accessModes:
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: 250Mi
+      volumeName: mariadb-pv # Explicitly bind to the existing PV
+    ```
+
+    Apply the PVC:
+
+    ```bash
+    kubectl apply -f mariadb-pvc.yaml
+    ```
+
+    Verify it's `Bound`:
+
+    ```bash
+    kubectl get pvc -n mariadb
+    ```
+
+3.  **Prepare the MariaDB Deployment File (`~/mariadb-deploy.yaml`):**
+    Create or ensure your `~/mariadb-deploy.yaml` file exists with the MariaDB Deployment definition. It should mount the PVC. An example structure:
+
+    ```yaml
+    # ~/mariadb-deploy.yaml
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: mariadb-deployment
+      namespace: mariadb
+      labels:
+        app: mariadb
+    spec:
+      replicas: 1
+      selector:
+        matchLabels:
+          app: mariadb
+      template:
+        metadata:
+          labels:
+            app: mariadb
+        spec:
+          containers:
+            - name: mariadb
+              image: mariadb:10.5 # Use an appropriate image version
+              env:
+                - name: MYSQL_ROOT_PASSWORD
+                  value: your_secure_password # Replace with a real password or secret reference
+              ports:
+                - containerPort: 3306
+              volumeMounts:
+                - name: mariadb-persistent-storage
+                  mountPath: /var/lib/mysql # Default data directory for MariaDB
+          volumes:
+            - name: mariadb-persistent-storage
+              persistentVolumeClaim:
+                claimName: mariadb # Reference the PVC created above
+    ```
+
+4.  **Update the Deployment (Choose ONE of the methods below):**
+
+    **Method A: Edit the Deployment YAML file directly and re-apply**
+    This is often the most straightforward for a full file update.
+
+    ```bash
+    # Make sure you've modified ~/mariadb-deploy.yaml as shown in step 3
+    kubectl apply -f ~/mariadb-deploy.yaml
+    ```
+
+    **Method B: Patch the existing Deployment (if it were already deployed and you needed a quick change)**
+    *Note: This assumes the Deployment `mariadb-deployment` *exists* but is perhaps misconfigured regarding storage. If it was deleted, Method A is necessary to re-create it.*
+    If the deployment was deleted, you must use Method A (apply the full YAML) to re-create it. If the question implies the *deployment* was deleted but the PV/PVC state is managed, then re-applying the full YAML is the correct approach to re-establish the deployment.
+
+    If the task was to *modify an existing* deployment's volume configuration, a patch could look something like this (this is a conceptual example for patching, actual patch might vary based on original deploy file):
+
+    ```bash
+    # Example patch - typically used for existing deployments that need modification,
+    # NOT for re-creating a deleted deployment from scratch.
+    # This example shows how to add a volumeMount and a volume.
+    kubectl patch deployment mariadb-deployment -n mariadb --patch '
+    spec:
+      template:
+        spec:
+          containers:
+            - name: mariadb
+              volumeMounts:
+                - name: mariadb-persistent-storage
+                  mountPath: /var/lib/mysql
+          volumes:
+            - name: mariadb-persistent-storage
+              persistentVolumeClaim:
+                claimName: mariadb
+    '
+    ```
+
+    *Self-correction*: For the specific scenario "accidentally deleted the MariaDB Deployment...re-establish the Deployment", `kubectl apply -f` (Method A) is the primary and most robust solution as it recreates the entire resource definition. Patching is typically for incremental updates to *existing* resources. I've noted this clarification in the steps.
+
+-----
+
+#### Verification Steps
+
+1.  **Check PVC Status:**
+    Ensure the PVC is `Bound` to the PV.
+
+    ```bash
+    kubectl get pvc -n mariadb
+    ```
+
+2.  **Check Deployment Status:**
+    Verify the MariaDB Deployment is running and has the correct number of ready replicas.
+
+    ```bash
+    kubectl get deploy -n mariadb
+    ```
+
+3.  **Check Pod Status:**
+    Ensure the MariaDB pod is `Running`.
+
+    ```bash
+    kubectl get po -n mariadb
+    ```
+
+4.  **Verify Volume Mount (Optional but good practice):**
+    Describe the pod to ensure the volume is correctly mounted.
+
+    ```bash
+    kubectl describe po -l app=mariadb -n mariadb
+    ```
+
+    Look for `Volume Mounts` and `Volumes` sections.
 
 -----
 
