@@ -8,7 +8,9 @@ Click here for all [Questions](https://docs.google.com/document/d/16CwiwhEtuisL5
 
 * [Q-01: NGINX TLSv1.3 Only Configuration](#q-01-nginx-tlsv13-only-configuration)
 * [Q-02: Ingress to Gateway API Migration](#q-02-ingress-to-gateway-api-migration)
+* [Q-04: Create Ingress Resource for Echo Server](#q-04-create-ingress-resource-for-echo-server)
 * [Q-14: Re-establish MariaDB Deployment with Persistent Storage](#q-14-re-establish-mariadb-deployment-with-persistent-storage)
+* [Q-15: Prepare Linux System for Kubernetes (cri-dockerd & sysctl)](#q-15-prepare-linux-system-for-kubernetes-cri-dockerd--sysctl)
 * [Q-16: Fix Broken Kubeadm Cluster Migration](#q-16-fix-broken-kubeadm-cluster-migration)
 * [Q-17: NetworkPolicy for Frontend-Backend Communication](#q-17-networkpolicy-for-frontend-backend-communication)
 
@@ -41,7 +43,7 @@ As TLSv1.2 should not be allowed anymore, the command should fail.
 
     Locate the `ssl_protocols` line and change it from `ssl_protocols TLSv1.3 TLSv1.2;` (or similar) to:
     ```nginx
-    ssl_protocols TLSv1.3;
+    ssl_protocols TLSv1.3; #
     ```
     
     The relevant part of the `ConfigMap` data should look like this:
@@ -191,6 +193,78 @@ kubectl delete ingress web -n alpha
 
 -----
 
+### Q-04: Create Ingress Resource for Echo Server
+
+**📝 Question:**
+Create a new Ingress resource `echo` in the `echo-sound` namespace. Exposing Service `echoserver-service` on `http://example.org/echo` using Service port `8080`.
+
+The availability of Service `echoserver-service` can be checked using the following command, which should return `200`:
+`[candidate@cka2025]$ curl -o /dev/null -s -w "%{http_code}\n" http://example.org/echo`
+
+#### Prereqs
+
+  * Namespace: `echo-sound` (create if it doesn't exist).
+  * Service: `echoserver-service` listening on port `8080` in the `echo-sound` namespace (assume it exists and routes to an echo application).
+  * Ingress Controller: An Ingress Controller (e.g., NGINX Ingress Controller) must be installed and running in the cluster.
+  * DNS: `example.org` should resolve to the Ingress Controller's IP (e.g., via `/etc/hosts` or actual DNS configuration).
+
+#### Solution Steps
+
+1.  **Create the `echo-sound` Namespace (if it doesn't exist):**
+
+    ```bash
+    kubectl create ns echo-sound
+    ```
+
+2.  **Create the Ingress Resource:**
+    Create a file named `echo-ingress.yaml` with the following content:
+
+    ```yaml
+    apiVersion: networking.k8s.io/v1
+    kind: Ingress
+    metadata:
+      name: echo
+      namespace: echo-sound
+    spec:
+      rules:
+      - host: example.org
+        http:
+          paths:
+          - path: /echo
+            pathType: Prefix
+            backend:
+              service:
+                name: echoserver-service
+                port:
+                  number: 8080
+    ```
+
+    Apply the Ingress:
+
+    ```bash
+    kubectl apply -f echo-ingress.yaml
+    ```
+
+#### Verification Steps
+
+1.  **Check Ingress Status:**
+    Verify the Ingress resource is created and has an address assigned by the Ingress Controller.
+
+    ```bash
+    kubectl get ingress -n echo-sound
+    ```
+
+2.  **Test Service Availability via Ingress:**
+    This command should return `200`.
+
+    ```bash
+    curl -o /dev/null -s -w "%{http_code}\n" [http://example.org/echo](http://example.org/echo)
+    ```
+
+    *Note: If `example.org` does not resolve, you might need to add an entry to your `/etc/hosts` file pointing `example.org` to the IP address of your Ingress Controller (e.g., a NodePort IP or LoadBalancer IP).*
+
+-----
+
 ### Q-14: Re-establish MariaDB Deployment with Persistent Storage
 
 **📝 Question:**  
@@ -211,7 +285,7 @@ A PersistentVolume (PV) named `mariadb-pv` already exists and is retained for re
 
 #### Prereqs
 
-  * Existing PersistentVolume: `mariadb-pv` (ensure it exists and its `reclaimPolicy` allows reuse, typically `Retain` for this scenario, as shown in the image).
+  * Existing PersistentVolume: `mariadb-pv` (ensure it exists and its `reclaimPolicy` allows reuse, typically `Retain` for this scenario).
       * **`mariadb-pv` YAML for reference:**
         ```yaml
         apiVersion: v1
@@ -388,27 +462,30 @@ Prepare a Linux system for Kubernetes. Docker is already installed, but you need
 
 **Task:**
 Complete these tasks to prepare the system for Kubernetes:
-* **Set up cri-dockerd:**
-    * Install the Debian package `~/cri-dockerd_0.3.9.3-0.ubuntu-jammy_amd64.deb`
-    * Debian packages are installed using `dpkg`.
-    * Enable and start the `cri-dockerd` service
-* **Configure these system parameters (sysctl):**
-    * `Set net.bridge.bridge-nf-call-iptables to 1`
-    * `Set net.ipv6.conf.all.forwarding to 1`
-    * `Set net.ipv4.ip_forward to 1`
-    * `Set net.netfilter.nf_conntrack_max to 131072`
 
----
+  * **Set up cri-dockerd:**
+      * Install the Debian package `~/cri-dockerd_0.3.9.3-0.ubuntu-jammy_amd64.deb`
+      * Debian packages are installed using `dpkg`.
+      * Enable and start the `cri-dockerd` service
+  * **Configure these system parameters (sysctl):**
+      * `Set net.bridge.bridge-nf-call-iptables to 1`
+      * `Set net.ipv6.conf.all.forwarding to 1`
+      * `Set net.ipv4.ip_forward to 1`
+      * `Set net.netfilter.nf_conntrack_max to 131072`
+
+-----
+
 #### Prereqs
 
-* A Linux system (e.g., Ubuntu Jammy) with Docker already installed.
-* The `cri-dockerd` Debian package (`cri-dockerd_0.3.9.3-0.ubuntu-jammy_amd64.deb`) located in the home directory (`~`).
-* Root/sudo access on the system.
+  * A Linux system (e.g., Ubuntu Jammy) with Docker already installed.
+  * The `cri-dockerd` Debian package (`cri-dockerd_0.3.9.3-0.ubuntu-jammy_amd64.deb`) located in the home directory (`~`).
+  * Root/sudo access on the system.
 
 #### Solution Steps
 
 1.  **Install `cri-dockerd` Debian package:**
     Navigate to your home directory (if not already there) and install the Debian package using `dpkg`.
+
     ```bash
     cd ~
     sudo dpkg -i cri-dockerd_0.3.9.3-0.ubuntu-jammy_amd64.deb
@@ -416,6 +493,7 @@ Complete these tasks to prepare the system for Kubernetes:
 
 2.  **Enable and Start `cri-dockerd` service:**
     After installation, ensure the `cri-dockerd` service is enabled to start on boot and is currently running.
+
     ```bash
     sudo systemctl enable cri-docker.service
     sudo systemctl enable --now cri-docker.socket # Enable and start the socket
@@ -426,6 +504,7 @@ Complete these tasks to prepare the system for Kubernetes:
     These parameters are crucial for Kubernetes networking (e.g., Pod-to-Pod communication and Service routing) and need to persist across reboots.
 
     Create a configuration file (e.g., `k8s.conf`) in `/etc/sysctl.d/` and add the specified parameters.
+
     ```bash
     cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
     net.bridge.bridge-nf-call-iptables = 1
@@ -437,6 +516,7 @@ Complete these tasks to prepare the system for Kubernetes:
 
 4.  **Apply `sysctl` parameters:**
     Apply the changes immediately without requiring a system reboot.
+
     ```bash
     sudo sysctl --system
     ```
@@ -445,20 +525,24 @@ Complete these tasks to prepare the system for Kubernetes:
 
 1.  **Verify `cri-dockerd` service status:**
     Check if `cri-dockerd` service is active and running.
+
     ```bash
     sudo systemctl status cri-docker.service
     sudo systemctl status cri-docker.socket
     ```
+
     Both should show `active (running)`.
 
 2.  **Verify `sysctl` parameters:**
     Confirm that each parameter has been set correctly.
+
     ```bash
     sysctl net.bridge.bridge-nf-call-iptables
     sysctl net.ipv6.conf.all.forwarding
     sysctl net.ipv4.ip_forward
     sysctl net.netfilter.nf_conntrack_max
     ```
+
     Expected output for each should be `... = 1` or `... = 131072`.
 
 -----
@@ -510,7 +594,7 @@ Finally, ensure the cluster, single node and all pods are Ready.
     Change the line:
 
     ```
-    - --etcd-servers=[https://128.0.0.1:2379](https://128.0.0.1:2379)
+    - --etcd-servers=[https://128.0.0.1:2379](https://128.0.0.1:2379) #
     ```
 
     To the correct IP of your external etcd server. For example, if the new etcd server IP is `172.30.1.2` (matching the advertise address of the API server itself, assuming it's on the same host or a reachable IP):
@@ -592,9 +676,9 @@ Apply: From the NetworkPolicy YAML files in the `~/netpol` folder, choose one to
   * Namespaces: `frontend` and `backend` (assume they exist)
   * Deployments: `frontend` pods in `frontend` NS, `backend` pods in `backend` NS (assume they exist and have `app: frontend` and `app: backend` labels respectively).
   * NetworkPolicy files located in `~/netpol/`:
-      * [`netpol-1.yaml`](./netpol-1.yaml)
-      * [`netpol-2.yaml`](./netpol-2.yaml)
-      * [`netpol-3.yaml`](./netpol-3.yaml)
+      * [`netpol-1.yaml`](https://www.google.com/search?q=./netpol-1.yaml)
+      * [`netpol-2.yaml`](https://www.google.com/search?q=./netpol-2.yaml)
+      * [`netpol-3.yaml`](https://www.google.com/search?q=./netpol-3.yaml)
 
 -----
 
