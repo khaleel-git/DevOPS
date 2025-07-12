@@ -509,7 +509,10 @@ Apply: From the NetworkPolicy YAML files in the `~/netpol` folder, choose one to
 
   * Namespaces: `frontend` and `backend` (assume they exist)
   * Deployments: `frontend` pods in `frontend` NS, `backend` pods in `backend` NS (assume they exist and have `app: frontend` and `app: backend` labels respectively).
-  * NetworkPolicy files located in `~/netpol/`: `netpol-1.yaml`, `netpol-2.yaml`, `netpol-3.yaml`
+  * NetworkPolicy files located in `~/netpol/`:
+      * [`netpol-1.yaml`](https://www.google.com/search?q=./netpol-1.yaml)
+      * [`netpol-2.yaml`](https://www.google.com/search?q=./netpol-2.yaml)
+      * [`netpol-3.yaml`](https://www.google.com/search?q=./netpol-3.yaml)
 
 -----
 
@@ -544,7 +547,7 @@ Apply: From the NetworkPolicy YAML files in the `~/netpol` folder, choose one to
 1.  **Apply the correct NetworkPolicy:**
     Based on the analysis, `netpol-2.yaml` is the most restrictive policy that allows communication.
     ```bash
-    kubectl apply -f ~/netpol/netpol-2.yaml
+    kubectl apply -f ./netpol-2.yaml
     ```
 
 -----
