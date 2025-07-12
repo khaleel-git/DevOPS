@@ -215,6 +215,11 @@ Finally, ensure the cluster, single node and all pods are Ready.
   * **kube-scheduler:** 10259 (HTTPS port, for metrics/health)
   * **kube-controller-manager:** 10257 (HTTPS port, for metrics/health)
   * **etcd:** 2379 (client port), 2380 (peer port)
+      * **To validate/test etcd health (e.g., for external etcd):**
+        ```bash
+        curl -k https://<ETCD_SERVER_IP>:2379/health
+        # You might need to add --cacert, --cert, --key for secure clusters
+        ```
 
 #### Solution Steps
 
