@@ -1,10 +1,3 @@
-You're asking to refine the patch example for Q-14, specifically to demonstrate how to patch the `volumes` section within `spec/template/spec`. This is a more precise way to target the `volumes` array for modification.
-
-I will update the `Q-14` section in your `README.md` to show a more accurate and robust `kubectl patch` command for modifying the `volumes` and `volumeMounts` within a deployment's pod template, explaining that it's for *modifying* an existing deployment, not re-creating a deleted one.
-
-Here's the updated `README.md` content:
-
-````markdown
 ## 📚 CKA 2025 Practice Questions & Solutions 
 
 Click here for all [Questions](https://docs.google.com/document/d/16CwiwhEtuisL5TaIL3rR0AJQY1BOI70yVVwuOO55tJM/edit?usp=sharing)
