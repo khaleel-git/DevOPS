@@ -93,15 +93,11 @@ kubectl describe httproute web-route -n alpha
 <NODE_IP> gateway.web.k8s.local
 ```
 
----
-
 #### Final Test (Curl to Gateway)
 
 ```bash
 curl -k https://gateway.web.k8s.local:<NodePort>
 ```
-
----
 
 #### Cleanup (ONLY if test is successful)
 
