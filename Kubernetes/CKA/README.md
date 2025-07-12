@@ -17,14 +17,13 @@ A `GatewayClass` named `nginx` is installed in the cluster.
 2. Next, create an **HTTPRoute** named `web-route` with hostname `gateway.web.k8s.local` that maintains the existing routing rules from the current Ingress resource named `web`.
 
 3. You can test your Gateway API configuration with the following command:
-   ```bash
+```bash
    curl https://gateway.web.k8s.local
-````
+```
 
 4. Finally, delete the existing Ingress resource named `web`.
 
 ---
-
 #### Prereqs
 
 * TLS Secret: `web-tls`
@@ -55,8 +54,6 @@ spec:
             name: web-tls
 ```
 
----
-
 #### HTTPRoute YAML (`web-route.yaml`)
 
 ```yaml
@@ -80,8 +77,6 @@ spec:
           port: 80
 ```
 
----
-
 #### Verification Steps
 
 ```bash
@@ -91,9 +86,6 @@ kubectl describe gateway web-gateway -n alpha
 kubectl get httproute web-route -n alpha
 kubectl describe httproute web-route -n alpha
 ```
-
----
-
 #### DNS Resolution (Local Host Setup)
 
 ```bash
