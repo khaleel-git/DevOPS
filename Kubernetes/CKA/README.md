@@ -1,6 +1,6 @@
 ## 📚 CKA 2025 Practice Questions & Solutions
 
-
+[Questions](https://docs.google.com/document/d/16CwiwhEtuisL5TaIL3rR0AJQY1BOI70yVVwuOO55tJM/edit?usp=sharing)
 
 ### Q-01: Update ConfigMap with FQDN Values
 
