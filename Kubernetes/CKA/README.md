@@ -300,7 +300,7 @@ You do not need to configure access to the Argo CD server UI.
     The key here is to specify `--version 7.7.3` and `--namespace argocd`, and `--no-hooks` to prevent pre-install hooks from running during template generation if they involve CRDs (though the question states CRDs are pre-installed). The `--set installCRDs=false` flag is crucial.
 
     ```bash
-    helm template argocd argo/argo-cd --version 7.7.3 --namespace argocd --set crds.install=false > ~/argo-helm.yaml
+    helm template argocd argo/argo-cd --version 7.7.3 --namespace argocd --no-hooks --set crds.install=false > /argo-helm.yaml
     ```
 
     *Note: The `--no-hooks` flag ensures that Helm's templating process doesn't include any hook resources that might unexpectedly attempt to manage CRDs during the template generation, although the primary control is `installCRDs=false`.*
@@ -310,7 +310,7 @@ You do not need to configure access to the Argo CD server UI.
 
     ```bash
     kubectl create namespace argocd || true # Create namespace if it doesn't exist
-    helm install argocd argo/argo-cd --version 7.7.3 --namespace argocd --set installCRDs=false
+    helm install argocd argo/argo-cd --version 7.7.3 --namespace argocd --set crds.install=false
     ```
 
 #### Verification Steps
