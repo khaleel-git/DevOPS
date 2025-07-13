@@ -266,6 +266,132 @@ The availability of Service `echoserver-service` can be checked using the follow
     *Note: If `example.org` does not resolve, you might need to add an entry to your `/etc/hosts` file pointing `example.org` to the IP address of your Ingress Controller (e.g., a NodePort IP or LoadBalancer IP).*
 
 -----
+You're absolutely right to point that out\! My apologies. For the `helm template` command and for applying manifests in Kubernetes, it's generally more direct and efficient to pipe the content directly to `kubectl apply -f -` or `helm install -f -` when possible, rather than downloading to a file first, especially in a one-off exam scenario.
+
+The previous solution for Q-07 used `curl -o tigera-operator.yaml` then `kubectl apply -f tigera-operator.yaml`. While it works, directly piping the output is cleaner.
+
+For the `helm template` command, saving to a file (`/argo-helm.yaml`) was a specific requirement from the question itself: "Generate a helm template... and save to `/argo-helm.yaml`". So, for that part, writing to a file is necessary.
+
+However, for the Calico installation itself in Q-06, directly piping the manifest to `kubectl apply` is indeed the more common and recommended approach in a shell environment.
+
+Let me provide the updated solution for **Q-06**, demonstrating the direct installation method without first saving the file locally.
+
+-----
+
+### Q-06: Install and Configure a CNI Plugin (Calico - Direct Install)
+
+**📝 Question:**
+Install and configure a Container Network Interface (CNI) of your choice that meets the specified requirements. Choose one of the following CNI options:
+
+  * Flannel using the manifest $\\rightarrow$ `https://github.com/flannel-io/flannel/releases/download/v0.26.1/kube-flannel.yaml`
+  * Calico using the manifest $\\rightarrow$ `https://raw.githubusercontent.com/projectcalico/calico/v3.29.2/manifests/tigera-operator.yaml`
+
+Ensure the selected CNI is properly installed and configured in the Kubernetes cluster.
+The CNI you choose must:
+
+  * Let Pods communicate with each other
+  * Support Network Policy enforcement
+  * Install from manifest files (do not use Helm)
+
+-----
+
+#### Prereqs
+
+  * A Kubernetes cluster where a CNI is not yet installed or needs to be replaced.
+  * `kubectl` configured to interact with the cluster.
+  * Internet connectivity to fetch the manifest file.
+
+#### Chosen CNI and Rationale
+
+The question provides two options: Flannel and Calico. We need a CNI that "Support Network Policy enforcement".
+
+  * **Flannel:** Primarily focuses on providing basic network connectivity between pods. It does not natively support Network Policies.
+  * **Calico:** Provides both network connectivity and robust Network Policy enforcement.
+
+Therefore, **Calico** is the appropriate choice as it meets all the stated requirements, especially Network Policy enforcement.
+
+#### Solution Steps (Calico - Direct Install)
+
+1.  **Apply the Calico Manifest Directly:**
+    Use `curl` to fetch the manifest and pipe its content directly to `kubectl apply -f -`. This avoids saving the file to disk.
+
+    ```bash
+    curl https://raw.githubusercontent.com/projectcalico/calico/v3.29.2/manifests/tigera-operator.yaml | kubectl apply -f -
+    ```
+
+    This command will create all the necessary Kubernetes resources (Deployments, DaemonSets, RBAC, etc.) for Calico to function.
+
+2.  **Wait for Calico Pods to become Ready:**
+    It might take a few moments for all Calico components to start up and become ready. Monitor the pods in the `calico-system` (or similar, depending on Calico version) namespace until they are all `Running` and `Ready`.
+
+    ```bash
+    kubectl get pods -n calico-system --watch
+    # Wait until all pods show "Running" status
+    ```
+
+#### Verification Steps
+
+1.  **Verify CNI Pods are Running:**
+    Check the pods in the `calico-system` namespace. All of them should be in the `Running` state.
+
+    ```bash
+    kubectl get pods -n calico-system
+    ```
+
+    Expected output will show pods like `calico-node-xxxx` and `calico-kube-controllers-xxxx` in `Running` status.
+
+2.  **Verify Pod-to-Pod Communication:**
+    Deploy two simple pods in different namespaces (or the same, but different nodes if possible) and try to `ping` or `curl` between them.
+
+    ```bash
+    # Create test namespace
+    kubectl create namespace test-ns-1
+    kubectl create namespace test-ns-2
+
+    # Deploy busybox in test-ns-1
+    kubectl run busybox-1 -n test-ns-1 --image=busybox:latest --restart=Never -- sleep 3600
+    # Deploy busybox in test-ns-2
+    kubectl run busybox-2 -n test-ns-2 --image=busybox:latest --restart=Never -- sleep 3600
+
+    # Wait for pods to be running
+    kubectl get pods -n test-ns-1 -w
+    kubectl get pods -n test-ns-2 -w
+
+    # Get IP of busybox-2
+    BUSYBOX2_IP=$(kubectl get pod busybox-2 -n test-ns-2 -o jsonpath='{.status.podIP}')
+
+    # From busybox-1, ping busybox-2
+    kubectl exec -it busybox-1 -n test-ns-1 -- ping -c 3 $BUSYBOX2_IP
+    ```
+
+    The `ping` command should be successful, demonstrating pod-to-pod communication.
+
+3.  **Verify Network Policy Enforcement (Conceptual):**
+    To confirm Network Policy enforcement, you would typically:
+
+      * Create a simple NetworkPolicy that denies all ingress traffic to a specific pod (e.g., `busybox-2`).
+      * Attempt to `curl` or `ping` that pod from another pod. The connection should fail.
+      * Then, modify or remove the NetworkPolicy to allow traffic and re-test.
+
+    Example of a deny-all NetworkPolicy (do NOT apply this directly unless you understand its impact, it's for conceptual verification):
+
+    ```yaml
+    apiVersion: networking.k8s.io/v1
+    kind: NetworkPolicy
+    metadata:
+      name: deny-all-ingress
+      namespace: test-ns-2
+    spec:
+      podSelector:
+        matchLabels:
+          run: busybox-2 # Selects the busybox-2 pod
+      policyTypes:
+        - Ingress
+      ingress: [] # Empty ingress rules mean no traffic is allowed
+    ```
+
+    If you apply this and `ping` `busybox-2` again from `busybox-1`, it should fail, confirming that Calico is enforcing network policies.
+-----
 ### Q-07: Install Argo CD with Helm
 
 **📝 Question:**
