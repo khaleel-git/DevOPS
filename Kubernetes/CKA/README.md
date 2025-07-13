@@ -4,6 +4,19 @@ Click here for all [Questions](https://docs.google.com/document/d/16CwiwhEtuisL5
 
 ---
 
+cpu 1
+memory 20463184Ki
+
+15% reserved
+
+cpu: 1 * 0.15 = 0.15
+memory: 20463184 * 0.15 = 3069477
+
+3 divide:
+
+cpu: 1 - 0.15 = 0.85  = 0.85 / 3 = .2833 = 250m
+memory: 20463184 - 3069477 = 17393707 / 3 = 5797902 = 5000000Ki
+
 ### Table of Contents
 
 * [Q-01: NGINX TLSv1.3 Only Configuration](#q-01-nginx-tlsv13-only-configuration)
