@@ -108,7 +108,7 @@ A `GatewayClass` named `nginx` is installed in the cluster.
 
 3.  You can test your Gateway API configuration with the following command:
     ```bash
-       curl [https://gateway.web.k8s.local](https://gateway.web.k8s.local)
+       curl https://gateway.web.k8s.local
     ```
 
 4.  Finally, delete the existing Ingress resource named `web`.
