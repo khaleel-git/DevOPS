@@ -266,6 +266,111 @@ The availability of Service `echoserver-service` can be checked using the follow
     *Note: If `example.org` does not resolve, you might need to add an entry to your `/etc/hosts` file pointing `example.org` to the IP address of your Ingress Controller (e.g., a NodePort IP or LoadBalancer IP).*
 
 -----
+### Q-11: Logging Integration with Sidecar Container
+
+**📝 Question:**
+A legacy app needs to be integrated into the Kubernetes built-in logging architecture (i.e. `kubectl logs`). Adding a streaming co-located container is a good and common way to accomplish this requirement.
+
+Task
+Update the existing Deployment `synergy-deployment`, adding a co-located container named `sidecar` using the `busybox:stable` image to the existing Pod. The new co-located container has to run the following command:
+`/bin/sh -c "tail -n+1 -f /var/log/synergy-deployment.log"`
+Use a Volume mounted at `/var/log` to make the log file `synergy-deployment.log` available to the co located container.
+Do not modify the specification of the existing container other than adding the required volume.
+Hint: Use a shared volume to expose the log file between the main application container and the sidecar.
+
+-----
+
+#### Prereqs
+
+  * An existing Deployment named `synergy-deployment`.
+  * The main container in `synergy-deployment` is assumed to be writing logs to `/var/log/synergy-deployment.log`.
+
+#### Solution Steps
+
+1.  **Edit the `synergy-deployment` Deployment:**
+    Use `kubectl edit deployment synergy-deployment` to modify the Deployment definition.
+
+    ```bash
+    kubectl edit deployment synergy-deployment
+    ```
+
+2.  **Add the `sidecar` container and shared volume configuration:**
+    Locate the `spec.template.spec` section of your Deployment. You will need to add:
+
+      * A new container definition under `spec.template.spec.containers` for the `sidecar`.
+      * A volume definition under `spec.template.spec.volumes`.
+      * `volumeMounts` in both the existing container and the new `sidecar` container, referencing the shared volume.
+
+    Your Deployment YAML should be modified to include these sections (adjust indentation as necessary):
+
+    ```yaml
+    # ... (existing Deployment YAML)
+    spec:
+      template:
+        spec:
+          # Add the volume definition here
+          volumes:
+            - name: log-volume # Name of the shared volume
+              emptyDir: {}    # An emptyDir volume is suitable for shared ephemeral storage
+
+          containers:
+            # Your existing container (e.g., 'synergy-app' or whatever its name is)
+            - name: <your-main-app-container-name> # IMPORTANT: Replace with the actual name of your existing container
+              image: <your-main-app-image>         # IMPORTANT: Keep its original image
+              command: ["/bin/sh", "-c", "while true; do date >> /var/log/synergy-deployment.log; sleep 5; done"]
+              # Add the volumeMount for the existing container
+              volumeMounts:
+                - name: log-volume
+                  mountPath: /var/log/ # This path should match where the main app writes its logs
+
+            # Add the new sidecar container
+            - name: sidecar
+              image: busybox:stable
+              command: ["/bin/sh", "-c", "tail -n+1 -f /var/log/synergy-deployment.log"]
+              volumeMounts:
+                - name: log-volume
+                  mountPath: /var/log/ # Mount the same volume for the sidecar
+    # ... (rest of the Deployment YAML)
+    ```
+
+    After saving the changes in the editor, Kubernetes will automatically update and roll out the new pods.
+
+-----
+
+#### Verification Steps
+
+1.  **Check Deployment rollout status:**
+    Verify that the Deployment is rolling out and new pods are becoming ready.
+
+    ```bash
+    kubectl rollout status deployment synergy-deployment
+    ```
+
+2.  **Check Pods status:**
+    Ensure the new pods with the sidecar container are running.
+
+    ```bash
+    kubectl get pods -l app=<your-synergy-app-label> # Use the appropriate label for your deployment
+    ```
+
+3.  **Verify sidecar container logs:**
+    Access the logs of the `sidecar` container within one of the new pods. You should see it streaming the log content. Replace `<pod-name>` with the actual name of a `synergy-deployment` pod.
+
+    ```bash
+    kubectl logs <pod-name> -c sidecar
+    ```
+
+    This command should show output from `synergy-deployment.log`, confirming the sidecar is correctly tailing the log file.
+
+4.  **Inspect Pod YAML (Optional):**
+    To confirm the configuration was applied correctly, you can describe a new pod and check its containers and volumes.
+
+    ```bash
+    kubectl describe pod <pod-name>
+    ```
+
+    Look under `Containers` for `sidecar` and ensure its `Command` and `Volume Mounts` are correct. Also, look under `Volumes` for `log-volume`.
+-----
 
 ### Q-12: Cert-Manager CRD and Subject Field Documentation
 
@@ -295,83 +400,15 @@ You may use any output format that `kubectl` supports.
     To list all CRDs and filter for `cert-manager` related ones (often identified by their group `cert-manager.io` or `acme.cert-manager.io`), then save them in the default output format.
 
     ```bash
-    kubectl get crds -o yaml | grep -A5 "group: cert-manager.io" | tee ~/resources.yaml
-    # A more robust way to filter for cert-manager CRDs specifically:
-    # kubectl get crds -o yaml | yq '.items[] | select(.spec.group | test("cert-manager.io|acme.cert-manager.io"))' > ~/resources.yaml
-    # Or, if yq is not available:
-    # kubectl get crds -o yaml | awk '/^metadata:/ {in_cert_manager=0} /group: cert-manager.io|acme.cert-manager.io/ {in_cert_manager=1} { if (in_cert_manager) print $0 }' > ~/resources.yaml
+    kubectl get crds | grep -i "cert-manager.io" >  ~/resources.yaml
     ```
-
-    *Note: The `grep -A5` is a heuristic and might not capture the entire CRD definition. A more precise method would involve `kubectl get crd <crd-name> -o yaml` for each, or using a tool like `yq` for more robust YAML parsing and filtering.*
-    *Since the task asks for the *default* output format and to *not set an output format*, the direct `kubectl get crds > ~/resources.yaml` would be appropriate, assuming all CRDs should be listed, or a `grep` on the *output* itself if only cert-manager specific CRDs are required.*
-
-    Given the instruction "make sure kubectl's default output format and use kubectl to list CRD's. Do not set an output format.", the most compliant command is:
-
-    ```bash
-    kubectl get crds > ~/resources.yaml
-    # Then manually filter or verify that cert-manager CRDs are present.
-    # If the intent is ONLY cert-manager CRDs, a more advanced filter (like with `yq`) would be needed.
-    # However, if 'default output format' is key and 'list CRDs' implies listing all, then `kubectl get crds` is the way.
-    ```
-
-    Let's assume the question implies listing *all* CRDs and then ensuring that cert-manager's are *among them* in the default format, or specifically just getting `cert-manager` related ones without an explicit `grep/awk` as part of the primary `kubectl` command. The task specifically mentions "a list of all cert-manager Custom Resource Definitions". The safest approach without `yq` might be to fetch all and then filter. However, adhering strictly to "Do not set an output format" and "list CRD's" (plural), implies `kubectl get crds`. If the context implies *only* cert-manager, a more explicit `kubectl get crd <crd-name-1> <crd-name-2> ...` is needed. Given the exam context, it's usually `kubectl get crds` and then understanding which ones are `cert-manager` related.
-
-    Let's use `kubectl get crds` and then pipe to `grep` to filter *only* the names and then `kubectl get crd <name> -o yaml` to get specific ones. A more direct way to list all cert-manager CRDs using a label selector if available, or by their known names:
-    Common cert-manager CRDs: `certificates.cert-manager.io`, `issuers.cert-manager.io`, `certificaterequests.cert-manager.io`, `clusterissuers.cert-manager.io`.
-
-    A precise solution for "all cert-manager Custom Resource Definitions" maintaining default output (which is wide table, not YAML directly, but the task then states "save it to \~/resources.yaml" which implies YAML or similar structured format). This contradiction might mean "list all CRDs, and ensure `cert-manager` ones are present in the *default kubectl output* saved to file."
-
-    Given the phrasing "make sure kubectl's default output format" and "list CRD's" and "save it to \~/resources.yaml", the typical default output of `kubectl get crds` is a table. If it needs to be YAML for a file, then `-o yaml` is needed. The constraint "Do not set an output format" contradicts "save it to ...yaml". This implies a slight ambiguity.
-
-    Let's interpret "default output format" as the standard format for the `get` command, and then the save implies a redirection, not an output *format change*. However, `.yaml` implies YAML.
-
-    **Revised approach for the first part to handle ambiguity:**
-    If "default output format" takes precedence over ".yaml", then:
-
-    ```bash
-    kubectl get crds > ~/resources.yaml
-    # This will save the table output. If YAML is strictly required for the .yaml extension,
-    # then the instruction "Do not set an output format" is the problematic part.
-    ```
-
-    If "save it to `~/resources.yaml`" means it MUST be YAML, and "default output format" means default *for that type of resource when getting full details*, then:
-
-    ```bash
-    kubectl get crds -o yaml > ~/resources.yaml
-    ```
-
-    Given the typical CKA exam context, "save it to X.yaml" usually means save as YAML. The "Do not set an output format" might be a trick related to *some other* part of the question or specific to how *lists* are output vs. individual resources. The most common interpretation for `*.yaml` is `yaml` output.
-
-    Let's assume `kubectl get crds -o yaml > ~/resources.yaml` is the intended solution given the `.yaml` extension for the output file.
 
 2.  **Extract documentation for `Certificate.spec.subject` and save to `~/subject.yaml`:**
     This requires using `kubectl explain`.
 
     ```bash
-    kubectl explain certificate.spec.subject --recursive > ~/subject.yaml
+    kubectl explain certificate.spec.subject > ~/subject.yaml
     ```
-
------
-
-#### Verification Steps
-
-1.  **Verify `~/resources.yaml` content:**
-    Check the file to ensure it contains CRD definitions and that cert-manager CRDs are present.
-
-    ```bash
-    cat ~/resources.yaml
-    # You can grep for cert-manager CRDs within the file
-    grep "cert-manager.io" ~/resources.yaml
-    ```
-
-2.  **Verify `~/subject.yaml` content:**
-    Check the file to ensure it contains the documentation for the `Certificate.spec.subject` field.
-
-    ```bash
-    cat ~/subject.yaml
-    ```
-
-    The output should describe the `subject` field, its type, and its sub-fields (like `organizations`, `organizationalUnits`, etc.).
 
 -----
 
