@@ -195,6 +195,96 @@ kubectl delete ingress web -n alpha
 
 -----
 
+### Q-03: Create a HorizontalPodAutoscaler (HPA)
+
+**📝 Question:**
+Create a new HorizontalPodAutoscaler (HPA) named `apache-server` in the `autoscaled` namespace. This HPA must target the existing Deployment called `apache-server` in the `autoscaled` namespace.
+
+Set the HPA to target for 50% CPU usage per Pod.
+
+  * Configure hpa to have at min 1 Pod and no more than 4 Pods[max].
+  * Also, we have to set the downscale stabilization window to 30 seconds.
+
+-----
+
+#### Prereqs
+
+  * An existing Deployment named `apache-server` in the `autoscaled` namespace.
+  * Metrics Server installed and running in the cluster (essential for HPA to collect CPU/memory metrics).
+
+#### Solution Steps
+
+1.  **Create the `autoscaled` namespace (if it doesn't exist):**
+    This step ensures the target namespace for the HPA and Deployment exists.
+
+    ```bash
+    kubectl create namespace autoscaled || true
+    ```
+
+2.  **Create the HorizontalPodAutoscaler (HPA):**
+    Create a YAML file (e.g., `apache-hpa.yaml`) with the HPA definition.
+
+    ```yaml
+    apiVersion: autoscaling/v2
+    kind: HorizontalPodAutoscaler
+    metadata:
+      name: apache-server # Name of the HPA
+      namespace: autoscaled # Namespace for the HPA
+    spec:
+      scaleTargetRef:
+        apiVersion: apps/v1
+        kind: Deployment
+        name: apache-server # Target the 'apache-server' Deployment
+      minReplicas: 1 # Minimum number of pods
+      maxReplicas: 4 # Maximum number of pods
+      metrics:
+        - type: Resource
+          resource:
+            name: cpu
+            target:
+              type: Utilization
+              averageUtilization: 50 # Target 50% CPU usage
+      behavior:
+        scaleDown:
+          stabilizationWindowSeconds: 30 # Downscale stabilization window
+    ```
+
+    Apply the HPA definition:
+
+    ```bash
+    kubectl apply -f apache-hpa.yaml
+    ```
+
+#### Verification Steps
+
+1.  **Check HPA status:**
+    Verify that the HPA has been created and is targeting the correct Deployment.
+
+    ```bash
+    kubectl get hpa -n autoscaled
+    ```
+
+    Look for `apache-server` in the output. The `TARGETS` column might initially show `<unknown>/50%` if metrics haven't been collected yet, but `MINPODS` should be `1` and `MAXPODS` should be `4`.
+
+2.  **Describe the HPA for detailed information:**
+    Check the HPA's full configuration, including `Min Replicas`, `Max Replicas`, `Metrics`, and `Behavior`.
+
+    ```bash
+    kubectl describe hpa apache-server -n autoscaled
+    ```
+
+    Confirm that `Metrics` shows `cpu utilization 50%`. Also, verify the `Downscale Stabilization Window` in the `Behavior` section is `30s`.
+
+3.  **Monitor Deployment scaling (Optional):**
+    If you apply a load to the `apache-server` Deployment, you should observe the `REPLICAS` increasing (up to 4) and then decreasing (after 30 seconds of low load) as the HPA takes effect.
+
+    ```bash
+    # To observe pod count changes:
+    kubectl get deployment apache-server -n autoscaled -w
+    # To observe HPA events:
+    kubectl get events -n autoscaled --field-selector involvedObject.kind=HorizontalPodAutoscaler
+    ```
+-----
 ### Q-04: Create Ingress Resource for Echo Server
 
 **📝 Question:**
