@@ -319,7 +319,7 @@ Failure to do so may result in a reduced score.
     Use `kubectl patch deployment` with an inline strategic merge patch to add the `priorityClassName` to the `spec.template.spec` section of the `busybox-logger` Deployment.
 
     ```bash
-    kubectl patch deployment busybox-logger -n priority --type='strategic' --patch '{"spec":{"template":{"spec":{"priorityClassName":"high-priority"}}}}'
+    kubectl patch deployment busybox-logger -n priority -p '{"spec":{"template":{"spec:{"priorityClassName":"high-priority"}}}}'
     ```
 
 -----
