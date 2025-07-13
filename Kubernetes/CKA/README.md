@@ -266,6 +266,106 @@ The availability of Service `echoserver-service` can be checked using the follow
     *Note: If `example.org` does not resolve, you might need to add an entry to your `/etc/hosts` file pointing `example.org` to the IP address of your Ingress Controller (e.g., a NodePort IP or LoadBalancer IP).*
 
 -----
+### Q-09: Expose Frontend Deployment via NodePort Service
+
+**📝 Question:**
+Reconfigure the existing Deployment `front-end` in namespace `sp-culator` to expose port `80/tcp` of the existing container `nginx`.
+Create a new Service named `front-end-svc` exposing the container port `80/tcp`.
+Configure the new Service to also expose the individual pods via a `NodePort`.
+
+-----
+
+#### Prereqs
+
+  * An existing Deployment named `front-end` in the `sp-culator` namespace.
+  * The main container in the `front-end` Deployment is named `nginx` and listens on port `80/tcp`.
+
+#### Solution Steps
+
+1.  **Edit the `front-end` Deployment to expose container port 80:**
+    This step ensures the `nginx` container within the `front-end` Deployment has `containerPort: 80` explicitly defined, making it discoverable by the Service.
+
+    ```bash
+    kubectl edit deployment front-end -n sp-culator
+    ```
+
+    Locate the `containers` section, find the `nginx` container, and add or ensure the `ports` section is present:
+
+    ```yaml
+    # ... (existing Deployment YAML)
+    spec:
+      template:
+        spec:
+          containers:
+            - name: nginx # Make sure this is the correct container name
+              image: nginx:latest # Keep original image
+              ports: # Add this section if not present
+                - containerPort: 80 # Expose port 80 of the nginx container
+                  protocol: TCP
+    # ... (rest of the Deployment YAML)
+    ```
+
+    Save and exit the editor. The Deployment will roll out new pods with this configuration.
+
+2.  **Create the `front-end-svc` Service:**
+    Create a YAML file (e.g., `front-end-svc.yaml`) for the Service. This Service will select pods with the appropriate label (e.g., `app: front-end` or whatever label the `front-end` Deployment uses in its `selector.matchLabels` and `template.metadata.labels`), expose port 80, and be of type `NodePort`.
+
+    ```yaml
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: front-end-svc
+      namespace: sp-culator
+    spec:
+      selector:
+        app: front-end # IMPORTANT: Use the actual label from your 'front-end' deployment's pods
+      ports:
+        - protocol: TCP
+          port: 80        # Service port
+          targetPort: 80  # Container port
+          name: http      # Optional: Name the port
+      type: NodePort      # Expose the service via NodePort
+    ```
+
+    Apply the Service:
+
+    ```bash
+    kubectl apply -f front-end-svc.yaml
+    ```
+
+-----
+
+#### Verification Steps
+
+1.  **Check Service status:**
+    Verify that the `front-end-svc` Service has been created and has a NodePort assigned.
+
+    ```bash
+    kubectl get svc -n sp-culator
+    ```
+
+    You should see `front-end-svc` with a `TYPE` of `NodePort` and a port mapping like `80:3XXXX/TCP`. Note down the NodePort (e.g., `30080`).
+
+2.  **Verify Endpoint association:**
+    Ensure the Service has active endpoints (i.e., it's connected to the `front-end` pods).
+
+    ```bash
+    kubectl get endpoints front-end-svc -n sp-culator
+    ```
+
+    You should see IP addresses listed under `ENDPOINTS`.
+
+3.  **Test access via NodePort (Optional but recommended for full verification):**
+    From outside the cluster (or from another node), you can test access to the `front-end` application using any Node's IP address and the assigned NodePort.
+
+    ```bash
+    # Replace <NODE_IP> with the IP address of one of your cluster nodes.
+    # Replace <NODE_PORT> with the actual NodePort allocated to front-end-svc (e.g., 30080).
+    curl http://<NODE_IP>:<NODE_PORT>
+    ```
+
+    This command should return the NGINX default welcome page or the content served by your `front-end` application.
+-----
 
 ### Q-10: Create and Set Default StorageClass
 
