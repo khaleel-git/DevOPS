@@ -9,6 +9,7 @@ Click here for all [Questions](https://docs.google.com/document/d/16CwiwhEtuisL5
 * [Q-01: NGINX TLSv1.3 Only Configuration](#q-01-nginx-tlsv13-only-configuration)
 * [Q-02: Ingress to Gateway API Migration](#q-02-ingress-to-gateway-api-migration)
 * [Q-04: Create Ingress Resource for Echo Server](#q-04-create-ingress-resource-for-echo-server)
+* [Q-13: Adjust WordPress Pod Resource Requests](#q-13-adjust-wordpress-pod-resource-requests)
 * [Q-14: Re-establish MariaDB Deployment with Persistent Storage](#q-14-re-establish-mariadb-deployment-with-persistent-storage)
 * [Q-15: Prepare Linux System for Kubernetes (cri-dockerd & sysctl)](#q-15-prepare-linux-system-for-kubernetes-cri-dockerd--sysctl)
 * [Q-16: Fix Broken Kubeadm Cluster Migration](#q-16-fix-broken-kubeadm-cluster-migration)
@@ -70,7 +71,6 @@ As TLSv1.2 should not be allowed anymore, the command should fail.
 
 2.  **Restart the `nginx-static` Deployment:**
     Changes to ConfigMaps mounted as files in pods typically require a pod restart to take effect.
-
     ```bash
     kubectl rollout restart deployment nginx-static -n nginx-static
     ```
@@ -265,13 +265,143 @@ The availability of Service `echoserver-service` can be checked using the follow
 
 -----
 
+### Q-13: Adjust WordPress Pod Resource Requests
+
+**📝 Question:**
+A WordPress application with 3 replicas in the `relative-fawn` namespace consists of: `cpu 1 memory 2015360ki`.
+
+Adjust all Pod resource requests as follows:
+
+  * Divide node resources evenly across all 3 pods.
+  * Give each Pod a fair share of CPU and memory.
+  * Add enough overhead to keep the node stable.
+  * Use the exact same requests for both containers and init containers.
+  * You are not required to change any resource limits.
+
+It may help to temporarily scale the WordPress Deployment to 0 replicas while updating the resource requests.
+
+After updates, confirm:
+
+  * WordPress keeps 3 replicas.
+  * All Pods are running and ready.
+
+-----
+
+#### Prereqs
+
+  * WordPress Deployment in the `relative-fawn` namespace with 3 replicas.
+  * Node capacity: CPU 1 core, Memory 2015360ki.
+  * An understanding of resource requests and limits in Kubernetes.
+
+#### Calculation Breakdown
+
+  * **Reserve Overhead:** Let's reserve about 15% for node/system overhead:
+
+      * CPU overhead: $1 \\text{ core} \\times 0.15 = 0.15 \\text{ cores}$
+      * Memory overhead: $2015360 \\text{Ki} \\times 0.15 = 302304 \\text{Ki} \\approx 300000 \\text{Ki}$
+
+  * **Usable for Pods:**
+
+      * CPU: $1 - 0.15 = 0.85 \\text{ cores}$
+      * Memory: $2015360 \\text{Ki} - 300000 \\text{Ki} = 1715360 \\text{Ki}$
+
+  * **Divide by 3 Pods:**
+
+      * CPU per Pod: $0.85 \\text{ cores} / 3 \\approx 0.283 \\text{ cores} \\rightarrow \\text{round to } 250\\text{m}$ (conservative & stable)
+      * Memory per Pod: $1715360 \\text{Ki} / 3 \\approx 571786 \\text{Ki} \\rightarrow \\text{round to } 570000\\text{Ki}$
+
+#### Solution Steps
+
+1.  **Temporarily scale down the WordPress Deployment (Optional but Recommended):**
+    This helps prevent disruptions during resource update and ensures new pods pick up the changes cleanly.
+
+    ```bash
+    kubectl scale deployment wordpress -n relative-fawn --replicas=0
+    ```
+
+2.  **Edit the WordPress Deployment:**
+    Modify the Deployment to add `resources.requests` for both containers and any init containers.
+
+    ```bash
+    kubectl edit deployment wordpress -n relative-fawn
+    ```
+
+    Add the `resources` section under `spec.template.spec.containers` and `spec.template.spec.initContainers` (if any).
+
+    ```yaml
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: wordpress
+      namespace: relative-fawn
+    spec:
+      template:
+        spec:
+          containers:
+          - name: wordpress-container # Replace with actual container name
+            image: wordpress:latest # Use your actual image
+            resources:
+              requests:
+                cpu: "250m"
+                memory: "570000Ki"
+          # If there are initContainers, add the same resources section here:
+          # initContainers:
+          # - name: init-wordpress # Replace with actual init container name
+          #   image: busybox # Use your actual image
+          #   resources:
+          #     requests:
+          #       cpu: "250m"
+          #       memory: "570000Ki"
+    ```
+
+3.  **Scale up the WordPress Deployment to 3 replicas:**
+
+    ```bash
+    kubectl scale deployment wordpress -n relative-fawn --replicas=3
+    ```
+
+#### Verification Steps
+
+1.  **Confirm WordPress has 3 replicas:**
+
+    ```bash
+    kubectl get deploy wordpress -n relative-fawn
+    ```
+
+    Ensure `READY` column shows `3/3`.
+
+2.  **Verify all Pods are running and ready:**
+
+    ```bash
+    kubectl get pods -n relative-fawn
+    ```
+
+    All pods should be in `Running` status with `READY` column showing `1/1` (or `X/X` if multiple containers).
+
+3.  **Inspect Pods to confirm resource requests:**
+    Describe one of the WordPress pods and check the `Requests` section.
+
+    ```bash
+    kubectl describe pod <wordpress-pod-name> -n relative-fawn
+    ```
+
+    Look for:
+
+    ```
+      Requests:
+        cpu:        250m
+        memory:     570000Ki
+    ```
+
+-----
+
 ### Q-14: Re-establish MariaDB Deployment with Persistent Storage
 
 **📝 Question:**  
 A user accidentally deleted the MariaDB Deployment in the `mariadb` namespace, which was configured with persistent storage. Your responsibility is to re-establish the Deployment while ensuring data is preserved by reusing the available PersistentVolume.
 
 **Task:**
-A PersistentVolume (PV) named `mariadb-pv` already exists and is retained for reuse. Only one PV exist.
+A PersistentVolume (PV) named `mariadb-pv` already exists and is retained for reuse. only one pv exist.
 
 1.  Create a **PersistentVolumeClaim (PVC)** named `mariadb` in the `mariadb` NS with the spec: `Accessmode: ReadWriteOnce` and `Storage: 250Mi`.
 
