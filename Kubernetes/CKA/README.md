@@ -266,6 +266,100 @@ The availability of Service `echoserver-service` can be checked using the follow
     *Note: If `example.org` does not resolve, you might need to add an entry to your `/etc/hosts` file pointing `example.org` to the IP address of your Ingress Controller (e.g., a NodePort IP or LoadBalancer IP).*
 
 -----
+
+### Q-08: Create and Apply PriorityClass (Inline Patch)
+
+**📝 Question:**
+Create a new PriorityClass named `high-priority` for user-workloads with a value that is one less than the highest existing user-defined priority class value.
+Patch the existing Deployment `busybox-logger` running in the `priority` namespace to use the `high-priority` priority class.
+Ensure that the `busybox-logger` Deployment rolls out successfully with the new priority class set.
+It is expected that Pods from other Deployments running in the `priority` namespace are evicted.
+Do not modify other Deployments running in the `priority` namespace.
+Failure to do so may result in a reduced score.
+
+-----
+
+#### Prereqs
+
+  * An existing user-defined PriorityClass (you'll need to determine its highest value). Let's assume you've identified the highest user-defined priority class has a value, for example, `1000000`.
+  * An existing Deployment named `busybox-logger` in the `priority` namespace.
+  * Other Deployments/Pods in the `priority` namespace that can be evicted.
+
+#### Solution Steps
+
+1.  **Find the highest existing user-defined PriorityClass value:**
+    First, inspect existing PriorityClasses to determine the highest user-defined value. System PriorityClasses usually start with `system-`. We are interested in user-defined ones.
+
+    ```bash
+    kubectl get priorityclass
+    ```
+
+    Look at the `VALUE` column. For example, if you see `custom-high-value` with `VALUE: 1000000`, then "one less than the highest" would be `999999`.
+
+    Let's assume the highest user-defined value is `1000000`.
+
+2.  **Create the `high-priority` PriorityClass:**
+    *Note: Creating a new resource like a PriorityClass cannot be done with `kubectl patch`. `patch` is used to modify *existing* resources. Therefore, we use `kubectl apply` for this step.*
+
+    Create the PriorityClass directly using `kubectl apply` with an inline YAML string:
+
+    ```bash
+    kubectl apply -f - <<EOF
+    apiVersion: scheduling.k8s.io/v1
+    kind: PriorityClass
+    metadata:
+      name: high-priority
+    value: 999999 # One less than the highest user-defined priority value found
+    globalDefault: false
+    description: "This priority class should be used for high-priority user workloads."
+    EOF
+    ```
+
+3.  **Patch the `busybox-logger` Deployment (Inline Patch):**
+    Use `kubectl patch deployment` with an inline strategic merge patch to add the `priorityClassName` to the `spec.template.spec` section of the `busybox-logger` Deployment.
+
+    ```bash
+    kubectl patch deployment busybox-logger -n priority --type='strategic' --patch '{"spec":{"template":{"spec":{"priorityClassName":"high-priority"}}}}'
+    ```
+
+-----
+
+#### Verification Steps
+
+1.  **Verify the `high-priority` PriorityClass is created:**
+    Check that the PriorityClass exists and has the correct value.
+
+    ```bash
+    kubectl get priorityclass high-priority
+    ```
+
+    Ensure `VALUE` is `999999`.
+
+2.  **Check `busybox-logger` Deployment rollout status:**
+    Confirm that the Deployment successfully rolls out new pods that incorporate the PriorityClass.
+
+    ```bash
+    kubectl rollout status deployment busybox-logger -n priority
+    ```
+
+3.  **Verify Pods use the new PriorityClass and observe evictions:**
+    Describe a pod from the `busybox-logger` Deployment to confirm it's using `high-priority`. Observe if other pods in the `priority` namespace are evicted or enter a pending state due to resource preemption.
+
+    ```bash
+    kubectl get pods -n priority
+    # You should see new busybox-logger pods running.
+
+    # Describe one of the busybox-logger pods to confirm the priorityClass
+    kubectl describe pod <busybox-logger-pod-name> -n priority
+    # Look for 'Priority Class Name: high-priority'
+
+    # Check for evicted pods or pods in pending state
+    kubectl get events -n priority | grep Evicted
+    # Or simply watch pods to see if others are terminated and potentially new ones get scheduled
+    kubectl get pods -n priority --watch
+    ```
+
+-----
 ### Q-09: Expose Frontend Deployment via NodePort Service
 
 **📝 Question:**
