@@ -218,7 +218,7 @@ Set the HPA to target for 50% CPU usage per Pod.
     This step ensures the target namespace for the HPA and Deployment exists.
 
     ```bash
-    kubectl create namespace autoscaled || true
+    kubectl create namespace autoscaled
     ```
 
 2.  **Create the HorizontalPodAutoscaler (HPA):**
