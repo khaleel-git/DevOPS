@@ -368,6 +368,175 @@ Let me provide the updated solution for **Q-06**, demonstrating the direct insta
 
 -----
 
+### Q-05: Install and Configure a CNI Plugin (Flannel - Download, Edit, Apply)
+
+**📝 Question:**
+Install and configure a Container Network Interface (CNI) of your choice that meets the specified requirements. Choose one of the following CNI options:
+
+  * Flannel (v0.26.1) using the manifest: `https://github.com/flannel-io/flannel/releases/download/v0.26.1/kube-flannel.yaml`
+  * Calico (v3.28.2) using the manifest: `https://raw.githubusercontent.com/projectcalico/calico/v3.28.2/manifests/tigera-operator.yaml`
+
+Ensure the selected CNI is properly installed and configured in the Kubernetes cluster.
+
+Implicit requirements based on general CNI functionality and typical CKA expectations:
+
+  * Let Pods communicate with each other.
+  * Install from manifest files (do not use Helm).
+
+-----
+
+#### Prereqs
+
+  * A Kubernetes cluster where a CNI is not yet installed or needs to be replaced.
+  * `kubectl` configured to interact with the cluster.
+  * Internet connectivity to fetch the manifest file.
+
+#### Chosen CNI and Rationale
+
+As requested, we will choose **Flannel** (v0.26.1). Flannel is a simple CNI that provides basic pod-to-pod networking, which is a fundamental requirement for a CNI. It can be installed directly from a manifest file, fulfilling the "do not use Helm" requirement.
+
+#### Solution Steps (Flannel - Download, Edit, Apply)
+
+1.  **Identify your Kubernetes Cluster's Pod CIDR:**
+    It's crucial to first know your cluster's actual configured pod CIDR. This is typically set during `kubeadm init` via the `--pod-network-cidr` flag. You can find it by inspecting the `kubeadm-config` ConfigMap or the `kube-controller-manager` static pod manifest.
+
+      * **Option A: From `kubeadm-config` (recommended for kubeadm clusters):**
+
+        ```bash
+        kubectl get cm kubeadm-config -n kube-system -o yaml | grep -A 5 "networking:"
+        # Look for the 'podSubnet:' field under 'networking:'
+        # Example output:
+        #   networking:
+        #     dnsDomain: cluster.local
+        #     podSubnet: 192.232.233.0/18 # <-- This is your cluster's pod CIDR
+        #     serviceSubnet: 10.96.0.0/12
+        ```
+
+      * **Option B: From `kube-controller-manager` manifest (if kubeadm-config isn't available or for double-checking):**
+        This command needs to be run on the control plane node.
+
+        ```bash
+        grep "cluster-cidr" /etc/kubernetes/manifests/kube-controller-manager.yaml
+        ```
+
+    **Note down the exact CIDR (e.g., `192.232.233.0/18`) that your cluster is configured to use.** This is the value you will use to update the Flannel manifest.
+
+2.  **Download the Flannel Manifest:**
+    Download the `kube-flannel.yaml` manifest file to your current directory.
+
+    ```bash
+    curl -o kube-flannel.yaml https://github.com/flannel-io/flannel/releases/download/v0.26.1/kube-flannel.yaml
+    ```
+
+3.  **Edit the Flannel Manifest to Update the Network CIDR:**
+    Open the downloaded `kube-flannel.yaml` file in a text editor (like `vi` or `nano`):
+
+    ```bash
+    vi kube-flannel.yaml
+    ```
+
+    Search for the `kube-flannel-cfg` ConfigMap section. Within its `data` field, you will find `kube-subnet.env`. Locate the `FLANNEL_NETWORK` variable and change its value to the CIDR you identified in Step 1.
+
+    **Original (example for `FLANNEL_NETWORK`):**
+
+    ```yaml
+    # ...
+    kind: ConfigMap
+    apiVersion: v1
+    metadata:
+      name: kube-flannel-cfg
+      namespace: kube-flannel
+    data:
+      # ... other data ...
+      kube-subnet.env: |
+        FLANNEL_NETWORK=10.244.0.0/16 # <--- This is the line to modify
+        FLANNEL_MTU=1450
+        FLANNEL_IPMASQ=true
+    ```
+
+    **Modified (example, using `192.232.233.0/18` as the detected cluster CIDR):**
+
+    ```yaml
+    # ...
+    kind: ConfigMap
+    apiVersion: v1
+    metadata:
+      name: kube-flannel-cfg
+      namespace: kube-flannel
+    data:
+      # ... other data ...
+      kube-subnet.env: |
+        FLANNEL_NETWORK=192.232.233.0/18 # <--- Updated to match your cluster's CIDR
+        FLANNEL_MTU=1450
+        FLANNEL_IPMASQ=true
+    ```
+
+    Save and exit the editor.
+
+4.  **Apply the Modified Flannel Manifest:**
+    Apply the `kube-flannel.yaml` file that you just modified.
+
+    ```bash
+    kubectl apply -f kube-flannel.yaml
+    ```
+
+5.  **Clean up the downloaded manifest (Optional but good practice):**
+
+    ```bash
+    rm kube-flannel.yaml
+    ```
+
+6.  **Wait for Flannel Pods to become Ready:**
+    Monitor the pods in the `kube-flannel` namespace until they are all `Running` and `Ready`.
+
+    ```bash
+    kubectl get pods -n kube-flannel --watch
+    # Wait until all pods show "Running" status and are ready (e.g., 1/1)
+    ```
+
+#### Verification Steps
+
+1.  **Verify CNI Pods are Running:**
+    Check the pods in the `kube-flannel` namespace. All of them should be in the `Running` state.
+
+    ```bash
+    kubectl get pods -n kube-flannel
+    ```
+
+    Expected output will show pods like `kube-flannel-daemonset-xxxx` in `Running` status.
+
+2.  **Verify Pod-to-Pod Communication:**
+    Deploy two simple pods in different namespaces (or the same) and try to `ping` or `curl` between them to confirm network connectivity.
+
+    ```bash
+    # Create a test namespace if it doesn't exist
+    kubectl create namespace test-network || true
+
+    # Deploy a busybox pod
+    kubectl run busybox-1 --image=busybox:latest -n test-network --restart=Never -- sleep 3600
+
+    # Deploy another busybox pod
+    kubectl run busybox-2 --image=busybox:latest -n test-network --restart=Never -- sleep 3600
+
+    # Wait for pods to be running
+    kubectl get pods -n test-network -w
+
+    # Get the IP address of busybox-2
+    BUSYBOX2_IP=$(kubectl get pod busybox-2 -n test-network -o jsonpath='{.status.podIP}')
+
+    # From busybox-1, ping busybox-2
+    kubectl exec -it busybox-1 -n test-network -- ping -c 3 $BUSYBOX2_IP
+    ```
+
+    The `ping` command should be successful, confirming that pods can communicate with each other. Also, you can inspect the pod IPs to ensure they fall within the new CIDR range you configured for Flannel.
+
+    ```bash
+    kubectl get pods -n test-network -o wide
+    ```
+
+    Check the `IP` column. The IPs should be within your configured range (e.g., `192.232.233.0/18`).
+-----
+
 ### Q-06: Install and Configure a CNI Plugin (Calico - Direct Install)
 
 **📝 Question:**
