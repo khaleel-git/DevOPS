@@ -88,7 +88,7 @@ As TLSv1.2 should not be allowed anymore, the command should fail.
 2.  **Test TLSv1.2 Connection:**
     This command should *fail* because TLSv1.2 is no longer allowed.
     ```bash
-    curl --tls-max 1.2 [https://web.k8s.local](https://web.k8s.local)
+    curl --tls-max 1.2 https://web.k8s.local
     ```
     Expected output will show an error like "curl: (35) error:1409442E:SSL routines:ssl3_read_bytes:tlsv1 alert protocol version" or similar, indicating a TLS protocol mismatch.
 
