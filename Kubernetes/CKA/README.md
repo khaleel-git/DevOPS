@@ -266,6 +266,81 @@ The availability of Service `echoserver-service` can be checked using the follow
     *Note: If `example.org` does not resolve, you might need to add an entry to your `/etc/hosts` file pointing `example.org` to the IP address of your Ingress Controller (e.g., a NodePort IP or LoadBalancer IP).*
 
 -----
+### Q-07: Install Argo CD with Helm
+
+**📝 Question:**
+Install Argo CD in cluster:
+Add the official Argo CD Helm repository with the name `argo`.
+The Argo CD CRDs have already been pre-installed in the cluster.
+Generate a helm template of the Argo CD Helm chart version 7.7.3 for the `argocd` NS and save to `/argo-helm.yaml`
+Configure the chart to not install CRDs.
+Install Argo CD using Helm with release name `argocd` using the same version as above
+and configuration as used in the template 7.7.3.
+Install it in the `argocd` ns and configure it to not install CRDs.
+You do not need to configure access to the Argo CD server UI.
+
+-----
+
+#### Prereqs
+
+  * Helm installed and configured.
+  * Basic understanding of Helm commands and Kubernetes namespaces.
+  * The `argocd` namespace is expected to exist, or you might need to create it.
+
+#### Solution Steps
+
+1.  **Add the official Argo CD Helm repository:**
+
+    ```bash
+    helm repo add argo https://argoproj.github.io/argo-helm
+    helm repo update
+    ```
+
+2.  **Generate a Helm template of the Argo CD chart (version 7.7.3) and save it:**
+    The key here is to specify `--version 7.7.3` and `--namespace argocd`, and `--no-hooks` to prevent pre-install hooks from running during template generation if they involve CRDs (though the question states CRDs are pre-installed). The `--set installCRDs=false` flag is crucial.
+
+    ```bash
+    helm template argocd argo/argo-cd --version 7.7.3 --namespace argocd --set crds.install=false > ~/argo-helm.yaml
+    ```
+
+    *Note: The `--no-hooks` flag ensures that Helm's templating process doesn't include any hook resources that might unexpectedly attempt to manage CRDs during the template generation, although the primary control is `installCRDs=false`.*
+
+3.  **Install Argo CD using Helm with the specified version and configuration:**
+    This step performs the actual installation. We'll use the same flags as the template generation for consistency and to ensure CRDs are not installed.
+
+    ```bash
+    kubectl create namespace argocd || true # Create namespace if it doesn't exist
+    helm install argocd argo/argo-cd --version 7.7.3 --namespace argocd --set installCRDs=false
+    ```
+
+#### Verification Steps
+
+1.  **Verify Helm release status:**
+    Check if the `argocd` release is successfully deployed.
+
+    ```bash
+    helm list -n argocd
+    ```
+
+    You should see `argocd` listed with a `STATUS` of `deployed`.
+
+2.  **Verify Pods are running in the `argocd` namespace:**
+    Check the status of the pods to ensure Argo CD components are running.
+
+    ```bash
+    kubectl get pods -n argocd
+    ```
+
+    All pods should eventually reach `Running` or `Completed` status.
+
+3.  **Inspect the generated template file (Optional):**
+    You can check the content of `/argo-helm.yaml` to ensure it doesn't contain CRD definitions.
+
+    ```bash
+    cat /argo-helm.yaml | grep -i "crd"
+    # This should return very few, if any, lines related to creating CRDs, mainly in comments or non-install sections.
+    ```
+-----
 
 ### Q-08: Create and Apply PriorityClass (Inline Patch)
 
