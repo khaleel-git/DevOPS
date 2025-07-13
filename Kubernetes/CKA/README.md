@@ -1129,7 +1129,9 @@ You may use any output format that `kubectl` supports.
     To list all CRDs and filter for `cert-manager` related ones (often identified by their group `cert-manager.io` or `acme.cert-manager.io`), then save them in the default output format.
 
     ```bash
-    kubectl get crds | grep -i "cert-manager.io" >  ~/resources.yaml
+    kubectl get crds | grep -i "cert-manager.io" >  ~/resources.yaml  
+    # OR
+    kubectl get crds | grep -i "cert-manager" | awk '{print 1$}' | xargs -I{} kubectl get crd {} -o yaml >> ~/resources.yaml  
     ```
 
 2.  **Extract documentation for `Certificate.spec.subject` and save to `~/subject.yaml`:**
