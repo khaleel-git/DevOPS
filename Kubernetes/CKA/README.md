@@ -266,6 +266,81 @@ The availability of Service `echoserver-service` can be checked using the follow
     *Note: If `example.org` does not resolve, you might need to add an entry to your `/etc/hosts` file pointing `example.org` to the IP address of your Ingress Controller (e.g., a NodePort IP or LoadBalancer IP).*
 
 -----
+
+### Q-10: Create and Set Default StorageClass
+
+**📝 Question:**
+
+1.  Create a new StorageClass named `low-latency` that uses the existing provisioner `rancher.io/local-path`.
+2.  Set the `VolumeBindingMode` to `WaitForFirstConsumer`. (Mandatory or the score will be reduced)
+3.  Make the newly created StorageClass (`low-latency`) the default StorageClass in the cluster.
+4.  DO NOT modify any existing Deployments or PersistentVolumeClaims. (If modified, the score will be reduced)
+
+-----
+
+#### Prereqs
+
+  * An existing StorageClass provisioner: `rancher.io/local-path`.
+
+#### Solution Steps
+
+1.  **Create the `low-latency` StorageClass:**
+    Create a YAML file (e.g., `low-latency-sc.yaml`) with the following content. This defines the new StorageClass, specifies its provisioner, and sets the `VolumeBindingMode`.
+
+    ```yaml
+    apiVersion: storage.k8s.io/v1
+    kind: StorageClass
+    metadata:
+      name: low-latency
+      annotations:
+        storageclass.kubernetes.io/is-default-class: "true" # This makes it the default
+    provisioner: rancher.io/local-path
+    volumeBindingMode: WaitForFirstConsumer
+    reclaimPolicy: Delete # Common default, adjust if a different policy is required by unstated constraints
+    ```
+
+    Apply the StorageClass:
+
+    ```bash
+    kubectl apply -f low-latency-sc.yaml
+    ```
+
+2.  **Set `low-latency` as the default StorageClass:**
+    This is achieved by adding the `storageclass.kubernetes.io/is-default-class: "true"` annotation under the `metadata` section of the StorageClass, as shown in the YAML above. If there was an existing default StorageClass, you would first need to remove this annotation from it by editing it:
+
+    ```bash
+    # If another StorageClass is currently default, first edit it to remove the default annotation:
+    # kubectl edit storageclass <current-default-storageclass-name>
+    # Remove or change 'storageclass.kubernetes.io/is-default-class: "true"' to "false"
+    ```
+
+    Since the new StorageClass is applied with this annotation set to "true", it will become the default.
+
+#### Verification Steps
+
+1.  **Verify the `low-latency` StorageClass is created and is default:**
+    Check the list of StorageClasses. The `low-latency` StorageClass should be marked as `(default)`.
+
+    ```bash
+    kubectl get sc
+    ```
+
+    Expected output will show `low-latency` with `(default)` next to its name. Example:
+
+    ```
+    NAME                 PROVISIONER             RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+    low-latency (default) rancher.io/local-path   Delete          WaitForFirstConsumer   false                  <X>s
+    ```
+
+2.  **Verify `VolumeBindingMode`:**
+    Describe the `low-latency` StorageClass to confirm the `VolumeBindingMode` is set correctly.
+
+    ```bash
+    kubectl describe sc low-latency
+    ```
+
+    Look for `VolumeBindingMode: WaitForFirstConsumer` in the output.
+-----
 ### Q-11: Logging Integration with Sidecar Container
 
 **📝 Question:**
