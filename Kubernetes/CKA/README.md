@@ -1591,13 +1591,13 @@ Finally, ensure the cluster, single node and all pods are Ready.
     Change the line:
 
     ```
-    - --etcd-servers=[https://128.0.0.1:2379](https://128.0.0.1:2379) #
+    - --etcd-servers=https://128.0.0.1:2379
     ```
 
     To the correct IP of your external etcd server. For example, if the new etcd server IP is `172.30.1.2` (matching the advertise address of the API server itself, assuming it's on the same host or a reachable IP):
 
     ```
-    - --etcd-servers=[https://172.30.1.2:2379](https://172.30.1.2:2379)
+    - --etcd-servers=https://172.30.1.2:2379
     ```
 
     *(Note: Replace `172.30.1.2` with the actual IP address of the external etcd server in the new environment if it's different).*
