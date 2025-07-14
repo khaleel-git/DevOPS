@@ -350,21 +350,10 @@ The availability of Service `echoserver-service` can be checked using the follow
     This command should return `200`.
 
     ```bash
-    curl -o /dev/null -s -w "%{http_code}\n" [http://example.org/echo](http://example.org/echo)
+    curl -o /dev/null -s -w "%{http_code}\n" http://example.org/echo
     ```
 
     *Note: If `example.org` does not resolve, you might need to add an entry to your `/etc/hosts` file pointing `example.org` to the IP address of your Ingress Controller (e.g., a NodePort IP or LoadBalancer IP).*
-
------
-You're absolutely right to point that out\! My apologies. For the `helm template` command and for applying manifests in Kubernetes, it's generally more direct and efficient to pipe the content directly to `kubectl apply -f -` or `helm install -f -` when possible, rather than downloading to a file first, especially in a one-off exam scenario.
-
-The previous solution for Q-07 used `curl -o tigera-operator.yaml` then `kubectl apply -f tigera-operator.yaml`. While it works, directly piping the output is cleaner.
-
-For the `helm template` command, saving to a file (`/argo-helm.yaml`) was a specific requirement from the question itself: "Generate a helm template... and save to `/argo-helm.yaml`". So, for that part, writing to a file is necessary.
-
-However, for the Calico installation itself in Q-06, directly piping the manifest to `kubectl apply` is indeed the more common and recommended approach in a shell environment.
-
-Let me provide the updated solution for **Q-06**, demonstrating the direct installation method without first saving the file locally.
 
 -----
 
@@ -694,7 +683,7 @@ You do not need to configure access to the Argo CD server UI.
     This step performs the actual installation. We'll use the same flags as the template generation for consistency and to ensure CRDs are not installed.
 
     ```bash
-    kubectl create namespace argocd || true # Create namespace if it doesn't exist
+    kubectl create namespace argocd  # Create namespace if it doesn't exist
     helm install argocd argo/argo-cd --version 7.7.3 --namespace argocd --set crds.install=false
     ```
 
