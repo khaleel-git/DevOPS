@@ -14,3 +14,8 @@
 ## Two Repositories are used
 1. https://github.com/iam-veeramalla/go-web-app
 2. https://github.com/iam-veeramalla/ultimate-devops-project-aws 
+
+## 1st repo
+1. clone to local machine
+2. build it by running `go build -o main`
+
