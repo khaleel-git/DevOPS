@@ -17,5 +17,5 @@
 
 ## 1st repo
 1. clone to local machine
-2. build it by running `go build -o main`
+2. build it by running `go build -o main .`
 
