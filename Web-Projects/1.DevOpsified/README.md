@@ -49,5 +49,5 @@ EXPOSE 8080
 
 CMD ["./main"]
 ```
-5. Run command `docker build -t khaleelorg/go-web-app:v1 .`
+5. Run command `docker build -t khaleelorg/go-web-app:v1 .` & Run/Test locally: `docker run -p 8080:8080 -it khaleelorg/go-web-app:v1`
 6. Push it to docker `docker push khaleelorg/go-web-app:v1` 
