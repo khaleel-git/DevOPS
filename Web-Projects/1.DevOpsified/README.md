@@ -126,3 +126,4 @@ eksctl delete cluster --name go-web-app-cluster --region eu-central-1 # delete e
 #### Note!
 Next time, use terraform for eks cluster
 Video link: https://www.youtube.com/watch?v=_BTpd2oYafM&list=PLdpzxOOAlwvI0O4PeKVV1-yJoX2AqIWuf&index=10&ab_channel=Abhishek.Veeramalla
+Related github repo: https://github.com/iam-veeramalla/terraform-eks
