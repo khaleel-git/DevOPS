@@ -52,3 +52,43 @@ CMD ["./main"]
 5. Run command `docker build -t khaleelorg/go-web-app:v1 .` & Run/Test locally: `docker run -p 8080:8080 -it khaleelorg/go-web-app:v1`
 6. Push it to docker `docker push khaleelorg/go-web-app:v1` 
 7. Create a folder called k8s for Kubernetes manifest files `mkdir -p k8s/manifests`
+8. Create a deployment.yaml file under `/k8s/manifests/deployment.yaml` as below:
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go-web-app
+  labels:
+    app: go-web-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: go-web-app
+  template:
+    metadata:
+      labels:
+        app: go-web-app
+    spec:
+      containers:
+      - name: go-web-app
+        image: khaleelorg/go-web-app
+        ports:
+        - containerPort: 8080
+```
+9. Create a Service under `/k8s/manifests/service.yaml`
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: go-web-app
+  labels:
+    app: go-web-app
+spec:
+  selector:
+    app: go-web-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+```
