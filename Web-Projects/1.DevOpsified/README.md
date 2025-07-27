@@ -119,8 +119,24 @@ spec:
 1. Authenticate to aws by using `aws configure`
 2. create eks cluster by using below:
 ```shell
-eksctl create cluster --name go-web-app-cluster --region eu-central-1 # install eks
-eksctl delete cluster --name go-web-app-cluster --region eu-central-1 # delete eks
+ # install eks
+eksctl create cluster \
+  --name go-web-app-cluster \
+  --region eu-central-1 \
+  --version 1.30 \
+  --vpc-cidr 10.100.0.0/16 \
+  --nodegroup-name public-nodes \
+  --node-type t3.medium \
+  --nodes 2 \
+  --nodes-min 1 \
+  --nodes-max 3 \
+  --node-private-networking=false \
+  --zones eu-central-1a,eu-central-1b \
+  --with-oidc \
+  --managed
+
+# delete eks
+eksctl delete cluster --name go-web-app-cluster --region eu-central-1
 ```
 
 #### Note!
