@@ -92,3 +92,37 @@ spec:
       port: 80
       targetPort: 8080
 ```
+10. Create ingress.yaml file under `/k8s/manifests/ingress.yaml`
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: go-web-app
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: go-web-app.local
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: go-web-app
+            port:
+              number: 80
+```
+
+### Now Create EKS Cluster
+1. Authenticate to aws by using `aws configure`
+2. create eks cluster by using below:
+```shell
+eksctl create cluster --name demo-cluster --region eu-central-1 # install eks
+eksctl delete cluster --name demo-cluster --region eu-central-1 # delete eks
+```
+
+#### Note!
+Next time, use terraform for eks cluster
+Video link: https://www.youtube.com/watch?v=_BTpd2oYafM&list=PLdpzxOOAlwvI0O4PeKVV1-yJoX2AqIWuf&index=10&ab_channel=Abhishek.Veeramalla
