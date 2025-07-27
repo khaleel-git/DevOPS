@@ -119,8 +119,8 @@ spec:
 1. Authenticate to aws by using `aws configure`
 2. create eks cluster by using below:
 ```shell
-eksctl create cluster --name demo-cluster --region eu-central-1 # install eks
-eksctl delete cluster --name demo-cluster --region eu-central-1 # delete eks
+eksctl create cluster --name go-web-app-cluster --region eu-central-1 # install eks
+eksctl delete cluster --name go-web-app-cluster --region eu-central-1 # delete eks
 ```
 
 #### Note!
