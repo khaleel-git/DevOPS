@@ -143,3 +143,18 @@ eksctl delete cluster --name go-web-app-cluster --region eu-central-1
 Next time, use terraform for eks cluster
 Video link: https://www.youtube.com/watch?v=_BTpd2oYafM&list=PLdpzxOOAlwvI0O4PeKVV1-yJoX2AqIWuf&index=10&ab_channel=Abhishek.Veeramalla
 Related github repo: https://github.com/iam-veeramalla/terraform-eks
+
+
+conductor llc, cities, visas, engineering org, devops, modern hybrid, bare metal, challenges, obserable, plantform automation, ci/cd,  
+terraform, ansible, container,
+aws kubernetes, ci/cd, 
+
+hr interview
+technnical interview
+platform engineering
+aws eks 2.5 (prepartion plus)
+team: 25 team members
+
+eks, elk stacked
+
+85k - 
