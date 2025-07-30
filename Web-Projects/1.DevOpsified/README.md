@@ -115,29 +115,125 @@ spec:
               number: 80
 ```
 
-### Now Create EKS Cluster
-1. Authenticate to aws by using `aws configure`
-2. create eks cluster by using below:
-```shell
- # install eks
+## 🚀 Now Create EKS Cluster
+
+### 1. Authenticate to AWS
+Make sure your AWS CLI is configured:
+
+```bash
+aws configure
+````
+
+---
+
+### 2. Create EKS Cluster Using `eksctl`
+
+```bash
+# Create EKS cluster (managed nodes, public)
 eksctl create cluster \
   --name go-web-app-cluster \
-  --region eu-central-1 \
+  --region us-east-1 \
   --version 1.30 \
   --vpc-cidr 10.100.0.0/16 \
   --nodegroup-name public-nodes \
-  --node-type t3.medium \
-  --nodes 2 \
+  --node-type t3.small \
+  --nodes 1 \
   --nodes-min 1 \
-  --nodes-max 3 \
+  --nodes-max 2 \
   --node-private-networking=false \
-  --zones eu-central-1a,eu-central-1b \
+  --zones us-east-1a \
   --with-oidc \
   --managed
-
-# delete eks
-eksctl delete cluster --name go-web-app-cluster --region eu-central-1
 ```
+
+---
+
+### 3. Delete EKS Cluster Using `eksctl`
+
+```bash
+eksctl delete cluster --name go-web-app-cluster --region us-east-1
+```
+
+---
+
+### 🧱 Alternatively: Use Terraform (Preferred for IaC)
+
+Instead of `eksctl`, you can use **Terraform** to create the same EKS cluster.
+
+> 📁 Folder structure:
+
+```
+eks-cluster/
+├── main.tf
+├── variables.tf
+├── outputs.tf
+├── provider.tf
+```
+
+---
+
+### ✅ How to Create EKS with Terraform
+
+```bash
+# Step 1: Navigate into Terraform project
+cd eks-cluster/
+
+# Step 2: Initialize Terraform
+terraform init
+
+# Step 3: Preview the changes
+terraform plan
+
+# Step 4: Apply and create the cluster
+terraform apply
+```
+
+---
+
+### 🧼 How to Delete the Cluster with Terraform
+
+```bash
+terraform destroy
+```
+
+---
+
+### 🌐 What This Will Create
+
+* EKS cluster named `go-web-app-cluster` in `us-east-1`
+* Kubernetes version `1.30`
+* Public worker nodes (`t3.small`)
+* VPC with CIDR `10.100.0.0/16`
+* IAM Roles and OIDC enabled
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #### Note!
 Next time, use terraform for eks cluster
