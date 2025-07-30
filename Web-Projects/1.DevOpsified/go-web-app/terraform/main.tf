@@ -5,8 +5,8 @@ module "vpc" {
   name = "eks-vpc"
   cidr = var.vpc_cidr
 
-  azs            = ["us-east-1a"]
-  public_subnets = ["10.100.1.0/24"]
+  azs            = ["us-east-1"]
+  public_subnets = ["10.100.0.0/16"]
   enable_dns_hostnames = true
 
   tags = {
@@ -16,10 +16,10 @@ module "vpc" {
 
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
-  version = "20.8.3"
+  version         = "20.8.4"
+  cluster_name    = local.cluster_name
+  cluster_version = var.kubernetes_version
 
-  cluster_name    = var.cluster_name
-  cluster_version = "1.30"
   subnet_ids      = module.vpc.public_subnets
   vpc_id          = module.vpc.vpc_id
 
@@ -40,4 +40,6 @@ module "eks" {
     project     = "go-web-app"
   }
 }
+
+
 
