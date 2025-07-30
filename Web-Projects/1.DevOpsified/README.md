@@ -163,7 +163,7 @@ Instead of `eksctl`, you can use **Terraform** to create the same EKS cluster.
 > 📁 Folder structure:
 
 ```
-eks-cluster/
+terraform/
 ├── main.tf
 ├── variables.tf
 ├── outputs.tf
@@ -176,7 +176,7 @@ eks-cluster/
 
 ```bash
 # Step 1: Navigate into Terraform project
-cd eks-cluster/
+cd terraform/
 
 # Step 2: Initialize Terraform
 terraform init
@@ -187,7 +187,6 @@ terraform plan
 # Step 4: Apply and create the cluster
 terraform apply
 ```
-
 ---
 
 ### 🧼 How to Delete the Cluster with Terraform
