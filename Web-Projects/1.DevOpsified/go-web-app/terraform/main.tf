@@ -5,9 +5,11 @@ module "vpc" {
   name = "eks-vpc"
   cidr = var.vpc_cidr
 
-  azs            = ["us-east-1"]
-  public_subnets = ["10.100.0.0/16"]
+  azs             = ["us-east-1a", "us-east-1b", "us-east-1c"]
+  public_subnets  = ["10.100.1.0/24", "10.100.2.0/24", "10.100.3.0/24"]
+
   enable_dns_hostnames = true
+  map_public_ip_on_launch   = true   # ✅ this is critical for worker nodes to get public IPs
 
   tags = {
     "kubernetes.io/cluster/${var.cluster_name}" = "shared"
@@ -21,6 +23,7 @@ module "eks" {
   name               = var.cluster_name
   kubernetes_version = "1.30"
 
+
   addons = {
     coredns                = {}
     eks-pod-identity-agent = {
@@ -31,10 +34,11 @@ module "eks" {
       before_compute = true
     }
   }
-  
+
   enable_irsa = true
   endpoint_public_access                   = true
   enable_cluster_creator_admin_permissions = true
+
 
   vpc_id                   = module.vpc.vpc_id
   subnet_ids               = module.vpc.public_subnets
