@@ -5,8 +5,8 @@ module "vpc" {
   name = "eks-vpc"
   cidr = var.vpc_cidr
 
-  azs             = ["us-east-1a", "us-east-1b", "us-east-1c"]
-  public_subnets  = ["10.100.1.0/24", "10.100.2.0/24", "10.100.3.0/24"]
+  azs             = ["us-east-1a"]
+  public_subnets  = ["10.100.1.0/24"]
 
   enable_dns_hostnames = true
   map_public_ip_on_launch   = true   # ✅ this is critical for worker nodes to get public IPs
@@ -48,9 +48,10 @@ module "eks" {
     public-nodes = {
       ami_type       = "AL2023_x86_64_STANDARD"
       instance_types = ["t3.small"]
+      capacity_type  = "SPOT"
 
-      min_size     = 1
-      max_size     = 2
+      min_size     = 0
+      max_size     = 1
       desired_size = 1
 
       subnet_ids = module.vpc.public_subnets
