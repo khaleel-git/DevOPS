@@ -37,19 +37,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Set up Go
-      uses: actions/setup-go@v4
+    - uses: actions/checkout@v4
+    - uses: actions/setup-go@v5
       with:
-        go-version: '1.21'
+        go-version: stable
+    
+    - run: cd Web-Projects/1.DevOpsified/go-web-app
 
-    - name: Run golangci-lint
-      run: |
-        cd Web-Projects/1.DevOpsified/go-web-app
-        golangci-lint run --no-cache
-  
+    - name: golangci-lint
+      uses: golangci/golangci-lint-action@v8
+      with:
+        version: v2.1
+
   push:
     runs-on: ubuntu-latest
-
     needs: build
 
     steps:
