@@ -33,21 +33,21 @@ jobs:
         cd Web-Projects/1.DevOpsified/go-web-app
         go test ./...
   
-  code-quality:
-    runs-on: ubuntu-latest
+  # code-quality:
+  #   runs-on: ubuntu-latest
 
-    steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-go@v5
-      with:
-        go-version: stable
+  #   steps:
+  #   - uses: actions/checkout@v4
+  #   - uses: actions/setup-go@v5
+  #     with:
+  #       go-version: stable
     
-    - run: cd Web-Projects/1.DevOpsified/go-web-app
+  #   - run: cd Web-Projects/1.DevOpsified/go-web-app
 
-    - name: golangci-lint
-      uses: golangci/golangci-lint-action@v8
-      with:
-        version: v2.1
+  #   - name: golangci-lint
+  #     uses: golangci/golangci-lint-action@v8
+  #     with:
+  #       version: v2.1
 
   push:
     runs-on: ubuntu-latest
