@@ -210,6 +210,37 @@ terraform destroy
 `aws eks --region us-east-1 update-kubeconfig --name go-web-app-cluster` OR
 `aws eks --region us-east-1 update-kubeconfig --name go-web-app-cluster --kubeconfig ~/.kube/config`
 
+12. Check relevant Security group & Open nodeports if you want:
+```shell
+aws ec2 describe-instances --filters "Name=private-dns-name,Values=ip-10-100-2-205.ec2.internal" \
+  --query "Reservations[*].Instances[*].SecurityGroups[*].GroupId" --region us-east-1
+
+# Now open Node Ports
+
+aws ec2 authorize-security-group-ingress \
+  --group-id sg-07d3aad0f272ba811 \
+  --protocol tcp \
+  --port 30000-32767 \
+  --cidr 0.0.0.0/0 \
+  --region us-east-1
+  ```
+
+12. Now Implement Ingress Controller
+```shell
+# Github Community Ingress Controller: https://github.com/kubernetes/ingress-nginx
+# Documentation link: https://kubernetes.github.io/ingress-nginx/deploy/#aws
+# Chsose aws ingress controller
+# Note: This nginx ingress controller creates a network Load Balancer
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.11.1/deploy/static/provider/aws/deploy.yaml4 # command
+
+# How it works?
+Ingress ---> Ingress Controller ---> Load Balancer
+Ingress controller watches ingress & creates a Load Blancer
+It is not practically possible to create LB everytime, that's why we need an nginx ingress controller & ingress
+Ingress controller is written by communities & private companies such as AWS etc.
+```
+
+
 
 
 
@@ -237,10 +268,6 @@ terraform destroy
 
 
 #### Note!
-Next time, use terraform for eks cluster
-Video link: https://www.youtube.com/watch?v=_BTpd2oYafM&list=PLdpzxOOAlwvI0O4PeKVV1-yJoX2AqIWuf&index=10&ab_channel=Abhishek.Veeramalla
-Related github repo: https://github.com/iam-veeramalla/terraform-eks
-
 
 conductor llc, cities, visas, engineering org, devops, modern hybrid, bare metal, challenges, obserable, plantform automation, ci/cd,  
 terraform, ansible, container,
