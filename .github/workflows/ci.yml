@@ -37,14 +37,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.21'
 
     - name: Run golangci-lint
-      uses: golangci/golangci-lint-action@v6
-      with:
-        version: v1.56.2
-        working-directory: Web-Projects/1.DevOpsified/go-web-app
+      run: |
+        cd Web-Projects/1.DevOpsified/go-web-app
+        golangci-lint run --no-cache
   
   push:
     runs-on: ubuntu-latest
@@ -83,7 +84,7 @@ jobs:
       with:
         token: ${{ secrets.TOKEN }}
 
-    - name: Update tag in Helm chart
+    - name: Update tag=${{github.run_id}} in Helm chart [skip ci] 
       run: |
         sed -i 's/tag: .*/tag: "${{github.run_id}}"/' Web-Projects/1.DevOpsified/go-web-app/helm/go-web-app-chart/values.yaml
 
@@ -92,5 +93,5 @@ jobs:
         git config --global user.email "khaleel.org@gmail.com"
         git config --global user.name "Khaleel"
         git add Web-Projects/1.DevOpsified/go-web-app/helm/go-web-app-chart/values.yaml
-        git commit -m "Update tag in Helm chart"
+        git commit -m "Update tag=${{github.run_id}} in Helm chart [skip ci]"
         git push
