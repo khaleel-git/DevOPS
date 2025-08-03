@@ -251,6 +251,17 @@ chmod 700 get_helm.sh
 
 # Create helm chart
  helm create go-web-app-chart
+ ls
+ Chart.yaml  charts  templates  values.yaml # it will create these files
+
+# Chart.yaml is a metadata
+# Go to template folder and remove everything: 
+`rm -rf *`
+# Copy everyting from k8s/manifests to template directory
+` sudo cp ../../../k8s/manifests/* .`
+
+# Edit deployment.yaml file and change image tag to jinja2 template
+`image: khaleelorg/go-web-app:{{ .Values.image.tag }}` # replace V1 tag
 ```
 
 
