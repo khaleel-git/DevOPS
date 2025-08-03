@@ -204,9 +204,11 @@ terraform destroy
 * Public worker nodes (`t3.small`)
 * VPC with CIDR `10.100.0.0/16`
 * IAM Roles and OIDC enabled
-
 ---
 
+11. Update kubeconfig to view aws eks cluster locally
+`aws eks --region us-east-1 update-kubeconfig --name go-web-app-cluster` OR
+`aws eks --region us-east-1 update-kubeconfig --name go-web-app-cluster --kubeconfig ~/.kube/config`
 
 
 
