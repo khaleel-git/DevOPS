@@ -278,7 +278,8 @@ helm uninstall go-web-app
 1. Build and Unit test
 2. Static Code Analysis
 3. Create & Push Docker images
-4. Update Helm - CI via Github Action && CD via ArgoCD
+4. Update Helm - CI via Github Action
+5. ArgoCD will install the helm chart on a kubernetes cluster
 
 
 
