@@ -30,8 +30,8 @@ jobs:
 
     - name: Test
       run: |
-      cd Web-Projects/1.DevOpsified/go-web-app
-      go test ./...
+        cd Web-Projects/1.DevOpsified/go-web-app
+        go test ./...
   
   code-quality:
     runs-on: ubuntu-latest
