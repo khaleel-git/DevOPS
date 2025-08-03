@@ -67,8 +67,8 @@ jobs:
     - name: Build and Push action
       uses: docker/build-push-action@v6
       with:
-        context: .
-        file: ./Dockerfile
+        context: Web-Projects/1.DevOpsified/go-web-app
+        file: Web-Projects/1.DevOpsified/go-web-app/Dockerfile
         push: true
         tags: ${{ secrets.DOCKER_USERNAME }}/go-web-app:${{github.run_id}}
 
@@ -85,12 +85,12 @@ jobs:
 
     - name: Update tag in Helm chart
       run: |
-        sed -i 's/tag: .*/tag: "${{github.run_id}}"/' helm/go-web-app-chart/values.yaml
+        sed -i 's/tag: .*/tag: "${{github.run_id}}"/' Web-Projects/1.DevOpsified/go-web-app/helm/go-web-app-chart/values.yaml
 
     - name: Commit and push changes
       run: |
         git config --global user.email "khaleel.org@gmail.com"
         git config --global user.name "Khaleel"
-        git add helm/go-web-app-chart/values.yaml
+        git add Web-Projects/1.DevOpsified/go-web-app/helm/go-web-app-chart/values.yaml
         git commit -m "Update tag in Helm chart"
         git push
