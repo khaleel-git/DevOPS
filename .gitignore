@@ -1,6 +1,12 @@
 # Ignore hidden directories
 .*/
 
+# But don't ignore the .github directory
+!.github/
+
+# If you want to track files inside .github, allow its contents too
+!.github/**
+
 # Ignore CSV files
 *.csv
 
