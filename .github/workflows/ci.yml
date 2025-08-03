@@ -84,7 +84,7 @@ jobs:
       with:
         token: ${{ secrets.TOKEN }}
 
-    - name: Update tag=${{github.run_id}} in Helm chart [skip ci] 
+    - name: Update tag=${{github.run_id}} in Helm chart by using [skip ci] 
       run: |
         sed -i 's/tag: .*/tag: "${{github.run_id}}"/' Web-Projects/1.DevOpsified/go-web-app/helm/go-web-app-chart/values.yaml
 
