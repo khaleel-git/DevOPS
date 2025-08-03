@@ -87,7 +87,8 @@ jobs:
 
     - name: Update tag=${{github.run_id}} in Helm chart by using [skip ci] 
       run: |
-        sed -i 's/tag: .*/tag: "${{github.run_id}}"/' Web-Projects/1.DevOpsified/go-web-app/helm/go-web-app-chart/values.yaml
+        cd Web-Projects/1.DevOpsified/go-web-app/
+        sed -i 's/tag: .*/tag: "${{github.run_id}}"/' helm/go-web-app-chart/values.yaml
 
     - name: Commit and push changes
       run: |
