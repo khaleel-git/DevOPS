@@ -262,7 +262,23 @@ chmod 700 get_helm.sh
 
 # Edit deployment.yaml file and change image tag to jinja2 template
 `image: khaleelorg/go-web-app:{{ .Values.image.tag }}` # replace V1 tag
+
+# install helm chart
+helm install go-web-app ./go-web-app-chart
+
+# uninstall helm if you want
+helm uninstall go-web-app
 ```
+
+## CI/Cd
+- CI via Github Action
+- CD via GitOps (ArgoCD)
+
+### Process
+1. Build and Unit test
+2. Static Code Analysis
+3. Create & Push Docker images
+4. Update Helm - CI via Github Action && CD via ArgoCD
 
 
 
