@@ -24,7 +24,7 @@ jobs:
 
     - name: Build
       run: |
-        go mod init
+        go mod tidy
         go build -o go-web-app
 
     - name: Test
