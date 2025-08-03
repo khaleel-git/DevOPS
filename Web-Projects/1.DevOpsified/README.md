@@ -237,7 +237,20 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/cont
 Ingress ---> Ingress Controller ---> Load Balancer
 Ingress controller watches ingress & creates a Load Blancer
 It is not practically possible to create LB everytime, that's why we need an nginx ingress controller & ingress
-Ingress controller is written by communities & private companies such as AWS etc.
+Ingress controller is written by communities & private companies such as AWS etc. 
+It will watch with ingress-class=nginx just like pods service discovery like labels and selectors.
+```
+
+13. Access Load blancer which ingress-controller just created.
+14. Helm
+```shell
+# first install helm 
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+chmod 700 get_helm.sh
+./get_helm.sh
+
+# Create helm chart
+ helm create go-web-app-chart
 ```
 
 
